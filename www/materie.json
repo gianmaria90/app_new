@@ -1,0 +1,36 @@
+[
+
+	{
+		"text": "Matematica",
+		"checked": false
+	},
+	{
+		"text": "Lettere e Filosofia",
+		"checked": false
+	},
+
+	{
+		"text": "Storia e Geografia",
+		"checked": false
+	},
+	{
+		"text": "Diritto e Economia",
+		"checked": false
+	},
+	{
+		"text": "Lingue",
+		"checked": false
+	},
+	{
+		"text": "Lingue antiche",
+		"checked": false
+	},
+	{
+		"text": "Chimica e/o fisica",
+		"checked": false
+	},
+	{
+		"text": "Informatica",
+		"checked": false
+	}
+]

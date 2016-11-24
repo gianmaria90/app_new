@@ -1,0 +1,38 @@
+
+<ion-view class="forms-view">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <span>Quiz orientamento</span>
+    </ion-nav-title>
+    <ion-content>
+
+        <label class="item item-input item-stacked-label item-text-wrap">
+            <h2 ><b>Quale lavoro sogni di intraprendere dopo aver ultimato il tuo percorso di studi? </b></h2>
+        </label>
+
+
+
+        <ion-radio ng-repeat="lav in lavori" class="item-text-wrap"  ng-model="radioLavoro.text" ng-value="lav.text" value="lav.text">
+            {{lav.text}}
+        </ion-radio>
+
+        <ion-radio class="item-text-wrap"   ng-model="radioLavoro.text" ng-value="'Altro'" >
+            Altro
+        </ion-radio>
+
+
+        <textarea style="resize: none;width: 100%;"  placeholder="La tua risposta"   ng_model="obj.txtLavoro" ng-minlength="1" ng-disabled=isThisDisabledLavoro() ng-show=!isThisDisabledLavoro() ></textarea>
+
+
+        <button class="button button-block button-assertive" ng-click="goToCompetenze(obj)" ng-disabled="isThisDisabled2Lavoro(obj)">
+            Next
+        </button>
+
+
+
+        </ion-content>
+
+
+    </ion-view>

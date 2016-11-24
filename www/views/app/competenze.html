@@ -1,0 +1,38 @@
+
+<ion-view class="forms-view">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <span>Quiz orientamento</span>
+    </ion-nav-title>
+    <ion-content>
+
+        <label class="item item-input item-stacked-label item-text-wrap">
+            <h2 ><b>Quali competenze ritieni di aver bisogno per raggiungere i tuoi obiettivi? </b></h2>
+        </label>
+
+
+
+        <ion-radio ng-repeat="comp in competenze" class="item-text-wrap"  ng-model="radioCompetenze.text" ng-value="comp.text" value="comp.text">
+            {{comp.text}}
+        </ion-radio>
+
+        <ion-radio class="item-text-wrap"   ng-model="radioCompetenze.text" ng-value="'Altro'" >
+            Altro
+        </ion-radio>
+
+
+        <textarea style="resize: none;width: 100%;"  placeholder="La tua risposta"   ng_model="obj.txtCompetenze" ng-minlength="1" ng-disabled=isThisDisabledCompetenze() ng-show=!isThisDisabledCompetenze() ></textarea>
+
+
+        <button class="button button-block button-assertive" ng-click="goToMaterie(obj)" ng-disabled="isThisDisabled2Competenze(obj)">
+            Next
+        </button>
+
+
+
+    </ion-content>
+
+
+</ion-view>

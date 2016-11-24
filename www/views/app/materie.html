@@ -1,0 +1,27 @@
+
+<ion-view class="forms-view">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <span>Quiz orientamento</span>
+    </ion-nav-title>
+    <ion-content>
+
+        <label class="item item-input item-stacked-label item-text-wrap">
+            <h2 ><b>Per quali materie pensi di essere più portato?</b></h2>
+        </label>
+
+
+        <ion-checkbox ng-repeat="mat in materie" ng-model="checkMaterie[mat.text]">{{mat.text}}</ion-checkbox>
+        <ion-checkbox ng-model="checkMaterie['Altro']">Altro</ion-checkbox>
+
+        <textarea style="resize: none;width: 100%;"  placeholder="La tua risposta"   ng_model="obj.txtMaterie" ng-minlength="1" ng-disabled=isThisDisabled2Materie() ng-show=!isThisDisabled2Materie() ></textarea>
+
+        <button class="button button-block button-assertive" ng-click="goToLibreria(obj)" ng-disabled="!isThisDisabledMaterie(obj)">
+            Next
+        </button>
+
+
+    </ion-content>
+</ion-view>

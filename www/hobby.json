@@ -1,0 +1,36 @@
+[
+
+	{
+		"text": "Documentarmi sulle nuove tecnologie",
+		"checked": false
+	},
+	{
+		"text": "Leggere libri di vario genere",
+		"checked": false
+	},
+
+	{
+		"text": "Fare sport o andare in palestra",
+		"checked": false
+	},
+	{
+		"text": "Public Relation",
+		"checked": false
+	},
+	{
+		"text": "Seguire le trasmissioni politico/sociali",
+		"checked": false
+	},
+	{
+		"text": "Passare ore al pc o ai videogame",
+		"checked": false
+	},
+	{
+		"text": "Leggere i quotidiani",
+		"checked": false
+	},
+	{
+		"text": "Interessarmi dell'ambito economico finanziario",
+		"checked": false
+	}
+]
