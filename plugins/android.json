@@ -7,37 +7,60 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-iad": {
+        "com.phonegap.plugins.PushPlugin": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         },
-        "cordova-plugin-email-composer": {
+        "com.synconset.imagepicker": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         },
-        "ionic-plugin-keyboard": {
+        "cordova-plugin-admobpro": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         },
         "cordova-plugin-apprate": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         },
-        "cordova-plugin-x-socialsharing": {
+        "cordova-plugin-console": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
-        },
-        "cordova-plugin-googleplus": {
-            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
-        }
-    },
-    "dependent_plugins": {
-        "cordova-plugin-extension": {
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         },
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         },
+        "cordova-plugin-email-composer": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "cordova-plugin-extension": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
         "cordova-plugin-globalization": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "cordova-plugin-googleplus": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "cordova-plugin-iad": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         }
-    }
+    },
+    "dependent_plugins": {}
 }

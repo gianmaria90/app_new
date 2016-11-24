@@ -23,52 +23,52 @@ angular.module('your_app_name.controllers', ["ngStorage"])
 
         $scope.isThisDisabledHobbie=function(object) {
 
-            if ($scope.checkHobbies['Altro'] && $scope.isUnd(object) == "UNDEFINED")
-                return false
-            else if ($scope.checkHobbies['Altro'] && object.txtHobbie == '')
-                return false
+            if ($scope.checkHobbies.Altro && $scope.isUnd(object) == "UNDEFINED")
+                return false;
+            else if ($scope.checkHobbies.Altro && object.txtHobbie === '')
+                return false;
 
 
             for (var i in $scope.checkHobbies) {
 
                 if ($scope.checkHobbies[i])
-                    return true
+                    return true;
 
             }
-            return false
-        }
+            return false;
+        };
 
         $scope.isThisDisabled2Hobbie=function(){
-            if($scope.checkHobbies['Altro'])
-                return false
+            if($scope.checkHobbies.Altro)
+                return false;
             else
-                return true
-        }
+                return true;
+        };
 
         $scope.goToAnswer=function(object){
-            $localStorage.quest1=[]
+            $localStorage.quest1=[];
             for (var i in $scope.checkHobbies) {
 
                 if ($scope.checkHobbies[i] && i!='Altro') //se check
-                    $localStorage.quest1.push(i)
+                    $localStorage.quest1.push(i);
 
             }
-            if ($scope.checkHobbies['Altro']) //se altro
-        		$localStorage.quest1.push(object.txtHobbie)
+            if ($scope.checkHobbies.Altro) //se altro
+        		$localStorage.quest1.push(object.txtHobbie);
 
-			console.log($localStorage.quest1)
+			console.log($localStorage.quest1);
             $state.go('app.answer');
-        }
+        };
 
 
         $scope.goToLavoro=function(object){
 
-			$localStorage.quest2=object.Q2
-            $localStorage.quest3=object.Q3
-            console.log($localStorage.quest2)
-            console.log($localStorage.quest3)
+			$localStorage.quest2=object.Q2;
+            $localStorage.quest3=object.Q3;
+            console.log($localStorage.quest2);
+            console.log($localStorage.quest3);
             $state.go('app.lavoro');
-        }
+        };
 
         //lavoro
 
@@ -85,9 +85,9 @@ angular.module('your_app_name.controllers', ["ngStorage"])
         $scope.isThisDisabledLavoro=function() {
 
             if ($scope.radioLavoro.text == 'Altro')
-                return false
+                return false;
             else
-                return true
+                return true;
 
         };
 
@@ -97,26 +97,26 @@ angular.module('your_app_name.controllers', ["ngStorage"])
 
 
             if($scope.radioLavoro.text==1)
-                return true
+                return true;
             else if ($scope.radioLavoro.text=='Altro' && $scope.isUnd(object)=="UNDEFINED")
-                return true
-            else if ($scope.radioLavoro.text=='Altro' && object.txtLavoro=='')
-                return true
+                return true;
+            else if ($scope.radioLavoro.text=='Altro' && object.txtLavoro==='')
+                return true;
             else
-                return false
+                return false;
 
         };
 
         $scope.goToCompetenze=function(object){
 
         	if ($scope.radioLavoro.text=='Altro')
-            	$localStorage.quest4=object.txtLavoro
+            	$localStorage.quest4=object.txtLavoro;
            	else
-                $localStorage.quest4 = $scope.radioLavoro.text
+                $localStorage.quest4 = $scope.radioLavoro.text;
 
-            console.log($localStorage.quest4)
+            console.log($localStorage.quest4);
             $state.go('app.competenze');
-        }
+        };
 
 
 		//competenze
@@ -139,9 +139,9 @@ angular.module('your_app_name.controllers', ["ngStorage"])
         $scope.isThisDisabledCompetenze=function() {
 
             if ($scope.radioCompetenze.text == 'Altro')
-                return false
+                return false;
             else
-                return true
+                return true;
 
         };
 
@@ -149,26 +149,26 @@ angular.module('your_app_name.controllers', ["ngStorage"])
 
 
             if($scope.radioCompetenze.text==1)
-                return true
+                return true;
             else if ($scope.radioCompetenze.text=='Altro' && $scope.isUnd(object)=="UNDEFINED")
-                return true
-            else if ($scope.radioCompetenze.text=='Altro' && object.txtCompetenze=='')
-                return true
+                return true;
+            else if ($scope.radioCompetenze.text=='Altro' && object.txtCompetenze==='')
+                return true;
             else
-                return false
+                return false;
 
         };
 
         $scope.goToMaterie=function(object){
 
             if ($scope.radioCompetenze.text=='Altro')
-                $localStorage.quest5=object.txtCompetenze
+                $localStorage.quest5=object.txtCompetenze;
             else
-                $localStorage.quest5 = $scope.radioCompetenze.text
+                $localStorage.quest5 = $scope.radioCompetenze.text;
 
-            console.log($localStorage.quest5)
+            console.log($localStorage.quest5);
             $state.go('app.materie');
-        }
+        };
 
         //materie
 
@@ -182,44 +182,44 @@ angular.module('your_app_name.controllers', ["ngStorage"])
 
         $scope.isThisDisabledMaterie=function(object) {
 
-            if ($scope.checkMaterie['Altro'] && $scope.isUnd(object) == "UNDEFINED")
-                return false
-            else if ($scope.checkMaterie['Altro'] && object.txtMaterie == '')
-                return false
+            if ($scope.checkMaterie.Altro && $scope.isUnd(object) == "UNDEFINED")
+                return false;
+            else if ($scope.checkMaterie.Altro && object.txtMaterie === '')
+                return false;
 
 
             for (var i in $scope.checkMaterie) {
 
                 if ($scope.checkMaterie[i])
-                    return true
+                    return true;
 
             }
-            return false
-        }
+            return false;
+        };
 
         $scope.isThisDisabled2Materie=function(){
-            if($scope.checkMaterie['Altro'])
-                return false
+            if($scope.checkMaterie.Altro)
+                return false;
             else
-                return true
-        }
+                return true;
+        };
 
 
         $scope.goToLibreria=function(object){
 
-            $localStorage.quest6=[]
+            $localStorage.quest6=[];
             for (var i in $scope.checkMaterie) {
 
                 if ($scope.checkMaterie[i] && i!='Altro') //se check
-                    $localStorage.quest6.push(i)
+                    $localStorage.quest6.push(i);
 
             }
-            if ($scope.checkMaterie['Altro']) //se altro
-                $localStorage.quest6.push(object.txtMaterie)
+            if ($scope.checkMaterie.Altro) //se altro
+                $localStorage.quest6.push(object.txtMaterie);
 
-            console.log($localStorage.quest6)
+            console.log($localStorage.quest6);
             $state.go('app.libreria');
-        }
+        };
 
 
         //libreria
@@ -243,9 +243,9 @@ angular.module('your_app_name.controllers', ["ngStorage"])
         $scope.isThisDisabledTematica=function() {
 
             if ($scope.radioTematica.text == 'Altro')
-                return false
+                return false;
             else
-                return true
+                return true;
 
         };
 
@@ -253,24 +253,24 @@ angular.module('your_app_name.controllers', ["ngStorage"])
 
 
             if($scope.radioTematica.text==1)
-                return true
+                return true;
             else if ($scope.radioTematica.text=='Altro' && $scope.isUnd(object)=="UNDEFINED")
-                return true
-            else if ($scope.radioTematica.text=='Altro' && object.txtTematica=='')
-                return true
+                return true;
+            else if ($scope.radioTematica.text=='Altro' && object.txtTematica==='')
+                return true;
             else
-                return false
+                return false;
 
         };
 
         $scope.isUnd = function (thing) {
             if (typeof thing == "undefined") {
 
-                return "UNDEFINED"
+                return "UNDEFINED";
             }
             else
-                return "OK"
-        }
+                return "OK";
+        };
 
 
         Object.toparams = function ObjecttoParams(obj) {
@@ -279,37 +279,34 @@ angular.module('your_app_name.controllers', ["ngStorage"])
                 p.push(key + '=' + encodeURIComponent(obj[key]));
             }
             return p.join('&');
-        }
+        };
 
         $scope.submit = function (object) {
 
-            var params= {}
+            var params= {};
             if ($scope.radioTematica.text=='Altro')
-                params= {'q1': $localStorage.quest1,'q2': $localStorage.quest2,'q3': $localStorage.quest3,'q4': $localStorage.quest4,'q5': $localStorage.quest5,'q6': $localStorage.quest6,'q7': object.txtTematica}
+                params= {"q1": $localStorage.quest1,"q2": $localStorage.quest2,"q3": $localStorage.quest3,"q4": $localStorage.quest4,"q5": $localStorage.quest5,"q6": $localStorage.quest6,"q7": object.txtTematica};
             else
-            	params= {'q1': $localStorage.quest1,'q2': $localStorage.quest2,'q3': $localStorage.quest3,'q4': $localStorage.quest4,'q5': $localStorage.quest5,'q6': $localStorage.quest6,'q7': $scope.radioTematica.text}
+                params= {"q1": $localStorage.quest1,"q2": $localStorage.quest2,"q3": $localStorage.quest3,"q4": $localStorage.quest4,"q5": $localStorage.quest5,"q6": $localStorage.quest6,"q7": $scope.radioTematica.text};
 
-            console.log($scope.radioTematica.text)
-
-
-
-
-            console.log(params)
+            console.log($scope.radioTematica.text);
+            console.log(params);
 
 
             $http({
                 method :'POST',
                 url:'https://bubbly-polygon-149222.appspot.com', //controllare url
-                data: Object.toparams(params),
+                //data: Object.toparams(params),
+                data: params,
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 }
             })
                 .success(function (data, status) {
 
                     console.log("Token stored, device is successfully subscribed to receive push notifications.");
                     var obj=angular.fromJson(data);
-                    console.log(obj.result);
+                    console.log(obj);
                     console.log(status);
 
                     /*if(obj.result=== '200')
@@ -338,7 +335,7 @@ angular.module('your_app_name.controllers', ["ngStorage"])
                 });
 
 
-        }
+        };
 
 
 
