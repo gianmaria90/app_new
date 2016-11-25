@@ -326,6 +326,16 @@ angular.module('your_app_name', [
           }
       })
 
+      .state('app.orientamento', {
+          url: "/orientamento",
+          views: {
+              'menuContent': {
+                  templateUrl: "views/app/orientamento.html",
+                  controller: 'QuizCtrl'
+              }
+          }
+      })
+
   .state('app.forms', {
     url: "/forms",
     views: {

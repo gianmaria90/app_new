@@ -1,4 +1,4 @@
-angular.module('your_app_name.controllers', ["ngStorage"])
+angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 .controller('AuthCtrl', function($scope, $ionicConfig) {
 
@@ -8,6 +8,7 @@ angular.module('your_app_name.controllers', ["ngStorage"])
 .controller('AppCtrl', function($scope, $ionicConfig) {
 
 })
+
 
 
     .controller('QuizCtrl', function($scope, $ionicConfig,$http,$localStorage,$state) {
@@ -273,13 +274,8 @@ angular.module('your_app_name.controllers', ["ngStorage"])
         };
 
 
-        Object.toparams = function ObjecttoParams(obj) {
-            var p = [];
-            for (var key in obj) {
-                p.push(key + '=' + encodeURIComponent(obj[key]));
-            }
-            return p.join('&');
-        };
+
+
 
         $scope.submit = function (object) {
 
@@ -293,10 +289,9 @@ angular.module('your_app_name.controllers', ["ngStorage"])
             console.log(params);
 
 
-            $http({
+            /*$http({
                 method :'POST',
-                url:'https://bubbly-polygon-149222.appspot.com', //controllare url
-                //data: Object.toparams(params),
+                url:'https://bubbly-polygon-149222.appspot.com',
                 data: params,
                 headers: {
                     'Content-Type': 'application/json'
@@ -308,8 +303,11 @@ angular.module('your_app_name.controllers', ["ngStorage"])
                     var obj=angular.fromJson(data);
                     console.log(obj);
                     console.log(status);
-
-                    /*if(obj.result=== '200')
+                    $localStorage.labelsLS=obj.classes.cls[0];
+                    $localStorage.datiLS=obj.classes.probs[0];
+                    console.log($localStorage.labelsLS);
+                    console.log($localStorage.datiLS);
+                    if(obj.result=== '200')
                     {
                         console.log("Registrazione ok.");
                         $scope.title="Registrazione";
@@ -328,16 +326,61 @@ angular.module('your_app_name.controllers', ["ngStorage"])
                         console.log("Registrazione fallita.");
                         $scope.title="Errore";
                         $scope.template="Registrazione fallita";
-                    }*/
+                    }
+
+                    $state.go('app.orientamento');
                 })
                 .error(function (data, status) {
                     console.log("Error storing device token." + data + " " + status);
-                });
-
+                });*/
+            $localStorage.labelsLS=["Eating", "Drinking", "Sleeping", "Designing", "Coding"];
+            $localStorage.datiLS=[0.9580, 0.0188, 0.0139, 0.0063, 0.0028];
+            console.log($localStorage.labelsLS);
+            console.log($localStorage.labelsLS);
+            $state.go('app.orientamento');
 
         };
 
+        $scope.getDati = function () {
+            return $localStorage.datiLS;
+        };
 
+        $scope.getLabels = function () {
+            return $localStorage.labelsLS;
+        };
+
+        $scope.getOptions = function () {
+            return {legend: {display: true}};
+        };
+
+        $scope.getTable = function () {
+
+            var table=[
+                {
+                    "nome": $localStorage.labelsLS[0],
+                    "prob":$localStorage.datiLS[0]
+                },
+                {
+                    "nome": $localStorage.labelsLS[1],
+                    "prob":$localStorage.datiLS[1]
+                },
+                {
+                    "nome": $localStorage.labelsLS[2],
+                    "prob":$localStorage.datiLS[2]
+                },
+                {
+                    "nome": $localStorage.labelsLS[3],
+                    "prob":$localStorage.datiLS[3]
+                },
+                {
+                    "nome": $localStorage.labelsLS[4],
+                    "prob":$localStorage.datiLS[4]
+                }
+
+            ];
+            console.log(table);
+            return table;
+        };
 
 
     })
@@ -430,7 +473,7 @@ angular.module('your_app_name.controllers', ["ngStorage"])
                 }
                 return p.join('&');
             };
-			$http({
+			/*$http({
                 method :'POST',
 				url:'https://arctic-window-132923.appspot.com/login',
 				data: Object.toparams(params),
@@ -457,8 +500,7 @@ angular.module('your_app_name.controllers', ["ngStorage"])
 				})
 				.error(function (data, status) {
 					console.log("Error storing device token." + data + " " + status);
-				});
-
+				});*/
 
 
 			$state.go('app.feeds-categories');
