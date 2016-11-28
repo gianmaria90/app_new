@@ -335,27 +335,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 });*/
             $localStorage.labelsLS=["Eating", "Drinking", "Sleeping", "Designing", "Coding"];
             $localStorage.datiLS=[0.9580, 0.0188, 0.0139, 0.0063, 0.0028];
-            console.log($localStorage.labelsLS);
-            console.log($localStorage.labelsLS);
-            $state.go('app.orientamento');
+            //$scope.labelsLS=["Eating", "Drinking", "Sleeping", "Designing", "Coding"];
+            //$scope.datiLS=[0.9580, 0.0188, 0.0139, 0.0063, 0.0028];
 
-        };
-
-        $scope.getDati = function () {
-            return $localStorage.datiLS;
-        };
-
-        $scope.getLabels = function () {
-            return $localStorage.labelsLS;
-        };
-
-        $scope.getOptions = function () {
-            return {legend: {display: true}};
-        };
-
-        $scope.getTable = function () {
-
-            var table=[
+            $localStorage.table=[
                 {
                     "nome": $localStorage.labelsLS[0],
                     "prob":$localStorage.datiLS[0]
@@ -378,10 +361,40 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 }
 
             ];
-            console.log(table);
-            return table;
+            console.log($localStorage.labelsLS);
+            console.log($localStorage.labelsLS);
+            $state.go('app.orientamento');
+
         };
 
+        $scope.getDati = function () {
+            return $localStorage.datiLS;
+        };
+
+        $scope.getLabels = function () {
+            return $localStorage.labelsLS;
+        };
+
+        $scope.getOptions = function () {
+            return {legend: {display: true}};
+        };
+
+        $scope.getRow = function (i) {
+
+            var row=
+                {
+                    "nome": $localStorage.labelsLS[i],
+                    "prob":$localStorage.datiLS[i]*100
+                }
+            ;
+
+            return row;
+        };
+
+
+        $scope.goToHome = function () {
+            $state.go('app.feeds-categories');
+        };
 
     })
 

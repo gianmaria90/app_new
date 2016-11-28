@@ -19,11 +19,31 @@
             </table>
         </div-->
 
-        <div class="row" ng-repeat="x in getTable()">
-            <div class="col">{{ x.nome }}</div>
-            <div class="col">{{ x.prob }}</div>
-
+        <div class="row">
+            <div class="col">{{ getRow(0).nome }}</div>
+            <div class="col">{{ getRow(0).prob | number:2}}%</div>
         </div>
+        <div class="row">
+            <div class="col">{{ getRow(1).nome }}</div>
+            <div class="col">{{ getRow(1).prob | number:2}}%</div>
+        </div>
+        <div class="row">
+            <div class="col">{{ getRow(2).nome }}</div>
+            <div class="col">{{ getRow(2).prob | number:2}}%</div>
+        </div>
+        <div class="row">
+            <div class="col">{{ getRow(3).nome}}</div>
+            <div class="col">{{ getRow(3).prob | number:2}}%</div>
+        </div>
+        <div class="row">
+            <div class="col">{{ getRow(4).nome }}%</div>
+            <div class="col">{{ getRow(4).prob | number:2}}%</div>
+        </div>
+
+        <button class="button button-block button-assertive"  ng-click="goToHome()">
+            HOME
+        </button>
+
     </ion-content>
 
 </ion-view>
