@@ -13,8 +13,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     .controller('QuestCtrl', function($scope,$state,$http) {
 
-        $scope.goQuest=function(us){
-            console.log(us);
+        $scope.goQuest=function(){
+            console.log($scope.user.password);
             $http({
                 method :'GET',
                 url:'https://arctic-window-132923.appspot.com/latest_code',
@@ -27,14 +27,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     console.log("Token stored, device is successfully subscribed to receive push notifications.");
                     var obj=angular.fromJson(data);
                     console.log(obj);
-                    console.log(us);
+
                     console.log(status);
                     $scope.cod=obj.result.codice;
                     console.log(obj.result.codice);
-                    console.log($scope.codice + " scope");
+                    console.log($scope.user.password + " scope");
                     //console.log($scope.uuu.codice + " object");
-                    if($scope.codice===$scope.cod)
-                        $state.go('app.orientamento');
+                    if($scope.user.password===$scope.cod)
+                        $state.go('app.questionario');
                     else
                        console.log("codice errato"); //mettere alert
                 })
@@ -594,6 +594,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         template: 'Si prega di verificare le credenziali!'
                     });
                 });
+            $state.go('app.feeds-categories');
         };
 
         $scope.user = {};
