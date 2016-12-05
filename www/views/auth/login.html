@@ -8,40 +8,47 @@
               <my-tab title="Login">
                 <div class="list">
                   <label class="item item-input">
-                    <input type="email" placeholder="Email" name="user_email" ng-model="user.email" required>
+                    <input type="email" placeholder="Email" name="user_email" ng-model="user.email"  required>
+                    <span style="color:red" ng-show="login_form.user_email.$dirty && login_form.user_email.$invalid"></span>
+                    <p ng-show="login_form.user_email.$error.email" class="help-block" style="color: red">Inserisci una email valida.</p>
                   </label>
-                  <label class="item item-input" show-hide-container>
-                    <input type="password" placeholder="Password" name="user_password" ng-model="user.password" required show-hide-input>
+                  <label class="item item-input">
+                    <!--<input type="password" placeholder="Password" name="user_password" ng-model="user.password" ng-minlength="6" ng-maxlength="45" required>-->
+                    <input type="text"
+                           ng-show="showPasswordIsChecked"
+                           placeholder=""
+                           ng-model="user.password"
+                           required ng-pattern="/[\w\d]{3,15}/i"
+                           ng-focus="onPasswordFocus()"
+                           ng-blur="onPasswordBlur()">
+                    <input type="password"
+                           ng-show="!showPasswordIsChecked"
+                           placeholder="Password"
+                           name="user_password"
+                           ng-model="user.password"
+                           minlength="5"
+                           maxlength="45" required>
+                    <span style="color:red" ng-show="login_form.user_password.$dirty && login_form.user_password.$invalid && login_form.user_password.$touched"></span>
+                    <span ng-show="login_form.user_password.$error.minlength" class="help-block"  style="color: red">Password troppo corta.</span>
+                    <span ng-show="login_form.user_password.$error.maxlength" class="help-block"  style="color: red">Password troppo lunga.</span>
                   </label>
+                  <ion-checkbox ng-model="showPasswordIsChecked">Mostra password</ion-checkbox>
                 </div>
               </my-tab>
-              <!--my-tab title="Phone">
-                <div class="list">
-                  <label class="item item-input">
-                    <input type="text" placeholder="Phone number" name="user_phone" ng-model="user.phone" required>
-                  </label>
-                  <label class="item item-input" show-hide-container>
-                    <input type="password" placeholder="PIN" name="user_pin" ng-model="user.pin" required valid-pin="user.pin" show-hide-input>
-                  </label>
-                </div>
-              </my-tab-->
             </my-tabs>
             <div class="item item-body bottom-content">
-              <button type="submit" class="button button-positive button-block" ng-click="doLogIn()" ng-disabled="(selected_tab=='Email') ? (login_form.user_email.$invalid || login_form.user_password.$invalid) : ((selected_tab=='Phone') ? (login_form.user_phone.$invalid || login_form.user_pin.$invalid) : false)">
+              <button type="submit" class="button button-positive button-block" ng-click="doLogIn()" ng-disabled="!login_form.$valid">
                 Log In
               </button>
             </div>
           </form>
         </div>
 
-
-
-
         <div class="alternative-actions">
           <a class="forgot-password button button-small button-clear button-light" ui-sref="auth.forgot-password">
             Password dimenticata?
           </a>
-          <a class="sign-up button button-small button-clear button-light" ui-sref="auth.signup">
+          <a class="sign-up button button-small button-clear button-light" ui-sref="auth.form-reg">
             Registrati
           </a>
         </div>

@@ -1,5 +1,5 @@
 <ion-view class="login-view auth-view" cache-view="false">
-    <ion-content scroll="false">
+    <ion-content scroll="true">
         <div class="row">
             <div class="col col-center">
                 <div class="card login-container" content-tabs tabsdata='tabsdata'>
@@ -7,40 +7,76 @@
                         <my-tabs>
                             <my-tab title="Registrazione">
                                 <div class="list">
+
                                     <label class="item item-input">
-                                        <span style="color: #9F9F9F;" class="input-label">Nome</span>
-                                        <input type="text" placeholder="" name="user_name" ng-model="data.nome">
+                                        <input type="text" placeholder="Nome" name="user_name" ng-model="reg.nome">
                                     </label>
+
                                     <label class="item item-input">
-                                        <span style="color: #9F9F9F;" class="input-label">Cognome</span>
-                                        <input type="text" placeholder="" name="user_cognome" ng-model="data.cognome">
+                                        <input type="text" placeholder="Cognome" name="user_cognome" ng-model="reg.cognome">
                                     </label>
+
                                     <label class="item item-input">
-                                        <span style="color: #9F9F9F;" class="input-label">Data di nascita</span>
-                                        <input  type="date" placeholder="" name="user_data" ng-model="data.date" max="{{minAge | date:'yyyy-MM-dd'}}">
+                                        <input type="text" placeholder="Data di nascita" name="user_data" ng-model="reg.date"  ng-click="VerifyDate()" max="{{minAge | date:'yyyy-MM-dd'}}" onfocus="(this.type='date')">
                                     </label>
-                                    <label class="item item-input item-select">
-                                        <span style="color: #9F9F9F;" class="input-label">Università</span>
-                                        <select ng-model="filtro.attributes.status">
-                                            <option selected>Todos</option>
-                                            <option value="aberto" selected>Abertos</option>
-                                            <option value="concluido">Concluídos</option>
-                                            <option value="transporte">Em transporte</option>
+
+
+                                    <span style="color: #9F9F9F; font-size: 15px" class="item item-input">Sesso
+                                         <select  style="margin-left: 5px" ng-model="reg.sex" required>
+                                             <option value="F">F</option>
+                                             <option value="M">M</option>
+
+                                         </select>
+                                    </span>
+
+                                    <span style="color: #9F9F9F; font-size: 15px" class="item item-input">Università
+                                         <select style="width: 100%; margin-left: 5px" id="UniversitySelector"
+                                                 ng-model="reg.universita" ng-click="getUniversity()" ng-options="uni.id as uni.nome for uni in university">
+                                             <option value=""></option>
+                                             <option ng-repeat="uni in university" value="{{uni.id}}">{{uni.nome}}</option>
                                         </select>
+                                    </span>
+
+                                    <label class="item item-input">
+
+                                        <input type="email" placeholder="Email" name="user_email" ng-model="reg.email" required>
+                                        <span style="color:red" ng-show="registration_form.user_email.$dirty && login_form.user_email.$invalid"></span>
+                                        <p ng-show="registration_form.user_email.$error.email" class="help-block" style="color: red">Inserisci una email valida.</p>
+                                    </label>
+
+                                    <label class="item item-input">
+                                        <input type="text"
+                                               ng-show="showPasswordIsChecked"
+                                               placeholder=""
+                                               ng-model="reg.password"
+                                               required ng-pattern="/[\w\d]{3,15}/i"
+                                               ng-focus="onPasswordFocus()"
+                                               ng-blur="onPasswordBlur()">
+
+                                        <input type="password"
+                                               ng-show="!showPasswordIsChecked"
+                                               placeholder="Password"
+                                               name="user_password"
+                                               ng-model="reg.password"
+                                               minlength="5"
+                                               maxlength="45">
+                                        <p ng-show="registration_form.user_password.$error.minlength" class="help-block"
+                                           style="color: red">Password troppo corta.</p>
+                                        <p ng-show="registration_form.user_password.$error.maxlength" class="help-block"
+                                           style="color: red">Password troppo lunga.</p>
+
                                     </label>
                                     <label class="item item-input">
-                                        <span style="color: #9F9F9F;" class="input-label">Email</span>
-                                        <input type="email" placeholder="" name="user_email" ng-model="data.email" required>
+                                        <input type="tel" placeholder="Telefono" name="phone" ng-model="reg.phone">
                                     </label>
-                                    <label class="item item-input" show-hide-container>
-                                        <span style="color: #9F9F9F;" class="input-label">Password</span>
-                                        <input type="password" placeholder="" name="user_password" ng-model="data.password" ng-minlength="6" required show-hide-input>
-                                    </label>
+
+                                    <ion-checkbox ng-model="showPasswordIsChecked">Mostra password</ion-checkbox>
+
                                 </div>
                             </my-tab>
                         </my-tabs>
                         <div class="item item-body bottom-content">
-                            <button type="submit" class="button button-positive button-block" ng-click="doRegister()" ng-disabled="(selected_tab=='Email') ? (login_form.user_email.$invalid || login_form.user_password.$invalid) : ((selected_tab=='Phone') ? (login_form.user_phone.$invalid || login_form.user_pin.$invalid) : false)">
+                            <button type="submit" class="button button-positive button-block" ng-click="doRegister()"   ng-disabled="!registration_form.$valid">
                                 Registrati
                             </button>
                         </div>

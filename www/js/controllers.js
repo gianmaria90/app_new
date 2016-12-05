@@ -11,10 +11,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 })
 
-    .controller('QuestCtrl', function($scope,$state,$http, $ionicConfig,userService) {
+    .controller('QuestCtrl', function($scope,$state,$http) {
 
-        $scope.goQuest=function(){
-
+        $scope.goQuest=function(us){
+            console.log(us);
             $http({
                 method :'GET',
                 url:'https://arctic-window-132923.appspot.com/latest_code',
@@ -26,10 +26,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                     console.log("Token stored, device is successfully subscribed to receive push notifications.");
                     var obj=angular.fromJson(data);
-                    /*console.log(obj);
-                    console.log(status);*/
+                    console.log(obj);
+                    console.log(us);
+                    console.log(status);
                     $scope.cod=obj.result.codice;
-
+                    console.log(obj.result.codice);
+                    console.log($scope.codice + " scope");
+                    //console.log($scope.uuu.codice + " object");
                     if($scope.codice===$scope.cod)
                         $state.go('app.orientamento');
                     else
@@ -453,153 +456,159 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
 
+    //REGISTRATION
+    .controller('RegistrationCtrl', function($scope, $ionicConfig,$http,$state,$ionicHistory,$ionicPopup) {
 
+        $scope.doRegister = function(){
 
+            var params = JSON.stringify( {'nome': $scope.reg.nome,
+                'cognome': $scope.reg.cognome,
+                'mail': $scope.reg.email,
+                'password': $scope.reg.password,
+                'dn': $scope.reg.date,
+                'sex': $scope.reg.sex,
+                'universita_id':$scope.reg.universita,
+                'phone': $scope.reg.phone
+            });
 
-
-//REGISTRATION
-	.controller('RegistrationCtrl', function($scope, $ionicConfig,$http) {
-
-		$scope.doRegister = function(){
-
-            var minAge = 18;
-            $scope.minAge = new Date($scope.date.getFullYear() - minAge, $scope.date.getMonth(), $scope.date.getDate());
-
-
-            Object.toparams = function ObjecttoParams(obj) {
-                var p = [];
-                for (var key in obj) {
-                    p.push(key + '=' + encodeURIComponent(obj[key]));
-                }
-                return p.join('&');
-            };
-            var params= {'nome': $scope.data.nome,'cognome': $scope.data.cognome,'email': $scope.data.email,'password': $scope.data.password,'date': $scope.data.date};
+            console.log(params);
             $http({
                 method :'POST',
-                url:'https://arctic-window-132923.appspot.com/reg', //controllare url
-                data: Object.toparams(params),
+                url:'https://arctic-window-132923.appspot.com/signin',
+                data: params,
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
                 .success(function (data, status) {
 
-                    console.log("Token stored, device is successfully subscribed to receive push notifications.");
                     var obj=angular.fromJson(data);
                     console.log(obj.result);
 
-                    if(obj.result=== '200')
+                    if(obj.result === '200')
                     {
                         console.log("Registrazione ok.");
-                        $scope.title="Registrazione";
-                        $scope.template="Registrazione effettuata con successo";
-                        $state.go('app.feeds-categories');
+                        $scope.title="Account Creato";
+                        $scope.template="Verifica la tua email per confermare la registrazione!";
+                        $ionicHistory.nextViewOptions({
+                            disableAnimate: true,
+                            disableBack: true
+                        });
+                        // the user is redirected to login page after sign up
+                        $state.go('auth.login', {}, {location: "replace", reload: true});
                     }
-                    else if (obj.result=== '401')
+                    else if (obj.result === '404')
                     {
                         console.log("Email already exist.");
-                        $scope.title="Errore";
-                        $scope.template="Email già esistente";
+                        $scope.title="Email già esistente";
+                        $scope.template="Si prega di fare clic su Password dimenticata se necessario";
                         //resettare i parametri focus email
                     }
                     else
-					{
+                    {
                         console.log("Registrazione fallita.");
                         $scope.title="Errore";
                         $scope.template="Registrazione fallita";
-					}
+                    }
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: $scope.title,
+                        template: $scope.template
+                    });
                 })
                 .error(function (data, status) {
                     console.log("Error storing device token." + data + " " + status);
-                });
+                    $scope.title="Registrazione fallita";
+                    $scope.template="Contattare il nostro team tecnico";
 
-            var alertPopup = $ionicPopup.alert({
-                title: $scope.title,
-                template: $scope.template
-            });
+                    var alertPopup = $ionicPopup.alert({
+                        title: $scope.title,
+                        template: $scope.template
+                    });
+                });
 
 
         };
+        $scope.reg = {};
 
-	})
+        $scope.getUniversity = function()
+        {
+            $scope.university = null;
+
+            //  The user has selected a Customer from our Drop Down List.  Let's load this Customer's records.
+            $http.get('https://arctic-window-132923.appspot.com/list_universities')
+                .success(function (data) {
+                    $scope.university = data;
+                })
+                .error(function (data, status, headers, config) {
+                    $scope.errorMessage = "Couldn't load the list of University, error # " + status;
+                });
+        };
+
+        $scope.VerifyDate = function()
+        {
+            var today = new Date();
+            var minAge = 18;
+            $scope.minAge = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
+        };
+
+
+    })
+
 
 
 
 //LOGIN
-	.controller('LoginCtrl', function($scope, $state, $http,$ionicPopup) {
-		$scope.doLogIn = function(){
+    .controller('LoginCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory) {
 
-			//$http.post('https://arctic-window-132923.appspot.com/login',{'mail': $scope.user.email,'password': $scope.user.password})
-        var params= {'mail': $scope.user.email,'password': $scope.user.password};
-            console.log($scope.user.email);
-            console.log($scope.user.password);
-            Object.toparams = function ObjecttoParams(obj) {
-                var p = [];
-                for (var key in obj) {
-                    p.push(key + '=' + encodeURIComponent(obj[key]));
-                }
-                return p.join('&');
-            };
-			/*$http({
+        $scope.doLogIn = function(){
+
+            var params = JSON.stringify( {'mail': $scope.user.email,'password': $scope.user.password} );
+
+            $http({
                 method :'POST',
-				url:'https://arctic-window-132923.appspot.com/login',
-				data: params,
+                url:'https://arctic-window-132923.appspot.com/login',
+                data: params,
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 }
-			})
-				.success(function (data, status) {
+            })
+                .success(function (data, status) {
+                    console.log("Token stored, device is successfully subscribed to receive push notifications.");
+                    var obj=angular.fromJson(data);
+                    console.log(obj.result);
+                    if(obj.result=== '200')
+                    {
+                        console.log("Correct login.");
+                        $ionicHistory.nextViewOptions({
+                            disableAnimate: true,
+                            disableBack: true
+                        });
+                        $state.go('app.feeds-categories');
+                    }
+                })
+                .error(function (data, status) {
+                    console.log("Error storing device token." + data + " " + status);
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Login fallita!',
+                        template: 'Si prega di verificare le credenziali!'
+                    });
+                });
+        };
 
-					console.log("Token stored, device is successfully subscribed to receive push notifications.");
-					var obj=angular.fromJson(data);
-					console.log(obj.result);
-					if(obj.result=== '200')
-					{
-						console.log("Correct login.");
-						$state.go('app.feeds-categories');
-					}
-					else
-					{
-						console.log("Error login.");
-			 			$scope.showAlert();
-			 			//resettare i parametri focus email
-					}
-				})
-				.error(function (data, status) {
-					console.log("Error storing device token." + data + " " + status);
-				});*/
+        $scope.user = {};
 
-
-			$state.go('app.feeds-categories');
-		};
-
-		$scope.user = {};
-
-		//$scope.user.email = "kekko.battistone@gmail.com";
+        //$scope.user.email = "kekko.battistone@gmail.com";
 
 
-		// We need this for the form validation
-		$scope.selected_tab = "";
+        // We need this for the form validation
+        $scope.selected_tab = "";
 
-		$scope.$on('my-tabs-changed', function (event, data) {
-			$scope.selected_tab = data.title;
-		});
+        $scope.$on('my-tabs-changed', function (event, data) {
+            $scope.selected_tab = data.title;
+        });
 
-		$scope.showAlert = function () {
-			var alertPopup = $ionicPopup.alert({
-				title: 'Errore',
-				template: 'Username o password errati'
-			});
-
-			alertPopup.then(function (res) {
-				console.log('Errore login');
-			});
-		};
-
-	})
-
-
-
+    })
 
 
 
@@ -643,13 +652,62 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 	};
 })
 
-.controller('ForgotPasswordCtrl', function($scope, $state) {
-	$scope.recoverPassword = function(){
-		$state.go('app.feeds-categories');
-	};
+    .controller('ForgotPasswordCtrl', function($scope, $state) {
+        $scope.recoverPassword = function(){
 
-	$scope.user = {};
-})
+            var params = JSON.stringify( {'mail': $scope.user.email} );
+
+            $http({
+                method :'POST',
+                url:'https://arctic-window-132923.appspot.com/pwresetrequest',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+                .success(function (data, status) {
+                    var obj=angular.fromJson(data);
+                    console.log(obj.result);
+                    if(obj.result=== '200')
+                    {
+                        console.log("Correct retrieve password.");
+
+
+                        $scope.title =  'Password dimenticata';
+                        $scope.template = 'Un\'email è stata inviata al tuo indirizzo email. Per reimpostare la password, segui le istruzioni riportate nell\'email';
+
+
+                        $ionicHistory.nextViewOptions({
+                            disableAnimate: true,
+                            disableBack: true
+                        });
+                        $state.go('auth.login');
+                    }
+                    else if(obj.result==='404')
+                    {
+                        $scope.title = 'Password dimenticata';
+                        $scope.template = 'Un\'email è stata inviata al tuo indirizzo email. Per reimpostare la password, segui le istruzioni riportate nell\'email';
+                    }
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: $scope.title,
+                        template: $scope.template
+                    });
+
+                })
+                .error(function (data, status) {
+                    console.log("Error storing device token." + data + " " + status);
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Login fallita!',
+                        template: 'Si prega di verificare le credenziali!'
+                    });
+                });
+
+        };
+
+        $scope.user = {};
+    })
 
 .controller('RateApp', function($scope) {
 	$scope.rateApp = function(){
