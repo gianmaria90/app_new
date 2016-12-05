@@ -26,8 +26,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                     console.log("Token stored, device is successfully subscribed to receive push notifications.");
                     var obj=angular.fromJson(data);
-                    console.log(obj);
-                    console.log(status);
+                    /*console.log(obj);
+                    console.log(status);*/
                     $scope.cod=obj.result.codice;
 
                     if($scope.codice===$scope.cod)
