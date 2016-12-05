@@ -51,13 +51,18 @@
           <i class="icon ion-gear-a"></i>
           <h2 class="menu-text">Settings</h2>
         </ion-item>
-        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.questionario">
+        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.codice">
           <i class="icon ion-ios-list"></i>
           <h2 class="menu-text">Questionario di valutazione</h2>
         </ion-item>
         <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.hobby">
           <i class="icon ion-ios-list"></i>
           <h2 class="menu-text">Quiz</h2>
+        </ion-item>
+
+        <ion-item class="item-icon-left" nav-clear menu-close ng-show="user.loggedIn">
+          <i class="icon ion-ios-list"></i>
+          <h2 class="menu-text">LOG OUT</h2>
         </ion-item>
 
     </ion-list>

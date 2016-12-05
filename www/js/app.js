@@ -5,6 +5,10 @@ angular.module('underscore', [])
   return window._; // assumes underscore has already been loaded on the page
 });
 
+
+
+
+
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
@@ -27,6 +31,26 @@ angular.module('your_app_name', [
   'youtube-embed',
   'ngCordovaOauth'
 ])
+    .factory('userService', function() {
+        var user={
+            loggedIn: false
+        };
+
+        user.login= function(username){
+            $timeout(function(){
+                user.loggedIn = true;
+                user.name = username;
+            },500);
+        };
+
+        user.logout= function(){
+            user.loggedIn = false;
+            user.name = undefined;
+        };
+
+        return user;
+
+    })
 
 .run(function($ionicPlatform, PushNotificationsService, $rootScope, $ionicConfig, $timeout) {
 
@@ -260,8 +284,19 @@ angular.module('your_app_name', [
           url: "/questionario",
           views: {
               'menuContent': {
-                  templateUrl: "views/app/questionario.html"
+                  templateUrl: "views/app/questionario.html",
+                  controller: 'QuizCtrl'
 
+              }
+          }
+      })
+
+      .state('app.codice', {
+          url: "/codice",
+          views: {
+              'menuContent': {
+                  templateUrl: "views/app/codice.html",
+                  controller: 'QuestCtrl'
               }
           }
       })

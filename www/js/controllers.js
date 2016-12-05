@@ -5,11 +5,64 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 })
 
 // APP
-.controller('AppCtrl', function($scope, $ionicConfig) {
+.controller('AppCtrl', function($scope, $ionicConfig,userService) {
+
+    $scope.user=userService;
 
 })
 
+    .controller('QuestCtrl', function($scope,$state,$http, $ionicConfig,userService) {
 
+        $scope.goQuest=function(){
+
+            $http({
+                method :'GET',
+                url:'https://arctic-window-132923.appspot.com/latest_code',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .success(function (data, status) {
+
+                    console.log("Token stored, device is successfully subscribed to receive push notifications.");
+                    var obj=angular.fromJson(data);
+                    console.log(obj);
+                    console.log(status);
+                    $scope.cod=obj.result.codice;
+
+                    if($scope.codice===$scope.cod)
+                        $state.go('app.orientamento');
+                    else
+                       console.log("codice errato"); //mettere alert
+                })
+                .error(function (data, status) {
+                    console.log("Error storing device token." + data + " " + status);
+                });
+
+        };
+
+        $scope.check=function(object){
+
+            if($scope.codice === '' || $scope.isUnd(object)=="UNDEFINED") {
+                console.log("true");
+                return true;
+            }
+            else {
+                console.log("false");
+                return false;
+            }
+        };
+
+        $scope.isUnd = function (thing) {
+            if (typeof thing == "undefined") {
+                console.log("true");
+                return "UNDEFINED";
+            }
+            else
+                return "OK";
+        };
+
+    })
 
     .controller('QuizCtrl', function($scope, $ionicConfig,$http,$localStorage,$state) {
 
@@ -289,7 +342,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             console.log(params);
 
 
-            /*$http({
+            $http({
                 method :'POST',
                 url:'https://bubbly-polygon-149222.appspot.com',
                 data: params,
@@ -307,7 +360,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     $localStorage.datiLS=obj.classes.probs[0];
                     console.log($localStorage.labelsLS);
                     console.log($localStorage.datiLS);
-                    if(obj.result=== '200')
+                    /*if(obj.result=== '200')
                     {
                         console.log("Registrazione ok.");
                         $scope.title="Registrazione";
@@ -326,15 +379,15 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         console.log("Registrazione fallita.");
                         $scope.title="Errore";
                         $scope.template="Registrazione fallita";
-                    }
+                    }*/
 
                     $state.go('app.orientamento');
                 })
                 .error(function (data, status) {
                     console.log("Error storing device token." + data + " " + status);
-                });*/
-            $localStorage.labelsLS=["Eating", "Drinking", "Sleeping", "Designing", "Coding"];
-            $localStorage.datiLS=[0.9580, 0.0188, 0.0139, 0.0063, 0.0028];
+                });
+            //$localStorage.labelsLS=["Eating", "Drinking", "Sleeping", "Designing", "Coding"];
+            //$localStorage.datiLS=[0.9580, 0.0188, 0.0139, 0.0063, 0.0028];
             //$scope.labelsLS=["Eating", "Drinking", "Sleeping", "Designing", "Coding"];
             //$scope.datiLS=[0.9580, 0.0188, 0.0139, 0.0063, 0.0028];
 
@@ -426,7 +479,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 url:'https://arctic-window-132923.appspot.com/reg', //controllare url
                 data: Object.toparams(params),
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 }
             })
                 .success(function (data, status) {
@@ -478,7 +531,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 			//$http.post('https://arctic-window-132923.appspot.com/login',{'mail': $scope.user.email,'password': $scope.user.password})
         var params= {'mail': $scope.user.email,'password': $scope.user.password};
-
+            console.log($scope.user.email);
+            console.log($scope.user.password);
             Object.toparams = function ObjecttoParams(obj) {
                 var p = [];
                 for (var key in obj) {
@@ -489,7 +543,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 			/*$http({
                 method :'POST',
 				url:'https://arctic-window-132923.appspot.com/login',
-				data: Object.toparams(params),
+				data: params,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
