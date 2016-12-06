@@ -36,10 +36,21 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     if($scope.user.password===$scope.cod)
                         $state.go('app.questionario');
                     else
-                       console.log("codice errato"); //mettere alert
+                    {
+                        console.log("codice errato"); //mettere alert
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Codice errato!',
+                            template: 'Si prega di verificare il codice d\'accesso!'
+                        });
+                    }
+
                 })
                 .error(function (data, status) {
                     console.log("Error storing device token." + data + " " + status);
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Errore connessione!',
+                        template: 'Si prega di la connessione ad internet!'
+                    });
                 });
 
         };
@@ -389,10 +400,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 .error(function (data, status) {
                     console.log("Error storing device token." + data + " " + status);
                 });
-            //$localStorage.labelsLS=["Eating", "Drinking", "Sleeping", "Designing", "Coding"];
-            //$localStorage.datiLS=[0.9580, 0.0188, 0.0139, 0.0063, 0.0028];
-            //$scope.labelsLS=["Eating", "Drinking", "Sleeping", "Designing", "Coding"];
-            //$scope.datiLS=[0.9580, 0.0188, 0.0139, 0.0063, 0.0028];
+
 
             $localStorage.table=[
                 {
@@ -594,7 +602,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         template: 'Si prega di verificare le credenziali!'
                     });
                 });
-            $state.go('app.feeds-categories');
+
         };
 
         $scope.user = {};
