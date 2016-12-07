@@ -191,7 +191,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.competenze = [];
 
-
         $http.get('competenze.json').success(function(response) {
             $scope.competenze = response;
         });
