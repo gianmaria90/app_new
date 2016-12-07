@@ -31,8 +31,8 @@
 
                                     <span style="color: #9F9F9F; font-size: 15px" class="item item-input">Università
                                          <select style="width: 100%; margin-left: 5px" id="UniversitySelector"
-                                                 ng-model="reg.universita" ng-click="getUniversity()" ng-options="uni.id as uni.nome for uni in university">
-                                             <option value=""></option>
+                                                 ng-model="reg.universita" ng-options="uni.id as uni.nome for uni in university">
+
                                              <option ng-repeat="uni in university" value="{{uni.id}}">{{uni.nome}}</option>
                                         </select>
                                     </span>

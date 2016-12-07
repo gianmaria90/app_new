@@ -7,7 +7,7 @@
     </ion-nav-title>
     <ion-content>
 
-        <div class="item item-text-wrap">
+        <div class="item item-text-wrap" style="width: 80%" align="center">
             <canvas id="doughnut" class="chart chart-doughnut" chart-data="getDati()" chart-labels="getLabels()" chart-options="getOptions()"> </canvas>
         </div>
         <!--div  ng-repeat="x in getTable() ">
@@ -19,23 +19,23 @@
             </table>
         </div-->
 
-        <div class="row">
+        <div class="row" align="center">
             <div class="col">{{ getRow(0).nome }}</div>
             <div class="col">{{ getRow(0).prob | number:2}}%</div>
         </div>
-        <div class="row">
+        <div class="row" align="center">
             <div class="col">{{ getRow(1).nome }}</div>
             <div class="col">{{ getRow(1).prob | number:2}}%</div>
         </div>
-        <div class="row">
+        <div class="row" align="center">
             <div class="col">{{ getRow(2).nome }}</div>
             <div class="col">{{ getRow(2).prob | number:2}}%</div>
         </div>
-        <div class="row">
+        <div class="row" align="center">
             <div class="col">{{ getRow(3).nome}}</div>
             <div class="col">{{ getRow(3).prob | number:2}}%</div>
         </div>
-        <div class="row">
+        <div class="row" align="center">
             <div class="col">{{ getRow(4).nome }}%</div>
             <div class="col">{{ getRow(4).prob | number:2}}%</div>
         </div>

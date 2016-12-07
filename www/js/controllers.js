@@ -11,7 +11,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 })
 
-    .controller('QuestCtrl', function($scope,$state,$http) {
+    .controller('QuestCtrl', function($scope,$state,$ionicPopup,$http) {
 
         $scope.goQuest=function(){
             console.log($scope.user.password);
@@ -78,7 +78,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     })
 
-    .controller('QuizCtrl', function($scope, $ionicConfig,$http,$localStorage,$state) {
+    .controller('QuizCtrl', function($scope, $ionicConfig,$http,$localStorage,$state,$ionicPopup) {
 
     	//hobbie
         $scope.hobbies = [];
@@ -467,6 +467,17 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     //REGISTRATION
     .controller('RegistrationCtrl', function($scope, $ionicConfig,$http,$state,$ionicHistory,$ionicPopup) {
 
+        $scope.university = null;
+
+        //  The user has selected a Customer from our Drop Down List.  Let's load this Customer's records.
+        $http.get('https://arctic-window-132923.appspot.com/list_universities')
+            .success(function (data) {
+                $scope.university = data;
+            })
+            .error(function (data, status, headers, config) {
+                $scope.errorMessage = "Couldn't load the list of University, error # " + status;
+            });
+
         $scope.doRegister = function(){
 
             var params = JSON.stringify( {'nome': $scope.reg.nome,
@@ -539,19 +550,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         };
         $scope.reg = {};
 
-        $scope.getUniversity = function()
-        {
-            $scope.university = null;
 
-            //  The user has selected a Customer from our Drop Down List.  Let's load this Customer's records.
-            $http.get('https://arctic-window-132923.appspot.com/list_universities')
-                .success(function (data) {
-                    $scope.university = data;
-                })
-                .error(function (data, status, headers, config) {
-                    $scope.errorMessage = "Couldn't load the list of University, error # " + status;
-                });
-        };
 
         $scope.VerifyDate = function()
         {
@@ -661,7 +660,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 	};
 })
 
-    .controller('ForgotPasswordCtrl', function($scope, $state) {
+    .controller('ForgotPasswordCtrl', function($scope,$ionicPopup, $state,$http,$ionicHistory) {
         $scope.recoverPassword = function(){
 
             var params = JSON.stringify( {'mail': $scope.user.email} );
