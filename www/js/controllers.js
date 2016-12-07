@@ -195,9 +195,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $scope.competenze = response;
         });
 
-
         $scope.txtCompetenze=[];
-
 
         $scope.radioCompetenze={
             text:'1'
