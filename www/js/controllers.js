@@ -337,7 +337,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 return "OK";
         };
 
-
         
         $scope.submit = function (object) {
 
