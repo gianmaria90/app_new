@@ -350,7 +350,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             console.log($scope.radioTematica.text);
             console.log(params);
 
-
             $http({
                 method :'POST',
                 url:'https://bubbly-polygon-149222.appspot.com',
