@@ -1,20 +1,6 @@
 angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
-.controller('AuthCtrl', function($scope, $ionicConfig,$ionicSlideBoxDelegate) {
-
-    var image = [
-        {url:'img/home.jpg'},
-        {url:'img/home_2.jpg'},
-        {url:'img/home_3.jpg'}
-    ];
-
-    $scope.items=image;
-
-    console.log( $scope.items);
-    $scope.slideHasChanged = function() {
-        $ionicSlideBoxDelegate.update();
-    };
-
+.controller('AuthCtrl', function($scope, $ionicConfig) {
 
 })
 
