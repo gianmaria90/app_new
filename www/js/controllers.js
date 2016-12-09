@@ -18,6 +18,100 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 })
 
+
+.controller('SideMenuCtrl', function($scope) {
+  $scope.theme = 'ionic-sidemenu-dark';
+  $scope.tree =
+    [
+    // {
+    //   id: 1,
+    //   name: "Saved for later",
+    //   icon: "ion-bookmark",
+    //   level: 0,
+    //   state: 'app.bookmarks'
+    // },
+    // {
+    //   id: 2,
+    //   name: "Feeds",
+    //   icon: "ion-radio-waves",
+    //   level: 0,
+    //   state: 'app.feeds-categories'
+    // },
+    // {
+    //   id: 3,
+    //   name: "Wordpress",
+    //   icon: "ion-social-wordpress",
+    //   level: 0,
+    //   state: 'app.wordpress'
+    // },
+    // {
+    //   id: 4,
+    //   name: "Layout",
+    //   icon: "ion-wand",
+    //   level: 0,
+    //   state: 'app.layouts'
+    // },
+    // {
+    //   id: 5,
+    //   name: "Forms",
+    //   icon: "ion-document",
+    //   level: 0,
+    //   state: 'app.miscellaneous'
+    // },
+    // {
+    //   id: 6,
+    //   name: "Miscellaneous",
+    //   icon: "ion-asterisk",
+    //   level: 0,
+    //   state: 'app.forms'
+    // },
+    // {
+    //   id: 7,
+    //   name: "Settings",
+    //   icon: "ion-gear-a",
+    //   level: 0,
+    //   state: 'app.settings'
+    // },
+    {
+      id: 8,
+      name: "Questionario Prometeo",
+      icon: "ion-ios-list",
+      level: 0,
+      state: 'app.codice'
+    },
+    {
+      id: 9,
+      name: "Quiz affinità",
+      icon: "ion-university",
+      level: 0,
+      state: 'app.hobby'
+    },     
+    {
+      id: 10,
+      level: 0,
+      name: 'Student Help Student',
+      icon: "icon ion-bookmark",
+      items: [{
+        id: 101,
+        level: 1,
+        name: 'Inserisci annuncio',
+        icon: "ion-compose",
+        },{
+        id: 102,
+        level: 1,
+        name: 'I miei annunci',
+        icon: "ion-ios-book",
+        },{
+        id: 103,
+        level: 1,
+        name: 'Ricerca annuncio',
+        icon: "ion-ios-search-strong",
+        }]
+    }
+    ];
+})
+
+
 // APP
 .controller('AppCtrl', function($scope, $ionicConfig,userService) {
 
