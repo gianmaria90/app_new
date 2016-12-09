@@ -14,6 +14,7 @@ angular.module('underscore', [])
 // the 2nd parameter is an array of 'requires'
 angular.module('your_app_name', [
   'ionic',
+  'ionic-sidemenu',
   'angularMoment',
   'your_app_name.controllers',
   'your_app_name.directives',
@@ -350,6 +351,17 @@ angular.module('your_app_name', [
               }
           }
       })
+
+
+      .state('app.student', {
+          url: "/student",
+          views: {
+              'menuContent': {
+                  templateUrl: "views/app/student.html",
+                  controller: ''
+              }
+          }
+      })      
 
       .state('app.libreria', {
           url: "/libreria",
