@@ -16,13 +16,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     //   level: 0,
     //   state: 'app.bookmarks'
     // },
-    // {
-    //   id: 2,
-    //   name: "Feeds",
-    //   icon: "ion-radio-waves",
-    //   level: 0,
-    //   state: 'app.feeds-categories'
-    // },
+    {
+      id: 2,
+      name: "News",
+      icon: "ion-social-rss",
+      level: 0,
+      state: 'app.feeds-categories'
+    },
     // {
     //   id: 3,
     //   name: "Wordpress",
@@ -82,16 +82,19 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         level: 1,
         name: 'Inserisci annuncio',
         icon: "ion-compose",
+        state: 'app.post_announcement'
         },{
         id: 102,
         level: 1,
         name: 'I miei annunci',
         icon: "ion-ios-book",
+        state: 'app.my_announcements'
         },{
         id: 103,
         level: 1,
         name: 'Ricerca annuncio',
         icon: "ion-ios-search-strong",
+        state: 'app.search_announcement'
         }]
     }
     ];
@@ -953,8 +956,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 // FEED
 //brings all feed categories
-.controller('FeedsCategoriesCtrl', function($scope, $http) {
+.controller('FeedsCategoriesCtrl', function($scope, $http,$ionicNavBarDelegate) {
 	$scope.feeds_categories = [];
+
+	//fix the problem of removing the "back" buttone after taking the quiz
+    // $ionicNavBarDelegate.showBackButton(false);
 
 	$http.get('feeds-categories.json').success(function(response) {
 		$scope.feeds_categories = response;
