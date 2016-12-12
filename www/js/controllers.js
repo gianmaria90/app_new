@@ -742,7 +742,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     $scope.user = UserService.getUser();
 
     var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
-    console.log(params);
+
     $http({
         method :'POST',
         url:'https://arctic-window-132923.appspot.com/get_user_info',
@@ -756,8 +756,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             var obj=angular.fromJson(data);
             console.log(obj.result);
 
-                $scope.profile=data;
-                conole.log($scope.profile);
+                $scope.profile=data.result;
+                console.log($scope.profile);
 
 
         })
