@@ -1,4 +1,4 @@
-<ion-view view-title="title">
+<ion-view cache-view="false" view-title="title">
     <ion-nav-title>
         <span>Questionario di valutazione</span>
     </ion-nav-title>
@@ -10,5 +10,8 @@
                 onload="if(submitted) {window.location='whateveryourredirectis.html';}"></iframe>
         <form-- action="https://docs.google.com/forms/d/e/1FAIpQLSc7tf8bNfBXSqW0JyyxmBh_4zMqLoiJdW3MGV2_O4GtpxOweA/viewform?c=0&w=1" method="post" target="hidden_iframe" onsubmit="submitted=true;">
         </form-->
+        <button class="button button-block button-assertive"  ng-click="goToHome()">
+            HOME
+        </button>
     </ion-content>
 </ion-view>

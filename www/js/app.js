@@ -412,6 +412,36 @@ angular.module('your_app_name', [
     }
   })
 
+   .state('app.post_announcement', {
+       url: "/post_announcement",
+       views: {
+           'menuContent': {
+               templateUrl: "views/app/shs/post_announcement.html",
+               controller: ''
+           }
+       }
+   })
+
+      .state('app.my_announcements', {
+          url: "/my_announcements",
+          views: {
+              'menuContent': {
+                  templateUrl: "views/app/shs/my_announcements.html",
+                  controller: ''
+              }
+          }
+      })
+
+      .state('app.search_announcement', {
+          url: "/search_announcement",
+          views: {
+              'menuContent': {
+                  templateUrl: "views/app/shs/search_announcement.html",
+                  controller: ''
+              }
+          }
+      })
+
 ;
 
   // if none of the above states are matched, use this as the fallback
