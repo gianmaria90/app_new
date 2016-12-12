@@ -175,7 +175,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     })
 
-    .controller('QuizCtrl', function($scope, $ionicConfig,$http,$localStorage,$state,$ionicPopup) {
+    .controller('QuizCtrl', function($scope, $ionicConfig,$http,$localStorage,$state,$ionicPopup,$ionicHistory) {
 
     	//hobbie
         $scope.hobbies = [];
@@ -485,6 +485,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         $scope.title="Errore";
                         $scope.template="Registrazione fallita";
                     }*/
+                    $ionicHistory.nextViewOptions({
+                        disableAnimate: true,
+                        disableBack: true
+                    });
 
                     $state.go('app.orientamento');
                 })
