@@ -143,7 +143,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     console.log("Error storing device token." + data + " " + status);
                     var alertPopup = $ionicPopup.alert({
                         title: 'Errore connessione!',
-                        template: 'Si prega di la connessione ad internet!'
+                        template: 'Si prega di contrllare la connessione ad internet!'
                     });
                 });
 
@@ -604,19 +604,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         // the user is redirected to login page after sign up
                         $state.go('auth.login', {}, {location: "replace", reload: true});
                     }
-                    else if (obj.result === '404')
-                    {
-                        console.log("Email already exist.");
-                        $scope.title="Email già esistente";
-                        $scope.template="Si prega di fare clic su Password dimenticata se necessario";
-                        //resettare i parametri focus email
-                    }
-                    else
-                    {
-                        console.log("Registrazione fallita.");
-                        $scope.title="Errore";
-                        $scope.template="Registrazione fallita";
-                    }
 
                     var alertPopup = $ionicPopup.alert({
                         title: $scope.title,
@@ -624,9 +611,22 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     });
                 })
                 .error(function (data, status) {
-                    console.log("Error storing device token." + data + " " + status);
-                    $scope.title="Registrazione fallita";
-                    $scope.template="Contattare il nostro team tecnico";
+                    console.log("Error." + data + " " + status);
+
+                    if (obj.result === '404')
+                    {
+                        console.log("Email already exist.");
+                        $scope.title="Email già esistente";
+                        $scope.template="Si prega di fare clic su Password dimenticata se necessario!";
+                        //resettare i parametri focus email
+                    }
+                    else
+                    {
+                        console.log("Registrazione fallita.");
+                        $scope.title="Registrazione fallita";
+                        $scope.template="Contattare il nostro team tecnico";
+                    }
+
 
                     var alertPopup = $ionicPopup.alert({
                         title: $scope.title,
@@ -654,11 +654,18 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
 //LOGIN
-    .controller('LoginCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory) {
+    .controller('LoginCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService) {
 
         $scope.doLogIn = function(){
 
+            var obj;
             var params = JSON.stringify( {'mail': $scope.user.email,'password': $scope.user.password} );
+
+            UserService.setUser({
+
+                mail: $scope.user.email,
+                password: $scope.user.password
+            });
 
             $http({
                 method :'POST',
@@ -670,24 +677,43 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             })
                 .success(function (data, status) {
                     console.log("Token stored, device is successfully subscribed to receive push notifications.");
-                    var obj=angular.fromJson(data);
+                    obj=angular.fromJson(data);
+
                     console.log(obj.result);
-                    if(obj.result=== '200')
-                    {
+
                         console.log("Correct login.");
                         $ionicHistory.nextViewOptions({
                             disableAnimate: true,
                             disableBack: true
                         });
-                        $state.go('app.feeds-categories');
-                    }
+                        $state.go('app.profile');
+
                 })
                 .error(function (data, status) {
-                    console.log("Error storing device token." + data + " " + status);
+                    console.log("Error." + data + " " + status);
+
+                    obj=angular.fromJson(data);
+                    if(obj.result==='402')
+                    {
+                        $scope.title="Login Fallita";
+                        $scope.template="Password errata!";
+                    }
+                    else if(obj.result==='403')
+                    {
+                        $scope.title="Login Fallita";
+                        $scope.template="Credenziali errate!";
+                    }
+                    else
+                    {
+                        $scope.title="Login fallita";
+                        $scope.template="Contattare il nostro team tecnico";
+                    }
+
                     var alertPopup = $ionicPopup.alert({
-                        title: 'Login fallita!',
-                        template: 'Si prega di verificare le credenziali!'
+                        title: $scope.title,
+                        template: $scope.template
                     });
+
                 });
 
         };
@@ -707,6 +733,36 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
+.controller('ProfileCtrl',function($scope, $state,$http,$ionicLoading,UserService)
+{
+    $scope.profile={};
+    $scope.user = UserService.getUser();
+
+    var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
+    console.log(params);
+    $http({
+        method :'POST',
+        url:'https://arctic-window-132923.appspot.com/get_user_info',
+        data: params,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+        .success(function (data, status) {
+            var obj=angular.fromJson(data);
+            console.log(obj.result);
+
+                $scope.profile=data;
+                conole.log($scope.profile);
+
+
+        })
+        .error(function (data, status) {
+            console.log("Error." + data + " " + status);
+        });
+
+})
 
 .controller('SignupCtrl', function($scope, $state,$cordovaOauth,$ionicLoading,UserService,$window) {
 
@@ -764,11 +820,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                 .success(function (data, status) {
                     var obj=angular.fromJson(data);
-                    console.log(obj.result);
-                    if(obj.result=== '200')
-                    {
-                        console.log("Correct retrieve password.");
 
+                    console.log(obj.result);
+
+                        console.log("Correct retrieve password.");
 
                         $scope.title =  'Password dimenticata';
                         $scope.template = 'Un\'email è stata inviata al tuo indirizzo email. Per reimpostare la password, segui le istruzioni riportate nell\'email';
@@ -779,12 +834,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             disableBack: true
                         });
                         $state.go('auth.login');
-                    }
-                    else if(obj.result==='404')
-                    {
-                        $scope.title = 'Password dimenticata';
-                        $scope.template = 'Un\'email è stata inviata al tuo indirizzo email. Per reimpostare la password, segui le istruzioni riportate nell\'email';
-                    }
 
                     var alertPopup = $ionicPopup.alert({
                         title: $scope.title,
@@ -795,8 +844,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 .error(function (data, status) {
                     console.log("Error storing device token." + data + " " + status);
                     var alertPopup = $ionicPopup.alert({
-                        title: 'Login fallita!',
-                        template: 'Si prega di verificare le credenziali!'
+                        title: 'Password dimenticata!',
+                        template: 'Un\'email è stata inviata al tuo indirizzo email. Per reimpostare la password, segui le istruzioni riportate nell\'email'
                     });
                 });
 
