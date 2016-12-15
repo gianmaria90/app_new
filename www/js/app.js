@@ -32,7 +32,7 @@ angular.module('your_app_name', [
   'youtube-embed',
   'ngCordovaOauth'
 ])
-    
+
 .run(function($ionicPlatform, PushNotificationsService, $rootScope, $ionicConfig, $timeout) {
 
   $ionicPlatform.on("deviceready", function(){

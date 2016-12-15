@@ -117,9 +117,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 // APP
 .controller('AppCtrl', function($scope, $ionicConfig,userService) {
-
-    $scope.user=userService;
-
+    
 })
 
     .controller('QuestCtrl', function($scope,$state,$ionicPopup,$http) {
