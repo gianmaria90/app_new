@@ -32,27 +32,7 @@ angular.module('your_app_name', [
   'youtube-embed',
   'ngCordovaOauth'
 ])
-    .factory('userService', function() {
-        var user={
-            loggedIn: false
-        };
-
-        user.login= function(username){
-            $timeout(function(){
-                user.loggedIn = true;
-                user.name = username;
-            },500);
-        };
-
-        user.logout= function(){
-            user.loggedIn = false;
-            user.name = undefined;
-        };
-
-        return user;
-
-    })
-
+    
 .run(function($ionicPlatform, PushNotificationsService, $rootScope, $ionicConfig, $timeout) {
 
   $ionicPlatform.on("deviceready", function(){

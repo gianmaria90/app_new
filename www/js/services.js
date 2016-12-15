@@ -222,20 +222,37 @@ angular.module('your_app_name.services', [])
 	};
 
 })
-	.service('UserService', function() {
+
+.service('UserService', function() {
 
 //for the purpose of this example I will store user data on ionic local storage but you should save it on a database
 
-		var setUser = function(user_data) {
-			window.localStorage.starter_google_user = JSON.stringify(user_data);
-		};
+    var setUser = function(user_data) {
+        window.localStorage.starter_google_user = JSON.stringify(user_data);
+    };
 
-		var getUser = function(){
-			return JSON.parse(window.localStorage.starter_google_user || '{}');
-		};
+    var getUser = function(){
+        return JSON.parse(window.localStorage.starter_google_user || '{}');
+    };
 
-		return {
-			getUser: getUser,
-			setUser: setUser
-		};
-	});
+    return {
+        getUser: getUser,
+        setUser: setUser
+    };
+})
+
+.service('ProfileService', function() {
+
+    var setProfile = function(user_profile) {
+        window.localStorage.user_profile_side = JSON.stringify(user_profile);
+    };
+
+    var getProfile = function(){
+        return JSON.parse( window.localStorage.user_profile_side || '{}' );
+    };
+
+    return {
+        getProfile: getProfile,
+        setProfile: setProfile
+    };
+});

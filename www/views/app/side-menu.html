@@ -70,16 +70,18 @@
     <ion-content ng-controller="SideMenuCtrl" ng-class="theme" >
         <ion-list >
 
-        <ion-item class="heading-item item item-avatar" nav-clear menu-close ui-sref="app.profile">
-          <div class="user-image-container">
+
+        <ion-item class="heading-item item item-avatar" nav-clear menu-close ui-sref="#">
+          <div  class="user-image-container"  >
             <pre-img ratio="_1_1" helper-class="rounded-image">
-              <img class="user-image" ng-src="https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg" spinner-on-load>
+                <img class="user-image"  ng-if="user_profile.sex=='M'" ng-src="img/male.jpg" spinner-on-load>
+                <img class="user-image"  ng-if="user_profile.sex=='F'" ng-src="img/female.jpg" spinner-on-load>
+                <img class="user-image"  ng-if="user_profile.sex=='N'" ng-src="img/generic.jpg" spinner-on-load>
             </pre-img>
           </div>
-          <h2 class="greeting">Hi Brynn</h2>
-          <p class="message">Welcome back</p>
+          <h2 class="greeting">Ciao {{user_profile.nome}}</h2>
+          <p class="message">Bentornato</p>
         </ion-item>
-
           <ionic-sidemenu tree="tree"></ionic-sidemenu>
         </ion-list>
     </ion-content>

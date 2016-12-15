@@ -5,7 +5,21 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 })
 
 
-.controller('SideMenuCtrl', function($scope) {
+.controller('SideMenuCtrl', function($scope,ProfileService) {
+
+    $scope.user_profile = ProfileService.getProfile();
+    console.log( $scope.user_profile);
+    console.log( $scope.user_profile.nome);
+    console.log( $scope.user_profile.sex);
+
+    if ($scope.user_profile.sex===undefined)
+    {
+        $scope.user_profile.sex='N';
+        $scope.user_profile.nome='Ospite';
+        console.log('Sono undefined');
+    }
+
+
   $scope.theme = 'ionic-sidemenu-dark';
   $scope.tree =
     [
@@ -23,13 +37,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
       level: 0,
       state: 'app.feeds-categories'
     },
-    // {
-    //   id: 3,
-    //   name: "Wordpress",
-    //   icon: "ion-social-wordpress",
-    //   level: 0,
-    //   state: 'app.wordpress'
-    // },
+     {
+       id: 3,
+       name: "Profilo",
+       icon: "ion-person",
+       level: 0,
+       state: 'app.profile'
+     },
     // {
     //   id: 4,
     //   name: "Layout",
@@ -736,10 +750,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
-.controller('ProfileCtrl',function($scope, $state,$http,$ionicLoading,UserService)
+.controller('ProfileCtrl',function($scope, $state,$http,$ionicLoading,UserService,ProfileService)
 {
     $scope.profile={};
     $scope.user = UserService.getUser();
+
 
     var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
 
@@ -754,15 +769,21 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         .success(function (data, status) {
             var obj=angular.fromJson(data);
-            console.log(obj.result);
 
                 $scope.profile=data.result;
-                console.log($scope.profile);
 
+                console.log($scope.profile.nome_studente);
 
+                ProfileService.setProfile({
+                nome: $scope.profile.nome_studente,
+                sex: $scope.profile.sesso_studente
+            });
+
+            console.log($scope.profile);
         })
         .error(function (data, status) {
             console.log("Error." + data + " " + status);
+
         });
 
 })
