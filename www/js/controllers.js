@@ -5,22 +5,38 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 })
 
 
-.controller('SideMenuCtrl', function($scope,ProfileService) {
+.controller('SideMenuCtrl', function($scope,ProfileService,$localStorage) {
 
-    $scope.user_profile = ProfileService.getProfile();
-    console.log( $scope.user_profile);
-    console.log( $scope.user_profile.nome);
-    console.log( $scope.user_profile.sex);
+    //$scope.user_profile = ProfileService.getProfile();
+    $localStorage.user_profile = ProfileService.getProfile();
+    //console.log( $scope.user_profile);
+    // console.log( $scope.user_profile.nome);
+    //console.log( $scope.user_profile.sex);
 
-    if ($scope.user_profile.sex===undefined)
+    console.log(  $localStorage.user_profile);
+
+    console.log( $localStorage.loggedIn +" logged");
+
+    /*if ($scope.user_profile.sex===undefined)
     {
         $scope.user_profile.sex='N';
         $scope.user_profile.nome='Ospite';
         console.log('Sono undefined');
+    }*/
+
+    if ($localStorage.user_profile.sex===undefined)
+    {
+        $localStorage.user_profile.sex='N';
+        $localStorage.user_profile.nome='Ospite';
+        console.log('Sono undefined');
     }
+    $scope.user_profile= $localStorage.user_profile;
+    $scope.theme = 'ionic-sidemenu-dark';
 
+    $scope.tree=[];
 
-  $scope.theme = 'ionic-sidemenu-dark';
+    if($localStorage.loggedIn===true)
+    {
   $scope.tree =
     [
     // {
@@ -112,12 +128,76 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         }]
     }
     ];
+    }
+    else
+    {
+        $scope.tree =
+            [
+                {
+                    id: 2,
+                    name: "News",
+                    icon: "ion-social-rss",
+                    level: 0,
+                    state: 'app.feeds-categories'
+                },
+                // {
+                //   id: 4,
+                //   name: "Layout",
+                //   icon: "ion-wand",
+                //   level: 0,
+                //   state: 'app.layouts'
+                // },
+                // {
+                //   id: 5,
+                //   name: "Forms",
+                //   icon: "ion-document",
+                //   level: 0,
+                //   state: 'app.miscellaneous'
+                // },
+                // {
+                //   id: 6,
+                //   name: "Miscellaneous",
+                //   icon: "ion-asterisk",
+                //   level: 0,
+                //   state: 'app.forms'
+                // },
+                // {
+                //   id: 7,
+                //   name: "Settings",
+                //   icon: "ion-gear-a",
+                //   level: 0,
+                //   state: 'app.settings'
+                // },
+                {
+                    id: 8,
+                    name: "Questionario Prometeo",
+                    icon: "ion-ios-list",
+                    level: 0,
+                    state: 'app.codice'
+                },
+                {
+                    id: 9,
+                    name: "Quiz affinità",
+                    icon: "ion-university",
+                    level: 0,
+                    state: 'app.hobby'
+                }
+            ];
+    }
+
 })
 
 
 // APP
+<<<<<<< Updated upstream
 .controller('AppCtrl', function($scope, $ionicConfig,userService) {
     
+=======
+.controller('AppCtrl', function($scope, $ionicConfig) {
+
+
+
+>>>>>>> Stashed changes
 })
 
     .controller('QuestCtrl', function($scope,$state,$ionicPopup,$http) {
@@ -673,18 +753,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
 //LOGIN
-    .controller('LoginCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService) {
+    .controller('LoginCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
 
         $scope.doLogIn = function(){
 
             var obj;
             var params = JSON.stringify( {'mail': $scope.user.email,'password': $scope.user.password} );
 
-            UserService.setUser({
-
-                mail: $scope.user.email,
-                password: $scope.user.password
-            });
 
             $http({
                 method :'POST',
@@ -699,8 +774,15 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     obj=angular.fromJson(data);
 
                     console.log(obj.result);
+                    UserService.setUser({
 
-                        console.log("Correct login.");
+                        mail: $scope.user.email,
+                        password: $scope.user.password
+                    });
+
+                    $localStorage.loggedIn=true;
+
+                    console.log("Correct login.");
                         $ionicHistory.nextViewOptions({
                             disableAnimate: true,
                             disableBack: true
@@ -752,14 +834,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
-.controller('ProfileCtrl',function($scope, $state,$http,$ionicLoading,UserService,ProfileService)
+.controller('ProfileCtrl',function($scope, $state,$http,$ionicLoading,UserService,ProfileService,$localStorage)
 {
     $scope.profile={};
     $scope.user = UserService.getUser();
 
-
+    console.log($localStorage.loggedIn);
     var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
-
+    console.log(params);
     $http({
         method :'POST',
         url:'https://arctic-window-132923.appspot.com/get_user_info',
@@ -790,7 +872,18 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 })
 
-.controller('SignupCtrl', function($scope, $state,$cordovaOauth,$ionicLoading,UserService,$window) {
+.controller('SignupCtrl', function($scope, $state,$cordovaOauth,$window,$ionicLoading,UserService,$localStorage) {
+    console.log($localStorage.loggedIn);
+
+    if($localStorage.loggedIn===true)
+    {
+        $state.go('app.profile');
+    }
+    else{
+        $window.localStorage.clear();
+        $localStorage.loggedIn=false;
+    }
+
 
 	$scope.doSignUp = function() {
 		$ionicLoading.show({
