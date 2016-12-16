@@ -5,7 +5,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 })
 
 
-.controller('SideMenuCtrl', function($scope,ProfileService,$localStorage) {
+.controller('SideMenuCtrl', function($scope,ProfileService,$localStorage,$window,$state) {
 
     //$scope.user_profile = ProfileService.getProfile();
     $localStorage.user_profile = ProfileService.getProfile();
@@ -16,6 +16,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     console.log(  $localStorage.user_profile);
 
     console.log( $localStorage.loggedIn +" logged");
+
+    $scope.doLogOut=function(){
+        console.log("logout effettuato");
+        $localStorage.$reset();
+        $state.go('auth.walkthrough');
+        console.log(  $localStorage.user_profile);
+
+    };
 
     /*if ($scope.user_profile.sex===undefined)
     {
@@ -126,6 +134,15 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         icon: "ion-ios-search-strong",
         state: 'app.search_announcement'
         }]
+    },
+    {
+        id: 11,
+        name: "Logout",
+        icon: "ion-android-exit",
+        level: 0,
+
+        onclick: "doLogOut()"
+
     }
     ];
     }
@@ -181,7 +198,15 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     icon: "ion-university",
                     level: 0,
                     state: 'app.hobby'
-                }
+                }/*,
+                {
+                    id: 11,
+                    name: "Logout",
+                    icon: "ion-android-exit",
+                    level: 0,
+                    onclick: "doLogOut()"
+                    //state: 'auth.walkthrough'
+                }*/
             ];
     }
 
@@ -195,8 +220,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     .controller('QuestCtrl', function($scope,$state,$ionicPopup,$http) {
 
-        $scope.goQuest=function(){
-            console.log($scope.user.password);
+        $scope.goQuest=function(cod){
+            console.log(cod.codice);
             $http({
                 method :'GET',
                 url:'https://arctic-window-132923.appspot.com/latest_code',
@@ -213,9 +238,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     console.log(status);
                     $scope.cod=obj.result.codice;
                     console.log(obj.result.codice);
-                    console.log($scope.user.password + " scope");
-                    //console.log($scope.uuu.codice + " object");
-                    if($scope.user.password===$scope.cod)
+
+                    if(cod.codice===$scope.cod)
                         $state.go('app.questionario');
                     else
                     {
@@ -876,6 +900,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         $window.localStorage.clear();
         $localStorage.loggedIn=false;
     }
+
+
 
 
 	$scope.doSignUp = function() {

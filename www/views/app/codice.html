@@ -35,6 +35,7 @@
         <div class="row">
             <div class="col col-center">
                 <div class="card login-container" content-tabs tabsdata='tabsdata'>
+                    <ion-item>
                     <form name="cod_form" class="" novalidate ng-cloak>
                         <my-tabs>
                             <my-tab title="Codice">
@@ -43,33 +44,28 @@
                                     <label class="item item-input">
 
                                         <input type="text"
-                                               ng-show="showPasswordIsChecked"
-                                               placeholder=""
-                                               ng-model="user.password"
+
+                                               placeholder="codice"
+                                               ng-model="cod.codice"
                                                required ng-pattern="/[\w\d]{3,15}/i"
                                                ng-focus="onPasswordFocus()"
-                                               ng-blur="onPasswordBlur()">
-                                        <input type="password"
-                                               ng-show="!showPasswordIsChecked"
-                                               placeholder="Password"
-                                               name="user_password"
-                                               ng-model="user.password"
+                                               ng-blur="onPasswordBlur()"
                                                minlength="10"
-                                               maxlength="10" required>
-                                        <span style="color:red" ng-show="login_form.user_password.$dirty && login_form.user_password.$invalid && login_form.user_password.$touched"></span>
-                                        <span ng-show="login_form.user_password.$error.minlength" class="help-block"  style="color: red">Password troppo corta.</span>
-                                        <span ng-show="login_form.user_password.$error.maxlength" class="help-block"  style="color: red">Password troppo lunga.</span>
+                                               maxlength="10">
+
                                     </label>
-                                    <ion-checkbox ng-model="showPasswordIsChecked">Mostra codice</ion-checkbox>
+
+                                    <div class="item item-body bottom-content">
+                                        <button type="submit" class="button button-positive button-block" ng-click="goQuest(cod)" ng-disabled="!cod_form.$valid">
+                                            Entra
+                                        </button>
+                                    </div>
                                 </div>
                             </my-tab>
                         </my-tabs>
-                        <div class="item item-body bottom-content">
-                            <button type="submit" class="button button-positive button-block" ng-click="goQuest()" ng-disabled="!cod_form.$valid">
-                                Entra
-                            </button>
-                        </div>
+
                     </form>
+                    </ion-item>
                 </div>
 
             </div>
