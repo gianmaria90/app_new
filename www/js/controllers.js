@@ -188,16 +188,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 })
 
 
-// APP
-<<<<<<< Updated upstream
-.controller('AppCtrl', function($scope, $ionicConfig,userService) {
-    
-=======
+
 .controller('AppCtrl', function($scope, $ionicConfig) {
 
-
-
->>>>>>> Stashed changes
 })
 
     .controller('QuestCtrl', function($scope,$state,$ionicPopup,$http) {
