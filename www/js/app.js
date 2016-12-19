@@ -33,9 +33,25 @@ angular.module('your_app_name', [
   'ngCordovaOauth'
 ])
 
-.run(function($ionicPlatform, PushNotificationsService, $rootScope, $ionicConfig, $timeout) {
+.run(function($ionicPlatform, PushNotificationsService, $rootScope, $ionicConfig, $timeout, $ionicPopup) {
 
   $ionicPlatform.on("deviceready", function(){
+
+      //Test connection
+      if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
+              $ionicPopup.confirm({
+                  title: "Internet disconnesso",
+                  content: "Controlla la connessione a Internet sul tuo dispositivo."
+              })
+                  .then(function(result) {
+                      if(!result) {
+                          ionic.Platform.exitApp();
+                      }
+                  });
+          }
+      }
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
