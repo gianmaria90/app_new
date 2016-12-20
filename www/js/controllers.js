@@ -1146,7 +1146,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 	//fix the problem of removing the "back" buttone after taking the quiz
     // $ionicNavBarDelegate.showBackButton(false);
 
-	$http.get('feeds-categories.json').success(function(response) {
+	$http.get('news.json').success(function(response) {
 		$scope.feeds_categories = response;
 	});
 })
@@ -1157,7 +1157,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 	$scope.categoryId = $stateParams.categoryId;
 
-	$http.get('feeds-categories.json').success(function(response) {
+	$http.get('news.json').success(function(response) {
 		var category = _.find(response, {id: $scope.categoryId});
 		$scope.categoryTitle = category.title;
 		$scope.category_sources = category.feed_sources;
