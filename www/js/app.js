@@ -155,16 +155,6 @@ angular.module('your_app_name', [
     }
   })
 
-  .state('app.maps', {
-    url: "/miscellaneous/maps",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/miscellaneous/maps.html",
-        controller: 'MapsCtrl'
-      }
-    }
-  })
-
   .state('app.image-picker', {
     url: "/miscellaneous/image-picker",
     views: {
@@ -437,6 +427,27 @@ angular.module('your_app_name', [
               }
           }
       })
+
+      .state('app.map', {
+          url: '/map',
+          views: {
+              'menuContent': {
+                  templateUrl: 'views/app/map.html',
+                  controller: 'MapCtrl'
+              }
+          }
+      })
+
+      .state('app.maps', {
+          url: "/miscellaneous/maps",
+          views: {
+              'menuContent': {
+                  templateUrl: "views/app/miscellaneous/maps.html",
+                  controller: 'MapsCtrl'
+              }
+          }
+      })
+
 
 ;
 

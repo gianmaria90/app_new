@@ -68,6 +68,15 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
        level: 0,
        state: 'app.profile'
      },
+     {
+       //to remove, jus for testing
+       id: 4,
+       name: "Aziende",
+       icon: "ion-ios-location",
+       level: 0,
+       state: 'app.map'
+       //to remove, jus for testing
+     },
     // {
     //   id: 4,
     //   name: "Layout",
@@ -109,7 +118,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
       icon: "ion-university",
       level: 0,
       state: 'app.hobby'
-    },     
+    },
     {
       id: 10,
       level: 0,
@@ -156,6 +165,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     icon: "ion-social-rss",
                     level: 0,
                     state: 'app.feeds-categories'
+                },
+                {
+                    id: 3,
+                    name: "Aziende",
+                    icon: "ion-ios-location",
+                    level: 0,
+                    state: 'app.map'
                 },
                 // {
                 //   id: 4,
@@ -544,7 +560,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         };
 
 
-        
+
         $scope.submit = function (object) {
 
             var params= {};
@@ -1023,43 +1039,185 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 	};
 })
 
-.controller('MapsCtrl', function($scope, $ionicLoading) {
+// add the following plug in: ionic plugin add cordova-plugin-googlemaps
+    .controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
 
-	$scope.info_position = {
-		lat: 43.07493,
-		lng: -89.381388
-	};
+        // 1. Google Map //
+        var cities = [
+            {
+                city : 'Vomero',
+                desc : 'Test',
+                lat : 40.843002,
+                long : 14.231061
+            },
+            {
+                city : 'Arenella',
+                desc : 'Test',
+                lat : 40.852773,
+                long : 14.230678
+            },
+            {
+                city : 'Rione Alto',
+                desc : 'Test',
+                lat : 40.859662,
+                long : 14.221276
+            },
+            {
+                city : 'Caserta',
+                desc : 'Test',
+                lat : 41.071687,
+                long : 14.329664
+            },
+            {
+                city : 'Pozzuoli',
+                desc : 'Test',
+                lat : 40.846243,
+                long : 14.082984
+            }
+        ];
 
-	$scope.center_position = {
-		lat: 43.07493,
-		lng: -89.381388
-	};
+        var options = {timeout: 10000, enableHighAccuracy: true};
 
-	$scope.my_location = "";
+        // Map Settings //
+        $scope.initialise = function() {
 
-	$scope.$on('mapInitialized', function(event, map) {
-		$scope.map = map;
-	});
+            // Center of Italy
+            var latLng = new google.maps.LatLng(42.988358, 12.623107);
 
-	$scope.centerOnMe= function(){
+            var mapOptions = {
+                center: latLng,
+                zoom: 5,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
 
-		$scope.positions = [];
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-		$ionicLoading.show({
-			template: 'Loading...'
-		});
+            // Geo Location
+            // navigator.geolocation.getCurrentPosition(function(pos) {
+            //     map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            //     var myLocation = new google.maps.Marker({
+            //         position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+            //         map: map,
+            //         animation: google.maps.Animation.DROP,
+            //         title: "My Location"
+            //     });
+            // });
 
-		// with this function you can get the user’s current position
-		// we use this plugin: https://github.com/apache/cordova-plugin-geolocation/
-		navigator.geolocation.getCurrentPosition(function(position) {
-			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			$scope.current_position = {lat: pos.G,lng: pos.K};
-			$scope.my_location = pos.G+", "+pos.K;
-			$scope.map.setCenter(pos);
-			$ionicLoading.hide();
-		});
-	};
-})
+            $scope.map = map;
+            // Additional Markers //
+            $scope.markers = [];
+            var infoWindow = new google.maps.InfoWindow();
+
+            var createMarker = function (info){
+                console.log(info);
+                //Wait until the map is loaded
+                google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+
+                    var marker = new google.maps.Marker({
+                        map: $scope.map,
+                        animation: google.maps.Animation.DROP,
+                        position: new google.maps.LatLng(info.lat, info.long),
+                        title: info.city
+                    });
+
+                    marker.content = '<div>' + info.desc + '</div>';
+
+                    google.maps.event.addListener(marker, 'click', function(){
+                        infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                        infoWindow.open($scope.map, marker);
+                    });
+                    $scope.markers.push(marker);
+
+                });
+
+            }
+
+            for (i = 0; i < cities.length; i++){
+                createMarker(cities[i]);
+            }
+
+        };
+
+        google.maps.event.addDomListener(document.getElementById("map"), 'load', $scope.initialise());
+
+        //My position
+        // $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+        //
+        //     //Wait until the map is loaded
+        //     google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+        //
+        //         $scope.centerOnMe= function(){
+        //
+        //             var myLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        //             var mapOptions = {
+        //                 center: myLatLng,
+        //                 zoom: 15,
+        //                 mapTypeId: google.maps.MapTypeId.ROADMAP
+        //             };
+        //
+        //             $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        //
+        //             $scope.map.setCenter(myLatLng);
+        //
+        //             var marker = new google.maps.Marker({
+        //                 map: $scope.map,
+        //                 animation: google.maps.Animation.DROP,
+        //                 position: myLatLng
+        //             });
+        //
+        //             var infoWindow = new google.maps.InfoWindow({
+        //                 content: "Here I am!"
+        //             });
+        //
+        //             google.maps.event.addListener(marker, 'click', function () {
+        //                 infoWindow.open($scope.map, marker);
+        //             });
+        //         };
+        //
+        //     });
+        //
+        // }, function(error){
+        //     console.log("Could not get location");
+        // });
+    })
+
+// .controller('MapsCtrl', function($scope, $ionicLoading) {
+//
+// 	$scope.info_position = {
+// 		lat: 43.07493,
+// 		lng: -89.381388
+// 	};
+//
+// 	$scope.center_position = {
+// 		lat: 43.07493,
+// 		lng: -89.381388
+// 	};
+//
+// 	$scope.my_location = "";
+//
+// 	$scope.$on('mapInitialized', function(event, map) {
+// 		$scope.map = map;
+// 	});
+//
+// 	$scope.centerOnMe= function(){
+//
+// 		$scope.positions = [];
+//
+// 		$ionicLoading.show({
+// 			template: 'Loading...'
+// 		});
+//
+// 		// with this function you can get the user’s current position
+// 		// we use this plugin: https://github.com/apache/cordova-plugin-geolocation/
+// 		navigator.geolocation.getCurrentPosition(function(position) {
+// 			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+// 			$scope.current_position = {lat: pos.G,lng: pos.K};
+// 			$scope.my_location = pos.G+", "+pos.K;
+// 			$scope.map.setCenter(pos);
+// 			$ionicLoading.hide();
+// 		});
+// 	};
+// })
 
 .controller('AdsCtrl', function($scope, $ionicActionSheet, AdMob, iAd) {
 
