@@ -438,15 +438,26 @@ angular.module('your_app_name', [
           }
       })
 
-      .state('app.maps', {
-          url: "/miscellaneous/maps",
+
+      .state('app.prometeo', {
+          url: '/prometeo',
           views: {
               'menuContent': {
-                  templateUrl: "views/app/miscellaneous/maps.html",
-                  controller: 'MapsCtrl'
+                  templateUrl: 'views/app/prometeo.html',
+                  controller: 'PrometroCtrl'
               }
           }
       })
+
+      // .state('app.maps', {
+      //     url: "/miscellaneous/maps",
+      //     views: {
+      //         'menuContent': {
+      //             templateUrl: "views/app/miscellaneous/maps.html",
+      //             controller: 'MapsCtrl'
+      //         }
+      //     }
+      // })
 
 
 ;
