@@ -444,7 +444,7 @@ angular.module('your_app_name', [
           views: {
               'menuContent': {
                   templateUrl: 'views/app/prometeo.html',
-                  controller: 'PrometroCtrl'
+                  controller: 'PrometeoCtrl'
               }
           }
       })
