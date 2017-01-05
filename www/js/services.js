@@ -230,6 +230,9 @@ angular.module('your_app_name.services', [])
     var setUser = function(user_data) {
         window.localStorage.starter_google_user = JSON.stringify(user_data);
     };
+    var resetUser = function(user_data) {
+        window.localStorage.starter_google_user = undefined;
+    };
 
     var getUser = function(){
         return JSON.parse(window.localStorage.starter_google_user || '{}');
@@ -237,7 +240,8 @@ angular.module('your_app_name.services', [])
 
     return {
         getUser: getUser,
-        setUser: setUser
+        setUser: setUser,
+        resetUser: resetUser
     };
 })
 
@@ -247,12 +251,20 @@ angular.module('your_app_name.services', [])
         window.localStorage.user_profile_side = JSON.stringify(user_profile);
     };
 
+    var resetProfile = function(user_profile) {
+        window.localStorage.user_profile_side = undefined;
+    };
+
     var getProfile = function(){
         return JSON.parse( window.localStorage.user_profile_side || '{}' );
     };
 
     return {
         getProfile: getProfile,
-        setProfile: setProfile
+        setProfile: setProfile,
+        resetProfile: resetProfile
     };
-});
+})
+
+
+;

@@ -82,8 +82,12 @@
           <h2 class="greeting">Ciao {{user_profile.nome}}</h2>
           <p class="message">Bentornato</p>
         </ion-item>
-          <ionic-sidemenu tree="tree"></ionic-sidemenu>
+          <ionic-sidemenu tree="$root.tree"></ionic-sidemenu>
         </ion-list>
+        <ion-item class="item-icon-left" nav-clear menu-close ng-click="doLogOut()">
+            <i class="icon ion-ios-list" ></i>
+            <h2 class="menu-text" ng-click="doLogOut()">LOG OUT</h2>
+        </ion-item>
     </ion-content>
 
 

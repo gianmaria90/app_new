@@ -5,7 +5,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
-    .controller('SideMenuCtrl', function($scope,ProfileService,$localStorage,$window,$state) {
+    .controller('SideMenuCtrl', function($rootScope,$scope,UserService,ProfileService,$localStorage,$window,$state,$ionicHistory) {
 
         //$scope.user_profile = ProfileService.getProfile();
         $localStorage.user_profile = ProfileService.getProfile();
@@ -13,13 +13,20 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         // console.log( $scope.user_profile.nome);
         //console.log( $scope.user_profile.sex);
 
-        console.log(  $localStorage.user_profile);
+        //console.log(  $localStorage.user_profile);
 
         console.log( $localStorage.loggedIn +" logged");
 
         $scope.doLogOut=function(){
             console.log("logout effettuato");
             $localStorage.$reset();
+            $localStorage.loggedIn=false;
+            $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+            });
+            UserService.resetUser();
+            $scope.Menu();
             $state.go('auth.walkthrough');
             console.log(  $localStorage.user_profile);
 
@@ -38,201 +45,202 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $localStorage.user_profile.nome='Ospite';
             console.log('Sono undefined');
         }
+
         $scope.user_profile= $localStorage.user_profile;
         $scope.theme = 'ionic-sidemenu-dark';
 
-        $scope.tree=[];
+        $rootScope.tree=[];
 
-        if($localStorage.loggedIn===true)
-        {
-            $scope.tree =
-                [
-                    {
-                      id: 1,
-                      name: "Prometeo",
-                      icon: "ion-bookmark",
-                      level: 0,
-                      state: 'app.prometeo'
-                    },
-                    {
-                        id: 2,
-                        name: "News",
-                        icon: "ion-social-rss",
-                        level: 0,
-                        state: 'app.feeds-categories'
-                    },
-                    {
-                        id: 3,
-                        name: "Profilo",
-                        icon: "ion-person",
-                        level: 0,
-                        state: 'app.profile'
-                    },
-                    {
-                        //to remove, jus for testing
-                        id: 4,
-                        name: "Aziende",
-                        icon: "ion-ios-location",
-                        level: 0,
-                        state: 'app.map'
-                        //to remove, jus for testing
-                    },
-                    // {
-                    //   id: 4,
-                    //   name: "Layout",
-                    //   icon: "ion-wand",
-                    //   level: 0,
-                    //   state: 'app.layouts'
-                    // },
-                    // {
-                    //   id: 5,
-                    //   name: "Forms",
-                    //   icon: "ion-document",
-                    //   level: 0,
-                    //   state: 'app.miscellaneous'
-                    // },
-                    // {
-                    //   id: 6,
-                    //   name: "Miscellaneous",
-                    //   icon: "ion-asterisk",
-                    //   level: 0,
-                    //   state: 'app.forms'
-                    // },
-                    // {
-                    //   id: 7,
-                    //   name: "Settings",
-                    //   icon: "ion-gear-a",
-                    //   level: 0,
-                    //   state: 'app.settings'
-                    // },
-                    {
-                        id: 8,
-                        name: "Questionario Prometeo",
-                        icon: "ion-ios-list",
-                        level: 0,
-                        state: 'app.codice'
-                    },
-                    {
-                        id: 9,
-                        name: "Quiz affinità",
-                        icon: "ion-university",
-                        level: 0,
-                        state: 'app.hobby'
-                    },
-                    {
-                        id: 10,
-                        level: 0,
-                        name: 'Student Help Student',
-                        icon: "icon ion-bookmark",
-                        items: [{
-                            id: 101,
-                            level: 1,
-                            name: 'Inserisci annuncio',
-                            icon: "ion-compose",
-                            state: 'app.post_announcement'
-                        },{
-                            id: 102,
-                            level: 1,
-                            name: 'I miei annunci',
-                            icon: "ion-ios-book",
-                            state: 'app.my_announcements'
-                        },{
-                            id: 103,
-                            level: 1,
-                            name: 'Ricerca annuncio',
-                            icon: "ion-ios-search-strong",
-                            state: 'app.search_announcement'
-                        }]
-                    },
-                    {
-                        id: 11,
-                        name: "Logout",
-                        icon: "ion-android-exit",
-                        level: 0,
+        $scope.Menu=function () {
+            if ($localStorage.loggedIn === true) {
+                $rootScope.tree =
+                    [
+                        {
+                            id: 1,
+                            name: "Prometeo",
+                            icon: "ion-bookmark",
+                            level: 0,
+                            state: 'app.prometeo'
+                        },
+                        {
+                            id: 2,
+                            name: "News",
+                            icon: "ion-social-rss",
+                            level: 0,
+                            state: 'app.feeds-categories'
+                        },
+                        {
+                            id: 3,
+                            name: "Profilo",
+                            icon: "ion-person",
+                            level: 0,
+                            state: 'app.profile'
+                        },
+                        {
+                            //to remove, jus for testing
+                            id: 4,
+                            name: "Aziende",
+                            icon: "ion-ios-location",
+                            level: 0,
+                            state: 'app.map'
+                            //to remove, jus for testing
+                        },
+                        // {
+                        //   id: 4,
+                        //   name: "Layout",
+                        //   icon: "ion-wand",
+                        //   level: 0,
+                        //   state: 'app.layouts'
+                        // },
+                        // {
+                        //   id: 5,
+                        //   name: "Forms",
+                        //   icon: "ion-document",
+                        //   level: 0,
+                        //   state: 'app.miscellaneous'
+                        // },
+                        // {
+                        //   id: 6,
+                        //   name: "Miscellaneous",
+                        //   icon: "ion-asterisk",
+                        //   level: 0,
+                        //   state: 'app.forms'
+                        // },
+                        // {
+                        //   id: 7,
+                        //   name: "Settings",
+                        //   icon: "ion-gear-a",
+                        //   level: 0,
+                        //   state: 'app.settings'
+                        // },
+                        {
+                            id: 8,
+                            name: "Questionario Prometeo",
+                            icon: "ion-ios-list",
+                            level: 0,
+                            state: 'app.codice'
+                        },
+                        {
+                            id: 9,
+                            name: "Quiz affinità",
+                            icon: "ion-university",
+                            level: 0,
+                            state: 'app.hobby'
+                        },
+                        {
+                            id: 10,
+                            level: 0,
+                            name: 'Student Help Student',
+                            icon: "icon ion-bookmark",
+                            items: [{
+                                id: 101,
+                                level: 1,
+                                name: 'Inserisci annuncio',
+                                icon: "ion-compose",
+                                state: 'app.post_announcement'
+                            }, {
+                                id: 102,
+                                level: 1,
+                                name: 'I miei annunci',
+                                icon: "ion-ios-book",
+                                state: 'app.my_announcements'
+                            }, {
+                                id: 103,
+                                level: 1,
+                                name: 'Ricerca annuncio',
+                                icon: "ion-ios-search-strong",
+                                state: 'app.search_announcement'
+                            }]
+                        },
+                        {
+                            id: 11,
+                            name: "Logout",
+                            icon: "ion-android-exit",
+                            level: 0,
 
-                        onclick: "doLogOut()"
+                            onclick: "doLogOut()"
 
-                    }
-                ];
-        }
-        else
-        {
-            $scope.tree =
-                [
-                    {
-                        id: 1,
-                        name: "Prometeo",
-                        icon: "ion-bookmark",
-                        level: 0,
-                        state: 'app.prometeo'
-                    },
-                    {
-                        id: 2,
-                        name: "News",
-                        icon: "ion-social-rss",
-                        level: 0,
-                        state: 'app.feeds-categories'
-                    },
-                    {
-                        id: 3,
-                        name: "Aziende",
-                        icon: "ion-ios-location",
-                        level: 0,
-                        state: 'app.map'
-                    },
-                    // {
-                    //   id: 4,
-                    //   name: "Layout",
-                    //   icon: "ion-wand",
-                    //   level: 0,
-                    //   state: 'app.layouts'
-                    // },
-                    // {
-                    //   id: 5,
-                    //   name: "Forms",
-                    //   icon: "ion-document",
-                    //   level: 0,
-                    //   state: 'app.miscellaneous'
-                    // },
-                    // {
-                    //   id: 6,
-                    //   name: "Miscellaneous",
-                    //   icon: "ion-asterisk",
-                    //   level: 0,
-                    //   state: 'app.forms'
-                    // },
-                    // {
-                    //   id: 7,
-                    //   name: "Settings",
-                    //   icon: "ion-gear-a",
-                    //   level: 0,
-                    //   state: 'app.settings'
-                    // },
-                    {
-                        id: 8,
-                        name: "Questionario Prometeo",
-                        icon: "ion-ios-list",
-                        level: 0,
-                        state: 'app.codice'
-                    },
-                    {
-                        id: 9,
-                        name: "Quiz affinità",
-                        icon: "ion-university",
-                        level: 0,
-                        state: 'app.hobby'
-                    }/*,
-                 {
-                 id: 11,
-                 name: "Logout",
-                 icon: "ion-android-exit",
-                 level: 0,
-                 onclick: "doLogOut()"
-                 //state: 'auth.walkthrough'
-                 }*/
-                ];
-        }
-
+                        }
+                    ];
+            }
+            else {
+                $rootScope.tree =
+                    [
+                        {
+                            id: 1,
+                            name: "Prometeo",
+                            icon: "ion-bookmark",
+                            level: 0,
+                            state: 'app.prometeo'
+                        },
+                        {
+                            id: 2,
+                            name: "News",
+                            icon: "ion-social-rss",
+                            level: 0,
+                            state: 'app.feeds-categories'
+                        },
+                        {
+                            id: 3,
+                            name: "Aziende",
+                            icon: "ion-ios-location",
+                            level: 0,
+                            state: 'app.map'
+                        },
+                        // {
+                        //   id: 4,
+                        //   name: "Layout",
+                        //   icon: "ion-wand",
+                        //   level: 0,
+                        //   state: 'app.layouts'
+                        // },
+                        // {
+                        //   id: 5,
+                        //   name: "Forms",
+                        //   icon: "ion-document",
+                        //   level: 0,
+                        //   state: 'app.miscellaneous'
+                        // },
+                        // {
+                        //   id: 6,
+                        //   name: "Miscellaneous",
+                        //   icon: "ion-asterisk",
+                        //   level: 0,
+                        //   state: 'app.forms'
+                        // },
+                        // {
+                        //   id: 7,
+                        //   name: "Settings",
+                        //   icon: "ion-gear-a",
+                        //   level: 0,
+                        //   state: 'app.settings'
+                        // },
+                        {
+                            id: 8,
+                            name: "Questionario Prometeo",
+                            icon: "ion-ios-list",
+                            level: 0,
+                            state: 'app.codice'
+                        },
+                        {
+                            id: 9,
+                            name: "Quiz affinità",
+                            icon: "ion-university",
+                            level: 0,
+                            state: 'app.hobby'
+                        }/*,
+                     {
+                     id: 11,
+                     name: "Logout",
+                     icon: "ion-android-exit",
+                     level: 0,
+                     onclick: "doLogOut()"
+                     //state: 'auth.walkthrough'
+                     }*/
+                    ];
+            }
+        };
+        $scope.Menu();
     })
 
 
@@ -793,7 +801,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
     //LOGIN
-    .controller('LoginCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
+    .controller('LoginCtrl', function($rootScope,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
 
         $scope.doLogIn = function(){
 
@@ -821,8 +829,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     });
 
                     $localStorage.loggedIn=true;
-
-                    console.log("Correct login.");
+                    console.log($localStorage.loggedIn);
+                    $scope.Menu();
+                    console.log($scope.Menu());
                     $ionicHistory.nextViewOptions({
                         disableAnimate: true,
                         disableBack: true
@@ -861,7 +870,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.user = {};
 
-        //$scope.user.email = "kekko.battistone@gmail.com";
+
 
 
         // We need this for the form validation
@@ -870,6 +879,196 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         $scope.$on('my-tabs-changed', function (event, data) {
             $scope.selected_tab = data.title;
         });
+
+        $scope.Menu=function () {
+            if ($localStorage.loggedIn === true) {
+                $rootScope.tree =
+                    [
+                        {
+                            id: 1,
+                            name: "Prometeo",
+                            icon: "ion-bookmark",
+                            level: 0,
+                            state: 'app.prometeo'
+                        },
+                        {
+                            id: 2,
+                            name: "News",
+                            icon: "ion-social-rss",
+                            level: 0,
+                            state: 'app.feeds-categories'
+                        },
+                        {
+                            id: 3,
+                            name: "Profilo",
+                            icon: "ion-person",
+                            level: 0,
+                            state: 'app.profile'
+                        },
+                        {
+                            //to remove, jus for testing
+                            id: 4,
+                            name: "Aziende",
+                            icon: "ion-ios-location",
+                            level: 0,
+                            state: 'app.map'
+                            //to remove, jus for testing
+                        },
+                        // {
+                        //   id: 4,
+                        //   name: "Layout",
+                        //   icon: "ion-wand",
+                        //   level: 0,
+                        //   state: 'app.layouts'
+                        // },
+                        // {
+                        //   id: 5,
+                        //   name: "Forms",
+                        //   icon: "ion-document",
+                        //   level: 0,
+                        //   state: 'app.miscellaneous'
+                        // },
+                        // {
+                        //   id: 6,
+                        //   name: "Miscellaneous",
+                        //   icon: "ion-asterisk",
+                        //   level: 0,
+                        //   state: 'app.forms'
+                        // },
+                        // {
+                        //   id: 7,
+                        //   name: "Settings",
+                        //   icon: "ion-gear-a",
+                        //   level: 0,
+                        //   state: 'app.settings'
+                        // },
+                        {
+                            id: 8,
+                            name: "Questionario Prometeo",
+                            icon: "ion-ios-list",
+                            level: 0,
+                            state: 'app.codice'
+                        },
+                        {
+                            id: 9,
+                            name: "Quiz affinità",
+                            icon: "ion-university",
+                            level: 0,
+                            state: 'app.hobby'
+                        },
+                        {
+                            id: 10,
+                            level: 0,
+                            name: 'Student Help Student',
+                            icon: "icon ion-bookmark",
+                            items: [{
+                                id: 101,
+                                level: 1,
+                                name: 'Inserisci annuncio',
+                                icon: "ion-compose",
+                                state: 'app.post_announcement'
+                            }, {
+                                id: 102,
+                                level: 1,
+                                name: 'I miei annunci',
+                                icon: "ion-ios-book",
+                                state: 'app.my_announcements'
+                            }, {
+                                id: 103,
+                                level: 1,
+                                name: 'Ricerca annuncio',
+                                icon: "ion-ios-search-strong",
+                                state: 'app.search_announcement'
+                            }]
+                        },
+                        {
+                            id: 11,
+                            name: "Logout",
+                            icon: "ion-android-exit",
+                            level: 0,
+
+                            onclick: "doLogOut()"
+
+                        }
+                    ];
+            }
+            else {
+                $rootScope.tree =
+                    [
+                        {
+                            id: 1,
+                            name: "Prometeo",
+                            icon: "ion-bookmark",
+                            level: 0,
+                            state: 'app.prometeo'
+                        },
+                        {
+                            id: 2,
+                            name: "News",
+                            icon: "ion-social-rss",
+                            level: 0,
+                            state: 'app.feeds-categories'
+                        },
+                        {
+                            id: 3,
+                            name: "Aziende",
+                            icon: "ion-ios-location",
+                            level: 0,
+                            state: 'app.map'
+                        },
+                        // {
+                        //   id: 4,
+                        //   name: "Layout",
+                        //   icon: "ion-wand",
+                        //   level: 0,
+                        //   state: 'app.layouts'
+                        // },
+                        // {
+                        //   id: 5,
+                        //   name: "Forms",
+                        //   icon: "ion-document",
+                        //   level: 0,
+                        //   state: 'app.miscellaneous'
+                        // },
+                        // {
+                        //   id: 6,
+                        //   name: "Miscellaneous",
+                        //   icon: "ion-asterisk",
+                        //   level: 0,
+                        //   state: 'app.forms'
+                        // },
+                        // {
+                        //   id: 7,
+                        //   name: "Settings",
+                        //   icon: "ion-gear-a",
+                        //   level: 0,
+                        //   state: 'app.settings'
+                        // },
+                        {
+                            id: 8,
+                            name: "Questionario Prometeo",
+                            icon: "ion-ios-list",
+                            level: 0,
+                            state: 'app.codice'
+                        },
+                        {
+                            id: 9,
+                            name: "Quiz affinità",
+                            icon: "ion-university",
+                            level: 0,
+                            state: 'app.hobby'
+                        }/*,
+                     {
+                     id: 11,
+                     name: "Logout",
+                     icon: "ion-android-exit",
+                     level: 0,
+                     onclick: "doLogOut()"
+                     //state: 'auth.walkthrough'
+                     }*/
+                    ];
+            }
+        };
 
     })
 
@@ -912,7 +1111,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     })
 
-    .controller('SignupCtrl', function($scope, $state,$cordovaOauth,$window,$ionicLoading,UserService,$localStorage) {
+    .controller('SignupCtrl', function($rootScope,$scope, $state,$cordovaOauth,$window,$ionicLoading,UserService,$localStorage) {
         console.log($localStorage.loggedIn);
 
         if($localStorage.loggedIn===true)
@@ -924,7 +1123,200 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $localStorage.loggedIn=false;
         }
 
+        $scope.Ospite = function() {
 
+            $scope.Menu=function () {
+                if ($localStorage.loggedIn === true) {
+                    $rootScope.tree =
+                        [
+                            {
+                                id: 1,
+                                name: "Prometeo",
+                                icon: "ion-bookmark",
+                                level: 0,
+                                state: 'app.prometeo'
+                            },
+                            {
+                                id: 2,
+                                name: "News",
+                                icon: "ion-social-rss",
+                                level: 0,
+                                state: 'app.feeds-categories'
+                            },
+                            {
+                                id: 3,
+                                name: "Profilo",
+                                icon: "ion-person",
+                                level: 0,
+                                state: 'app.profile'
+                            },
+                            {
+                                //to remove, jus for testing
+                                id: 4,
+                                name: "Aziende",
+                                icon: "ion-ios-location",
+                                level: 0,
+                                state: 'app.map'
+                                //to remove, jus for testing
+                            },
+                            // {
+                            //   id: 4,
+                            //   name: "Layout",
+                            //   icon: "ion-wand",
+                            //   level: 0,
+                            //   state: 'app.layouts'
+                            // },
+                            // {
+                            //   id: 5,
+                            //   name: "Forms",
+                            //   icon: "ion-document",
+                            //   level: 0,
+                            //   state: 'app.miscellaneous'
+                            // },
+                            // {
+                            //   id: 6,
+                            //   name: "Miscellaneous",
+                            //   icon: "ion-asterisk",
+                            //   level: 0,
+                            //   state: 'app.forms'
+                            // },
+                            // {
+                            //   id: 7,
+                            //   name: "Settings",
+                            //   icon: "ion-gear-a",
+                            //   level: 0,
+                            //   state: 'app.settings'
+                            // },
+                            {
+                                id: 8,
+                                name: "Questionario Prometeo",
+                                icon: "ion-ios-list",
+                                level: 0,
+                                state: 'app.codice'
+                            },
+                            {
+                                id: 9,
+                                name: "Quiz affinità",
+                                icon: "ion-university",
+                                level: 0,
+                                state: 'app.hobby'
+                            },
+                            {
+                                id: 10,
+                                level: 0,
+                                name: 'Student Help Student',
+                                icon: "icon ion-bookmark",
+                                items: [{
+                                    id: 101,
+                                    level: 1,
+                                    name: 'Inserisci annuncio',
+                                    icon: "ion-compose",
+                                    state: 'app.post_announcement'
+                                }, {
+                                    id: 102,
+                                    level: 1,
+                                    name: 'I miei annunci',
+                                    icon: "ion-ios-book",
+                                    state: 'app.my_announcements'
+                                }, {
+                                    id: 103,
+                                    level: 1,
+                                    name: 'Ricerca annuncio',
+                                    icon: "ion-ios-search-strong",
+                                    state: 'app.search_announcement'
+                                }]
+                            },
+                            {
+                                id: 11,
+                                name: "Logout",
+                                icon: "ion-android-exit",
+                                level: 0,
+
+                                onclick: "doLogOut()"
+
+                            }
+                        ];
+                }
+                else {
+                    $rootScope.tree =
+                        [
+                            {
+                                id: 1,
+                                name: "Prometeo",
+                                icon: "ion-bookmark",
+                                level: 0,
+                                state: 'app.prometeo'
+                            },
+                            {
+                                id: 2,
+                                name: "News",
+                                icon: "ion-social-rss",
+                                level: 0,
+                                state: 'app.feeds-categories'
+                            },
+                            {
+                                id: 3,
+                                name: "Aziende",
+                                icon: "ion-ios-location",
+                                level: 0,
+                                state: 'app.map'
+                            },
+                            // {
+                            //   id: 4,
+                            //   name: "Layout",
+                            //   icon: "ion-wand",
+                            //   level: 0,
+                            //   state: 'app.layouts'
+                            // },
+                            // {
+                            //   id: 5,
+                            //   name: "Forms",
+                            //   icon: "ion-document",
+                            //   level: 0,
+                            //   state: 'app.miscellaneous'
+                            // },
+                            // {
+                            //   id: 6,
+                            //   name: "Miscellaneous",
+                            //   icon: "ion-asterisk",
+                            //   level: 0,
+                            //   state: 'app.forms'
+                            // },
+                            // {
+                            //   id: 7,
+                            //   name: "Settings",
+                            //   icon: "ion-gear-a",
+                            //   level: 0,
+                            //   state: 'app.settings'
+                            // },
+                            {
+                                id: 8,
+                                name: "Questionario Prometeo",
+                                icon: "ion-ios-list",
+                                level: 0,
+                                state: 'app.codice'
+                            },
+                            {
+                                id: 9,
+                                name: "Quiz affinità",
+                                icon: "ion-university",
+                                level: 0,
+                                state: 'app.hobby'
+                            }/*,
+                         {
+                         id: 11,
+                         name: "Logout",
+                         icon: "ion-android-exit",
+                         level: 0,
+                         onclick: "doLogOut()"
+                         //state: 'auth.walkthrough'
+                         }*/
+                        ];
+                }
+            };
+            $scope.Menu();
+            $state.go('app.feeds-categories');
+        };
 
 
         $scope.doSignUp = function() {
@@ -1188,7 +1580,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                         });
 
-                    }
+                    };
 
                     for (i = 0; i < cities.length; i++){
                         createMarker(cities[i]);
