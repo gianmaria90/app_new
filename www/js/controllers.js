@@ -5,7 +5,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
-    .controller('SideMenuCtrl', function($rootScope,$scope,UserService,ProfileService,$localStorage,$window,$state,$ionicHistory) {
+    .controller('SideMenuCtrl', function($rootScope,$scope,UserService,ProfileService,$localStorage,$window,$state,$ionicHistory,$ionicLoading,$timeout) {
 
         //$scope.user_profile = ProfileService.getProfile();
         $localStorage.user_profile = ProfileService.getProfile();
@@ -19,7 +19,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.doLogOut=function(){
             console.log("logout effettuato");
-            $localStorage.$reset();
+            /*$localStorage.$reset();
             $localStorage.loggedIn=false;
             $ionicHistory.nextViewOptions({
                 disableAnimate: true,
@@ -27,8 +27,36 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             });
             UserService.resetUser();
             $scope.Menu();
-            $state.go('auth.walkthrough');
-            console.log(  $localStorage.user_profile);
+            console.log($rootScope.tree);
+            //$state.go('auth.walkthrough');
+            console.log(  $localStorage.user_profile);*/
+
+            $ionicLoading.show({
+                template: 'Logging out....'
+            });
+            //$localstorage.set('loggin_state', '');
+
+            $timeout(function () {
+                $ionicLoading.hide();
+                $ionicHistory.clearCache();
+                $ionicHistory.clearHistory();
+                $ionicHistory.nextViewOptions({
+                    disableBack: true,
+                    historyRoot: true
+                });
+                $localStorage.$reset();
+                $localStorage.loggedIn=false;
+                $ionicHistory.nextViewOptions({
+                    disableAnimate: true,
+                    disableBack: true
+                });
+                UserService.resetUser();
+                $scope.Menu();
+                console.log($rootScope.tree);
+                //$state.go('auth.walkthrough');
+                console.log(  $localStorage.user_profile);
+                $state.go('auth.walkthrough');
+            }, 30);
 
         };
 
@@ -187,34 +215,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             level: 0,
                             state: 'app.map'
                         },
-                        // {
-                        //   id: 4,
-                        //   name: "Layout",
-                        //   icon: "ion-wand",
-                        //   level: 0,
-                        //   state: 'app.layouts'
-                        // },
-                        // {
-                        //   id: 5,
-                        //   name: "Forms",
-                        //   icon: "ion-document",
-                        //   level: 0,
-                        //   state: 'app.miscellaneous'
-                        // },
-                        // {
-                        //   id: 6,
-                        //   name: "Miscellaneous",
-                        //   icon: "ion-asterisk",
-                        //   level: 0,
-                        //   state: 'app.forms'
-                        // },
-                        // {
-                        //   id: 7,
-                        //   name: "Settings",
-                        //   icon: "ion-gear-a",
-                        //   level: 0,
-                        //   state: 'app.settings'
-                        // },
+
                         {
                             id: 8,
                             name: "Questionario Prometeo",
@@ -228,15 +229,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             icon: "ion-university",
                             level: 0,
                             state: 'app.hobby'
-                        }/*,
-                     {
-                     id: 11,
-                     name: "Logout",
-                     icon: "ion-android-exit",
-                     level: 0,
-                     onclick: "doLogOut()"
-                     //state: 'auth.walkthrough'
-                     }*/
+                        }
                     ];
             }
         };
@@ -801,7 +794,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
     //LOGIN
-    .controller('LoginCtrl', function($rootScope,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
+    .controller('LoginCtrl', function($rootScope,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$timeout,ProfileService) {
 
         $scope.doLogIn = function(){
 
@@ -822,7 +815,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     obj=angular.fromJson(data);
 
                     console.log(obj.result);
-                    UserService.setUser({
+                    /*UserService.setUser({
 
                         mail: $scope.user.email,
                         password: $scope.user.password
@@ -831,12 +824,44 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     $localStorage.loggedIn=true;
                     console.log($localStorage.loggedIn);
                     $scope.Menu();
-                    console.log($scope.Menu());
+                    console.log($rootScope.tree);
                     $ionicHistory.nextViewOptions({
                         disableAnimate: true,
                         disableBack: true
+                    });*/
+                    //$state.go('app.profile');
+
+                    $ionicLoading.show({
+                        template: 'Logging out....'
                     });
-                    $state.go('app.profile');
+                    //$localstorage.set('loggin_state', '');
+
+                    $timeout(function () {
+                        UserService.setUser({
+
+                            mail: $scope.user.email,
+                            password: $scope.user.password
+                        });
+
+                        $localStorage.user_profile = ProfileService.getProfile();
+                        console.log($localStorage.user_profile);
+                        $ionicLoading.hide();
+                        $ionicHistory.clearCache();
+                        $ionicHistory.clearHistory();
+                        $ionicHistory.nextViewOptions({
+                            disableBack: true,
+                            historyRoot: true
+                        });
+                        $localStorage.loggedIn=true;
+                        console.log($localStorage.loggedIn);
+                        $scope.Menu();
+                        console.log($rootScope.tree);
+                        $ionicHistory.nextViewOptions({
+                            disableAnimate: true,
+                            disableBack: true
+                        });
+                        $state.go('app.profile');
+                    }, 30);
 
                 })
                 .error(function (data, status) {
