@@ -23,12 +23,12 @@
       <div ng-if="profile.borsa=='true'" class="button-bar">
         <button class="button icon ion-bookmark">Piano studi</button>
         <button class="button icon ion-calendar">Attività</button>
-        <button class="button icon ion-person-stalker">Mentor</button>
-        <button class="button icon ion-person">Profilo</button>
+        <button class="button icon ion-person-stalker" ng-click="Mentor()">Mentor</button>
+        <button class="button icon ion-person" ng-click="updateProfileData()">Profilo</button>
       </div>
 
       <div ng-if="profile.borsa=='false'" class="button-bar">
-        <button class="button icon ion-person">Profilo</button>
+        <button class="button icon ion-person" ng-click="updateProfileData()">Profilo</button>
       </div>
 
     </div>

@@ -168,7 +168,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             icon: "ion-university",
                             level: 0,
                             state: 'app.hobby'
-                        }
+                        },
                     ];
             }
             //clear the state
@@ -378,7 +378,34 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             level: 0,
                             state: 'app.map'
                         },
-
+                        // {
+                        //   id: 4,
+                        //   name: "Layout",
+                        //   icon: "ion-wand",
+                        //   level: 0,
+                        //   state: 'app.layouts'
+                        // },
+                        // {
+                        //   id: 5,
+                        //   name: "Forms",
+                        //   icon: "ion-document",
+                        //   level: 0,
+                        //   state: 'app.miscellaneous'
+                        // },
+                        // {
+                        //   id: 6,
+                        //   name: "Miscellaneous",
+                        //   icon: "ion-asterisk",
+                        //   level: 0,
+                        //   state: 'app.forms'
+                        // },
+                        // {
+                        //   id: 7,
+                        //   name: "Settings",
+                        //   icon: "ion-gear-a",
+                        //   level: 0,
+                        //   state: 'app.settings'
+                        // },
                         {
                             id: 8,
                             name: "Questionario Prometeo",
@@ -392,6 +419,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             icon: "ion-university",
                             level: 0,
                             state: 'app.hobby'
+                        },
+                        {
+                            id: 10,
+                            name: "Mentor",
+                            icon: "ion-university",
+                            level: 0,
+                            state: 'app.mentor'
                         }
                     ];
             }
@@ -954,6 +988,183 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
+    .controller('UpdateProfileCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
+
+        $scope.editName = false;
+        $scope.editSurname = false;
+        $scope.editSex = false;
+        $scope.editPhone = false;
+        $scope.editAddress= false;
+        $scope.editUniversity = false;
+        $scope.editCDL= false;
+
+        $scope.editFields = function () {
+            $scope.editName = true;
+            $scope.editSurname = true;
+            $scope.editSex = true;
+            $scope.editPhone = true;
+            $scope.editAddress= true;
+            $scope.editUniversity = true;
+            $scope.editCDL= true;
+            $scope.editSubmit = true;
+        }
+
+        $scope.prof =
+
+            {
+                "mail":                     $localStorage.user_profile.mail,
+                "nome":                     $localStorage.user_profile.nome,
+                "cognome":                  $localStorage.user_profile.cognome,
+                "sesso":                    $localStorage.user_profile.sesso,
+                "telefono":                 $localStorage.user_profile.telefono,
+                "nome_uni":                 $localStorage.user_profile.nome_uni,
+                "id_uni":                   $localStorage.user_profile.id_uni,
+                "corso_laurea":             $localStorage.user_profile.corso_laurea,
+                "indirizzo":                $localStorage.user_profile.indirizzo,
+                "borsa":                    $localStorage.user_profile.borsa,
+                "tipologia_borsa":          $localStorage.user_profile.tipologia_borsa
+
+            };
+
+
+        $scope.university = {};
+
+        //  The user has selected a Customer from our Drop Down List.  Let's load this Customer's records.
+        // $http.get('https://arctic-window-132923.appspot.com/list_universities')
+        //     .success(function (data) {
+        //         $scope.university = data;
+        //         console.log("here");
+        //     })
+        //     .error(function (data, status, headers, config) {
+        //         $scope.errorMessage = "Couldn't load the list of University, error # " + status;
+        //     });
+
+        $http({
+            method :'GET',
+            url:'https://arctic-window-132923.appspot.com/list_universities',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .success(function (data, status) {
+                $scope.university = data;
+                $scope.selectedValue = $localStorage.user_profile.nome_uni;
+
+            })
+            .error(function (data, status) {
+                console.log("Error storing device token." + data + " " + status);
+
+                $scope.title = "Qualcosa non è andato a buon fine!";
+                $scope.template = "Contattare il nostro team tecnico";
+
+                var alertPopup = $ionicPopup.alert({
+                    title: $scope.title,
+                    template: $scope.template
+                });
+            });
+
+
+        console.log($localStorage);
+
+        $scope.doUpdateProfile = function(){
+
+            console.log($scope.prof);
+
+            var updated_data = JSON.stringify({
+
+                "mail":                     $scope.prof.mail,
+                "nome":                     $scope.prof.nome,
+                "cognome":                  $scope.prof.cognome,
+                "sex":                      $scope.prof.sesso,
+                "telefono":                 $scope.prof.telefono,
+                "id_uni":                   $scope.prof.id_uni,
+                "corso_laurea":             $scope.prof.corso_laurea,
+                "indirizzo":                $scope.prof.indirizzo
+            });
+
+            console.log(updated_data);
+
+
+            $http({
+                method :'POST',
+                url:'https://arctic-window-132923.appspot.com/update_profile',
+                data: updated_data,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .success(function (data, status) {
+
+                    var obj = angular.fromJson(data);
+                    console.log(obj.result);
+
+                    if(obj.result === '200')
+                    {
+                        console.log("Dati aggiornati con successo");
+                        $scope.title="Profilo aggiornato";
+                        $scope.template="Il tuo profilo è stato aggiornato con successo!";
+                        $ionicHistory.nextViewOptions({
+                            disableAnimate: true,
+                            disableBack: true
+                        });
+                        // the user is redirected to login page after sign up
+                        $state.go('app.profile', {}, {location: "replace", reload: true});
+                    }
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: $scope.title,
+                        template: $scope.template
+                    });
+                })
+                .error(function (data, status) {
+                    console.log("Error." + data + " " + status);
+
+                    if (obj.result === '500')
+                    {
+                        console.log("Something went wrong!");
+                        $scope.title="Something went wrong!";
+                        $scope.template="Contattare il nostro team tecnico";
+                        //resettare i parametri focus email
+                    }
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: $scope.title,
+                        template: $scope.template
+                    });
+
+                });
+        };
+    })
+
+
+    .controller('MentorCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
+
+        //TODO: You must install the cordova plugin whitelist:
+        //cordova plugin add cordova-plugin-whitelist
+        //or if you want to save the reference to your config.xml file:
+
+          //  cordova plugin add cordova-plugin-whitelist --save
+        //and that you have to add the intent to your config.xml file:
+
+          //  <allow-intent href="mailto:*" />
+            //<allow-intent href="tel:*" />
+
+
+        $scope.mentor_data =
+
+            {
+                "nome":              $localStorage.user_profile.nome_mentore,
+                "cognome":           $localStorage.user_profile.cognome_mentore,
+                "sesso":             $localStorage.user_profile.sesso_mentore,
+                "mail":              $localStorage.user_profile.mail_mentore,
+                "telefono":          $localStorage.user_profile.telefono_mentore
+            };
+
+
+
+    })
+
+
 
 
     //LOGIN
@@ -1432,9 +1643,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         $scope.profile={};
         $scope.user = UserService.getUser();
 
-        console.log($localStorage.loggedIn);
+        // console.log($localStorage.loggedIn);
         var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
-        console.log(params);
+        // console.log(params);
         $http({
             method :'POST',
             url:'https://arctic-window-132923.appspot.com/get_user_info',
@@ -1449,19 +1660,55 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                 $scope.profile=data.result;
 
-                console.log($scope.profile.nome_studente);
+                // console.log($scope.profile.nome_studente);
 
                 ProfileService.setProfile({
                     nome: $scope.profile.nome_studente,
                     sex: $scope.profile.sesso_studente
                 });
 
-                console.log($scope.profile);
+
+                // SESSION DATA FOR STUDENT W/0 SCHOLARSHIP
+                $localStorage.user_profile.mail = $scope.user.mail;
+                $localStorage.user_profile.nome = $scope.profile.nome_studente;
+                $localStorage.user_profile.cognome = $scope.profile.cognome_studente;
+                $localStorage.user_profile.telefono = $scope.profile.telefono_studente;
+                $localStorage.user_profile.indirizzo = $scope.profile.indirizzo_studente;
+                $localStorage.user_profile.nome_uni = $scope.profile.nome_uni;
+                $localStorage.user_profile.id_uni = $scope.profile.id_uni;
+                $localStorage.user_profile.corso_laurea = $scope.profile.studente_corso_laurea;
+                $localStorage.user_profile.dipartimento = $scope.profile.studente_dipartimento;
+                $localStorage.user_profile.sesso = $scope.profile.sesso_studente;
+                $localStorage.user_profile.borsa = $scope.profile.borsa;
+
+
+                // OTHER SESSION DATA FOR STUDENT W/ SCHOLARSHIP
+                if ($localStorage.user_profile.borsa=='true') {
+                    $localStorage.user_profile.tipologia_borsa = $scope.profile.tipologia_borsa;
+                    $localStorage.user_profile.data_inizio_borsa = $scope.profile.data_inizio_borsa;
+                    $localStorage.user_profile.nome_mentore = $scope.profile.nome_mentore;
+                    $localStorage.user_profile.cognome_mentore = $scope.profile.cognome_mentore;
+                    $localStorage.user_profile.sesso_mentore = $scope.profile.sesso_mentore;
+                    $localStorage.user_profile.mail_mentore = $scope.profile.mail_mentore;
+                    $localStorage.user_profile.telefono_mentore = $scope.profile.telefono_mentore;
+                }
+
+
+                console.log($localStorage.user_profile);
+
             })
             .error(function (data, status) {
                 console.log("Error." + data + " " + status);
 
             });
+
+        $scope.updateProfileData = function(){
+            $state.go('app.update_profile');
+        };
+
+        $scope.Mentor = function(){
+            $state.go('app.mentor');
+        };
 
     })
 

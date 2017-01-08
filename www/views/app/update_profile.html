@@ -1,0 +1,143 @@
+<ion-view class="Profile-view" cache-view="false">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button style="border-color: #f8f8f8;" menu-toggle="right" class="button button-small button-assertive" ng-click="editFields()">Edit</button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <span>Profilo</span>
+    </ion-nav-title>
+    <ion-content>
+        <form name="update_profile_form" class="" novalidate ng-cloak>
+
+            <div ng-if="prof.borsa=='true'" class="list">
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Nome*</b></span>
+                    <input type="text" ng-model="prof.nome" required ng-disabled="!editName">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Cognome*</b></span>
+                    <input type="text" ng-model="prof.cognome" required ng-disabled="!editSurname">
+                </label>
+
+                <div ng-class="list">
+                    <!--Click here to disable all the form fields:<input type="checkbox" ng-model="all"><br>-->
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            <b>Sesso*</b>
+                        </div>
+                        <!--FIXME: bug che non disabilita la select -->
+                        <select ng-disabled="!editSex" ng-model="prof.sesso">
+                            <option >M</option>
+                            <option >F</option>
+                        </select>
+                    </label>
+                </div>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Telefono</b></span>
+                    <input type="tel" ng-model="prof.telefono" ng-disabled="!editPhone">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Indirizzo*</b></span>
+                    <input type="text" ng-model="prof.indirizzo" required ng-disabled="!editAddress">
+                </label>
+
+                <div class="list">
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            <b>Università*</b>
+                        </div>
+
+                        <!--FIXME: bug che non disabilita la select -->
+                        <select ng-model="prof.id_uni" ng-disabled="!editUniversity">
+                            <option value="">---Select option-----</option>
+                            <option ng-selected="prof.nome_uni == uni.nome" value="{{uni.id}}" ng-repeat="uni in university">{{uni.nome}}</option>
+                        </select>
+
+                    </label>
+                </div>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Corso di Laurea</b></span>
+                    <input type="text" ng-model="prof.corso_laurea" ng-disabled="!editCDL">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Tipologia Borsa</b></span>
+                    <input type="text" ng-model="prof.tipologia_borsa" ng-readonly="true">
+                </label>
+
+            </div>
+
+            <div ng-if="prof.borsa=='false'" class="list">
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Nome*</b></span>
+                    <input type="text" ng-model="prof.nome" required ng-disabled="!editName">
+                </label>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Cognome*</b></span>
+                    <input type="text" ng-model="prof.cognome" required ng-disabled="!editSurname">
+                </label>
+
+                <div ng-class="list">
+                    <!--Click here to disable all the form fields:<input type="checkbox" ng-model="all"><br>-->
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            <b>Sesso*</b>
+                        </div>
+                        <!--FIXME: bug che non disabilita la select -->
+                        <select ng-disabled="!editSex" ng-model="prof.sesso">
+                            <option >M</option>
+                            <option >F</option>
+                        </select>
+                    </label>
+                </div>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Telefono</b></span>
+                    <input type="tel" ng-model="prof.telefono" ng-disabled="!editPhone">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Indirizzo*</b></span>
+                    <input type="text" ng-model="prof.indirizzo" required ng-disabled="!editAddress">
+                </label>
+
+                <div class="list">
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            <b>Università*</b>
+                        </div>
+
+                        <!--FIXME: bug che non disabilita la select -->
+                        <select ng-model="prof.id_uni" ng-disabled="!editUniversity">
+                            <option value="">---Select option-----</option>
+                            <option ng-selected="prof.nome_uni == uni.nome" value="{{uni.id}}" ng-repeat="uni in university">{{uni.nome}}</option>
+                        </select>
+
+                    </label>
+                </div>
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Corso di Laurea</b></span>
+                    <input type="text" ng-model="prof.corso_laurea" ng-disabled="!editCDL">
+                </label>
+
+            </div>
+
+            <div class="item item-body bottom-content">
+                <button type="submit" class="button button-block button-assertive" ng-click="doUpdateProfile()"   ng-disabled="(!update_profile_form.$valid) || (!editSubmit)">
+                    Aggiorna Profilo
+                </button>
+            </div>
+
+        </form>
+    </ion-content>
+</ion-view>
+
+

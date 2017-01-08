@@ -141,7 +141,7 @@ angular.module('your_app_name', [
   .state('app', {
     url: "/app",
     abstract: true,
-      cache: false,
+      // cache: false,
     templateUrl: "views/app/side-menu.html",
     controller: 'AppCtrl'
   })
@@ -381,6 +381,7 @@ angular.module('your_app_name', [
 
   .state('app.profile', {
     url: "/profile",
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: "views/app/profile.html",
@@ -449,6 +450,27 @@ angular.module('your_app_name', [
               }
           }
       })
+
+      .state('app.update_profile', {
+          url: '/update_profile',
+          views: {
+              'menuContent': {
+                  templateUrl: 'views/app/update_profile.html',
+                  controller: 'UpdateProfileCtrl'
+              }
+          }
+      })
+
+      .state('app.mentor', {
+          url: '/mentor',
+          views: {
+              'menuContent': {
+                  templateUrl: 'views/app/mentor.html',
+                  controller: 'MentorCtrl'
+              }
+          }
+      })
+
 
       // .state('app.maps', {
       //     url: "/miscellaneous/maps",
