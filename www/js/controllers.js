@@ -172,6 +172,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     ];
             }
             //clear the state
+            if(!$scope.$$phase) {
+                $scope.$apply();
+            }
             $state.go('auth.walkthrough', {}, { reload: true });
         });
 
@@ -216,7 +219,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 console.log(  $localStorage.user_profile);
                // $state.go('auth.walkthrough');
                 $scope.$emit('menuDataChange');
-            }, 30);
+            }, 100);
 
         };
 
@@ -957,7 +960,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     .controller('LoginCtrl', function($rootScope,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$timeout,ProfileService) {
 
 
-        $scope.$on('menuData', function (event, data) {
+        $scope.$on('menuData', function (event) {
             //refresh menu items data
 
             if ($localStorage.loggedIn === true) {
@@ -1113,6 +1116,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     ];
             }
             //clear the state
+            if(!$scope.$$phase) {
+                $scope.$apply();
+            }
             $state.go('app.profile', {}, { reload: true });
 
         });
@@ -1184,7 +1190,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         });
                         $scope.$emit('menuData');
                         //$state.go('app.profile');
-                    }, 30);
+                    }, 100);
 
                 })
                 .error(function (data, status) {
@@ -1471,9 +1477,172 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $localStorage.loggedIn=false;
         }
 
+        $scope.$on('menuD', function (event) {
+            //refresh menu items data
+
+            if ($localStorage.loggedIn === true) {
+                $rootScope.tree =
+                    [
+                        {
+                            id: 1,
+                            name: "Prometeo",
+                            icon: "ion-bookmark",
+                            level: 0,
+                            state: 'app.prometeo'
+                        },
+                        {
+                            id: 2,
+                            name: "News",
+                            icon: "ion-social-rss",
+                            level: 0,
+                            state: 'app.feeds-categories'
+                        },
+                        {
+                            id: 3,
+                            name: "Profilo",
+                            icon: "ion-person",
+                            level: 0,
+                            state: 'app.profile'
+                        },
+                        {
+                            //to remove, jus for testing
+                            id: 4,
+                            name: "Aziende",
+                            icon: "ion-ios-location",
+                            level: 0,
+                            state: 'app.map'
+                            //to remove, jus for testing
+                        },
+                        // {
+                        //   id: 4,
+                        //   name: "Layout",
+                        //   icon: "ion-wand",
+                        //   level: 0,
+                        //   state: 'app.layouts'
+                        // },
+                        // {
+                        //   id: 5,
+                        //   name: "Forms",
+                        //   icon: "ion-document",
+                        //   level: 0,
+                        //   state: 'app.miscellaneous'
+                        // },
+                        // {
+                        //   id: 6,
+                        //   name: "Miscellaneous",
+                        //   icon: "ion-asterisk",
+                        //   level: 0,
+                        //   state: 'app.forms'
+                        // },
+                        // {
+                        //   id: 7,
+                        //   name: "Settings",
+                        //   icon: "ion-gear-a",
+                        //   level: 0,
+                        //   state: 'app.settings'
+                        // },
+                        {
+                            id: 8,
+                            name: "Questionario Prometeo",
+                            icon: "ion-ios-list",
+                            level: 0,
+                            state: 'app.codice'
+                        },
+                        {
+                            id: 9,
+                            name: "Quiz affinità",
+                            icon: "ion-university",
+                            level: 0,
+                            state: 'app.hobby'
+                        },
+                        {
+                            id: 10,
+                            level: 0,
+                            name: 'Student Help Student',
+                            icon: "icon ion-bookmark",
+                            items: [{
+                                id: 101,
+                                level: 1,
+                                name: 'Inserisci annuncio',
+                                icon: "ion-compose",
+                                state: 'app.post_announcement'
+                            }, {
+                                id: 102,
+                                level: 1,
+                                name: 'I miei annunci',
+                                icon: "ion-ios-book",
+                                state: 'app.my_announcements'
+                            }, {
+                                id: 103,
+                                level: 1,
+                                name: 'Ricerca annuncio',
+                                icon: "ion-ios-search-strong",
+                                state: 'app.search_announcement'
+                            }]
+                        },
+                        {
+                            id: 11,
+                            name: "Logout",
+                            icon: "ion-android-exit",
+                            level: 0,
+
+                            onclick: "doLogOut()"
+
+                        }
+                    ];
+            }
+            else {
+                $rootScope.tree =
+                    [
+                        {
+                            id: 1,
+                            name: "Prometeo",
+                            icon: "ion-bookmark",
+                            level: 0,
+                            state: 'app.prometeo'
+                        },
+                        {
+                            id: 2,
+                            name: "News",
+                            icon: "ion-social-rss",
+                            level: 0,
+                            state: 'app.feeds-categories'
+                        },
+                        {
+                            id: 3,
+                            name: "Aziende",
+                            icon: "ion-ios-location",
+                            level: 0,
+                            state: 'app.map'
+                        },
+
+                        {
+                            id: 8,
+                            name: "Questionario Prometeo",
+                            icon: "ion-ios-list",
+                            level: 0,
+                            state: 'app.codice'
+                        },
+                        {
+                            id: 9,
+                            name: "Quiz affinità",
+                            icon: "ion-university",
+                            level: 0,
+                            state: 'app.hobby'
+                        }
+                    ];
+            }
+            //clear the state
+            if(!$scope.$$phase) {
+                $scope.$apply();
+            }
+            $state.go('app.feeds-categories', {}, { reload: true });
+
+        });
+
         $scope.Ospite = function() {
 
-            $scope.Menu=function () {
+            /*$scope.Menu=function () {
                 if ($localStorage.loggedIn === true) {
                     $rootScope.tree =
                         [
@@ -1507,34 +1676,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                 state: 'app.map'
                                 //to remove, jus for testing
                             },
-                            // {
-                            //   id: 4,
-                            //   name: "Layout",
-                            //   icon: "ion-wand",
-                            //   level: 0,
-                            //   state: 'app.layouts'
-                            // },
-                            // {
-                            //   id: 5,
-                            //   name: "Forms",
-                            //   icon: "ion-document",
-                            //   level: 0,
-                            //   state: 'app.miscellaneous'
-                            // },
-                            // {
-                            //   id: 6,
-                            //   name: "Miscellaneous",
-                            //   icon: "ion-asterisk",
-                            //   level: 0,
-                            //   state: 'app.forms'
-                            // },
-                            // {
-                            //   id: 7,
-                            //   name: "Settings",
-                            //   icon: "ion-gear-a",
-                            //   level: 0,
-                            //   state: 'app.settings'
-                            // },
+
                             {
                                 id: 8,
                                 name: "Questionario Prometeo",
@@ -1609,34 +1751,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                 level: 0,
                                 state: 'app.map'
                             },
-                            // {
-                            //   id: 4,
-                            //   name: "Layout",
-                            //   icon: "ion-wand",
-                            //   level: 0,
-                            //   state: 'app.layouts'
-                            // },
-                            // {
-                            //   id: 5,
-                            //   name: "Forms",
-                            //   icon: "ion-document",
-                            //   level: 0,
-                            //   state: 'app.miscellaneous'
-                            // },
-                            // {
-                            //   id: 6,
-                            //   name: "Miscellaneous",
-                            //   icon: "ion-asterisk",
-                            //   level: 0,
-                            //   state: 'app.forms'
-                            // },
-                            // {
-                            //   id: 7,
-                            //   name: "Settings",
-                            //   icon: "ion-gear-a",
-                            //   level: 0,
-                            //   state: 'app.settings'
-                            // },
+
                             {
                                 id: 8,
                                 name: "Questionario Prometeo",
@@ -1650,20 +1765,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                 icon: "ion-university",
                                 level: 0,
                                 state: 'app.hobby'
-                            }/*,
-                         {
-                         id: 11,
-                         name: "Logout",
-                         icon: "ion-android-exit",
-                         level: 0,
-                         onclick: "doLogOut()"
-                         //state: 'auth.walkthrough'
-                         }*/
+                            }
                         ];
                 }
-            };
-            $scope.Menu();
-            $state.go('app.feeds-categories');
+            };*/
+            //$scope.Menu();
+            $scope.$emit('menuD');
+           // $state.go('app.feeds-categories');
         };
 
 

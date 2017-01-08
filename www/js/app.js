@@ -141,6 +141,7 @@ angular.module('your_app_name', [
   .state('app', {
     url: "/app",
     abstract: true,
+      cache: false,
     templateUrl: "views/app/side-menu.html",
     controller: 'AppCtrl'
   })
