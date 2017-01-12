@@ -30,7 +30,7 @@
                             <b>Sesso*</b>
                         </div>
                         <!--FIXME: bug che non disabilita la select -->
-                        <select ng-disabled="!editSex" ng-model="prof.sesso">
+                        <select ng-model="prof.sesso">
                             <option >M</option>
                             <option >F</option>
                         </select>
@@ -53,7 +53,7 @@
                         </div>
 
                         <!--FIXME: bug che non disabilita la select -->
-                        <select ng-model="prof.id_uni" ng-disabled="!editUniversity">
+                        <select ng-model="prof.id_uni">
                             <option value="">---Select option-----</option>
                             <option ng-selected="prof.nome_uni == uni.nome" value="{{uni.id}}" ng-repeat="uni in university">{{uni.nome}}</option>
                         </select>
@@ -92,7 +92,7 @@
                             <b>Sesso*</b>
                         </div>
                         <!--FIXME: bug che non disabilita la select -->
-                        <select ng-disabled="!editSex" ng-model="prof.sesso">
+                        <select ng-model="prof.sesso">
                             <option >M</option>
                             <option >F</option>
                         </select>
@@ -115,7 +115,7 @@
                         </div>
 
                         <!--FIXME: bug che non disabilita la select -->
-                        <select ng-model="prof.id_uni" ng-disabled="!editUniversity">
+                        <select ng-model="prof.id_uni">
                             <option value="">---Select option-----</option>
                             <option ng-selected="prof.nome_uni == uni.nome" value="{{uni.id}}" ng-repeat="uni in university">{{uni.nome}}</option>
                         </select>

@@ -9,7 +9,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         //$scope.user_profile = ProfileService.getProfile();
         $localStorage.user_profile = ProfileService.getProfile();
-        //console.log( $scope.user_profile);
+        // console.log($localStorage.user_profile);
         // console.log( $scope.user_profile.nome);
         //console.log( $scope.user_profile.sex);
 
@@ -118,16 +118,15 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                 icon: "ion-ios-search-strong",
                                 state: 'app.search_announcement'
                             }]
-                        },
-                        {
-                            id: 11,
-                            name: "Logout",
-                            icon: "ion-android-exit",
-                            level: 0,
-
-                            onclick: "doLogOut()"
-
                         }
+                        // {
+                        //     id: 11,
+                        //     name: "Logout",
+                        //     icon: "ion-android-exit",
+                        //     level: 0,
+                        //     onclick: "doLogOut()"
+                        //
+                        // }
                     ];
             }
             else {
@@ -168,7 +167,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             icon: "ion-university",
                             level: 0,
                             state: 'app.hobby'
-                        },
+                        }
                     ];
             }
             //clear the state
@@ -181,16 +180,16 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         $scope.doLogOut=function(){
             console.log("logout effettuato");
             /*$localStorage.$reset();
-            $localStorage.loggedIn=false;
-            $ionicHistory.nextViewOptions({
-                disableAnimate: true,
-                disableBack: true
-            });
-            UserService.resetUser();
-            $scope.Menu();
-            console.log($rootScope.tree);
-            //$state.go('auth.walkthrough');
-            console.log(  $localStorage.user_profile);*/
+             $localStorage.loggedIn=false;
+             $ionicHistory.nextViewOptions({
+             disableAnimate: true,
+             disableBack: true
+             });
+             UserService.resetUser();
+             $scope.Menu();
+             console.log($rootScope.tree);
+             //$state.go('auth.walkthrough');
+             console.log(  $localStorage.user_profile);*/
 
             $ionicLoading.show({
                 template: 'Logging out....'
@@ -217,32 +216,26 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 console.log($rootScope.tree);
                 //$state.go('auth.walkthrough');
                 console.log(  $localStorage.user_profile);
-               // $state.go('auth.walkthrough');
+                // $state.go('auth.walkthrough');
                 $scope.$emit('menuDataChange');
             }, 100);
 
         };
 
-        /*if ($scope.user_profile.sex===undefined)
-         {
-         $scope.user_profile.sex='N';
-         $scope.user_profile.nome='Ospite';
-         console.log('Sono undefined');
-         }*/
 
-        if ($localStorage.user_profile.sex===undefined)
+        if ($localStorage.user_profile.sesso===undefined)
         {
-            $localStorage.user_profile.sex='N';
+            $localStorage.user_profile.sesso='N';
             $localStorage.user_profile.nome='Ospite';
             console.log('Sono undefined');
         }
 
-        $scope.user_profile= $localStorage.user_profile;
+        $scope.user_profile = $localStorage.user_profile;
         $scope.theme = 'ionic-sidemenu-dark';
 
         $rootScope.tree=[];
 
-        $scope.Menu=function () {
+        $scope.Menu = function () {
             if ($localStorage.loggedIn === true) {
                 $rootScope.tree =
                     [
@@ -342,16 +335,16 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                 icon: "ion-ios-search-strong",
                                 state: 'app.search_announcement'
                             }]
-                        },
-                        {
-                            id: 11,
-                            name: "Logout",
-                            icon: "ion-android-exit",
-                            level: 0,
-
-                            onclick: "doLogOut()"
-
                         }
+                        // {
+                        //     id: 11,
+                        //     name: "Logout",
+                        //     icon: "ion-android-exit",
+                        //     level: 0,
+                        //
+                        //     onclick: "doLogOut()"
+                        //
+                        // }
                     ];
             }
             else {
@@ -371,13 +364,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             level: 0,
                             state: 'app.feeds-categories'
                         },
-                        {
-                            id: 3,
-                            name: "Aziende",
-                            icon: "ion-ios-location",
-                            level: 0,
-                            state: 'app.map'
-                        },
+                        // {
+                        //     id: 3,
+                        //     name: "Aziende",
+                        //     icon: "ion-ios-location",
+                        //     level: 0,
+                        //     state: 'app.map'
+                        // },
                         // {
                         //   id: 4,
                         //   name: "Layout",
@@ -419,17 +412,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             icon: "ion-university",
                             level: 0,
                             state: 'app.hobby'
-                        },
-                        {
-                            id: 10,
-                            name: "Mentor",
-                            icon: "ion-university",
-                            level: 0,
-                            state: 'app.mentor'
                         }
                     ];
             }
         };
+
         $scope.Menu();
     })
 
@@ -882,6 +869,12 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
         $scope.goToHome = function () {
+
+            $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+            });
+
             $state.go('app.feeds-categories');
         };
 
@@ -992,10 +985,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.editName = false;
         $scope.editSurname = false;
-        $scope.editSex = false;
+        // $scope.editSex = false;
         $scope.editPhone = false;
         $scope.editAddress= false;
-        $scope.editUniversity = false;
+        // $scope.editUniversity = false;
         $scope.editCDL= false;
 
         $scope.editFields = function () {
@@ -1007,7 +1000,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $scope.editUniversity = true;
             $scope.editCDL= true;
             $scope.editSubmit = true;
-        }
+        };
 
         $scope.prof =
 
@@ -1108,7 +1101,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             disableBack: true
                         });
                         // the user is redirected to login page after sign up
-                        $state.go('app.profile', {}, {location: "replace", reload: true});
+                        $state.go('app.profile');
                     }
 
                     var alertPopup = $ionicPopup.alert({
@@ -1143,12 +1136,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         //cordova plugin add cordova-plugin-whitelist
         //or if you want to save the reference to your config.xml file:
 
-          //  cordova plugin add cordova-plugin-whitelist --save
+        //  cordova plugin add cordova-plugin-whitelist --save
         //and that you have to add the intent to your config.xml file:
 
-          //  <allow-intent href="mailto:*" />
-            //<allow-intent href="tel:*" />
+        //  <allow-intent href="mailto:*" />
+        //<allow-intent href="tel:*" />
 
+        console.log("HERE");
 
         $scope.mentor_data =
 
@@ -1160,7 +1154,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 "telefono":          $localStorage.user_profile.telefono_mentore
             };
 
-
+        console.log($scope.mentor_data);
 
     })
 
@@ -1168,11 +1162,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
     //LOGIN
-    .controller('LoginCtrl', function($rootScope,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$timeout,ProfileService) {
+    .controller('LoginCtrl', function($window, $location,$rootScope,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$timeout,ProfileService) {
+
 
 
         $scope.$on('menuData', function (event) {
             //refresh menu items data
+
+            // if ($localStorage.mentore === false) {
 
             if ($localStorage.loggedIn === true) {
                 $rootScope.tree =
@@ -1198,15 +1195,15 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             level: 0,
                             state: 'app.profile'
                         },
-                        {
-                            //to remove, jus for testing
-                            id: 4,
-                            name: "Aziende",
-                            icon: "ion-ios-location",
-                            level: 0,
-                            state: 'app.map'
-                            //to remove, jus for testing
-                        },
+                        // {
+                        //     //to remove, jus for testing
+                        //     id: 4,
+                        //     name: "Aziende",
+                        //     icon: "ion-ios-location",
+                        //     level: 0,
+                        //     state: 'app.map'
+                        //     //to remove, jus for testing
+                        // },
                         // {
                         //   id: 4,
                         //   name: "Layout",
@@ -1326,20 +1323,23 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         }
                     ];
             }
+
             //clear the state
             if(!$scope.$$phase) {
                 $scope.$apply();
             }
-            $state.go('app.profile', {}, { reload: true });
-
+            console.log("go_to_profile");
+            $state.go('app.profile');
+            // }
         });
 
 
-        $scope.doLogIn = function(){
+        $scope.doLogIn = function() {
 
             var obj;
             var params = JSON.stringify( {'mail': $scope.user.email,'password': $scope.user.password} );
 
+            $scope.profile={};
 
             $http({
                 method :'POST',
@@ -1353,37 +1353,103 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     console.log("Token stored, device is successfully subscribed to receive push notifications.");
                     obj=angular.fromJson(data);
 
-                    console.log(obj.result);
+                    // console.log(obj.result);
                     /*UserService.setUser({
 
-                        mail: $scope.user.email,
-                        password: $scope.user.password
-                    });
+                     mail: $scope.user.email,
+                     password: $scope.user.password
+                     });
 
-                    $localStorage.loggedIn=true;
-                    console.log($localStorage.loggedIn);
-                    $scope.Menu();
-                    console.log($rootScope.tree);
-                    $ionicHistory.nextViewOptions({
-                        disableAnimate: true,
-                        disableBack: true
-                    });*/
+                     $localStorage.loggedIn=true;
+                     console.log($localStorage.loggedIn);
+                     $scope.Menu();
+                     console.log($rootScope.tree);
+                     $ionicHistory.nextViewOptions({
+                     disableAnimate: true,
+                     disableBack: true
+                     });*/
                     //$state.go('app.profile');
 
+
+                    // //TODO: call API get_user_info
+                    // $http({
+                    //     method :'POST',
+                    //     url:'https://arctic-window-132923.appspot.com/get_user_info',
+                    //     data: params,
+                    //     headers: {
+                    //         'Content-Type': 'application/json'
+                    //     }
+                    // })
+                    //     .success(function (data, status) {
+                    //         var obj=angular.fromJson(data);
+                    //
+                    //         $localStorage.mentore = true;
+                    //
+                    //         // if ($localStorage.mentore===true) {
+                    //         //     $window.location.href = 'http://polar-winter-149323.appspot.com/loginm';
+                    //         // }
+                    //         // else {
+                    //
+                    //         $scope.profile = data.result;
+                    //
+                    //         console.log($scope.profile.nome_studente);
+                    //         console.log("STEP_1");
+                    //
+                    //         //useless
+                    //         ProfileService.setProfile({
+                    //             nome: $scope.profile.nome_studente,
+                    //             sex: $scope.profile.sesso_studente
+                    //         });
+                    //
+                    //
+                    //         // SESSION DATA FOR STUDENT W/0 SCHOLARSHIP
+                    //         $localStorage.user_profile.mail = $scope.user.mail;
+                    //         $localStorage.user_profile.nome = $scope.profile.nome_studente;
+                    //         $localStorage.user_profile.cognome = $scope.profile.cognome_studente;
+                    //         $localStorage.user_profile.telefono = $scope.profile.telefono_studente;
+                    //         $localStorage.user_profile.indirizzo = $scope.profile.indirizzo_studente;
+                    //         $localStorage.user_profile.nome_uni = $scope.profile.nome_uni;
+                    //         $localStorage.user_profile.id_uni = $scope.profile.id_uni;
+                    //         $localStorage.user_profile.corso_laurea = $scope.profile.studente_corso_laurea;
+                    //         $localStorage.user_profile.dipartimento = $scope.profile.studente_dipartimento;
+                    //         $localStorage.user_profile.sesso = $scope.profile.sesso_studente;
+                    //         $localStorage.user_profile.borsa = $scope.profile.borsa;
+                    //
+                    //
+                    //         // OTHER SESSION DATA FOR STUDENT W/ SCHOLARSHIP
+                    //         if ($localStorage.user_profile.borsa == 'true') {
+                    //             $localStorage.user_profile.tipologia_borsa = $scope.profile.tipologia_borsa;
+                    //             $localStorage.user_profile.data_inizio_borsa = $scope.profile.data_inizio_borsa;
+                    //             $localStorage.user_profile.nome_mentore = $scope.profile.nome_mentore;
+                    //             $localStorage.user_profile.cognome_mentore = $scope.profile.cognome_mentore;
+                    //             $localStorage.user_profile.sesso_mentore = $scope.profile.sesso_mentore;
+                    //             $localStorage.user_profile.mail_mentore = $scope.profile.mail_mentore;
+                    //             $localStorage.user_profile.telefono_mentore = $scope.profile.telefono_mentore;
+                    //         }
+                    //
+                    //         console.log("STEP_2");
+                    //         console.log($localStorage.user_profile);
+                    //         // }
+                    //
+                    //     })
+                    //     .error(function (data, status) {
+                    //         console.log("Error." + data + " " + status);
+                    //
+                    //     });
+
+
                     $ionicLoading.show({
-                        template: 'Logging out....'
+                        template: 'Logging in....'
                     });
-                    //$localstorage.set('loggin_state', '');
 
                     $timeout(function () {
-                        UserService.setUser({
 
+                        UserService.setUser({
                             mail: $scope.user.email,
                             password: $scope.user.password
                         });
 
                         $localStorage.user_profile = ProfileService.getProfile();
-                        console.log($localStorage.user_profile);
                         $ionicLoading.hide();
                         $ionicHistory.clearCache();
                         $ionicHistory.clearHistory();
@@ -1391,16 +1457,21 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             disableBack: true,
                             historyRoot: true
                         });
+
                         $localStorage.loggedIn=true;
                         console.log($localStorage.loggedIn);
+
                         $scope.Menu();
                         console.log($rootScope.tree);
+
                         $ionicHistory.nextViewOptions({
                             disableAnimate: true,
                             disableBack: true
                         });
+
+                        console.log("go_to_menuData");
                         $scope.$emit('menuData');
-                        //$state.go('app.profile');
+                        // $state.go('app.profile');
                     }, 100);
 
                 })
@@ -1411,12 +1482,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     if(obj.result==='402')
                     {
                         $scope.title="Login Fallita";
-                        $scope.template="Password errata!";
-                    }
-                    else if(obj.result==='403')
-                    {
-                        $scope.title="Login Fallita";
-                        $scope.template="Credenziali errate!";
+                        $scope.template="Password or Username wrong!";
                     }
                     else
                     {
@@ -1431,11 +1497,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                 });
 
+
         };
 
         $scope.user = {};
-
-
 
 
         // We need this for the form validation
@@ -1446,7 +1511,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         });
 
         $scope.Menu=function () {
-            if ($localStorage.loggedIn === true) {
+            // if ($scope.mentore===true) {
+            if ($localStorage.loggedIn) {
                 $rootScope.tree =
                     [
                         {
@@ -1470,15 +1536,15 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             level: 0,
                             state: 'app.profile'
                         },
-                        {
-                            //to remove, jus for testing
-                            id: 4,
-                            name: "Aziende",
-                            icon: "ion-ios-location",
-                            level: 0,
-                            state: 'app.map'
-                            //to remove, jus for testing
-                        },
+                        // {
+                        //     //to remove, jus for testing
+                        //     id: 4,
+                        //     name: "Aziende",
+                        //     icon: "ion-ios-location",
+                        //     level: 0,
+                        //     state: 'app.map'
+                        //     //to remove, jus for testing
+                        // },
                         // {
                         //   id: 4,
                         //   name: "Layout",
@@ -1622,18 +1688,20 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             icon: "ion-university",
                             level: 0,
                             state: 'app.hobby'
-                        }/*,
-                     {
-                     id: 11,
-                     name: "Logout",
-                     icon: "ion-android-exit",
-                     level: 0,
-                     onclick: "doLogOut()"
-                     //state: 'auth.walkthrough'
-                     }*/
+                        }
+                        /*,
+                         {
+                         id: 11,
+                         name: "Logout",
+                         icon: "ion-android-exit",
+                         level: 0,
+                         onclick: "doLogOut()"
+                         //state: 'auth.walkthrough'
+                         }*/
                     ];
             }
         };
+
 
     })
 
@@ -1645,7 +1713,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         // console.log($localStorage.loggedIn);
         var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
-        // console.log(params);
+        console.log(params);
         $http({
             method :'POST',
             url:'https://arctic-window-132923.appspot.com/get_user_info',
@@ -1660,7 +1728,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                 $scope.profile=data.result;
 
-                // console.log($scope.profile.nome_studente);
+                console.log($scope.profile.nome_studente);
 
                 ProfileService.setProfile({
                     nome: $scope.profile.nome_studente,
@@ -1890,135 +1958,135 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         $scope.Ospite = function() {
 
             /*$scope.Menu=function () {
-                if ($localStorage.loggedIn === true) {
-                    $rootScope.tree =
-                        [
-                            {
-                                id: 1,
-                                name: "Prometeo",
-                                icon: "ion-bookmark",
-                                level: 0,
-                                state: 'app.prometeo'
-                            },
-                            {
-                                id: 2,
-                                name: "News",
-                                icon: "ion-social-rss",
-                                level: 0,
-                                state: 'app.feeds-categories'
-                            },
-                            {
-                                id: 3,
-                                name: "Profilo",
-                                icon: "ion-person",
-                                level: 0,
-                                state: 'app.profile'
-                            },
-                            {
-                                //to remove, jus for testing
-                                id: 4,
-                                name: "Aziende",
-                                icon: "ion-ios-location",
-                                level: 0,
-                                state: 'app.map'
-                                //to remove, jus for testing
-                            },
+             if ($localStorage.loggedIn === true) {
+             $rootScope.tree =
+             [
+             {
+             id: 1,
+             name: "Prometeo",
+             icon: "ion-bookmark",
+             level: 0,
+             state: 'app.prometeo'
+             },
+             {
+             id: 2,
+             name: "News",
+             icon: "ion-social-rss",
+             level: 0,
+             state: 'app.feeds-categories'
+             },
+             {
+             id: 3,
+             name: "Profilo",
+             icon: "ion-person",
+             level: 0,
+             state: 'app.profile'
+             },
+             {
+             //to remove, jus for testing
+             id: 4,
+             name: "Aziende",
+             icon: "ion-ios-location",
+             level: 0,
+             state: 'app.map'
+             //to remove, jus for testing
+             },
 
-                            {
-                                id: 8,
-                                name: "Questionario Prometeo",
-                                icon: "ion-ios-list",
-                                level: 0,
-                                state: 'app.codice'
-                            },
-                            {
-                                id: 9,
-                                name: "Quiz affinità",
-                                icon: "ion-university",
-                                level: 0,
-                                state: 'app.hobby'
-                            },
-                            {
-                                id: 10,
-                                level: 0,
-                                name: 'Student Help Student',
-                                icon: "icon ion-bookmark",
-                                items: [{
-                                    id: 101,
-                                    level: 1,
-                                    name: 'Inserisci annuncio',
-                                    icon: "ion-compose",
-                                    state: 'app.post_announcement'
-                                }, {
-                                    id: 102,
-                                    level: 1,
-                                    name: 'I miei annunci',
-                                    icon: "ion-ios-book",
-                                    state: 'app.my_announcements'
-                                }, {
-                                    id: 103,
-                                    level: 1,
-                                    name: 'Ricerca annuncio',
-                                    icon: "ion-ios-search-strong",
-                                    state: 'app.search_announcement'
-                                }]
-                            },
-                            {
-                                id: 11,
-                                name: "Logout",
-                                icon: "ion-android-exit",
-                                level: 0,
+             {
+             id: 8,
+             name: "Questionario Prometeo",
+             icon: "ion-ios-list",
+             level: 0,
+             state: 'app.codice'
+             },
+             {
+             id: 9,
+             name: "Quiz affinità",
+             icon: "ion-university",
+             level: 0,
+             state: 'app.hobby'
+             },
+             {
+             id: 10,
+             level: 0,
+             name: 'Student Help Student',
+             icon: "icon ion-bookmark",
+             items: [{
+             id: 101,
+             level: 1,
+             name: 'Inserisci annuncio',
+             icon: "ion-compose",
+             state: 'app.post_announcement'
+             }, {
+             id: 102,
+             level: 1,
+             name: 'I miei annunci',
+             icon: "ion-ios-book",
+             state: 'app.my_announcements'
+             }, {
+             id: 103,
+             level: 1,
+             name: 'Ricerca annuncio',
+             icon: "ion-ios-search-strong",
+             state: 'app.search_announcement'
+             }]
+             },
+             {
+             id: 11,
+             name: "Logout",
+             icon: "ion-android-exit",
+             level: 0,
 
-                                onclick: "doLogOut()"
+             onclick: "doLogOut()"
 
-                            }
-                        ];
-                }
-                else {
-                    $rootScope.tree =
-                        [
-                            {
-                                id: 1,
-                                name: "Prometeo",
-                                icon: "ion-bookmark",
-                                level: 0,
-                                state: 'app.prometeo'
-                            },
-                            {
-                                id: 2,
-                                name: "News",
-                                icon: "ion-social-rss",
-                                level: 0,
-                                state: 'app.feeds-categories'
-                            },
-                            {
-                                id: 3,
-                                name: "Aziende",
-                                icon: "ion-ios-location",
-                                level: 0,
-                                state: 'app.map'
-                            },
+             }
+             ];
+             }
+             else {
+             $rootScope.tree =
+             [
+             {
+             id: 1,
+             name: "Prometeo",
+             icon: "ion-bookmark",
+             level: 0,
+             state: 'app.prometeo'
+             },
+             {
+             id: 2,
+             name: "News",
+             icon: "ion-social-rss",
+             level: 0,
+             state: 'app.feeds-categories'
+             },
+             {
+             id: 3,
+             name: "Aziende",
+             icon: "ion-ios-location",
+             level: 0,
+             state: 'app.map'
+             },
 
-                            {
-                                id: 8,
-                                name: "Questionario Prometeo",
-                                icon: "ion-ios-list",
-                                level: 0,
-                                state: 'app.codice'
-                            },
-                            {
-                                id: 9,
-                                name: "Quiz affinità",
-                                icon: "ion-university",
-                                level: 0,
-                                state: 'app.hobby'
-                            }
-                        ];
-                }
-            };*/
+             {
+             id: 8,
+             name: "Questionario Prometeo",
+             icon: "ion-ios-list",
+             level: 0,
+             state: 'app.codice'
+             },
+             {
+             id: 9,
+             name: "Quiz affinità",
+             icon: "ion-university",
+             level: 0,
+             state: 'app.hobby'
+             }
+             ];
+             }
+             };*/
             //$scope.Menu();
             $scope.$emit('menuD');
-           // $state.go('app.feeds-categories');
+            // $state.go('app.feeds-categories');
         };
 
 
@@ -2167,7 +2235,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
     // add the following plug in: ionic plugin add cordova-plugin-googlemaps
-    .controller('MapCtrl', function($scope,$state,$http,$ionicPopup) {
+    .controller('MapCtrl', function($scope,$state,$http,$ionicPopup,$ionicLoading) {
 
         $http({
             method :'GET',
@@ -2216,6 +2284,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                 var options = {timeout: 10000, enableHighAccuracy: true};
 
+                // $ionicLoading.show({
+                //     template: 'Loading....',
+                //     duration: 3000
+                // });
+                //
+                //
+                // $ionicLoading.hide();
+
                 // Map Settings //
                 $scope.initialise = function() {
 
@@ -2227,6 +2303,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         zoom: 5,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
+
 
                     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
@@ -2244,6 +2321,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     $scope.map = map;
                     // Additional Markers //
                     $scope.markers = [];
+
                     var infoWindow = new google.maps.InfoWindow();
 
                     var createMarker = function (info){
@@ -2284,6 +2362,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         });
 
                     };
+
 
                     for (i = 0; i < cities.length; i++){
                         createMarker(cities[i]);

@@ -1,6 +1,6 @@
 <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content class="post-size-14px">
-    <ion-nav-bar class="bar app-top-bar">
+    <ion-nav-bar style="color: #4CD68E" class="bar app-top-bar">
       <ion-nav-back-button>
       </ion-nav-back-button>
       <ion-nav-buttons side="left">
@@ -14,17 +14,16 @@
   <ion-side-menu side="left" class="main-menu" expose-aside-when="large">
 
 
-
-    <ion-content ng-controller="SideMenuCtrl" ng-class="theme" >
+    <ion-content ng-class="theme" >
         <ion-list >
 
 
         <ion-item class="heading-item item item-avatar" nav-clear menu-close ui-sref="#">
           <div  class="user-image-container"  >
             <pre-img ratio="_1_1" helper-class="rounded-image">
-                <img class="user-image"  ng-if="user_profile.sex=='M'" ng-src="img/male.jpg" spinner-on-load>
-                <img class="user-image"  ng-if="user_profile.sex=='F'" ng-src="img/female.jpg" spinner-on-load>
-                <img class="user-image"  ng-if="user_profile.sex=='N'" ng-src="img/generic.jpg" spinner-on-load>
+                <img class="user-image"  ng-if="user_profile.sesso=='M'" ng-src="img/male.jpg" spinner-on-load>
+                <img class="user-image"  ng-if="user_profile.sesso=='F'" ng-src="img/female.jpg" spinner-on-load>
+                <img class="user-image"  ng-if="user_profile.sesso=='N'" ng-src="img/generic.jpg" spinner-on-load>
             </pre-img>
           </div>
           <h2 class="greeting">Ciao {{user_profile.nome}}</h2>
@@ -32,13 +31,21 @@
         </ion-item>
           <ionic-sidemenu tree="$root.tree"></ionic-sidemenu>
         </ion-list>
-        <ion-item class="item-icon-left" nav-clear menu-close ng-click="doLogOut()">
-            <i class="icon ion-ios-list" ></i>
-            <h2 class="menu-text" ng-click="doLogOut()">LOG OUT</h2>
+        <ion-item class="item-icon-left" nav-clear menu-close">
+            <i style="color: #FFFFFF;
+    border-radius: 50%;
+    font-size: 22px;
+    padding: 5px;
+    /*width: 32px;*/
+    /*height: 32px;*/
+    width: 0px;
+    font-size: 20px;
+    text-shadow: 0 1px 1px #000;
+    line-height: 32px;
+    margin-left: 6px;" class="icon ion-android-exit" ></i>
+        <span style="font-weight: 600; color: #fff; font-size: 14px; margin-left: 6px;" class="menu-text" ng-click="doLogOut()">Log Out</span>
         </ion-item>
     </ion-content>
-
-
 
 
     </ion-list>
