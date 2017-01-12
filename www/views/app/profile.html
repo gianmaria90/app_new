@@ -18,116 +18,23 @@
         <div ng-if="profile.sesso_studente=='F'" multi-bg="['img/female.jpg']"></div>
       </div>
     </div>
-    <!--<div class="bottom-content">-->
 
 
-    <div style="padding: 0px 10px 10px 10px;" class="button-bar">
+    <div ng-if="profile.borsa=='true'" style="padding: 0px 10px 10px 10px;" class="button-bar">
       <a class="button ion-person" ng-click="updateProfileData()">Profilo</a>
       <a class="button ion-bookmark">Piano studi</a>
     </div>
-    <!--<br>-->
-    <div style="padding: 10px 10px 0px 10px;" class="button-bar">
+
+    <div ng-if="profile.borsa=='true'" style="padding: 10px 10px 0px 10px;" class="button-bar">
       <a class="button ion-person-stalker" ng-click="Mentor()">Info Mentor</a>
       <a class="button ion-bookmark">Attività</a>
     </div>
 
-    <!--<div class="button-bar">-->
-      <!--<a class="button ion-person" ng-click="updateProfileData()">Profilo</a>-->
-      <!--<a class="button ion-bookmark">Piano studi</a>-->
-    <!--</div>-->
 
-    <!--<br>-->
-    <!--<div class="button-bar">-->
-      <!--<a class="button ion-person-stalker" ng-click="Mentor()">Info Mentor</a>-->
-      <!--<a class="button ion-bookmark">Attività</a>-->
-    <!--</div>-->
-
-    <!--<div class = "row">-->
-      <!--<div class = "col text-center">-->
-        <!--<button class = "button icon ion-person" ng-click="updateProfileData()">-->
-          <!--&ensp; Profilo-->
-        <!--</button>-->
-      <!--</div>-->
-
-      <!--<div class = "col text-center">-->
-        <!--<button class = "button icon ion-bookmark">&ensp; Piano studi</button>-->
-      <!--</div>-->
-
-    <!--</div>-->
-
-
-    <!--<div class = "row">-->
-
-      <!--<div class = "col text-center">-->
-        <!--<button class = "button icon ion-person-stalker" ng-click="Mentor()">-->
-          <!--&ensp; Info Mentor-->
-        <!--</button>-->
-      <!--</div>-->
-
-      <!--<div class = "col text-center">-->
-        <!--<button class = "button icon ion-calendar">&ensp; Attività</button>-->
-      <!--</div>-->
-
-    <!--</div>-->
-
-
-
-    <!--<div ng-if="profile.borsa=='true'" class="row">-->
-    <!--<div class="col col-33 col-offset-20 col-center">-->
-    <!--<button class="button icon ion-person" ng-click="updateProfileData()">&ensp; Profilo</button>-->
-    <!--</div>-->
-    <!--<div class="col col-50 col-center">-->
-    <!--<button class="button icon ion-person-stalker" ng-click="Mentor()">&ensp; Mentor</button>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div ng-if="profile.borsa=='true'" class="row">-->
-    <!--<div class="col col-50 col-offset-20 col-center">-->
-    <!--<button class="button icon ion-bookmark">&ensp; Piano studi</button>-->
-    <!--</div>-->
-    <!--<div class="col col-33 col-offset-10 col-center">-->
-    <!--<button class="button icon ion-calendar">&ensp; Attività</button>-->
-    <!--</div>-->
-    <!--</div>-->
-
-
-    <div ng-if="profile.borsa=='false'" class="row responsive-sm">
-      <div class="col">
+    <div ng-if="profile.borsa=='false'" class="button-bar">
         <button class="button icon ion-person" ng-click="updateProfileData()">Profilo</button>
-      </div>
     </div>
 
-    <!--<div ng-if="profile.borsa=='true'"  class="row row-center">-->
-    <!--<div class="col col-50">-->
-    <!--<button class="button icon ion-person" ng-click="updateProfileData()">Profilo</button>-->
-    <!--</div>-->
-    <!--<div class="col col-50">-->
-    <!--<button class="button icon ion-person-stalker" ng-click="Mentor()">Mentor</button>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div ng-if="profile.borsa=='true'"  class="row row-center">-->
-    <!--<div class="col col-50">-->
-    <!--<button class="button icon ion-bookmark">Piano studi</button>-->
-    <!--</div>-->
-    <!--<div class="col col-50">-->
-    <!--<button class="button icon ion-calendar">Attività</button>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div ng-if="profile.borsa=='true'" class="button-bar">-->
-    <!--<button class="button icon ion-bookmark">Piano studi</button>-->
-    <!--<button class="button icon ion-calendar">Attività</button>-->
-    <!--<button class="button icon ion-person-stalker" ng-click="Mentor()">Mentor</button>-->
-    <!--<button class="button icon ion-person" ng-click="updateProfileData()">Profilo</button>-->
-    <!--</div>-->
-
-    <!--<div ng-if="profile.borsa=='false'" class="button-bar">-->
-    <!--<button class="button icon ion-person" ng-click="updateProfileData()">Profilo</button>-->
-    <!--</div>-->
-
-
-    <!--</div>-->
   </ion-content>
 </ion-view>
 
