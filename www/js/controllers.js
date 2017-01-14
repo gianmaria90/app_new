@@ -982,7 +982,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
     .controller('UpdateProfileCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
-
+        $ionicHistory.clearHistory();
+        $ionicHistory.clearCache();
         $scope.editName = false;
         $scope.editSurname = false;
         // $scope.editSex = false;
@@ -1784,11 +1785,12 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     })
 
-    .controller('SignupCtrl', function($rootScope,$scope, $state,$cordovaOauth,$window,$ionicLoading,UserService,$localStorage) {
+    .controller('SignupCtrl', function($rootScope,$scope, $state,$cordovaOauth,$window,$ionicLoading,UserService,$localStorage,$ionicHistory) {
         console.log($localStorage.loggedIn);
 
         if($localStorage.loggedIn===true)
         {
+
             $state.go('app.profile');
         }
         else{
@@ -2133,7 +2135,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
-    .controller('safeCtrl', function ($scope,$http,$ionicHistory,$ionicPopup,UserService,$localStorage,$ionicLoading) {
+    .controller('safeCtrl', function ($scope,$http,$ionicHistory,$ionicPopup,UserService,$localStorage,$ionicLoading,$state) {
 
         var firstnames = ['Laurent', 'Blandine', 'Olivier', 'Max'];
         var lastnames = ['Renard', 'Faivre', 'Frere', 'Eponge'];
@@ -2156,7 +2158,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         $scope.checkPs={};
 
         var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
-        /*$scope.show($ionicLoading);
+        $scope.show($ionicLoading);
          $http({
          method :'POST',
          url:'https://arctic-window-132923.appspot.com/list_ps',
@@ -2199,12 +2201,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
          })
          .finally(function ($ionicLoading) {
          $scope.hide($ionicLoading);
-         });*/
+         });
 
-        $http.get('attivita.json').success(function(response) {
+        /*$http.get('attivita.json').success(function(response) {
             $scope.piano = response;
-        });
-        console.log($scope.piano);
+            console.log($scope.piano);
+        });*/
+
 
         $scope.Confirm=function () {
             /*for (var i in $scope.checkPs) {
@@ -2214,6 +2217,64 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
             }*/
             console.log($scope.radioAttivita.text);
+
+            var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password,'id_att':$scope.radioAttivita.text.toString()} );
+            console.log(params);
+            $scope.show($ionicLoading);
+            $http({
+                method :'POST',
+                url:'https://arctic-window-132923.appspot.com/complete_PS',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .success(function (data, status) {
+
+                    $scope.piano=angular.fromJson(data);
+                    console.log($scope.piano);
+
+
+                        $ionicHistory.clearHistory();
+                        $ionicHistory.nextViewOptions({
+                            disableAnimate: true,
+                            disableBack: true
+                        });
+                        console.log("tutto ok frat'm");
+                        // the user is redirected to login page after sign up
+                        $scope.title = "Conferma inviata";
+                        $scope.template = "L'attività è in attesa di conferma da parte del mentor";
+
+                        $scope.hide($ionicLoading);
+                        var alertPopup = $ionicPopup.alert({
+                            title: $scope.title,
+                            template: $scope.template
+                        });
+                        console.log("prima di go");
+                        $state.go('app.profile');
+
+
+
+                })
+                .error(function (data, status) {
+                    $scope.hide($ionicLoading);
+                    console.log("Error." + data + " " + status);
+
+                    console.log("Errore lista piano studi.");
+                    $scope.title = "Errore connessione";
+                    $scope.template = "Contattare il nostro team tecnico";
+
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: $scope.title,
+                        template: $scope.template
+                    });
+
+                });
+
+
+
+
         };
 
 

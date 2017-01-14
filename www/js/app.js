@@ -381,7 +381,6 @@ angular.module('your_app_name', [
 
   .state('app.profile', {
     url: "/profile",
-    cache: false,
     views: {
       'menuContent': {
         templateUrl: "views/app/profile.html",
@@ -452,6 +451,7 @@ angular.module('your_app_name', [
       })
       .state('app.piano-studi', {
           url: '/piano-studi',
+          cache: false,
           views: {
               'menuContent': {
                   templateUrl: "views/app/piano-studi.html",

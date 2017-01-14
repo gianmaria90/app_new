@@ -83,9 +83,30 @@
 
             <!--ion-checkbox ng-repeat="row in piano" ng-model="checkPs[row.id]">{{ row.nome }}</ion-checkbox-->
 
-            <ion-radio ng-repeat="row in piano" class="item-text-wrap"  ng-model="radioAttivita.text" ng-value="row.id" value="row.id">
+            <!--ion-radio ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='da_completare'" ng-model="radioAttivita.text" ng-value="row.id" value="row.id">
                 {{row.nome}}
-            </ion-radio>
+            </ion-radio-->
+
+            <ion-list radio-group >
+                <ion-item>
+                    <ion-label><b>Da confermare</b></ion-label>
+                    <ion-radio ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='da_completare'" ng-model="radioAttivita.text" ng-value="row.id" value="row.id">
+                       <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
+                    </ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label><b>In attesa</b></ion-label>
+                    <ion-item  ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='pendente'">
+                        <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
+                    </ion-item>
+                </ion-item>
+                <ion-item>
+                    <ion-label><b>Confermate</b></ion-label>
+                    <ion-item  ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='completato'">
+                        <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
+                    </ion-item>
+                </ion-item>
+            </ion-list>
 
         </ion-scroll>
         <!--</div>-->
@@ -95,7 +116,7 @@
     </ion-content>
 
     <div class="bar bar-footer bar-assertive " >
-        <button class="button button-clear pull-right" ng-disabled="isThisDisabled2Attivita()" ng-click="Confirm()">SUBMIT</button>
+        <button class="button button-clear pull-right" ng-disabled="isThisDisabled2Attivita()" ng-click="Confirm()"><b>SUBMIT</b></button>
 
     </div>
 
