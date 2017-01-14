@@ -1,0 +1,112 @@
+<ion-view >
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button type="button"  ng-click="addRandomItem(row)" class="btn">
+            <i class="glyphicon glyphicon-plus">
+            </i> Add
+        </button>
+    </ion-nav-buttons>
+
+
+    <ion-nav-title>
+        <span>Piano studi</span>
+    </ion-nav-title>
+
+    <ion-content>
+
+        <!--<div ng-controller="basicsCtrl">-->
+
+        <!--div class="row">
+            <div class="col-xs-6 col-sm3">
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-responsive">
+            <thead>
+            <tr style="font-weight: bold">
+                <th st-sort="firstName">first name</th>
+                <th st-sort="lastName">last name</th>
+                <th st-sort="birthDate">birth date</th>
+                <th st-sort="balance">balance</th>
+                <th></th>
+            </tr>
+            <tr>
+                <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in displayedCollection">
+
+                 <span editable-text="user.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required>
+                  {{row.firstName || 'empty' }}
+                </span>
+                <td>{{row.firstName}}</td>
+                <td>{{row.lastName}}</td>
+                <td>{{row.birthDate}}</td>
+                <td>{{row.balance}}</td>
+                <td>
+                    <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+                        <i class="glyphicon glyphicon-remove-circle">
+                        </i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td class="text-center" st-pagination="" st-items-by-page="10" colspan="4">
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+            </div>
+            </div-->
+
+        <!--ul class="list">
+            <li class="row item item-button-right item-text-wrap" style="border: none; float: right;width: 100%" ng-repeat="row in piano">
+
+                <div class="col-sm-4" style="width: 80%">{{ row.nome }}</div>
+
+
+                <!--button class="button button-positive">
+                    <i class="icon ion-ios8-telephone">EDIT</i>
+                </button>
+                <div class="col-sm-4" ><ion-checkbox style="border: none;" ng-model="checkPs[row.id]"/></div>
+
+            </li>
+
+        </ul-->
+            <label class="item item-input item-stacked-label item-text-wrap">
+                <h2 ><b>Check per inviare conferma conclusione attività</b></h2>
+            </label>
+        <ion-scroll style="height:85%;">
+
+            <!--ion-checkbox ng-repeat="row in piano" ng-model="checkPs[row.id]">{{ row.nome }}</ion-checkbox-->
+
+            <ion-radio ng-repeat="row in piano" class="item-text-wrap"  ng-model="radioAttivita.text" ng-value="row.id" value="row.id">
+                {{row.nome}}
+            </ion-radio>
+
+        </ion-scroll>
+        <!--</div>-->
+        <!--button class="button button-block button-assertive" ng-click="Confirm()" ng-disabled="!isThisDisabledAttivita()">
+            SUBMIT
+        </button-->
+    </ion-content>
+
+    <div class="bar bar-footer bar-assertive " >
+        <button class="button button-clear pull-right" ng-disabled="isThisDisabled2Attivita()" ng-click="Confirm()">SUBMIT</button>
+
+    </div>
+
+
+    <!--ion-footer-bar align-title="left" class="bar-assertive">
+        <div class="buttons" >
+            <button class="button">Left Button</button>
+        </div>
+        <h1 class="title"></h1>
+        <div class="buttons" ng-click="Confirm()">
+            <button class="button">Right Button</button>
+        </div>
+    </ion-footer-bar-->
+</ion-view>

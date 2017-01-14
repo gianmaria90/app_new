@@ -450,6 +450,16 @@ angular.module('your_app_name', [
               }
           }
       })
+      .state('app.piano-studi', {
+          url: '/piano-studi',
+          views: {
+              'menuContent': {
+                  templateUrl: "views/app/piano-studi.html",
+                  controller: 'safeCtrl'
+              }
+          }
+
+      })
 
       .state('app.update_profile', {
           url: '/update_profile',

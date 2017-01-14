@@ -1778,6 +1778,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $state.go('app.mentor');
         };
 
+        $scope.PianoStudi=function () {
+            $state.go("app.piano-studi");
+        };
+
     })
 
     .controller('SignupCtrl', function($rootScope,$scope, $state,$cordovaOauth,$window,$ionicLoading,UserService,$localStorage) {
@@ -2127,6 +2131,171 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             );
         };
     })
+
+
+    .controller('safeCtrl', function ($scope,$http,$ionicHistory,$ionicPopup,UserService,$localStorage,$ionicLoading) {
+
+        var firstnames = ['Laurent', 'Blandine', 'Olivier', 'Max'];
+        var lastnames = ['Renard', 'Faivre', 'Frere', 'Eponge'];
+        var dates = ['1987-05-21', '1987-04-25', '1955-08-27', '1966-06-06'];
+        var id = 1;
+
+        $scope.show = function() {
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+            });
+        };
+
+        $scope.hide = function(){
+            $ionicLoading.hide();
+        };
+        $scope.user = UserService.getUser();
+        console.log($scope.user);
+
+        $scope.piano=[];
+        $scope.checkPs={};
+
+        var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
+        /*$scope.show($ionicLoading);
+         $http({
+         method :'POST',
+         url:'https://arctic-window-132923.appspot.com/list_ps',
+         data: params,
+         headers: {
+         'Content-Type': 'application/json'
+         }
+         })
+         .success(function (data, status) {
+
+         $scope.piano=angular.fromJson(data);
+         console.log($scope.piano);
+
+         if(status === '200')
+         {
+
+         $ionicHistory.nextViewOptions({
+         disableAnimate: true,
+         disableBack: true
+         });
+         // the user is redirected to login page after sign up
+
+         }
+
+         })
+         .error(function (data, status) {
+
+         console.log("Error." + data + " " + status);
+
+         console.log("Errore lista piano studi.");
+         $scope.title = "Errore connessione";
+         $scope.template = "Contattare il nostro team tecnico";
+
+
+         var alertPopup = $ionicPopup.alert({
+         title: $scope.title,
+         template: $scope.template
+         });
+
+         })
+         .finally(function ($ionicLoading) {
+         $scope.hide($ionicLoading);
+         });*/
+
+        $http.get('attivita.json').success(function(response) {
+            $scope.piano = response;
+        });
+        console.log($scope.piano);
+
+        $scope.Confirm=function () {
+            /*for (var i in $scope.checkPs) {
+
+                if ($scope.checkPs[i])
+                    console.log(i);
+
+            }*/
+            console.log($scope.radioAttivita.text);
+        };
+
+
+        $scope.isThisDisabledAttivita=function() {
+
+            for (var i in $scope.checkPs) {
+
+                if ($scope.checkPs[i])
+                    return true;
+
+            }
+            return false;
+        };
+
+
+        $scope.radioAttivita={text:'1'};
+
+
+        $scope.isThisDisabled2Attivita=function() {
+
+
+            if($scope.radioAttivita.text==1)
+                return true;
+            else
+                return false;
+
+        };
+
+
+        function generateRandomItem(id) {
+
+            var firstname = firstnames[Math.floor(Math.random() * 3)];
+            var lastname = lastnames[Math.floor(Math.random() * 3)];
+            var birthdate = dates[Math.floor(Math.random() * 3)];
+            var balance = Math.floor(Math.random() * 2000);
+
+            return {
+                id: id,
+                firstName: firstname,
+                lastName: lastname,
+                birthDate: new Date(birthdate),
+                balance: balance
+            };
+        }
+
+        $scope.rowCollection = [];
+
+        for (id; id < 5; id++) {
+            $scope.rowCollection.push(generateRandomItem(id));
+        }
+
+        //add to the real data holder
+        $scope.addRandomItem = function addRandomItem() {
+            $scope.rowCollection.push(generateRandomItem(id));
+            id++;
+        };
+
+        //remove to the real data holder
+        $scope.removeItem = function removeItem(row) {
+            var index = $scope.rowCollection.indexOf(row);
+            if (index !== -1) {
+                $scope.rowCollection.splice(index, 1);
+            }
+        };
+
+        $scope.checkName = function(data, id) {
+            if (id === 2 && data !== 'awesome') {
+                return "Username 2 should be `awesome`";
+            }
+        };
+
+        // add user
+        $scope.addUser = function() {
+            $scope.inserted = {
+                id: $scope.users.length+1,
+                name: '',
+            };
+            $scope.users.push($scope.inserted);
+        };
+
+    })
+
 
     .controller('ForgotPasswordCtrl', function($scope,$ionicPopup, $state,$http,$ionicHistory) {
         $scope.recoverPassword = function(){
