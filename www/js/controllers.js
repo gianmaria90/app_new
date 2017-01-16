@@ -174,7 +174,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             if(!$scope.$$phase) {
                 $scope.$apply();
             }
-            $state.go('auth.walkthrough', {}, { reload: true });
+            $state.go('walkthrough', {}, { reload: true });
         });
 
         $scope.doLogOut=function(){
@@ -188,7 +188,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
              UserService.resetUser();
              $scope.Menu();
              console.log($rootScope.tree);
-             //$state.go('auth.walkthrough');
+             //$state.go('walkthrough');
              console.log(  $localStorage.user_profile);*/
 
             $ionicLoading.show({
@@ -214,9 +214,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 UserService.resetUser();
                 $scope.Menu();
                 console.log($rootScope.tree);
-                //$state.go('auth.walkthrough');
+                //$state.go('walkthrough');
                 console.log(  $localStorage.user_profile);
-                // $state.go('auth.walkthrough');
+                // $state.go('walkthrough');
                 $scope.$emit('menuDataChange');
             }, 100);
 
@@ -1697,7 +1697,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                          icon: "ion-android-exit",
                          level: 0,
                          onclick: "doLogOut()"
-                         //state: 'auth.walkthrough'
+                         //state: 'walkthrough'
                          }*/
                     ];
             }
@@ -2923,7 +2923,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 destructiveButtonClicked: function(){
                     //Called when the destructive button is clicked.
                     //Return true to close the action sheet, or false to keep it opened.
-                    $state.go('auth.walkthrough');
+                    $state.go('walkthrough');
                 }
             });
 

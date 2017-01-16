@@ -108,9 +108,9 @@ angular.module('your_app_name', [
     controller: 'AuthCtrl'
   })
 
-  .state('auth.walkthrough', {
+  .state('walkthrough', {
     url: '/walkthrough',
-    templateUrl: "views/auth/walkthrough.html",
+    templateUrl: "views/walkthrough.html",
     controller: 'SignupCtrl'
   })
 
@@ -497,5 +497,5 @@ angular.module('your_app_name', [
 ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/auth/walkthrough');
+  $urlRouterProvider.otherwise('/walkthrough');
 });
