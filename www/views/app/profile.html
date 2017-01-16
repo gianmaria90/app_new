@@ -26,13 +26,13 @@
     </div>
 
     <div ng-if="profile.borsa=='true'" style="padding: 10px 10px 0px 10px;" class="button-bar">
-      <a class="button ion-person-stalker" ng-click="Mentor()">Info Mentor</a>
-      <a class="button ion-bookmark">Attività</a>
+      <a style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-person-stalker" ng-click="Mentor()">Info Mentor</a>
+      <a style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-bookmark">Attività</a>
     </div>
 
 
     <div ng-if="profile.borsa=='false'" class="button-bar">
-        <button class="button icon ion-person" ng-click="updateProfileData()">Profilo</button>
+        <button style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button icon ion-person" ng-click="updateProfileData()">Profilo</button>
     </div>
 
   </ion-content>
