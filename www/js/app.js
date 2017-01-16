@@ -461,6 +461,7 @@ angular.module('your_app_name', [
 
       })
 
+
       .state('app.update_profile', {
           url: '/update_profile',
           views: {

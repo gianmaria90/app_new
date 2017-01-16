@@ -2135,12 +2135,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
-    .controller('safeCtrl', function ($scope,$http,$ionicHistory,$ionicPopup,UserService,$localStorage,$ionicLoading,$state) {
+    .controller('safeCtrl', function ($scope,$http,$ionicHistory,$ionicPopup,UserService,$localStorage,$ionicLoading,$state,$ionicModal) {
 
-        var firstnames = ['Laurent', 'Blandine', 'Olivier', 'Max'];
-        var lastnames = ['Renard', 'Faivre', 'Frere', 'Eponge'];
-        var dates = ['1987-05-21', '1987-04-25', '1955-08-27', '1966-06-06'];
-        var id = 1;
 
         $scope.show = function() {
             $ionicLoading.show({
@@ -2304,58 +2300,103 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         };
 
 
-        function generateRandomItem(id) {
+        $scope.modal= $ionicModal.fromTemplate('<ion-modal-view > <ion-header-bar class="bar bar-header bar-positive"> <h1 class="title">Nuova attività</h1> <button class="button button-clear button-primary" ng-click="close()">Annulla</button> </ion-header-bar> <ion-content class="padding"> <form name="form_attivita" class="" novalidate ng-cloak> <div class="list"> <label class="item item-input"> <span class="input-label">Nome</span> <input ng-model="attivita.nome" type="text" required></label> <label class="item item-input"><span class="input-label">CFU</span> <input ng-model="attivita.cfu" type="number" required></label> <label class="item item-input"> <span class="input-label">Tipo <select style="width: 100%; margin-left: 5px; font-size: 15px" ng-model="attivita.tipo" required> <option value="Univ">Universita</option> <option  value="Extra">Extra</option> </select> </span> </label> <button class="button button-full button-positive" ng-click="addAttivita(attivita)" ng-disabled="!form_attivita.$valid">Aggiungi</button> </div> </form> </ion-content> </ion-modal-view>',
+            {scope:$scope});
 
-            var firstname = firstnames[Math.floor(Math.random() * 3)];
-            var lastname = lastnames[Math.floor(Math.random() * 3)];
-            var birthdate = dates[Math.floor(Math.random() * 3)];
-            var balance = Math.floor(Math.random() * 2000);
 
-            return {
-                id: id,
-                firstName: firstname,
-                lastName: lastname,
-                birthDate: new Date(birthdate),
-                balance: balance
-            };
-        }
 
-        $scope.rowCollection = [];
 
-        for (id; id < 5; id++) {
-            $scope.rowCollection.push(generateRandomItem(id));
-        }
-
-        //add to the real data holder
-        $scope.addRandomItem = function addRandomItem() {
-            $scope.rowCollection.push(generateRandomItem(id));
-            id++;
+        $scope.close=function () {
+            $scope.modal.hide();
         };
 
-        //remove to the real data holder
-        $scope.removeItem = function removeItem(row) {
-            var index = $scope.rowCollection.indexOf(row);
-            if (index !== -1) {
-                $scope.rowCollection.splice(index, 1);
-            }
+        $scope.openModal=function () {
+            $scope.modal.show();
+        };
+        $scope.addAttivita=function (object) {
+            $scope.attivita=object;
+
+            console.log($scope.attivita);
+
+            var params = JSON.stringify( {
+                'mail': $scope.user.mail,
+                'password': $scope.user.password,
+                'attiv_nome': $scope.attivita.nome,
+                'attiv_cfu': $scope.attivita.cfu,
+                'attiv_tipo': $scope.attivita.tipo
+
+                });
+            console.log(params);
+            $http({
+                method :'POST',
+                url:'https://arctic-window-132923.appspot.com/insert_ps',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .success(function (data, status) {
+
+                    var obj=angular.fromJson(data);
+                    console.log(obj.result);
+
+                    if(obj.result === 200)
+                    {
+                        console.log("Insert attività ok.");
+                        $scope.title="Attivita";
+                        $scope.template="Attivita inserita corettamente!";
+                        $ionicHistory.nextViewOptions({
+                            disableAnimate: true,
+                            disableBack: true
+                        });
+                        // the user is redirected to login page after sign up
+                        //$state.go('app.piano-studi', {}, {location: "replace", reload: true});
+                        $scope.close();
+                    }
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: $scope.title,
+                        template: $scope.template
+                    });
+                })
+                .error(function (data, status) {
+                    console.log("Error." + data + " " + status);
+
+                    if (obj.result === '404')
+                    {
+                        console.log("Insert ko");
+                        $scope.title="Attività";
+                        $scope.template="Inserimento attività non riuscito!";
+                        //resettare i parametri focus email
+                    }
+                    else
+                    {
+                        console.log("Insert ko");
+                        $scope.title="Attività";
+                        $scope.template="Inserimento attività non riuscito!";
+                    }
+
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: $scope.title,
+                        template: $scope.template
+                    });
+                });
+
+
+
+
+
+
         };
 
-        $scope.checkName = function(data, id) {
-            if (id === 2 && data !== 'awesome') {
-                return "Username 2 should be `awesome`";
-            }
-        };
 
-        // add user
-        $scope.addUser = function() {
-            $scope.inserted = {
-                id: $scope.users.length+1,
-                name: '',
-            };
-            $scope.users.push($scope.inserted);
-        };
+
+
 
     })
+
+
 
 
     .controller('ForgotPasswordCtrl', function($scope,$ionicPopup, $state,$http,$ionicHistory) {
