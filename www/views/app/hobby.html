@@ -16,7 +16,7 @@
         <ion-checkbox ng-model="checkHobbies['Altro']">Altro</ion-checkbox>
 
         <textarea style="resize: none;width: 100%;"  placeholder="La tua risposta"   ng_model="obj.txtHobbie" ng-minlength="1" ng-disabled=isThisDisabled2Hobbie() ng-show=!isThisDisabled2Hobbie() ></textarea>
-
+        <!--style="background-color: rgba(255, 255, 255, 0.4); border: 2px solid #E5A98C; color: #444;"-->
         <button class="button button-block button-assertive" ng-click="goToAnswer(obj)" ng-disabled="!isThisDisabledHobbie(obj)">
             Next
         </button>

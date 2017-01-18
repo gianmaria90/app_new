@@ -1,4 +1,4 @@
-<ion-view class="profile-view">
+<ion-view class="post_announcement-view" cache-view="false">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
@@ -6,6 +6,62 @@
         <span>Inserisci annuncio</span>
     </ion-nav-title>
     <ion-content>
-    ...
+
+        <form name="post_project_form" class="" novalidate ng-cloak>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label"><b>Titolo*</b></span>
+                <input type="text" ng-model="proj.title" required>
+            </label>
+
+            <div ng-class="list" required>
+                <!--Click here to disable all the form fields:<input type="checkbox" ng-model="all"><br>-->
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        <b>Categoria*</b>
+                    </div>
+                    <select ng-model="proj.category">
+                        <option value="Sanitaria e Medica">Sanitaria e Medica</option>
+                        <option value="Scienze e Tecnologie">Scienze e Tecnologie</option>
+                        <option value="Umanistica e Giuridica">Umanistica e Giuridica</option>
+                        <option value="Umanistica e Giuridica">Umanistica e Giuridica</option>
+                        <option value="Economica">Economica</option>
+                        <option value="Civile e Architettura">Civile e Architettura</option>
+                    </select>
+                </label>
+            </div>
+
+            <!--<label class="item item-input">-->
+            <!--&lt;!&ndash;<span class="input-label" style="color: #9F9F9F; font-size: 15px">Data di nascita</span>&ndash;&gt;-->
+            <!--&lt;!&ndash;TODO: handle in the form-reg's controller the type='date' instead of type='text'&ndash;&gt;-->
+            <!--<input type="text" placeholder="Data di nascita" name="user_data" ng-model="proj.exp_date"  ng-click="VerifyDate()" max="{{minAge | date:'yyyy-MM-dd'}}" onfocus="(this.type='date')">-->
+            <!--</label>-->
+
+            <label class="item item-input item-stacked-label">
+                <b>Data pubblicazione</b>
+                <input type="text" ng-model="current_date"  disabled>
+
+            </label>
+
+            <label class="item item-input" >
+                <span class="input-label"><b>Data di scadenza</b></span>
+                <!--max="{{minAge | date:'yyyy-MM-dd'}}" onfocus="(this.type='date')"-->
+                <input type="date" ng-model="proj.expiring_date" min="2017-01-15" required>
+            </label>
+
+            <label class="item item-input">
+                <textarea placeholder="Descrizione" ng-model="proj.description" required></textarea>
+            </label>
+
+            <div class="item item-body bottom-content">
+                <button type="submit" class="button button-block button-assertive" ng-click="doInsertAnnouncement()" ng-disabled="!post_project_form.$valid">
+                    Inserisci Annuncio
+                </button>
+            </div>
+
+
+        </form>
+
+
     </ion-content>
 </ion-view>

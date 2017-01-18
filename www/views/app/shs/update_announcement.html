@@ -1,0 +1,61 @@
+<ion-view class="Profile-view" cache-view="false">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <!--<ion-nav-buttons side="right">-->
+        <!--<button style="border-color: #f8f8f8;" menu-toggle="right" class="button button-small button-assertive">Edit</button>-->
+    <!--</ion-nav-buttons>-->
+    <ion-nav-title>
+        <span>Aggiorna Annuncio</span>
+    </ion-nav-title>
+    <ion-content>
+        <form name="update_announcement_form" class="" novalidate ng-cloak>
+
+            <div class="list">
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Titolo*</b></span>
+                    <input type="text" ng-model="to_update.titolo" required>
+                </label>
+            </div>
+
+            <div ng-class="list" required>
+                <!--Click here to disable all the form fields:<input type="checkbox" ng-model="all"><br>-->
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        <b>Categoria*</b>
+                    </div>
+                    <select ng-model="to_update.categoria">
+                        <option value="Sanitaria e Medica">Sanitaria e Medica</option>
+                        <option value="Scienze e Tecnologie">Scienze e Tecnologie</option>
+                        <option value="Umanistica e Giuridica">Umanistica e Giuridica</option>
+                        <option value="Umanistica e Giuridica">Umanistica e Giuridica</option>
+                        <option value="Economica">Economica</option>
+                        <option value="Civile e Architettura">Civile e Architettura</option>
+                    </select>
+                </label>
+            </div>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label"><b>Data scadenza</b></span>
+                <input type="date" ng-model="to_update.data_scadenza" required>
+            </label>
+
+            <label class="item item-input item-stacked-label">
+                <span class="input-label"><b>Descrizione</b></span>
+                <input type="tel" ng-model="to_update.descrizione" required>
+            </label>
+
+
+            <div class="item item-body bottom-content">
+                <button type="submit" class="button button-block button-assertive" ng-click="doUpdateAnnouncement()" ng-disabled="(!update_announcement_form.$valid)">
+                    Aggiorna Profilo
+                </button>
+            </div>
+
+        </form>
+
+    </ion-content>
+</ion-view>
+
+

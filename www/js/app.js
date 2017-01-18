@@ -404,17 +404,18 @@ angular.module('your_app_name', [
        views: {
            'menuContent': {
                templateUrl: "views/app/shs/post_announcement.html",
-               controller: ''
+               controller: 'InsertAnnouncementCtrl'
            }
        }
    })
 
       .state('app.my_announcements', {
           url: "/my_announcements",
+          cache: false,
           views: {
               'menuContent': {
                   templateUrl: "views/app/shs/my_announcements.html",
-                  controller: ''
+                  controller: 'AnnouncementsCtrl'
               }
           }
       })
@@ -428,6 +429,18 @@ angular.module('your_app_name', [
               }
           }
       })
+
+
+      .state('app.update_announcement', {
+          url: "/update_announcement",
+          views: {
+              'menuContent': {
+                  templateUrl: "views/app/shs/update_announcement.html",
+                  controller: 'MyAnnouncementsCtrl'
+              }
+          }
+      })
+
 
       .state('app.map', {
           url: '/map',

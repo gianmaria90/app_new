@@ -19,6 +19,7 @@
                                     <label class="item item-input">
                                         <!--<span class="input-label" style="color: #9F9F9F; font-size: 15px">Data di nascita</span>-->
                                         <!--TODO: handle in the form-reg's controller the type='date' instead of type='text'-->
+                                        <!--FIXME: minAge doesnt work -->
                                         <input type="text" placeholder="Data di nascita" name="user_data" ng-model="reg.date"  ng-click="VerifyDate()" max="{{minAge | date:'yyyy-MM-dd'}}" onfocus="(this.type='date')">
                                     </label>
 
@@ -27,7 +28,6 @@
                                          <select  style="margin-left: 5px" ng-model="reg.sex" required>
                                              <option value="F">F</option>
                                              <option value="M">M</option>
-
                                          </select>
                                     </span>
 
@@ -78,7 +78,7 @@
                             </my-tab>
                         </my-tabs>
                         <div class="item item-body bottom-content">
-                            <button style="background-color: rgba(255, 255, 255, 0.4); border: 2px solid #F47F18; color: #444;" type="submit" class="button button-positive button-block" ng-click="doRegister()"   ng-disabled="!registration_form.$valid">
+                            <button style="background-color: rgba(255, 255, 255, 0.4); border: 2px solid #F47F18; color: #444;" type="submit" class="button button-positive button-block" ng-click="doRegister()"  ng-disabled="!registration_form.$valid">
                                 Registrati
                             </button>
                         </div>

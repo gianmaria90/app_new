@@ -1,4 +1,4 @@
-<ion-view class="profile-view">
+<ion-view class="my_announcements-view" cache-view="false">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
@@ -6,6 +6,88 @@
         <span>I miei annunci</span>
     </ion-nav-title>
     <ion-content>
-        ...
+        <!--<body ng-controller="AnnouncementsCtrl">-->
+
+        <ion-tabs class="tabs-icon-top tabs-positive">
+
+            <ion-tab title="Miei Annunci"
+                     icon-on="ion-ios-list"
+                     icon-off="ion-ios-list-outline"
+                     ng-controller="MyAnnouncementsCtrl">
+
+                <!--ng-controller="HomeCtrl"-->
+                <!--ng-click="myAnnouncements()"-->
+
+
+                <!--<ion-header-bar class="bar-positive">-->
+                <!--&lt;!&ndash;<button class="button button-clear" ng-click="newTask()">New</button>&ndash;&gt;-->
+                <!--<h1 class="title">Miei Annunci</h1>-->
+                <!--</ion-header-bar>-->
+
+
+                <ion-content has-tabs="true" >
+                    <ion-refresher
+                            on-refresh="doRefresh()">
+                    ></ion-refresher>
+                    <ion-list scroll="false s-editing="isEditingItems
+                              animation="fade-out"
+                              delete-icon="icon ion-minus-circled">
+                        <ion-item ng-repeat="info in info_my_ann" ng-click="showMenu(info)">
+                            <!--<ion-avatar item-left>-->
+                            <!--<img src="img/avatar-finn.png">-->
+                            <!--</ion-avatar>                        &lt;!&ndash;<ion-avatar item-left>-->
+                            <!--<img src="img/avatar-finn.png">-->
+                            <!--</ion-avatar>-->
+                            <input ng-model="test.id" type="hidden" id="hiddenValue" value="ciao" />
+                            <h2>{{info.titolo}}</h2>
+                            <h3>{{info.categoria}}</h3>
+                            <p># candidature: {{info.num_cand}}</p>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+
+                <!--<ion-content has-tabs="true" >-->
+                <!--<ion-refresher></ion-refresher>-->
+                <!--<ion-list scroll="false s-editing="isEditingItems"-->
+                <!--animation="fade-out"-->
+                <!--delete-icon="icon ion-minus-circled">-->
+                <!--<ion-item ng-repeat="item in items"-->
+                <!--item="item"-->
+                <!--buttons="item.buttons"-->
+                <!--can-delete="true"-->
+                <!--can-swipe="true"-->
+                <!--on-delete="deleteItem(item)"-->
+                <!--ng-class="{completed: item.isCompleted}">-->
+                <!--{{item.title}}-->
+                <!--<i class="{{item.icon}}"></i>-->
+                <!--</ion-item>-->
+                <!--</ion-list>-->
+                <!--</ion-content>-->
+
+            </ion-tab>
+
+
+            <ion-tab title="Annunci da risolvere" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline">
+                <!--<header class="bar bar-header bar-positive">-->
+                <!--<h1 class="title">Annunci candidato</h1>-->
+                <!--</header>-->
+                <ion-content has-header="true">
+                    <h1>Annunci da risolvere</h1>
+                </ion-content>
+            </ion-tab>
+
+            <ion-tab title="Storico" icon-on="ion-ios-gear" icon-off="ion-ios-gear-outline">
+                <!--<header class="bar bar-header bar-positive">-->
+                <!--<h1 class="title">Storico</h1>-->
+                <!--</header>-->
+                <ion-content has-header="true">
+                    <h1>Storico</h1>
+                </ion-content>
+            </ion-tab>
+
+
+
+        </ion-tabs>
+        <!--</body>-->
     </ion-content>
 </ion-view>
