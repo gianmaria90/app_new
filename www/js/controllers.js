@@ -1551,8 +1551,12 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
-    .controller('ProfileCtrl',function($scope, $state,$http,$ionicLoading,UserService,ProfileService,$localStorage,$filter)
+    .controller('ProfileCtrl',function($scope, $state,$http,$ionicLoading,UserService,ProfileService,$localStorage,$filter,$ionicHistory)
     {
+
+        $ionicHistory.clearHistory();
+        $ionicHistory.clearCache();
+
         $scope.profile={};
         $scope.user = UserService.getUser();
 

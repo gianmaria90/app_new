@@ -48,7 +48,19 @@
                 </label>
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Indirizzo*</b></span>
-                    <input type="text" ng-model="i" ng-disabled="!edit" required >
+                    <input type="text" ng-model="ind[0]" ng-disabled="!edit" required >
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>CAP*</b></span>
+                    <input type="number" ng-model="cap" ng-disabled="!edit" required >
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Città*</b></span>
+                    <input type="text" ng-model="ind[2]" ng-disabled="!edit" required >
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Provincia*</b></span>
+                    <input type="text" ng-model="ind[3]" ng-disabled="!edit" required >
                 </label>
 
                 <div class="list">
@@ -106,7 +118,7 @@
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Data di Nascita*</b></span>
-                    <input type="date" ng-model="prof.data_di_nascita" required>
+                    <input type="date" ng-model="prof.data_di_nascita" ng-disabled="!edit" required>
                 </label>
 
                 <label class="item item-input item-stacked-label">
