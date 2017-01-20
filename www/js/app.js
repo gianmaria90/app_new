@@ -98,7 +98,10 @@ angular.module('your_app_name', [
 
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-  $stateProvider
+
+    $ionicConfigProvider.tabs.position('bottom');
+
+    $stateProvider
 
   //INTRO
   .state('auth', {

@@ -425,7 +425,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             name: "Test",
                             icon: "Test",
                             level: 0,
-                            state: 'app.post_announcement'
+                            state: 'app.my_announcements'
                         }
                     ];
             }
@@ -563,7 +563,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             if(par===0)
                 $scope.getInfoMyAnnouncements(0);
             else if(par===1)
-                $scope.getInfoMyAppliedAnnouncements(0)
+                $scope.getInfoMyAppliedAnnouncements(0);
             else {}
 
             $scope.$broadcast('scroll.refreshComplete');
@@ -985,7 +985,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     .controller('TaskCtrl', function($scope) {
         $scope.close = function() {
             $scope.modal.hide();
-        }
+        };
     })
 
 
