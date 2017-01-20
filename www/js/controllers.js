@@ -1547,14 +1547,100 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $scope.minAge = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
         };
 
+    })
+
+
+    .controller('ProfileCtrl',function($scope, $state,$http,$ionicLoading,UserService,ProfileService,$localStorage,$filter)
+    {
+        $scope.profile={};
+        $scope.user = UserService.getUser();
+
+        // console.log($localStorage.loggedIn);
+        var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
+        console.log(params);
+        $http({
+            method :'POST',
+            url:'https://arctic-window-132923.appspot.com/get_user_info',
+            data: params,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+            .success(function (data, status) {
+                var obj=angular.fromJson(data);
+
+                $scope.profile=data.result;
+
+                // console.log($scope.profile.data_di_nascita);
+
+                $scope.profile.data_di_nascita = $filter('limitTo')($scope.profile.data_di_nascita,10,0);
+                $scope.profile.data_di_nascita = $filter('date')(new Date($scope.profile.data_di_nascita), 'yyyy-MM-dd');
+
+                console.log($scope.profile.data_di_nascita);
+                console.log(typeof $scope.profile.data_di_nascita);
+
+                ProfileService.setProfile({
+                    nome: $scope.profile.nome_studente,
+                    sex: $scope.profile.sesso_studente
+                });
+
+
+                // SESSION DATA FOR STUDENT W/0 SCHOLARSHIP
+                $localStorage.user_profile.mail = $scope.user.mail;
+                $localStorage.user_profile.nome = $scope.profile.nome_studente;
+                $localStorage.user_profile.cognome = $scope.profile.cognome_studente;
+                $localStorage.user_profile.data_di_nascita = $scope.profile.data_di_nascita;
+                $localStorage.user_profile.telefono = $scope.profile.telefono_studente;
+                $localStorage.user_profile.indirizzo = $scope.profile.indirizzo_studente;
+                $localStorage.user_profile.nome_uni = $scope.profile.nome_uni;
+                $localStorage.user_profile.id_uni = $scope.profile.id_uni;
+                $localStorage.user_profile.corso_laurea = $scope.profile.studente_corso_laurea;
+                $localStorage.user_profile.dipartimento = $scope.profile.studente_dipartimento;
+                $localStorage.user_profile.sesso = $scope.profile.sesso_studente;
+                $localStorage.user_profile.borsa = $scope.profile.borsa;
+
+
+                // OTHER SESSION DATA FOR STUDENT W/ SCHOLARSHIP
+                if ($localStorage.user_profile.borsa=='true') {
+                    $localStorage.user_profile.tipologia_borsa = $scope.profile.tipologia_borsa;
+                    $localStorage.user_profile.data_inizio_borsa = $scope.profile.data_inizio_borsa;
+                    $localStorage.user_profile.nome_mentore = $scope.profile.nome_mentore;
+                    $localStorage.user_profile.cognome_mentore = $scope.profile.cognome_mentore;
+                    $localStorage.user_profile.sesso_mentore = $scope.profile.sesso_mentore;
+                    $localStorage.user_profile.mail_mentore = $scope.profile.mail_mentore;
+                    $localStorage.user_profile.telefono_mentore = $scope.profile.telefono_mentore;
+                }
+
+
+                // console.log($localStorage.user_profile);
+
+            })
+            .error(function (data, status) {
+                console.log("Error." + data + " " + status);
+
+            });
+
+        $scope.updateProfileData = function(){
+            $state.go('app.update_profile');
+        };
+
+        $scope.Mentor = function(){
+            $state.go('app.mentor');
+        };
+
+        $scope.PianoStudi=function () {
+            $state.go("app.piano-studi");
+        };
 
     })
 
 
-    .controller('UpdateProfileCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
+    .controller('UpdateProfileCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$filter) {
         // $ionicHistory.clearHistory();
         // $ionicHistory.clearCache();
         $scope.editName = false;
+        $scope.editSurname = false;
         $scope.editSurname = false;
         // $scope.editSex = false;
         $scope.editPhone = false;
@@ -1573,12 +1659,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $scope.editSubmit = true;
         };
 
+
         $scope.prof =
 
             {
                 "mail":                     $localStorage.user_profile.mail,
                 "nome":                     $localStorage.user_profile.nome,
                 "cognome":                  $localStorage.user_profile.cognome,
+                "data_di_nascita":          new Date($localStorage.user_profile.data_di_nascita),
                 "sesso":                    $localStorage.user_profile.sesso,
                 "telefono":                 $localStorage.user_profile.telefono,
                 "nome_uni":                 $localStorage.user_profile.nome_uni,
@@ -1640,6 +1728,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 "nome":                     $scope.prof.nome,
                 "cognome":                  $scope.prof.cognome,
                 "sex":                      $scope.prof.sesso,
+                "data_di_nascita":          $filter('date')(new Date($scope.prof.data_di_nascita), 'yyyy-MM-dd'),
                 "telefono":                 $scope.prof.telefono,
                 "id_uni":                   $scope.prof.id_uni,
                 "corso_laurea":             $scope.prof.corso_laurea,
@@ -2299,84 +2388,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     })
 
-
-    .controller('ProfileCtrl',function($scope, $state,$http,$ionicLoading,UserService,ProfileService,$localStorage)
-    {
-        $scope.profile={};
-        $scope.user = UserService.getUser();
-
-        // console.log($localStorage.loggedIn);
-        var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
-        console.log(params);
-        $http({
-            method :'POST',
-            url:'https://arctic-window-132923.appspot.com/get_user_info',
-            data: params,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-            .success(function (data, status) {
-                var obj=angular.fromJson(data);
-
-                $scope.profile=data.result;
-
-                console.log($scope.profile.nome_studente);
-
-                ProfileService.setProfile({
-                    nome: $scope.profile.nome_studente,
-                    sex: $scope.profile.sesso_studente
-                });
-
-
-                // SESSION DATA FOR STUDENT W/0 SCHOLARSHIP
-                $localStorage.user_profile.mail = $scope.user.mail;
-                $localStorage.user_profile.nome = $scope.profile.nome_studente;
-                $localStorage.user_profile.cognome = $scope.profile.cognome_studente;
-                $localStorage.user_profile.telefono = $scope.profile.telefono_studente;
-                $localStorage.user_profile.indirizzo = $scope.profile.indirizzo_studente;
-                $localStorage.user_profile.nome_uni = $scope.profile.nome_uni;
-                $localStorage.user_profile.id_uni = $scope.profile.id_uni;
-                $localStorage.user_profile.corso_laurea = $scope.profile.studente_corso_laurea;
-                $localStorage.user_profile.dipartimento = $scope.profile.studente_dipartimento;
-                $localStorage.user_profile.sesso = $scope.profile.sesso_studente;
-                $localStorage.user_profile.borsa = $scope.profile.borsa;
-
-
-                // OTHER SESSION DATA FOR STUDENT W/ SCHOLARSHIP
-                if ($localStorage.user_profile.borsa=='true') {
-                    $localStorage.user_profile.tipologia_borsa = $scope.profile.tipologia_borsa;
-                    $localStorage.user_profile.data_inizio_borsa = $scope.profile.data_inizio_borsa;
-                    $localStorage.user_profile.nome_mentore = $scope.profile.nome_mentore;
-                    $localStorage.user_profile.cognome_mentore = $scope.profile.cognome_mentore;
-                    $localStorage.user_profile.sesso_mentore = $scope.profile.sesso_mentore;
-                    $localStorage.user_profile.mail_mentore = $scope.profile.mail_mentore;
-                    $localStorage.user_profile.telefono_mentore = $scope.profile.telefono_mentore;
-                }
-
-
-                console.log($localStorage.user_profile);
-
-            })
-            .error(function (data, status) {
-                console.log("Error." + data + " " + status);
-
-            });
-
-        $scope.updateProfileData = function(){
-            $state.go('app.update_profile');
-        };
-
-        $scope.Mentor = function(){
-            $state.go('app.mentor');
-        };
-
-        $scope.PianoStudi=function () {
-            $state.go("app.piano-studi");
-        };
-
-    })
 
     .controller('SignupCtrl', function($rootScope,$scope, $state,$cordovaOauth,$window,$ionicLoading,UserService,$localStorage,$ionicHistory) {
         console.log($localStorage.loggedIn);
