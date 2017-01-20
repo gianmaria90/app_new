@@ -173,7 +173,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             name: "Test",
                             icon: "Test",
                             level: 0,
-                            state: 'app.post_announcement'
+                            state: 'app.my_announcements'
                         }
                     ];
             }
@@ -447,12 +447,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.getInfoMyAnnouncements = function(par) {
 
+            $ionicTabsDelegate .select(0);
+
             $scope.info_my_ann = {};
 
             if(par==1) {
                 $scope.show = function () {
                     $ionicLoading.show({
-                        template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+                        template: '<p>Loading...</p><ion-spinner icon="spiral"></ion-spinner>'
                     });
                 };
 
@@ -469,6 +471,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 method: 'POST',
                 url: 'https://arctic-window-132923.appspot.com/get_info_my_announcements',
                 data: params,
+                cache: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -497,47 +500,184 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             };
         };
 
-        console.log("AGAIN");
+        $scope.getInfoMyAppliedAnnouncements = function(par) {
+
+            $ionicTabsDelegate .select(1);
+
+            $scope.info_my_app_ann = {};
+
+            if(par==1) {
+                $scope.show = function () {
+                    $ionicLoading.show({
+                        template: '<p>Loading...</p><ion-spinner icon="spiral"></ion-spinner>'
+                    });
+                };
+
+                $scope.hide = function () {
+                    $ionicLoading.hide();
+                };
+            }
+
+            var params = JSON.stringify({'mail_student': $scope.user.mail});
+            console.log(params);
+            if(par==1)
+                $scope.show($ionicLoading);
+            $http({
+                method: 'POST',
+                url: 'https://arctic-window-132923.appspot.com/get_my_applied_announcements',
+                data: params,
+                cache: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            })
+                .success(function (data, status) {
+                    $scope.info_my_app_ann = data;
+                    console.log($scope.info_my_app_ann);
+                })
+                .error(function (data, status) {
+                    console.log("2_Error storing device token." + data + " " + status);
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Errore connessione!',
+                        template: 'Si prega di controllare la connessione ad internet!'
+                    });
+                })
+                .finally(function ($ionicLoading) {
+                    if(par==1)
+                        $scope.hide($ionicLoading);
+                });
+
+            // console.log('RootCtrl');
+            // $scope.onControllerChanged = function (oldController, oldIndex, newController, newIndex) {
+            //     console.log('Controller changed', oldController, oldIndex, newController, newIndex);
+            //     console.log(arguments);
+            // };
+        };
+
 
         $scope.getInfoMyAnnouncements(1);
 
-        $scope.doRefresh = function() {
-            $scope.getInfoMyAnnouncements(0);
+
+        $scope.doRefresh = function(par) {
+            if(par===0)
+                $scope.getInfoMyAnnouncements(0);
+            else if(par===1)
+                $scope.getInfoMyAppliedAnnouncements(0)
+            else {}
+
             $scope.$broadcast('scroll.refreshComplete');
         };
 
+
+        // $scope.getInfoMyAppliedAnnouncements(1);
+
+
+        //FIRST CALL
+
+        // $scope.info_my_ann = {};
+        //
+        //
+        // var params = JSON.stringify({'mail_student': $scope.user.mail});
+        // console.log(params);
+        //
+        // $http({
+        //     method: 'POST',
+        //     url: 'https://arctic-window-132923.appspot.com/get_info_my_announcements',
+        //     data: params,
+        //     cache: true,
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        //
+        // })
+        //     .success(function (data, status) {
+        //         $scope.info_my_ann = data;
+        //         console.log($scope.info_my_ann);
+        //     })
+        //     .error(function (data, status) {
+        //         console.log("1_Error storing device token." + data + " " + status);
+        //         var alertPopup = $ionicPopup.alert({
+        //             title: 'Errore connessione!',
+        //             template: 'Si prega di controllare la connessione ad internet!'
+        //         });
+        //     });
+        //
+        // console.log('RootCtrl');
+        // $scope.onControllerChanged = function (oldController, oldIndex, newController, newIndex) {
+        //     console.log('Controller changed', oldController, oldIndex, newController, newIndex);
+        //     console.log(arguments);
+        // };
+        //
+        // $scope.info_my_app_ann = {};
+        //
+        // var params = JSON.stringify({'mail_student': $scope.user.mail});
+        // console.log(params);
+        //
+        // $http({
+        //     method: 'POST',
+        //     url: 'https://arctic-window-132923.appspot.com/get_my_applied_announcements',
+        //     data: params,
+        //     cache: true,
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        //
+        // })
+        //     .success(function (data, status) {
+        //         $scope.info_my_app_ann = data;
+        //         console.log($scope.info_my_app_ann);
+        //     })
+        //     .error(function (data, status) {
+        //         console.log("2_Error storing device token." + data + " " + status);
+        //         var alertPopup = $ionicPopup.alert({
+        //             title: 'Errore connessione!',
+        //             template: 'Si prega di controllare la connessione ad internet!'
+        //         });
+        //     });
+        //
+
+
+
+        // //SECOND CALL
+        // $scope.info_my_app_ann = {};
+        //
+        // var params = JSON.stringify({'mail_student': $scope.user.mail});
+        // console.log(params);
+        //
+        // $http({
+        //     method: 'POST',
+        //     url: 'https://arctic-window-132923.appspot.com/get_my_applied_announcements',
+        //     data: params,
+        //     cache: true,
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        //
+        // })
+        //     .success(function (data, status) {
+        //         $scope.info_my_app_ann = data;
+        //         console.log($scope.info_my_app_ann);
+        //     })
+        //     .error(function (data, status) {
+        //         console.log("2_Error storing device token." + data + " " + status);
+        //         var alertPopup = $ionicPopup.alert({
+        //             title: 'Errore connessione!',
+        //             template: 'Si prega di controllare la connessione ad internet!'
+        //         });
+        //     });
+
+
     })
 
-
-    // .controller('TestCtrl', function($window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$ionicTabsDelegate,$ionicActionSheet) {
-    //
-    //     $scope.to_update = {
-    //
-    //         "titolo":   "test"
-    //
-    //     };
-    //
-    // })
 
     .controller('MyAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$ionicTabsDelegate,$ionicActionSheet) {
 
         // $ionicHistory.clearHistory();
         // $ionicHistory.clearCache();
-
-        // $scope.to_update = {
-        //
-        //     "titolo":   "test"
-        //
-        // };
-
-        // $scope.to_update = {
-        //
-        //     "titolo":   "test"
-        //
-        // };
+        $scope.user = UserService.getUser();
 
         $scope.to_update = $localStorage.info_ann;
-
 
         // Triggered on a the item click
         $scope.showMenu = function(obj) {
@@ -545,21 +685,22 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             obj.data_scadenza = $filter('limitTo')(obj.data_scadenza,10,0);
             obj.data_scadenza = new Date($filter('date')(obj.data_scadenza.toString(),'yyyy-MM-dd'));
 
-
-
             $localStorage.info_ann = obj;
-
 
             // console.log($scope.to_update);
 
+            var menu_buttons = [
+                {
+                    text: '<b>Stop</b>'
+                }];
+
+            if(obj.num_cand > 0)
+                menu_buttons.push({text: 'Modifica'});
 
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
                 //Here you can add some more buttons
-                buttons: [
-                    { text: '<b>Stop</b>' },
-                    { text: 'Modifica' }
-                ],
+                buttons: menu_buttons,
                 destructiveText: 'Elimina',
                 titleText: 'Sei sicuro di voler eliminare l\' annuncio selezionato?',
                 cancelText: 'Annulla',
@@ -601,7 +742,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                     $scope.show = function () {
                         $ionicLoading.show({
-                            template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+                            template: '<p>Loading...</p><ion-spinner icon="spiral"></ion-spinner>'
                         });
                     };
 
@@ -647,9 +788,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         };
 
-
         $scope.doUpdateAnnouncement = function(){
-
 
 
             var updated_data = JSON.stringify({
@@ -716,118 +855,142 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         };
 
-        // $scope.items = [];
-
-        // $scope.info_my_ann = {};
-        //
-        // $scope.show = function() {
-        //     $ionicLoading.show({
-        //         template: '<p>Loading...</p><ion-spinner></ion-spinner>'
-        //     });
-        // };
-        //
-        // $scope.hide = function(){
-        //     $ionicLoading.hide();
-        // };
-        //
-        // $scope.myAnnouncements = function(index) {
-        //
-        //     $ionicTabsDelegate .select(index);
-        //
-        //     var params = JSON.stringify({'mail_student': $localStorage.user_profile.mail});
-        //     $scope.show($ionicLoading);
-        //     $http({
-        //         method: 'POST',
-        //         url: 'https://arctic-window-132923.appspot.com/get_info_my_announcements',
-        //         data: params,
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //
-        //     })
-        //         .success(function (data, status) {
-        //             $scope.info_my_ann = data;
-        //             console.log($scope.info_my_ann);
-        //         })
-        //         .error(function (data, status) {
-        //             console.log("Error storing device token." + data + " " + status);
-        //             var alertPopup = $ionicPopup.alert({
-        //                 title: 'Errore connessione!',
-        //                 template: 'Si prega di contrllare la connessione ad internet!'
-        //             });
-        //         })
-        //         .finally(function ($ionicLoading) {
-        //             $scope.hide($ionicLoading);
-        //         });
-        // };
-
-        // $ionicModal.fromTemplateUrl('newTask.html', function(modal) {
-        //     $scope.settingsModal = modal;
-        // });
-
-        // var removeItem = function(item, button) {
-        //     $ionicActionSheet.show({
-        //         buttons: [],
-        //         destructiveText: 'Delete Task',
-        //         cancelText: 'Cancel',
-        //         cancel: function() {
-        //             return true;
-        //         },
-        //         destructiveButtonClicked: function() {
-        //             $scope.items.splice($scope.items.indexOf(item), 1);
-        //             return true;
-        //         }
-        //     });
-        // };
-        //
-        // var completeItem = function(item, button) {
-        //     item.isCompleted = true;
-        // };
-        //
-        // $scope.onReorder = function(el, start, end) {
-        //     ionic.Utils.arrayMove($scope.items, start, end);
-        // };
-
-        // $scope.onRefresh = function() {
-        //     console.log('ON REFRESH');
-        //
-        //     $timeout(function() {
-        //         $scope.$broadcast('scroll.refreshComplete');
-        //     }, 1000);
-        // };
-
-
-        // $scope.removeItem = function(item) {
-        //     removeItem(item);
-        // };
-        //
-        // $scope.newTask = function() {
-        //     $scope.settingsModal.show();
-        // };
-
-        // Create the items
-        // for(var i = 0; i < 25; i++) {
-        //     $scope.items.push({
-        //         title: 'Task ' + (i + 1),
-        //         buttons: [{
-        //             text: 'Done',
-        //             type: 'button-success',
-        //             onButtonClicked: completeItem
-        //         }, {
-        //             text: 'Delete',
-        //             type: 'button-danger',
-        //             onButtonClicked: removeItem
-        //         }]
-        //     });
-        // }
 
     })
+
+
+
+    .controller('MyAppliedAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$ionicTabsDelegate,$ionicActionSheet) {
+
+        // $ionicHistory.clearHistory();
+        // $ionicHistory.clearCache();
+        $scope.user = UserService.getUser();
+
+        $scope.to_update = $localStorage.info_my_app_ann;
+
+
+        // Triggered on a the item click
+        $scope.showMenu = function(obj) {
+
+            // obj.data_scadenza = $filter('limitTo')(obj.data_scadenza,10,0);
+            // obj.data_scadenza = new Date($filter('date')(obj.data_scadenza.toString(),'yyyy-MM-dd'));
+
+            $localStorage.info_my_ann = obj;
+
+            // console.log($scope.to_update);
+
+            // Show the action sheet
+            var hideSheet = $ionicActionSheet.show({
+                //Here you can add some more buttons
+                buttons: [
+                    { text: '<b>Info</b>' },
+                    { text: 'Modifica' }
+                ],
+                destructiveText: 'Cancella Candidatura',
+                titleText: 'Sei sicuro di voler cancellare la candidatura?',
+                cancelText: 'Annulla',
+                cancel: function() {
+                    // add cancel code..
+                },
+                buttonClicked: function(index) {
+                    //Called when one of the non-destructive buttons is clicked,
+                    //with the index of the button that was clicked and the button object.
+                    //Return true to close the action sheet, or false to keep it opened.
+
+                    console.log(index);
+
+                    if(index===0) //code for 'Stop' function
+                    {
+                        console.log('INFO');
+                        // $state.go('app.profile');
+                    }
+                    else if(index===1) //code for 'Modifica' function
+                    {
+
+                        console.log($localStorage.info_ann);
+                        console.log("MODIFICA CANDIDATURA");
+                        // $state.go('app.update_announcement');
+
+                    }
+                    else
+                    {}
+
+                    return true;
+                },
+                destructiveButtonClicked: function(){
+
+                    //Called when the destructive button is clicked.
+                    //Return true to close the action sheet, or false to keep it opened.
+                    // $state.go('walkthrough');
+
+                    console.log(obj.id);
+
+                    $scope.show = function () {
+                        $ionicLoading.show({
+                            template: '<p>Loading...</p><ion-spinner icon="spiral"></ion-spinner>'
+                        });
+                    };
+
+                    $scope.hide = function () {
+                        $ionicLoading.hide();
+                    };
+
+                    var params = JSON.stringify({
+                        'mail_student':  $scope.user.mail,
+                        'id':   obj.id
+                    });
+
+                    $scope.show($ionicLoading);
+                    $http({
+                        method: 'POST',
+                        url: 'https://arctic-window-132923.appspot.com/delete_candidacy',
+                        data: params,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .success(function (data, status) {
+
+                            console.log("HERE");
+                            $window.location.reload(true);
+
+                        })
+                        .error(function (data, status) {
+                            console.log("2_Error storing device token." + data + " " + status);
+                            var alertPopup = $ionicPopup.alert({
+                                title: 'Errore connessione!',
+                                template: 'Si prega di controllare la connessione ad internet!'
+                            });
+                        })
+                        .finally(function ($ionicLoading) {
+                            $scope.hide($ionicLoading);
+                        });
+
+                    // $state.go("app.my_announcements");
+                    // $state.go($state.current, {}, {reload: true});
+
+                    return true;
+
+                }
+            });
+
+        };
+
+
+
+    })
+
+
 
     .controller('TaskCtrl', function($scope) {
         $scope.close = function() {
             $scope.modal.hide();
         }
     })
+
+
+
+
 
 
     .controller('AppCtrl', function($scope, $ionicConfig) {
@@ -1389,8 +1552,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
     .controller('UpdateProfileCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
-        $ionicHistory.clearHistory();
-        $ionicHistory.clearCache();
+        // $ionicHistory.clearHistory();
+        // $ionicHistory.clearCache();
         $scope.editName = false;
         $scope.editSurname = false;
         // $scope.editSex = false;
@@ -1497,19 +1660,28 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 .success(function (data, status) {
 
                     var obj = angular.fromJson(data);
-                    console.log(obj.result);
 
-                    if(obj.result === '200') {
-                        console.log("Dati aggiornati con successo");
-                        $scope.title="Profilo aggiornato";
-                        $scope.template="Il tuo profilo è stato aggiornato con successo!";
-                        $ionicHistory.nextViewOptions({
-                            disableAnimate: true,
-                            disableBack: true
-                        });
-                        // the user is redirected to login page after sign up
-                        $state.go('app.profile');
-                    }
+                    // $localStorage.user_profile.nome = $scope.prof.nome;
+                    // $localStorage.user_profile.cognome = $scope.prof.cognome;
+                    // $localStorage.user_profile.sesso = $scope.prof.sesso;
+                    // $localStorage.user_profile.telefono = $scope.prof.telefono;
+                    // $localStorage.user_profile.nome_uni = $scope.prof.nome_uni;
+                    // $localStorage.user_profile.id_uni = $scope.prof.id_uni;
+                    // $localStorage.user_profile.corso_laurea = $scope.prof.corso_laurea;
+                    // $localStorage.user_profile.indirizzo = $scope.prof.indirizzo;
+
+                    console.log($localStorage.user_profile);
+
+                    console.log("Dati aggiornati con successo");
+                    $scope.title="Profilo aggiornato";
+                    $scope.template="Il tuo profilo è stato aggiornato con successo!";
+                    $ionicHistory.nextViewOptions({
+                        disableAnimate: true,
+                        disableBack: true
+                    });
+                    // the user is redirected to login page after sign up
+                    $state.go('app.profile');
+
 
                     var alertPopup = $ionicPopup.alert({
                         title: $scope.title,
@@ -2568,7 +2740,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.show = function() {
             $ionicLoading.show({
-                template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+                template: '<p>Loading...</p><ion-spinner icon="spiral"></ion-spinner>'
             });
         };
 
@@ -3015,6 +3187,24 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     // add the following plug in: ionic plugin add cordova-plugin-googlemaps
     .controller('MapCtrl', function($scope,$state,$http,$ionicPopup,$ionicLoading) {
 
+        //TODO: insert background image into ionicLoading
+        $scope.show = function () {
+            $ionicLoading.show({
+                template: '<p>Loading...</p><ion-spinner icon="spiral"></ion-spinner>'
+                // templateUrl: '../views/test.html'
+            });
+            // content: 'Loading',
+            //     animation: 'fade-in',
+            //     showBackdrop: true,
+            //     maxWidth: 200,
+            //     showDelay: 0
+        };
+
+        $scope.hide = function () {
+            $ionicLoading.hide();
+        };
+
+        $scope.show($ionicLoading);
         $http({
             method :'GET',
             url:'https://arctic-window-132923.appspot.com/get_companies_info',
@@ -3164,6 +3354,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     title: $scope.title,
                     template: $scope.template
                 });
+            })
+            .finally(function ($ionicLoading) {
+                $scope.hide($ionicLoading);
             });
 
 

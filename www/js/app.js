@@ -381,6 +381,7 @@ angular.module('your_app_name', [
 
   .state('app.profile', {
     url: "/profile",
+      cache: false,
     views: {
       'menuContent': {
         templateUrl: "views/app/profile.html",
