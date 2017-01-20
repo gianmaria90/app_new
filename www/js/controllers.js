@@ -1476,7 +1476,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 'dn': $scope.reg.date,
                 'sex': $scope.reg.sex,
                 'universita_id':$scope.reg.universita,
-                'phone': $scope.reg.phone
+                'phone': $scope.reg.phone,
+                'indirizzo' : $scope.reg.indirizzo+';'+$scope.reg.cap.toString()+';'+$scope.reg.citta+';'+$scope.reg.prov
             });
 
             console.log(params);
@@ -1639,26 +1640,19 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     .controller('UpdateProfileCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$filter) {
         // $ionicHistory.clearHistory();
         // $ionicHistory.clearCache();
-        $scope.editName = false;
-        $scope.editSurname = false;
-        $scope.editSurname = false;
-        // $scope.editSex = false;
-        $scope.editPhone = false;
-        $scope.editAddress= false;
-        // $scope.editUniversity = false;
-        $scope.editCDL= false;
+        $scope.edit = false;
+
 
         $scope.editFields = function () {
-            $scope.editName = true;
-            $scope.editSurname = true;
-            $scope.editSex = true;
-            $scope.editPhone = true;
-            $scope.editAddress= true;
-            $scope.editUniversity = true;
-            $scope.editCDL= true;
-            $scope.editSubmit = true;
+            $scope.edit = true;
+
         };
 
+
+        $scope.ind= $localStorage.user_profile.indirizzo.split(";");
+        $scope.cap=parseInt($scope.ind[1],10);
+        console.log(typeof $scope.cap);
+        console.log($scope.cap);
 
         $scope.prof =
 
@@ -1732,7 +1726,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 "telefono":                 $scope.prof.telefono,
                 "id_uni":                   $scope.prof.id_uni,
                 "corso_laurea":             $scope.prof.corso_laurea,
-                "indirizzo":                $scope.prof.indirizzo
+                "indirizzo":                $scope.ind[0]+';'+$scope.cap+';'+$scope.ind[2]+';'+$scope.ind[3]
             });
 
             console.log(updated_data);
@@ -1780,13 +1774,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 .error(function (data, status) {
                     console.log("Error." + data + " " + status);
 
-                    if (obj.result === '500')
-                    {
+
                         console.log("Something went wrong!");
                         $scope.title="Something went wrong!";
                         $scope.template="Contattare il nostro team tecnico";
-                        //resettare i parametri focus email
-                    }
 
                     var alertPopup = $ionicPopup.alert({
                         title: $scope.title,

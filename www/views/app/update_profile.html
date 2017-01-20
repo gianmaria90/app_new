@@ -15,12 +15,12 @@
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Nome*</b></span>
-                    <input type="text" ng-model="prof.nome" required ng-disabled="!editName">
+                    <input type="text" ng-model="prof.nome" required ng-disabled="!edit">
                 </label>
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Cognome*</b></span>
-                    <input type="text" ng-model="prof.cognome" required ng-disabled="!editSurname">
+                    <input type="text" ng-model="prof.cognome" required ng-disabled="!edit">
                 </label>
 
                 <div ng-class="list">
@@ -30,7 +30,7 @@
                             <b>Sesso*</b>
                         </div>
                         <!--FIXME: bug che non disabilita la select -->
-                        <select ng-model="prof.sesso">
+                        <select ng-model="prof.sesso" ng-disabled="!edit">
                             <option >M</option>
                             <option >F</option>
                         </select>
@@ -44,11 +44,11 @@
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Telefono</b></span>
-                    <input type="tel" ng-model="prof.telefono" ng-disabled="!editPhone">
+                    <input type="tel" ng-model="prof.telefono" ng-disabled="!edit">
                 </label>
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Indirizzo*</b></span>
-                    <input type="text" ng-model="prof.indirizzo" required ng-disabled="!editAddress">
+                    <input type="text" ng-model="i" ng-disabled="!edit" required >
                 </label>
 
                 <div class="list">
@@ -58,9 +58,9 @@
                         </div>
 
                         <!--FIXME: bug che non disabilita la select -->
-                        <select ng-model="prof.id_uni">
+                        <select ng-model="prof.id_uni" ng-disabled="!edit">
                             <option value="">---Select option-----</option>
-                            <option ng-selected="prof.nome_uni == uni.nome" value="{{uni.id}}" ng-repeat="uni in university">{{uni.nome}}</option>
+                            <option ng-selected="prof.nome_uni == uni.nome" value="{{uni.id}}" ng-repeat="uni in university" >{{uni.nome}}</option>
                         </select>
 
                     </label>
@@ -68,12 +68,12 @@
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Corso di Laurea</b></span>
-                    <input type="text" ng-model="prof.corso_laurea" ng-disabled="!editCDL">
+                    <input type="text" ng-model="prof.corso_laurea" ng-disabled="!edit">
                 </label>
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Tipologia Borsa</b></span>
-                    <input type="text" ng-model="prof.tipologia_borsa" ng-readonly="true">
+                    <input type="text" ng-model="prof.tipologia_borsa" ng-disabled="!edit" ng-readonly="true">
                 </label>
 
             </div>
@@ -82,12 +82,12 @@
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Nome*</b></span>
-                    <input type="text" ng-model="prof.nome" required ng-disabled="!editName">
+                    <input type="text" ng-model="prof.nome" required ng-disabled="!edit">
                 </label>
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Cognome*</b></span>
-                    <input type="text" ng-model="prof.cognome" required ng-disabled="!editSurname">
+                    <input type="text" ng-model="prof.cognome" required ng-disabled="!edit">
                 </label>
 
                 <div ng-class="list">
@@ -97,9 +97,9 @@
                             <b>Sesso*</b>
                         </div>
                         <!--FIXME: bug che non disabilita la select -->
-                        <select ng-model="prof.sesso">
+                        <select ng-model="prof.sesso" ng-disabled="!edit">
                             <option >M</option>
-                            <option >F</option>
+                            <option  >F</option>
                         </select>
                     </label>
                 </div>
@@ -111,11 +111,23 @@
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Telefono</b></span>
-                    <input type="tel" ng-model="prof.telefono" ng-disabled="!editPhone">
+                    <input type="tel" ng-model="prof.telefono" ng-disabled="!edit">
                 </label>
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Indirizzo*</b></span>
-                    <input type="text" ng-model="prof.indirizzo" required ng-disabled="!editAddress">
+                    <input type="text" ng-model="ind[0]" ng-disabled="!edit" required >
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>CAP*</b></span>
+                    <input type="number" ng-model="cap" ng-disabled="!edit" required >
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Città*</b></span>
+                    <input type="text" ng-model="ind[2]" ng-disabled="!edit" required >
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label"><b>Provincia*</b></span>
+                    <input type="text" ng-model="ind[3]" ng-disabled="!edit" required >
                 </label>
 
                 <div class="list">
@@ -125,9 +137,9 @@
                         </div>
 
                         <!--FIXME: bug che non disabilita la select -->
-                        <select ng-model="prof.id_uni">
+                        <select ng-model="prof.id_uni"  ng-disabled="!edit">
                             <option value="">---Select option-----</option>
-                            <option ng-selected="prof.nome_uni == uni.nome" value="{{uni.id}}" ng-repeat="uni in university">{{uni.nome}}</option>
+                            <option ng-selected="prof.nome_uni == uni.nome" value="{{uni.id}}"  ng-repeat="uni in university">{{uni.nome}}</option>
                         </select>
 
                     </label>
@@ -135,13 +147,13 @@
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label"><b>Corso di Laurea</b></span>
-                    <input type="text" ng-model="prof.corso_laurea" ng-disabled="!editCDL">
+                    <input type="text" ng-model="prof.corso_laurea" ng-disabled="!edit">
                 </label>
 
             </div>
 
             <div class="item item-body bottom-content">
-                <button type="submit" class="button button-block button-assertive" ng-click="doUpdateProfile()"   ng-disabled="(!update_profile_form.$valid) || (!editSubmit)">
+                <button type="submit" class="button button-block button-assertive" ng-click="doUpdateProfile()"   ng-disabled="(!update_profile_form.$valid) || (!edit)">
                     Aggiorna Profilo
                 </button>
             </div>
