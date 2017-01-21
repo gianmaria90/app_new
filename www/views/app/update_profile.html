@@ -71,7 +71,7 @@
 
                         <!--FIXME: bug che non disabilita la select -->
                         <select ng-model="prof.id_uni" ng-disabled="!edit">
-                            <option value="">---Select option-----</option>
+                            <option value="">---Seleziona Opzione---</option>
                             <option ng-selected="prof.nome_uni == uni.nome" value="{{uni.id}}" ng-repeat="uni in university" >{{uni.nome}}</option>
                         </select>
 

@@ -173,7 +173,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             name: "Test",
                             icon: "Test",
                             level: 0,
-                            state: 'app.my_announcements'
+                            state: 'app.search_announcement'
                         }
                     ];
             }
@@ -555,6 +555,61 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             // };
         };
 
+        $scope.getInfoArchivedAnnouncements = function(par) {
+
+            $ionicTabsDelegate .select(2);
+
+            $scope.info_my_app_ann = {};
+
+            if(par==1) {
+                $scope.show = function () {
+                    $ionicLoading.show({
+                        template: '<p>Loading...</p><ion-spinner icon="spiral"></ion-spinner>'
+                    });
+                };
+
+                $scope.hide = function () {
+                    $ionicLoading.hide();
+                };
+            }
+
+            var params = JSON.stringify({'mail_student': $scope.user.mail});
+            console.log(params);
+            if(par==1)
+                $scope.show($ionicLoading);
+            $http({
+                method: 'POST',
+                url: 'https://arctic-window-132923.appspot.com/get_my_applied_announcements',
+                data: params,
+                cache: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            })
+                .success(function (data, status) {
+                    $scope.info_my_app_ann = data;
+                    console.log($scope.info_my_app_ann);
+                })
+                .error(function (data, status) {
+                    console.log("2_Error storing device token." + data + " " + status);
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Errore connessione!',
+                        template: 'Si prega di controllare la connessione ad internet!'
+                    });
+                })
+                .finally(function ($ionicLoading) {
+                    if(par==1)
+                        $scope.hide($ionicLoading);
+                });
+
+            // console.log('RootCtrl');
+            // $scope.onControllerChanged = function (oldController, oldIndex, newController, newIndex) {
+            //     console.log('Controller changed', oldController, oldIndex, newController, newIndex);
+            //     console.log(arguments);
+            // };
+        };
+
 
         $scope.getInfoMyAnnouncements(1);
 
@@ -564,7 +619,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 $scope.getInfoMyAnnouncements(0);
             else if(par===1)
                 $scope.getInfoMyAppliedAnnouncements(0);
-            else {}
+            else {
+
+            }
 
             $scope.$broadcast('scroll.refreshComplete');
         };
@@ -671,7 +728,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
-    .controller('MyAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$ionicTabsDelegate,$ionicActionSheet) {
+    .controller('MyAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$ionicTabsDelegate,$ionicActionSheet,$ionicTabsDelegate) {
 
         // $ionicHistory.clearHistory();
         // $ionicHistory.clearCache();
@@ -691,11 +748,12 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
             var menu_buttons = [
                 {
-                    text: '<b>Stop</b>'
+                    'text': 'Modifica'
                 }];
 
-            if(obj.num_cand > 0)
-                menu_buttons.push({text: 'Modifica'});
+            if(obj.num_cand > 0) {
+                menu_buttons.push({text: '<b>Stop</b>'});
+            }
 
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
@@ -714,18 +772,18 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                     console.log(index);
 
-                    if(index===0) //code for 'Stop' function
-                    {
-                        console.log('STOP');
-                        $state.go('app.profile');
-                    }
-                    else if(index===1) //code for 'Modifica' function
+                    if(index===0) //code for 'Modifica' function
                     {
 
                         console.log($localStorage.info_ann);
                         console.log("MODIFICA");
                         $state.go('app.update_announcement');
-
+                    }
+                    else if(index===1) //code for 'STOP' function
+                    {
+                        console.log('STOP');
+                        $ionicTabsDelegate .select(2);
+                        $state.go('app.my_announcements');
                     }
                     else
                     {}
