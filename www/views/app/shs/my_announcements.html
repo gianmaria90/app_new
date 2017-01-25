@@ -110,7 +110,8 @@
             <ion-tab title="Storico"
                      icon-on="ion-ios-gear"
                      icon-off="ion-ios-gear-outline"
-            <!--ng-controller="MyAnnouncementsCtrl",-->
+                     ng-controller="HistoryCtrl"
+                     ng-click="storico()"
             <!--ng-click="getInfoMyAnnouncements(1)"-->
             >
 
@@ -131,22 +132,48 @@
                             </a>
                         </div>
                     </div-->
-                <ion-tabs class="tabs-striped tabs-background-stable">
+                <ion-tabs class="tabs-striped tabs-background-stable"  >
 
-                    <ion-tab title="Miei annunci">
+                    <ion-tab title="Annunci applicati">
 
                             <ion-content class="has-tabs">
-                                pippo
+                                <ion-list scroll="false s-editing="isEditingItems
+                                          animation="fade-out"
+                                          delete-icon="icon ion-minus-circled">
+                                    <div class="card">
+                                        <div class="item item-text-wrap" ng-repeat="app in applied" >
+
+                                            <h2><b>{{app.titolo}}</b></h2>
+                                            <h3><b>{{app.categoria}}</b></h3>
+                                            <h4><b>descrizione:</b> {{app.descrizione}}</h4>
+                                            <h4><b>email utente:</b> {{app.mail_pubblicante}}</h4>
+                                            <h4><b>data pubblicazione:</b> {{app.data_pubblicazione}}</h4>
+
+                                        </div>
+                                    </div>
+                                </ion-list>
                             </ion-content>
 
 
                     </ion-tab>
 
-                    <ion-tab title="Annunci applicati">
+                    <ion-tab title="Miei annunci" >
 
                         <ion-content class="has-tabs" >
+                            <ion-list scroll="false s-editing="isEditingItems
+                                      animation="fade-out"
+                                      delete-icon="icon ion-minus-circled">
+                                <div class="card">
+                                    <div class="item item-text-wrap" ng-repeat="m in my" >
 
-                                pluto
+                                        <h2><b>{{m.titolo}}</b></h2>
+                                        <h3><b>{{m.categoria}}</b></h3>
+                                        <h4><b>descrizione:</b> {{m.descrizione}}</h4>
+                                        <h4><b>data pubblicazione:</b> {{m.data_pubblicazione}}</h4>
+
+                                    </div>
+                                </div>
+                            </ion-list>
                         </ion-content>
 
 

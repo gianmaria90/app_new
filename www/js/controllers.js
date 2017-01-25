@@ -918,7 +918,65 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
 
-    .controller('MyAppliedAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$ionicTabsDelegate,$ionicActionSheet) {
+    .controller('HistoryCtrl',function ($scope,$http,UserService,$ionicLoading,$ionicPopup,$ionicTabsDelegate) {
+
+
+        $scope.storico=function () {
+            $ionicTabsDelegate.select(2);
+            $scope.user = UserService.getUser();
+            var params = JSON.stringify({
+                'mail_student':  $scope.user.mail
+
+            });
+
+            $scope.show = function () {
+                $ionicLoading.show({
+                    template: '<p>Loading...</p><ion-spinner icon="spiral"></ion-spinner>'
+                });
+            };
+
+            $scope.hide = function () {
+                $ionicLoading.hide();
+            };
+
+            $scope.show($ionicLoading);
+            $http({
+                method: 'POST',
+                url: 'https://arctic-window-132923.appspot.com/get_archived_announcements',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .success(function (data, status) {
+
+                    var obj = angular.fromJson(data);
+                    $scope.applied=obj[0].applied_announcements;
+                    $scope.my=obj[1].my_announcements;
+
+                    console.log($scope.applied);
+                    console.log($scope.my);
+
+                })
+                .error(function (data, status) {
+                    console.log("2_Error storing device token." + data + " " + status);
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Errore connessione!',
+                        template: 'Si prega di controllare la connessione ad internet!'
+                    });
+                })
+                .finally(function ($ionicLoading) {
+                    $scope.hide($ionicLoading);
+                });
+
+        };
+
+    })
+
+
+
+
+    .controller('MyAppliedAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicTabsDelegate,$ionicActionSheet,$ionicLoading) {
 
         // $ionicHistory.clearHistory();
         // $ionicHistory.clearCache();
