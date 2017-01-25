@@ -100,16 +100,39 @@
                 <!--on-refresh="doRefresh(1)">-->
                 <!--&gt; </ion-refresher>-->
 
-                <div class="tabs-striped tabs-top tabs-background-stable">
-                    <div style="top: 0px;" class="tabs">
-                        <a class="tab-item" ui-sref="">
-                            <b>Miei Annunci</b>
-                        </a>
-                        <a class="tab-item" ui-sref="">
-                            <b>Annunci Applicati</b>
-                        </a>
+
+                    <div class="tabs-striped tabs-top tabs-background-stable">
+                        <div style="top: 0px;" class="tabs">
+                            <a class="tab-item" ui-sref="app.my_announcements.page1">
+                                <b>Miei Annunci</b>
+                            </a>
+                            <a class="tab-item" ui-sref="app.my_announcements.page2">
+                                <b>Annunci Applicati</b>
+                            </a>
+                        </div>
                     </div>
-                </div>
+
+
+                <script id="templates/about-page1.html" type="text/ng-template">
+
+                    <ion-view title="About Page 1">
+                        <ion-content class="padding has-tabs-top">
+                            About Page 1
+                        </ion-content>
+                    </ion-view>
+
+                </script>
+
+                <script id="templates/about-page2.html" type="text/ng-template">
+
+                    <ion-view title="About Page 2">
+                        <ion-content class="padding has-tabs-top">
+                            About Page 2
+                        </ion-content>
+                    </ion-view>
+
+                </script>
+
 
                 <!--<ion-list scroll="false s-editing="isEditingItems-->
                 <!--animation="fade-out"-->

@@ -489,6 +489,7 @@ angular.module('your_app_name', [
           }
       })
 
+
       .state('app.mentor', {
           url: '/mentor',
           views: {
@@ -498,6 +499,25 @@ angular.module('your_app_name', [
               }
           }
       })
+
+
+        .state('app.my_announcements.page1', {
+            url: "/page1",
+            views: {
+                'about-page': {
+                    templateUrl: "templates/about-page1.html"
+                }
+            }
+        })
+
+        .state('app.my_announcements.page2', {
+            url: "/page2",
+            views: {
+                'about-page': {
+                    templateUrl: "templates/about-page2.html"
+                }
+            }
+        })
 
 
       // .state('app.maps', {
