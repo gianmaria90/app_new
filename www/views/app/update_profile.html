@@ -37,9 +37,9 @@
                     </label>
                 </div>
 
-                <label class="item item-input item-stacked-label">
+                <label class="item item-input item-stacked-label" >
                     <span class="input-label"><b>Data di Nascita*</b></span>
-                    <input type="date" ng-model="prof.data_di_nascita" required>
+                    <input type="date" ng-model="prof.data_di_nascita" ng-disabled="!edit" required>
                 </label>
 
                 <label class="item item-input item-stacked-label">

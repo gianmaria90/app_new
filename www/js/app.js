@@ -30,7 +30,8 @@ angular.module('your_app_name', [
   'slugifier',
   'ionic.contrib.ui.tinderCards',
   'youtube-embed',
-  'ngCordovaOauth'
+  'ngCordovaOauth',
+    'ui.router'
 ])
 
 .run(function($ionicPlatform, PushNotificationsService, $rootScope, $ionicConfig, $timeout, $ionicPopup) {
@@ -453,7 +454,8 @@ angular.module('your_app_name', [
                   templateUrl: 'views/app/map.html',
                   controller: 'MapCtrl'
               }
-          }
+          },
+          parent:""
       })
 
 
@@ -464,7 +466,8 @@ angular.module('your_app_name', [
                   templateUrl: 'views/app/prometeo.html',
                   controller: 'PrometeoCtrl'
               }
-          }
+          },
+          parent:""
       })
       .state('app.piano-studi', {
           url: '/piano-studi',
@@ -504,19 +507,21 @@ angular.module('your_app_name', [
         .state('app.my_announcements.page1', {
             url: "/page1",
             views: {
-                'about-page': {
-                    templateUrl: "templates/about-page1.html"
+                'menuContent': {
+                    templateUrl: "templates.about-page1.html"
                 }
-            }
+            },
+            parent:"app.my_announcements"
         })
 
         .state('app.my_announcements.page2', {
             url: "/page2",
             views: {
-                'about-page': {
-                    templateUrl: "templates/about-page2.html"
+                'menuContent': {
+                    templateUrl: "templates.about-page2.html"
                 }
-            }
+            },
+            parent:"app.my_announcements"
         })
 
 

@@ -1,3 +1,23 @@
+<script id="templates.about-page1.html" type="text/ng-template">
+
+    <ion-view title="About Page 1">
+        <ion-content class="padding has-tabs-top">
+            About Page 1
+        </ion-content>
+    </ion-view>
+
+</script>
+
+<script id="templates.about-page2.html" type="text/ng-template">
+
+    <ion-view title="About Page 2">
+        <ion-content class="padding has-tabs-top">
+            About Page 2
+        </ion-content>
+    </ion-view>
+
+</script>
+
 <ion-view class="my_announcements-view" cache-view="false">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
@@ -101,7 +121,7 @@
                 <!--&gt; </ion-refresher>-->
 
 
-                    <div class="tabs-striped tabs-top tabs-background-stable">
+                    <!--div class="tabs-striped tabs-top tabs-background-stable">
                         <div style="top: 0px;" class="tabs">
                             <a class="tab-item" ui-sref="app.my_announcements.page1">
                                 <b>Miei Annunci</b>
@@ -110,28 +130,31 @@
                                 <b>Annunci Applicati</b>
                             </a>
                         </div>
-                    </div>
+                    </div-->
+                <ion-tabs class="tabs-striped tabs-background-stable">
+
+                    <ion-tab title="Miei annunci">
+
+                            <ion-content class="has-tabs">
+                                pippo
+                            </ion-content>
 
 
-                <script id="templates/about-page1.html" type="text/ng-template">
+                    </ion-tab>
 
-                    <ion-view title="About Page 1">
-                        <ion-content class="padding has-tabs-top">
-                            About Page 1
+                    <ion-tab title="Annunci applicati">
+
+                        <ion-content class="has-tabs" >
+
+                                pluto
                         </ion-content>
-                    </ion-view>
 
-                </script>
 
-                <script id="templates/about-page2.html" type="text/ng-template">
+                    </ion-tab>
 
-                    <ion-view title="About Page 2">
-                        <ion-content class="padding has-tabs-top">
-                            About Page 2
-                        </ion-content>
-                    </ion-view>
+                </ion-tabs>
 
-                </script>
+
 
 
                 <!--<ion-list scroll="false s-editing="isEditingItems-->
@@ -152,3 +175,5 @@
         <!--</body>-->
     </ion-content>
 </ion-view>
+
+

@@ -728,7 +728,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
-    .controller('MyAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$ionicTabsDelegate,$ionicActionSheet,$ionicTabsDelegate) {
+    .controller('MyAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$ionicTabsDelegate,$ionicActionSheet) {
 
         // $ionicHistory.clearHistory();
         // $ionicHistory.clearCache();
