@@ -491,6 +491,8 @@ angular.module('your_app_name', [
       })
 
 
+
+
       .state('app.update_profile', {
           url: '/update_profile',
           views: {
@@ -533,16 +535,6 @@ angular.module('your_app_name', [
             parent:"app.my_announcements"
         })
 
-
-      // .state('app.maps', {
-      //     url: "/miscellaneous/maps",
-      //     views: {
-      //         'menuContent': {
-      //             templateUrl: "views/app/miscellaneous/maps.html",
-      //             controller: 'MapsCtrl'
-      //         }
-      //     }
-      // })
 
 
 ;
