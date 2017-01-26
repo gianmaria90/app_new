@@ -223,7 +223,29 @@ angular.module('your_app_name.services', [])
 
 })
 
-.service('UserService', function() {
+
+    .service('NoteService', function ($rootScope, $http){
+
+        this.getNote = function($params) {
+
+            var params = JSON.stringify( {'id_att': $params} );
+        	console.log($params);
+
+            return $http({
+                method: 'POST',
+                url: 'https://arctic-window-132923.appspot.com/list_notes',
+                data: params,
+                headers: {
+                	'Content-Type': 'application/json'
+                }
+
+            });
+
+        };
+
+    })
+
+	.service('UserService', function() {
 
 //for the purpose of this example I will store user data on ionic local storage but you should save it on a database
 

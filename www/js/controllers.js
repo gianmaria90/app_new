@@ -167,13 +167,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             icon: "ion-university",
                             level: 0,
                             state: 'app.hobby'
-                        },
-                        {
-                            id: 10,
-                            name: "Test",
-                            icon: "Test",
-                            level: 0,
-                            state: 'app.test'
                         }
                     ];
             }
@@ -419,13 +412,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             icon: "ion-university",
                             level: 0,
                             state: 'app.hobby'
-                        },
-                        {
-                            id: 10,
-                            name: "Test",
-                            icon: "Test",
-                            level: 0,
-                            state: 'app.test'
                         }
                     ];
             }
@@ -551,11 +537,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         $scope.hide($ionicLoading);
                 });
 
-            console.log('RootCtrl');
-            $scope.onControllerChanged = function (oldController, oldIndex, newController, newIndex) {
-                console.log('Controller changed', oldController, oldIndex, newController, newIndex);
-                console.log(arguments);
-            };
+            // console.log('RootCtrl');
+            // $scope.onControllerChanged = function (oldController, oldIndex, newController, newIndex) {
+            //     console.log('Controller changed', oldController, oldIndex, newController, newIndex);
+            //     console.log(arguments);
+            // };
         };
 
         $scope.getInfoMyAppliedAnnouncements = function(par) {
@@ -673,6 +659,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
         $scope.doRefresh = function(par) {
+
+            $ionicLoading.show({
+                template: 'Loading note...'
+            });
+
             if(par===0)
                 $scope.getInfoMyAnnouncements(0);
             else if(par===1)
@@ -680,7 +671,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             else {
 
             }
-
+            $ionicLoading.hide();
             $scope.$broadcast('scroll.refreshComplete');
         };
 
@@ -922,14 +913,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         };
 
 
-                        var params = JSON.stringify({'annuncio_id': obj.id});
+                        var params2 = JSON.stringify({'annuncio_id': obj.id});
 
                         $scope.show($ionicLoading);
 
                         $http({
                             method: 'POST',
                             url: 'https://arctic-window-132923.appspot.com/stop_announce',
-                            data: params,
+                            data: params2,
                             headers: {
                                 'Content-Type': 'application/json'
                             }
@@ -1936,6 +1927,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.PianoStudi=function () {
             $state.go("app.piano-studi");
+        };
+
+        $scope.Attivita = function () {
+            $state.go("app.attivita");
         };
 
     })
@@ -3295,56 +3290,183 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
+    .controller('AttivitaCtrl', function ($scope,$state,$stateParams, $ionicModal,$http,$ionicPopup,UserService)
+    {
 
+        $scope.doRefresh = function() {
 
-    .controller('ForgotPasswordCtrl', function($scope,$ionicPopup, $state,$http,$ionicHistory) {
-        $scope.recoverPassword = function(){
+            $scope.user = UserService.getUser();
+            $scope.attivita = [];
 
-            var params = JSON.stringify( {'mail': $scope.user.email} );
-
+            var params = JSON.stringify({'mail': $scope.user.mail, 'password': $scope.user.password});
             $http({
-                method :'POST',
-                url:'https://arctic-window-132923.appspot.com/pwresetrequest',
+                method: 'POST',
+                url: 'https://arctic-window-132923.appspot.com/list_ps_incomplete',
                 data: params,
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
-
                 .success(function (data, status) {
-                    var obj=angular.fromJson(data);
 
+                    $scope.attivita = angular.fromJson(data);
+                    $scope.$broadcast('scroll.refreshComplete');
+                    console.log($scope.attivita);
+                    console.log(status);
+
+                })
+                .error(function (data, status) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Errore!',
+                        template: 'Non è possibile caericare la lista delle attività !'
+                    });
+                });
+        };
+
+        $scope.doRefresh();
+
+
+
+        $scope.gotoPost = function(attivitaId) {
+            $state.go('app.note', {'attivitaId': +attivitaId});
+        };
+    })
+
+
+
+
+    .controller('NoteCtrl', function ($scope,$http,$ionicLoading,NoteService,$ionicModal,$ionicHistory,$ionicPopup) {
+
+
+        //$scope.note = [];
+
+        var paramsToPost  = $stateParams.attivitaId;
+        console.log(paramsToPost);
+
+       $scope.doRefresh = function() {
+
+            $ionicLoading.show({
+                    template: 'Loading note...'
+                });
+
+        var  params = JSON.stringify( {'id_att': paramsToPost} );
+
+           return $http({
+               method: 'POST',
+               url: 'https://arctic-window-132923.appspot.com/list_notes',
+               data: params,
+               headers: {
+                   'Content-Type': 'application/json'
+               }
+
+           })
+           .success(function (data, status) {
+               //var obj=angular.fromJson(data);
+                $scope.note=data;
+               $ionicLoading.hide();
+               console.log($scope.note);
+           })
+               .error(function (data, status) {
+                   $ionicLoading.hide();
+                   var alertPopup = $ionicPopup.alert({
+                       title: 'Note!',
+                       template: 'Non ci sono note per la seguente attività!'
+                   });
+               })
+               .finally(function() {
+                   // Stop the ion-refresher from spinning
+                   $scope.$broadcast('scroll.refreshComplete');
+               });
+
+
+        };
+
+        $scope.doRefresh();
+
+
+
+
+        $scope.modal= $ionicModal.fromTemplate('<ion-modal-view > <ion-header-bar class="bar bar-header bar-positive"> <h1 class="title">Nuova Nota </h1> <button class="button button-clear button-primary" ng-click="close()">Annulla</button> </ion-header-bar> <ion-content class="padding"> <form name="form_nota"  class="" novalidate ng-cloak> <div class="list"> <label class="item item-input"> <input ng-model="nota.titolo" type="text" placeholder="Titolo" required> </label>  <label class="item item-input"> <textarea style="resize: none;width: 100%;" ng-model="nota.testo" placeholder="Nota (Max) 250 chars." ng-minlength="1" ng-maxlength="250" maxlength="250" rows="10" required></textarea>   </label> <button class="button button-full button-positive" ng-click="addNota(nota)" ng-disabled="!form_nota.$valid">Aggiungi</button> </div> </form> </ion-content> </ion-modal-view>',
+            {scope:$scope});
+
+
+        $scope.close=function () {
+            $scope.modal.hide();
+        };
+
+        $scope.openModalNote=function () {
+            $scope.modal.show();
+        };
+
+
+        $scope.addNota=function (object) {
+            $scope.nota=object;
+
+            console.log($scope.nota);
+
+            var params = JSON.stringify( {
+                "id_att":paramsToPost,
+                "titolo_nota":$scope.nota.titolo,
+                "note":$scope.nota.testo
+
+            });
+            console.log(params);
+            $http({
+                method :'POST',
+                url:'https://arctic-window-132923.appspot.com/insert_note',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .success(function (data, status) {
+
+                    var obj=angular.fromJson(data);
                     console.log(obj.result);
 
-                    console.log("Correct retrieve password.");
-
-                    $scope.title =  'Password dimenticata';
-                    $scope.template = 'Un\'email è stata inviata al tuo indirizzo email. Per reimpostare la password, segui le istruzioni riportate nell\'email';
-
-
-                    $ionicHistory.nextViewOptions({
-                        disableAnimate: true,
-                        disableBack: true
-                    });
-                    $state.go('auth.login');
+                    if(obj.result === 200)
+                    {
+                        console.log("Insert note ok.");
+                        $scope.title="Nota";
+                        $scope.template="Nota inserita corettamente!";
+                        $ionicHistory.nextViewOptions({
+                            disableAnimate: true,
+                            disableBack: true
+                        });
+                        $scope.nota.titolo="";
+                        $scope.nota.testo="";
+                        $scope.close();
+                    }
 
                     var alertPopup = $ionicPopup.alert({
                         title: $scope.title,
                         template: $scope.template
                     });
-
                 })
                 .error(function (data, status) {
-                    console.log("Error storing device token." + data + " " + status);
+                    console.log("Error." + data + " " + status);
+
+                    if (obj.result === '404')
+                    {
+                        console.log("Insert ko");
+                        $scope.title="Nota";
+                        $scope.template="Inserimento Nota non riuscito!";
+                        //resettare i parametri focus email
+                    }
+                    else
+                    {
+                        console.log("Insert ko");
+                        $scope.title="Nota";
+                        $scope.template="Inserimento Nota non riuscito!";
+                    }
+
+
                     var alertPopup = $ionicPopup.alert({
-                        title: 'Password dimenticata!',
-                        template: 'Un\'email è stata inviata al tuo indirizzo email. Per reimpostare la password, segui le istruzioni riportate nell\'email'
+                        title: $scope.title,
+                        template: $scope.template
                     });
                 });
-
         };
-
-        $scope.user = {};
     })
 
 

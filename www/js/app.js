@@ -248,7 +248,7 @@ angular.module('your_app_name', [
         templateUrl: "views/app/wordpress/wordpress_post.html",
         controller: 'WordpressPostCtrl'
       }
-    },
+   /* },
     resolve: {
       post_data: function(PostService, $ionicLoading, $stateParams) {
         $ionicLoading.show({
@@ -257,7 +257,7 @@ angular.module('your_app_name', [
 
         var postId = $stateParams.postId;
         return PostService.getPost(postId);
-      }
+      }*/
     }
   })
 
@@ -489,8 +489,37 @@ angular.module('your_app_name', [
           }
 
       })
+      .state('app.attivita', {
+          url: '/attivita',
+          cache: false,
+          views: {
+              'menuContent': {
+                  templateUrl: "views/app/attivita.html",
+                  controller: 'AttivitaCtrl'
+              }
+          }
 
+      })
 
+      .state('app.note', {
+          url: "/attivita/:attivitaId",
+          views: {
+              'menuContent' :{
+                  templateUrl: "views/app/note.html",
+                  controller: "NoteCtrl"
+              }
+          },
+     /*     resolve:{
+              note_data: function (NoteService, $ionicLoading, $stateParams) {
+                  $ionicLoading.show({
+                      template: 'Loading note ...'
+                  });
+                  var noteId = $stateParams.noteId;
+                  return NoteService.getNote(noteId);
+
+              }
+          }*/
+      })
 
 
       .state('app.update_profile', {
