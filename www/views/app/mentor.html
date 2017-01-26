@@ -12,6 +12,7 @@
             <img ng-if="mentor_data.sesso=='M'" ng-src="img/male.jpg" >
             <img ng-if="mentor_data.sesso=='F'" ng-src="img/female.jpg" >
             <h2> <b>{{mentor_data.nome}} {{mentor_data.cognome}} </b></h2>
+            <!--TODO: Let the Tutor insert a personal sentence-->
             <p> Back off, man. I'm a scientist.</p>
         </a>
 
@@ -22,7 +23,7 @@
 
         <a ng-href="tel:{{mentor_data.telefono}}" class="item item-icon-left">
             <i class="icon ion-ios-telephone"></i>
-            Chiama {{mentor_data.nome}} {{mentor_data.cognome}}
+            {{mentor_data.nome}} {{mentor_data.cognome}}
         </a>
 
 

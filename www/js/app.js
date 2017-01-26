@@ -447,6 +447,16 @@ angular.module('your_app_name', [
       })
 
 
+        .state('app.test', {
+            url: "/test",
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/test.html",
+                    controller: 'TestCtrl'
+                }
+            }
+        })
+
       .state('app.map', {
           url: '/map',
           views: {

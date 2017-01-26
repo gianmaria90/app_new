@@ -1,0 +1,41 @@
+<ion-view ng-controller="TestCtrl">
+        <ion-nav-buttons side="left">
+                <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+                <button type="button"  ng-click="openModal()" class="btn">
+                        <i class="glyphicon glyphicon-plus">
+                        </i> Add
+                </button>
+        </ion-nav-buttons>
+
+
+        <ion-nav-title>
+                <span>TEST</span>
+        </ion-nav-title>
+
+        <ion-content>
+
+            <a class="item">
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Titolo: </b><h2 style="display: inline !important">ELIM</h2><br>
+                </div>
+
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Categoria: </b><h3 style="display: inline !important">Scienze e Tecnologie</h3><br>
+                </div>
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Data Scadenza: </b><h3 style="display: inline !important">29/02/2017</h3><br>
+                </div>
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Descrizione: </b>
+                </div>
+                    <label class="item item-input" style="border-style: dashed;">
+                        <textarea style="resize: none;" readonly >Sviluppo progetto Elaborazione delle Immagini</textarea>
+                    </label>
+            </a>
+        </ion-content>
+
+
+</ion-view>
+

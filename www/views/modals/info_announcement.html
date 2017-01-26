@@ -1,0 +1,50 @@
+<ion-modal-view ng-controller="MyAnnouncementsCtrl">
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Info Annuncio</h1>
+        <button class="button button-clear button-primary" ng-click="close()">Esci</button>
+    </ion-header-bar>
+    <ion-content class="padding">
+        <!--TODO: add title, category, description and other fields-->
+        <div class="list">
+            <div class="item item-divider">
+                <b>Info Annuncio</b>
+            </div>
+
+            <a class="item">
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Titolo: </b><h2 style="display: inline !important">{{modal.info_announcement.titolo}}</h2><br>
+                </div>
+
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Categoria: </b><h2 style="display: inline !important">{{modal.info_announcement.categoria}}</h2><br>
+                </div>
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Data Scadenza: </b><h2 style="display: inline !important">{{modal.info_announcement.data_scadenza}}</h2><br>
+                </div>
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Descrizione: </b>
+                </div>
+                <label class="item item-input" style="border-style: dashed;">
+                    <textarea style="resize: none;" readonly >{{modal.info_announcement.descrizione}}</textarea>
+                </label>
+            </a>
+
+
+            <div class="item item-divider">
+                <b>Numero di candidati: {{modal.info_announcement.num_cand}}</b>
+            </div>
+            <a class="item item-avatar" ng-repeat="info in modal.info_candidates">
+                <img ng-src="img/male.jpg" ng-if="info.sesso=='M'">
+                <img ng-src="img/female.jpg" ng-if="info.sesso=='F'">
+                <h2>{{info.nome}} {{info.cognome}}</h2>
+                <h3>{{info.nome_uni}}</h3>
+                <i class="icon ion-email"></i>
+                <p style="display: inline !important; color: #0c63ee;">{{info.mail}}</p>
+                <br>
+                <!--<a ng-href="tel:{{info.telefono}}" class="item item-icon-left">{{info.telefono}}</a>-->
+                <i class="icon ion-ios-telephone"></i>
+                <p style="display: inline !important; color: red;">{{info.telefono}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-modal-view>
