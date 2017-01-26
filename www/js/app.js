@@ -468,7 +468,6 @@ angular.module('your_app_name', [
           parent:""
       })
 
-
       .state('app.prometeo', {
           url: '/prometeo',
           views: {

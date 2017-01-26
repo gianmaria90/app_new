@@ -832,8 +832,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                     console.log(index);
 
-                    if(index===0) //code for 'Modifica' function
-                    {
+                    //code for 'Modifica' function
+                    if(index===0) {
                         console.log('INFO');
 
                         var params = JSON.stringify({'id': obj.id});
@@ -860,7 +860,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                     modal.info_announcement = obj;
 
 
-
+                                    //TODO: FIX DATE (change format)
                                     modal.info_announcement.data_scadenza = $filter('limitTo')(modal.info_announcement.data_scadenza.toString(),10,0);
                                     modal.info_announcement.data_scadenza = $filter('date')(modal.info_announcement.data_scadenza.toString(),'yyyy-MM-dd');
                                     console.log(modal.info_announcement.data_scadenza);
@@ -910,11 +910,66 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     else if(index===2) //code for 'STOP' function
                     {
                         console.log('STOP');
-                        $ionicTabsDelegate .select(2);
-                        $state.go('app.my_announcements');
+
+                        $scope.show = function () {
+                            $ionicLoading.show({
+                                template: '<p>Loading...</p><ion-spinner icon="spiral"></ion-spinner>'
+                            });
+                        };
+
+                        $scope.hide = function () {
+                            $ionicLoading.hide();
+                        };
+
+
+                        var params = JSON.stringify({'annuncio_id': obj.id});
+
+                        $scope.show($ionicLoading);
+
+                        $http({
+                            method: 'POST',
+                            url: 'https://arctic-window-132923.appspot.com/stop_announce',
+                            data: params,
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .success(function (data, status) {
+
+                                console.log("HERE");
+
+                                console.log("Annuncio Stoppato");
+                                $scope.title="Annuncio Stoppato";
+                                $scope.template="Controlla la mail per visualizzare i candidati alla risoluzione dell'annuncio da te selezionato.";
+
+                                $ionicHistory.nextViewOptions({
+                                    disableAnimate: true,
+                                    disableBack: true
+                                });
+
+                                // $window.location.reload(true);
+
+                                var alertPopup = $ionicPopup.alert({
+                                    title: $scope.title,
+                                    template: $scope.template
+                                });
+
+
+                            })
+                            .error(function (data, status) {
+                                console.log("Error storing device token." + data + " " + status);
+                                var alertPopup = $ionicPopup.alert({
+                                    title: 'Errore connessione!',
+                                    template: 'Si prega di controllare la connessione ad internet!'
+                                });
+                            })
+                            .finally(function ($ionicLoading) {
+                                $scope.hide($ionicLoading);
+                            });
+                        // $ionicTabsDelegate .select(2);
+                        // $state.go('app.my_announcements');
                     }
-                    else
-                    {}
+                    else {}
 
                     return true;
                 },
