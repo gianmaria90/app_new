@@ -478,7 +478,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
 
-.controller('AnnouncementsCtrl', function($timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$ionicLoading,$localStorage,$ionicTabsDelegate) {
+    .controller('AnnouncementsCtrl', function($timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$ionicLoading,$localStorage,$ionicTabsDelegate) {
 
         // $ionicHistory.clearHistory();
         // $ionicHistory.clearCache();
@@ -785,6 +785,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.to_update = $localStorage.info_ann;
 
+
         // Triggered on a the item click
         $scope.showMenu = function(obj) {
 
@@ -933,17 +934,19 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                 $scope.title="Annuncio Stoppato";
                                 $scope.template="Controlla la mail per visualizzare i candidati alla risoluzione dell'annuncio da te selezionato.";
 
-                                $ionicHistory.nextViewOptions({
+                                //FIXME: far comparire il popup dopo il reload della vista (attualmente non funzionante)!
+                                $ionicHistory.currentTitle( {
                                     disableAnimate: true,
                                     disableBack: true
                                 });
-
-                                // $window.location.reload(true);
 
                                 var alertPopup = $ionicPopup.alert({
                                     title: $scope.title,
                                     template: $scope.template
                                 });
+
+                                $window.location.reload(true);
+
 
 
                             })
@@ -962,6 +965,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     }
                     else {}
 
+
                     return true;
                 },
                 destructiveButtonClicked: function(){
@@ -974,7 +978,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                     $scope.show = function () {
                         $ionicLoading.show({
-                            template: '<p>Loading...</p><ion-spinner icon="spiral"></ion-spinner>'
+                            template: '<p>Elimino Annuncio...</p><ion-spinner icon="spiral"></ion-spinner>',
+                            duration: 5000
                         });
                     };
 
@@ -997,6 +1002,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         .success(function (data, status) {
 
                             console.log("HERE");
+
+                            //FIXME: far comparire un popup dopo il reload della vista!
+
                             $window.location.reload(true);
 
                         })
@@ -1151,7 +1159,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
 
-    .controller('MyAppliedAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicTabsDelegate,$ionicActionSheet,$ionicLoading) {
+    .controller('MyAppliedAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicTabsDelegate,$ionicActionSheet,$ionicLoading,$ionicModal) {
 
         // $ionicHistory.clearHistory();
         // $ionicHistory.clearCache();
@@ -1174,8 +1182,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             var hideSheet = $ionicActionSheet.show({
                 //Here you can add some more buttons
                 buttons: [
-                    { text: '<b>Info</b>' },
-                    { text: 'Modifica' }
+                    { text: 'Info' }
                 ],
                 destructiveText: 'Cancella Candidatura',
                 titleText: 'Sei sicuro di voler cancellare la candidatura?',
@@ -1193,15 +1200,67 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     if(index===0) //code for 'Stop' function
                     {
                         console.log('INFO');
+
+                        var params = JSON.stringify({'id': obj.id});
+
+                        console.log(params);
+
+
+                        $http({
+                            method: 'POST',
+                            url: 'https://arctic-window-132923.appspot.com/get_info_announcements_byID',
+                            data: params,
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .success(function (data, status) {
+
+                                console.log("HERE");
+                                // $scope.info_data = data;
+
+                                $scope.modal = $ionicModal.fromTemplateUrl('../www/views/modals/info_applied_announcement.html', {
+                                    scope: $scope,
+                                    animation: 'slide-in-up'
+                                }).then(function(modal) {
+                                    modal.info_candidates = data;
+                                    modal.info_announcement = obj;
+
+
+                                    //TODO: FIX DATE (change format)
+                                    modal.info_announcement.data_scadenza = $filter('limitTo')(modal.info_announcement.data_scadenza.toString(),10,0);
+                                    modal.info_announcement.data_scadenza = $filter('date')(modal.info_announcement.data_scadenza.toString(),'yyyy-MM-dd');
+                                    console.log(modal.info_announcement.data_scadenza);
+                                    // modal.info_data.titolo = obj.titolo;
+                                    // modal.info_data.categoria = obj.titolo;
+                                    // modal.info_data.categoria = obj.titolo;
+                                    // modal.info_data.data_pubblicazione = obj.data_pubblicazione;
+                                    // modal.info_data.descrizione = obj.descrizione;
+                                    // modal.info_data. = obj.num_cand;
+                                    $scope.modal = modal;
+
+
+                                    $scope.modal.show();
+                                });
+
+                                $scope.close=function () {
+                                    $scope.modal.hide();
+                                };
+
+
+                            })
+                            .error(function (data, status) {
+                                console.log("2_Error storing device token." + data + " " + status);
+                                var alertPopup = $ionicPopup.alert({
+                                    title: 'Errore connessione!',
+                                    template: 'Si prega di controllare la connessione ad internet!'
+                                });
+                            })
+                            .finally(function ($ionicLoading) {
+                                $scope.hide($ionicLoading);
+                            });
+
                         // $state.go('app.profile');
-                    }
-                    else if(index===1) //code for 'Modifica' function
-                    {
-
-                        console.log($localStorage.info_ann);
-                        console.log("MODIFICA CANDIDATURA");
-                        // $state.go('app.update_announcement');
-
                     }
                     else
                     {}
@@ -2074,9 +2133,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     console.log("Error." + data + " " + status);
 
 
-                        console.log("Something went wrong!");
-                        $scope.title="Something went wrong!";
-                        $scope.template="Contattare il nostro team tecnico";
+                    console.log("Something went wrong!");
+                    $scope.title="Something went wrong!";
+                    $scope.template="Contattare il nostro team tecnico";
 
                     var alertPopup = $ionicPopup.alert({
                         title: $scope.title,
@@ -3105,63 +3164,63 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
         $scope.show($ionicLoading);
-         $http({
-         method :'POST',
-         url:'https://arctic-window-132923.appspot.com/list_ps',
-         data: params,
-         headers: {
-         'Content-Type': 'application/json'
-         }
-         })
-         .success(function (data, status) {
+        $http({
+            method :'POST',
+            url:'https://arctic-window-132923.appspot.com/list_ps',
+            data: params,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .success(function (data, status) {
 
-         $scope.piano=angular.fromJson(data);
-         console.log($scope.piano);
+                $scope.piano=angular.fromJson(data);
+                console.log($scope.piano);
 
-         if(status === '200')
-         {
+                if(status === '200')
+                {
 
-         $ionicHistory.nextViewOptions({
-         disableAnimate: true,
-         disableBack: true
-         });
-         // the user is redirected to login page after sign up
+                    $ionicHistory.nextViewOptions({
+                        disableAnimate: true,
+                        disableBack: true
+                    });
+                    // the user is redirected to login page after sign up
 
-         }
+                }
 
-         })
-         .error(function (data, status) {
+            })
+            .error(function (data, status) {
 
-         console.log("Error." + data + " " + status);
+                console.log("Error." + data + " " + status);
 
-         console.log("Errore lista piano studi.");
-         $scope.title = "Errore connessione";
-         $scope.template = "Contattare il nostro team tecnico";
+                console.log("Errore lista piano studi.");
+                $scope.title = "Errore connessione";
+                $scope.template = "Contattare il nostro team tecnico";
 
 
-         var alertPopup = $ionicPopup.alert({
-         title: $scope.title,
-         template: $scope.template
-         });
+                var alertPopup = $ionicPopup.alert({
+                    title: $scope.title,
+                    template: $scope.template
+                });
 
-         })
-         .finally(function ($ionicLoading) {
-         $scope.hide($ionicLoading);
-         });
+            })
+            .finally(function ($ionicLoading) {
+                $scope.hide($ionicLoading);
+            });
 
         /*$http.get('attivita.json').success(function(response) {
-            $scope.piano = response;
-            console.log($scope.piano);
-        });*/
+         $scope.piano = response;
+         console.log($scope.piano);
+         });*/
 
 
         $scope.Confirm=function () {
             /*for (var i in $scope.checkPs) {
 
-                if ($scope.checkPs[i])
-                    console.log(i);
+             if ($scope.checkPs[i])
+             console.log(i);
 
-            }*/
+             }*/
             console.log($scope.radioAttivita.text);
 
             var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password,'id_att':$scope.radioAttivita.text.toString()} );
@@ -3181,23 +3240,23 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     console.log($scope.piano);
 
 
-                        $ionicHistory.clearHistory();
-                        $ionicHistory.nextViewOptions({
-                            disableAnimate: true,
-                            disableBack: true
-                        });
-                        console.log("tutto ok frat'm");
-                        // the user is redirected to login page after sign up
-                        $scope.title = "Conferma inviata";
-                        $scope.template = "L'attività è in attesa di conferma da parte del mentor";
+                    $ionicHistory.clearHistory();
+                    $ionicHistory.nextViewOptions({
+                        disableAnimate: true,
+                        disableBack: true
+                    });
+                    console.log("tutto ok frat'm");
+                    // the user is redirected to login page after sign up
+                    $scope.title = "Conferma inviata";
+                    $scope.template = "L'attività è in attesa di conferma da parte del mentor";
 
-                        $scope.hide($ionicLoading);
-                        var alertPopup = $ionicPopup.alert({
-                            title: $scope.title,
-                            template: $scope.template
-                        });
-                        console.log("prima di go");
-                        $state.go('app.profile');
+                    $scope.hide($ionicLoading);
+                    var alertPopup = $ionicPopup.alert({
+                        title: $scope.title,
+                        template: $scope.template
+                    });
+                    console.log("prima di go");
+                    $state.go('app.profile');
 
 
 
@@ -3275,7 +3334,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 'attiv_cfu': $scope.attivita.cfu,
                 'attiv_tipo': $scope.attivita.tipo
 
-                });
+            });
             console.log(params);
             $http({
                 method :'POST',
@@ -3392,40 +3451,41 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         var paramsToPost  = $stateParams.attivitaId;
         console.log($stateParams);
 
-       $scope.doRefresh = function() {
+        $scope.doRefresh = function() {
 
             $ionicLoading.show({
-                    template: 'Loading note...'
+                template: '<p>Loading note...</p><ion-spinner icon="spiral"></ion-spinner>'
+
+            });
+
+            var  params = JSON.stringify( {'id_att': paramsToPost} );
+
+            return $http({
+                method: 'POST',
+                url: 'https://arctic-window-132923.appspot.com/list_notes',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            })
+                .success(function (data, status) {
+                    //var obj=angular.fromJson(data);
+                    $scope.note=data;
+                    $ionicLoading.hide();
+                    // console.log($scope.note);
+                })
+                .error(function (data, status) {
+                    $ionicLoading.hide();
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Note!',
+                        template: 'Non ci sono note per la seguente attività!'
+                    });
+                })
+                .finally(function() {
+                    // Stop the ion-refresher from spinning
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
-
-        var  params = JSON.stringify( {'id_att': paramsToPost} );
-
-           return $http({
-               method: 'POST',
-               url: 'https://arctic-window-132923.appspot.com/list_notes',
-               data: params,
-               headers: {
-                   'Content-Type': 'application/json'
-               }
-
-           })
-           .success(function (data, status) {
-               //var obj=angular.fromJson(data);
-                $scope.note=data;
-               $ionicLoading.hide();
-               // console.log($scope.note);
-           })
-               .error(function (data, status) {
-                   $ionicLoading.hide();
-                   var alertPopup = $ionicPopup.alert({
-                       title: 'Note!',
-                       template: 'Non ci sono note per la seguente attività!'
-                   });
-               })
-               .finally(function() {
-                   // Stop the ion-refresher from spinning
-                   $scope.$broadcast('scroll.refreshComplete');
-               });
 
 
         };
@@ -3522,7 +3582,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
     //STUDENT HELP STUDENT SECTION
-    .controller('InsertAnnouncementCtrl', function($filter,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
+    .controller('InsertAnnouncementCtrl', function($filter,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading) {
 
 
         $scope.current_date = $filter('date')(new Date(), 'yyyy-MM-dd');
@@ -3541,6 +3601,18 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.user = UserService.getUser();
 
+        $scope.show = function () {
+            $ionicLoading.show({
+                template: '<p>Inserimento Annuncio...</p><ion-spinner icon="spiral"></ion-spinner>',
+                duration: 3000
+            });
+        };
+
+        $scope.hide = function () {
+            $ionicLoading.hide();
+        };
+
+
         $scope.doInsertAnnouncement = function () {
 
             var params = JSON.stringify(
@@ -3552,8 +3624,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     "expiring_date":    $filter('date')(new Date($scope.proj.expiring_date), 'yyyy-MM-dd')
                 });
 
+
             // console.log($scope.proj.title);
             console.log(params);
+            $scope.show($ionicLoading);
 
             $http({
                 method: 'POST',
@@ -3574,14 +3648,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         disableBack: true
                     });
                     // the user is redirected to login page after sign up
-                    //TODO: redirect to my_announcements page
                     $state.go('app.my_announcements');
 
-
-                    var alertPopup = $ionicPopup.alert({
-                        title: $scope.title,
-                        template: $scope.template
-                    });
 
                 })
                 .error(function (data, status) {
@@ -3591,13 +3659,19 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     $scope.title = "Errore connessione";
                     $scope.template = "Contattare il nostro team tecnico";
 
-
                     var alertPopup = $ionicPopup.alert({
                         title: $scope.title,
                         template: $scope.template
                     });
 
+                }).finally(function ($ionicLoading) {
+                $scope.hide($ionicLoading);
+
+                var alertPopup = $ionicPopup.alert({
+                    title: $scope.title,
+                    template: $scope.template
                 });
+            });
         };
 
     })
