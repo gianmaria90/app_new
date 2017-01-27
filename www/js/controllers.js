@@ -1202,14 +1202,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     {
                         console.log('INFO');
 
-                        var params = JSON.stringify({'id': obj.id});
+                        var params = JSON.stringify({'id': obj.id, 'mail_student': $scope.user.mail});
 
                         console.log(params);
 
 
                         $http({
                             method: 'POST',
-                            url: 'https://arctic-window-132923.appspot.com/get_info_announcements_byID',
+                            url: 'https://arctic-window-132923.appspot.com/get_applied_announcements_byID',
                             data: params,
                             headers: {
                                 'Content-Type': 'application/json'
