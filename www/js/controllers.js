@@ -854,8 +854,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
                                     //TODO: FIX DATE (change format)
-                                    modal.info_announcement.data_scadenza = $filter('limitTo')(modal.info_announcement.data_scadenza.toString(),10,0);
-                                    modal.info_announcement.data_scadenza = $filter('date')(modal.info_announcement.data_scadenza.toString(),'yyyy-MM-dd');
+                                   // modal.info_announcement.data_scadenza = $filter('limitTo')(modal.info_announcement.data_scadenza.toString(),10,0);
+                                    modal.info_announcement.data_scadenza = $filter('date')(modal.info_announcement.data_scadenza,'dd-MM-yyyy');
                                     console.log(modal.info_announcement.data_scadenza);
                                     // modal.info_data.titolo = obj.titolo;
                                     // modal.info_data.categoria = obj.titolo;
@@ -2785,7 +2785,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         template: 'Un\'email è stata inviata al tuo indirizzo email. Per reimpostare la password, segui le istruzioni riportate nell\'email'
                     });
                 });
-        }
+        };
     })
 
 
