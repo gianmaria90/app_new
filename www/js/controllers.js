@@ -25,14 +25,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 1,
                             name: "Prometeo",
-                            icon: "ion-bookmark",
+                            icon: "ion-android-bulb",
                             level: 0,
                             state: 'app.prometeo'
                         },
                         {
                             id: 2,
                             name: "News",
-                            icon: "ion-social-rss",
+                            icon: "ion-ios-paper-outline",
                             level: 0,
                             state: 'app.feeds-categories'
                         },
@@ -47,7 +47,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             //to remove, jus for testing
                             id: 4,
                             name: "Aziende",
-                            icon: "ion-ios-location",
+                            icon: "ion-briefcase",
                             level: 0,
                             state: 'app.map'
                             //to remove, jus for testing
@@ -83,7 +83,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 8,
                             name: "Questionario Prometeo",
-                            icon: "ion-ios-list",
+                            icon: "ion-android-clipboard",
                             level: 0,
                             state: 'app.codice'
                         },
@@ -98,7 +98,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             id: 10,
                             level: 0,
                             name: 'Student Help Student',
-                            icon: "icon ion-bookmark",
+                            icon: "ion-chatbubbles",
                             items: [{
                                 id: 101,
                                 level: 1,
@@ -135,21 +135,21 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 1,
                             name: "Prometeo",
-                            icon: "ion-bookmark",
+                            icon: "ion-android-bulb",
                             level: 0,
                             state: 'app.prometeo'
                         },
                         {
                             id: 2,
                             name: "News",
-                            icon: "ion-social-rss",
+                            icon: "ion-ios-paper-outline",
                             level: 0,
                             state: 'app.feeds-categories'
                         },
                         {
                             id: 3,
                             name: "Aziende",
-                            icon: "ion-ios-location",
+                            icon: "ion-briefcase",
                             level: 0,
                             state: 'app.map'
                         },
@@ -157,7 +157,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 8,
                             name: "Questionario Prometeo",
-                            icon: "ion-ios-list",
+                            icon: "ion-android-clipboard",
                             level: 0,
                             state: 'app.codice'
                         },
@@ -242,14 +242,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 1,
                             name: "Prometeo",
-                            icon: "ion-bookmark",
+                            icon: "ion-android-bulb",
                             level: 0,
                             state: 'app.prometeo'
                         },
                         {
                             id: 2,
                             name: "News",
-                            icon: "ion-social-rss",
+                            icon: "ion-ios-paper-outline",
                             level: 0,
                             state: 'app.feeds-categories'
                         },
@@ -264,7 +264,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             //to remove, jus for testing
                             id: 4,
                             name: "Aziende",
-                            icon: "ion-ios-location",
+                            icon: "ion-briefcase",
                             level: 0,
                             state: 'app.map'
                             //to remove, jus for testing
@@ -300,7 +300,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 8,
                             name: "Questionario Prometeo",
-                            icon: "ion-ios-list",
+                            icon: "ion-android-clipboard",
                             level: 0,
                             state: 'app.codice'
                         },
@@ -315,7 +315,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             id: 10,
                             level: 0,
                             name: 'Student Help Student',
-                            icon: "icon ion-bookmark",
+                            icon: "ion-chatbubbles",
                             items: [{
                                 id: 101,
                                 level: 1,
@@ -353,21 +353,21 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 1,
                             name: "Prometeo",
-                            icon: "ion-bookmark",
+                            icon: "ion-android-bulb",
                             level: 0,
                             state: 'app.prometeo'
                         },
                         {
                             id: 2,
                             name: "News",
-                            icon: "ion-social-rss",
+                            icon: "ion-ios-paper-outline",
                             level: 0,
                             state: 'app.feeds-categories'
                         },
                         // {
                         //     id: 3,
                         //     name: "Aziende",
-                        //     icon: "ion-ios-location",
+                        //     icon: "ion-briefcase",
                         //     level: 0,
                         //     state: 'app.map'
                         // },
@@ -402,7 +402,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 8,
                             name: "Questionario Prometeo",
-                            icon: "ion-ios-list",
+                            icon: "ion-android-clipboard",
                             level: 0,
                             state: 'app.codice'
                         },
@@ -2135,14 +2135,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 1,
                             name: "Prometeo",
-                            icon: "ion-bookmark",
+                            icon: "ion-android-bulb",
                             level: 0,
                             state: 'app.prometeo'
                         },
                         {
                             id: 2,
                             name: "News",
-                            icon: "ion-social-rss",
+                            icon: "ion-ios-paper-outline",
                             level: 0,
                             state: 'app.feeds-categories'
                         },
@@ -2157,7 +2157,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         //     //to remove, jus for testing
                         //     id: 4,
                         //     name: "Aziende",
-                        //     icon: "ion-ios-location",
+                        //     icon: "ion-briefcase",
                         //     level: 0,
                         //     state: 'app.map'
                         //     //to remove, jus for testing
@@ -2193,7 +2193,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 8,
                             name: "Questionario Prometeo",
-                            icon: "ion-ios-list",
+                            icon: "ion-android-clipboard",
                             level: 0,
                             state: 'app.codice'
                         },
@@ -2208,7 +2208,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             id: 10,
                             level: 0,
                             name: 'Student Help Student',
-                            icon: "icon ion-bookmark",
+                            icon: "ion-chatbubbles",
                             items: [{
                                 id: 101,
                                 level: 1,
@@ -2246,21 +2246,21 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 1,
                             name: "Prometeo",
-                            icon: "ion-bookmark",
+                            icon: "ion-android-bulb",
                             level: 0,
                             state: 'app.prometeo'
                         },
                         {
                             id: 2,
                             name: "News",
-                            icon: "ion-social-rss",
+                            icon: "ion-ios-paper-outline",
                             level: 0,
                             state: 'app.feeds-categories'
                         },
                         {
                             id: 3,
                             name: "Aziende",
-                            icon: "ion-ios-location",
+                            icon: "ion-briefcase",
                             level: 0,
                             state: 'app.map'
                         },
@@ -2268,7 +2268,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 8,
                             name: "Questionario Prometeo",
-                            icon: "ion-ios-list",
+                            icon: "ion-android-clipboard",
                             level: 0,
                             state: 'app.codice'
                         },
@@ -2484,14 +2484,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 1,
                             name: "Prometeo",
-                            icon: "ion-bookmark",
+                            icon: "ion-android-bulb",
                             level: 0,
                             state: 'app.prometeo'
                         },
                         {
                             id: 2,
                             name: "News",
-                            icon: "ion-social-rss",
+                            icon: "ion-ios-paper-outline",
                             level: 0,
                             state: 'app.feeds-categories'
                         },
@@ -2506,7 +2506,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         //     //to remove, jus for testing
                         //     id: 4,
                         //     name: "Aziende",
-                        //     icon: "ion-ios-location",
+                        //     icon: "ion-briefcase",
                         //     level: 0,
                         //     state: 'app.map'
                         //     //to remove, jus for testing
@@ -2542,7 +2542,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 8,
                             name: "Questionario Prometeo",
-                            icon: "ion-ios-list",
+                            icon: "ion-android-clipboard",
                             level: 0,
                             state: 'app.codice'
                         },
@@ -2557,7 +2557,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             id: 10,
                             level: 0,
                             name: 'Student Help Student',
-                            icon: "icon ion-bookmark",
+                            icon: "ion-chatbubbles",
                             items: [{
                                 id: 101,
                                 level: 1,
@@ -2595,21 +2595,21 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 1,
                             name: "Prometeo",
-                            icon: "ion-bookmark",
+                            icon: "ion-android-bulb",
                             level: 0,
                             state: 'app.prometeo'
                         },
                         {
                             id: 2,
                             name: "News",
-                            icon: "ion-social-rss",
+                            icon: "ion-ios-paper-outline",
                             level: 0,
                             state: 'app.feeds-categories'
                         },
                         {
                             id: 3,
                             name: "Aziende",
-                            icon: "ion-ios-location",
+                            icon: "ion-briefcase",
                             level: 0,
                             state: 'app.map'
                         },
@@ -2651,7 +2651,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 8,
                             name: "Questionario Prometeo",
-                            icon: "ion-ios-list",
+                            icon: "ion-android-clipboard",
                             level: 0,
                             state: 'app.codice'
                         },
@@ -2679,6 +2679,55 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
+
+    .controller('ForgotPasswordCtrl', function($scope,$ionicPopup, $state,$http,$ionicHistory) {
+        $scope.recoverPassword = function() {
+
+            var params = JSON.stringify({'mail': $scope.user.email});
+
+            $http({
+                method: 'POST',
+                url: 'https://arctic-window-132923.appspot.com/pwresetrequest',
+                data: params,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+                .success(function (data, status) {
+                    var obj = angular.fromJson(data);
+
+                    console.log(obj.result);
+
+                    console.log("Correct retrieve password.");
+
+                    $scope.title = 'Password dimenticata';
+                    $scope.template = 'Un\'email è stata inviata al tuo indirizzo email. Per reimpostare la password, segui le istruzioni riportate nell\'email';
+
+
+                    $ionicHistory.nextViewOptions({
+                        disableAnimate: true,
+                        disableBack: true
+                    });
+                    $state.go('auth.login');
+
+                    var alertPopup = $ionicPopup.alert({
+                        title: $scope.title,
+                        template: $scope.template
+                    });
+
+                })
+                .error(function (data, status) {
+                    console.log("Error storing device token." + data + " " + status);
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Password dimenticata!',
+                        template: 'Un\'email è stata inviata al tuo indirizzo email. Per reimpostare la password, segui le istruzioni riportate nell\'email'
+                    });
+                });
+        }
+    })
+
+
     .controller('SignupCtrl', function($rootScope,$scope, $state,$cordovaOauth,$window,$ionicLoading,UserService,$localStorage,$ionicHistory) {
         console.log($localStorage.loggedIn);
 
@@ -2701,14 +2750,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 1,
                             name: "Prometeo",
-                            icon: "ion-bookmark",
+                            icon: "ion-android-bulb",
                             level: 0,
                             state: 'app.prometeo'
                         },
                         {
                             id: 2,
                             name: "News",
-                            icon: "ion-social-rss",
+                            icon: "ion-ios-paper-outline",
                             level: 0,
                             state: 'app.feeds-categories'
                         },
@@ -2723,7 +2772,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             //to remove, jus for testing
                             id: 4,
                             name: "Aziende",
-                            icon: "ion-ios-location",
+                            icon: "ion-briefcase",
                             level: 0,
                             state: 'app.map'
                             //to remove, jus for testing
@@ -2759,7 +2808,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 8,
                             name: "Questionario Prometeo",
-                            icon: "ion-ios-list",
+                            icon: "ion-android-clipboard",
                             level: 0,
                             state: 'app.codice'
                         },
@@ -2774,7 +2823,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             id: 10,
                             level: 0,
                             name: 'Student Help Student',
-                            icon: "icon ion-bookmark",
+                            icon: "ion-chatbubbles",
                             items: [{
                                 id: 101,
                                 level: 1,
@@ -2812,21 +2861,21 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 1,
                             name: "Prometeo",
-                            icon: "ion-bookmark",
+                            icon: "ion-android-bulb",
                             level: 0,
                             state: 'app.prometeo'
                         },
                         {
                             id: 2,
                             name: "News",
-                            icon: "ion-social-rss",
+                            icon: "ion-ios-paper-outline",
                             level: 0,
                             state: 'app.feeds-categories'
                         },
                         {
                             id: 3,
                             name: "Aziende",
-                            icon: "ion-ios-location",
+                            icon: "ion-briefcase",
                             level: 0,
                             state: 'app.map'
                         },
@@ -2834,7 +2883,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         {
                             id: 8,
                             name: "Questionario Prometeo",
-                            icon: "ion-ios-list",
+                            icon: "ion-android-clipboard",
                             level: 0,
                             state: 'app.codice'
                         },
@@ -2878,7 +2927,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
              {
              id: 2,
              name: "News",
-             icon: "ion-social-rss",
+             icon: "ion-ios-paper-outline",
              level: 0,
              state: 'app.feeds-categories'
              },
@@ -2893,7 +2942,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
              //to remove, jus for testing
              id: 4,
              name: "Aziende",
-             icon: "ion-ios-location",
+             icon: "ion-briefcase",
              level: 0,
              state: 'app.map'
              //to remove, jus for testing
@@ -2902,7 +2951,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
              {
              id: 8,
              name: "Questionario Prometeo",
-             icon: "ion-ios-list",
+             icon: "ion-android-clipboard",
              level: 0,
              state: 'app.codice'
              },
@@ -2917,7 +2966,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
              id: 10,
              level: 0,
              name: 'Student Help Student',
-             icon: "icon ion-bookmark",
+             icon: "ion-chatbubbles",
              items: [{
              id: 101,
              level: 1,
@@ -2962,14 +3011,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
              {
              id: 2,
              name: "News",
-             icon: "ion-social-rss",
+             icon: "ion-ios-paper-outline",
              level: 0,
              state: 'app.feeds-categories'
              },
              {
              id: 3,
              name: "Aziende",
-             icon: "ion-ios-location",
+             icon: "ion-briefcase",
              level: 0,
              state: 'app.map'
              },
@@ -2977,7 +3026,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
              {
              id: 8,
              name: "Questionario Prometeo",
-             icon: "ion-ios-list",
+             icon: "ion-android-clipboard",
              level: 0,
              state: 'app.codice'
              },
@@ -3335,13 +3384,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
 
-    .controller('NoteCtrl', function ($scope,$http,$ionicLoading,NoteService,$ionicModal,$ionicHistory,$ionicPopup) {
+    .controller('NoteCtrl', function ($scope,$http,$ionicLoading,NoteService,$ionicModal,$ionicHistory,$ionicPopup,$stateParams) {
 
 
         //$scope.note = [];
 
         var paramsToPost  = $stateParams.attivitaId;
-        console.log(paramsToPost);
+        console.log($stateParams);
 
        $scope.doRefresh = function() {
 
@@ -3364,7 +3413,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                //var obj=angular.fromJson(data);
                 $scope.note=data;
                $ionicLoading.hide();
-               console.log($scope.note);
+               // console.log($scope.note);
            })
                .error(function (data, status) {
                    $ionicLoading.hide();
@@ -3744,7 +3793,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             if (info.phone != '-'){
                                 marker.content +=  '<p><b>Telefono: </b>' + info.phone + '</p>';
                             }
-
+                            //TODO: do inner opening browser with href
                             if (info.link_sito != '-'){
                                 marker.content += '<p><b>Sito web: </b><a href=' + info.link_sito + '>' + info.link_sito + '</a> </p>';
                             }
