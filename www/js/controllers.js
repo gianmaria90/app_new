@@ -1172,8 +1172,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         // Triggered on a the item click
         $scope.showMenu = function(obj) {
 
-            // obj.data_scadenza = $filter('limitTo')(obj.data_scadenza,10,0);
-            // obj.data_scadenza = new Date($filter('date')(obj.data_scadenza.toString(),'yyyy-MM-dd'));
+            obj.data_scadenza = $filter('limitTo')(obj.data_scadenza,10,0);
+            obj.data_scadenza = new Date($filter('date')(obj.data_scadenza.toString(),'yyyy-MM-dd'));
 
             $localStorage.info_my_ann = obj;
 
@@ -1229,8 +1229,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
                                     //TODO: FIX DATE (change format)
-                                    modal.info_announcement.data_scadenza = $filter('limitTo')(modal.info_announcement.data_scadenza.toString(),10,0);
-                                    modal.info_announcement.data_scadenza = $filter('date')(modal.info_announcement.data_scadenza.toString(),'yyyy-MM-dd');
+                                    modal.info_announcement.data_scadenza = $filter('date')(modal.info_announcement.data_scadenza,'dd-MM-yyyy');
                                     console.log(modal.info_announcement.data_scadenza);
                                     // modal.info_data.titolo = obj.titolo;
                                     // modal.info_data.categoria = obj.titolo;
