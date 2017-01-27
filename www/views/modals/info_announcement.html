@@ -33,7 +33,9 @@
             <div class="item item-divider">
                 <b>Numero di candidati: {{modal.info_announcement.num_cand}}</b>
             </div>
-            <a class="item item-avatar" ng-repeat="info in modal.info_candidates">
+            <div ng-repeat="info in modal.info_candidates">
+
+            <a class="item item-avatar" >
                 <img ng-src="img/male.jpg" ng-if="info.sesso=='M'">
                 <img ng-src="img/female.jpg" ng-if="info.sesso=='F'">
                 <h2>{{info.nome}} {{info.cognome}}</h2>
@@ -45,6 +47,7 @@
                 <i class="icon ion-ios-telephone"></i>
                 <p style="display: inline !important; color: red;">{{info.telefono}}</p>
             </a>
+            </div>
         </div>
     </ion-content>
 </ion-modal-view>

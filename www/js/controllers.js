@@ -827,6 +827,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     //code for 'Modifica' function
                     if(index===0) {
                         console.log('INFO');
+                        console.log(obj.id);
 
                         var params = JSON.stringify({'id': obj.id});
 
@@ -2008,6 +2009,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
         $scope.ind= $localStorage.user_profile.indirizzo.split(";");
+        console.log($localStorage.user_profile.indirizzo);
         $scope.cap=parseInt($scope.ind[1],10);
         console.log(typeof $scope.cap);
         console.log($scope.cap);
@@ -2084,7 +2086,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 "telefono":                 $scope.prof.telefono,
                 "id_uni":                   $scope.prof.id_uni,
                 "corso_laurea":             $scope.prof.corso_laurea,
-                "indirizzo":                $scope.ind[0]+';'+$scope.cap+';'+$scope.ind[2]+';'+$scope.ind[3]
+                "indirizzo":                $scope.ind[0]+';'+$scope.ind[1]+';'+$scope.ind[2]+';'+$scope.ind[3]
             });
 
             console.log(updated_data);
