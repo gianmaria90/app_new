@@ -27,25 +27,42 @@
                          icon-off="ion-ios-list-outline"
                          >
 
-                    <ion-content has-tabs="true" >
+                    <ion-content has-tabs="true" overflow-scroll="true" >
                         <!--ion-refresher
                                 on-refresh="doRefresh()">
                             ></ion-refresher-->
                         <label class="item item-input item-stacked-label item-text-wrap">
                             <h2 ><b>Check per inviare conferma conclusione attività</b></h2>
                         </label>
-                        <ion-scroll style="height:85%;">
-                        <ion-list radio-group >
-                        <ion-item>
-                            <ion-label><b>Da confermare</b></ion-label>
-                            <ion-radio ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='da_completare'" ng-model="radioAttivita.text" ng-value="row.id" value="row.id">
-                               <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
-                            </ion-radio>
-                        </ion-item>
-                        </ion-list>
+
+                        <ion-scroll style="height: 75%">
+                            <ion-list radio-group >
+                                <ion-item>
+                                    <ion-label><b>Da confermare</b></ion-label>
+                                    <!--ion-radio ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='da_completare'" ng-model="radioAttivita.text" ng-value="row.id" value="row.id">
+                                       <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
+                                    </ion-radio-->
+
+                                    <ion-radio  class="item-text-wrap"  ng-model="radioAttivita.text">
+                                        <b>row.nome</b> <br>tipo: row.tipo  cfu: 3
+                                    </ion-radio>
+                                    <ion-radio  class="item-text-wrap"  ng-model="radioAttivita.text">
+                                        <b>row.nome</b> <br>tipo: row.tipo  cfu: 3
+                                    </ion-radio>
+                                    <ion-radio  class="item-text-wrap"  ng-model="radioAttivita.text">
+                                        <b>row.nome</b> <br>tipo: row.tipo  cfu: 3
+                                    </ion-radio>
+                                    <ion-radio  class="item-text-wrap" ng-model="radioAttivita.text">
+                                        <b>row.nome</b> <br>tipo: row.tipo  cfu: 3
+                                    </ion-radio>
+                                    <ion-radio  class="item-text-wrap"  ng-model="radioAttivita.text">
+                                        <b>row.nome</b> <br>tipo: row.tipo  cfu: 3
+                                    </ion-radio>
+                                </ion-item>
+                            </ion-list>
                         </ion-scroll>
 
-                            <button class="button button-block button-assertive" ng-disabled="isThisDisabled2Attivita()" ng-click="Confirm()" ><b>SUBMIT</b></button>
+                        <button class="button button-block button-assertive" style="bottom: 0px;position: fixed" ng-disabled="isThisDisabled2Attivita()" ng-click="Confirm()" ><b>SUBMIT</b></button>
 
 
 
