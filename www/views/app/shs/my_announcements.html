@@ -40,15 +40,17 @@
                      ng-click="getInfoMyAnnouncements(1)"
             >
 
-                <!--TODO: aggiungere custom refresh-->
-                <!--TODO: visualizzare testo: 'Nessun annuncio da visualizzare' se info_my_ann e' vuto-->
+
                 <ion-content has-tabs="true" >
                     <ion-refresher
                             on-refresh="doRefresh(0)">
                         > </ion-refresher>
+                    <ion-item ng-if="my_empty" class="item-text-wrap">
+                        <h3>Non sono presenti annunci per la categoria selezionata</h3>
+                    </ion-item>
                     <ion-list scroll="false s-editing="isEditingItems
                               animation="fade-out"
-                              delete-icon="icon ion-minus-circled">
+                              delete-icon="icon ion-minus-circled" ng-if="!my_empty">
                         <div class="card">
                             <div class="item item-text-wrap" ng-repeat="info in info_my_ann" ng-click="showMenu(info)">
                                 <!--<ion-avatar item-left>-->
@@ -84,9 +86,14 @@
                             pulling-text="Pull to refresh..."
                             on-refresh="doRefresh(1)">
                     </ion-refresher>
+                    <ion-item ng-if="app_empty" class="item-text-wrap">
+                        <h3>Non sono presenti annunci per la categoria selezionata</h3>
+                    </ion-item>
+
+
                     <ion-list scroll="false s-editing="isEditingItems
                               animation="fade-out"
-                              delete-icon="icon ion-minus-circled">
+                              delete-icon="icon ion-minus-circled" ng-if="!app_empty">
                         <div class="card">
                             <div class="item item-text-wrap" ng-repeat="info in info_my_app_ann" ng-click="showMenu(info)">
                                 <!--ng-click="showMenu(info)-->
@@ -138,6 +145,7 @@
                     <ion-tab title="Annunci applicati">
 
                             <ion-content class="has-tabs">
+
                                 <ion-list scroll="false s-editing="isEditingItems
                                           animation="fade-out"
                                           delete-icon="icon ion-minus-circled">

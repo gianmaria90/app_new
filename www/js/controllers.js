@@ -523,6 +523,12 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             })
                 .success(function (data, status) {
                     $scope.info_my_ann = data;
+
+                    if(typeof $scope.info_my_ann[0]==='undefined' || $scope.info_my_ann[0]===null)
+                    {
+                        console.log('vuoto');
+                        $scope.my_empty=true;
+                    }
                     console.log($scope.info_my_ann);
                 })
                 .error(function (data, status) {
@@ -578,6 +584,12 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             })
                 .success(function (data, status) {
                     $scope.info_my_app_ann = data;
+
+                    if(typeof $scope.info_my_app_ann[0]==='undefined' || $scope.info_my_app_ann[0]===null)
+                    {
+                        console.log('vuoto');
+                        $scope.app_empty=true;
+                    }
                     console.log($scope.info_my_app_ann);
                 })
                 .error(function (data, status) {
@@ -853,7 +865,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                     modal.info_announcement = obj;
 
 
-                                    //TODO: FIX DATE (change format)
+
                                    // modal.info_announcement.data_scadenza = $filter('limitTo')(modal.info_announcement.data_scadenza.toString(),10,0);
                                     modal.info_announcement.data_scadenza = $filter('date')(modal.info_announcement.data_scadenza,'dd-MM-yyyy');
                                     console.log(modal.info_announcement.data_scadenza);
@@ -935,7 +947,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                 $scope.title="Annuncio Stoppato";
                                 $scope.template="Controlla la mail per visualizzare i candidati alla risoluzione dell'annuncio da te selezionato.";
 
-                                //FIXME: far comparire il popup dopo il reload della vista (attualmente non funzionante)!
+
                                 $ionicHistory.currentTitle( {
                                     disableAnimate: true,
                                     disableBack: true
@@ -945,8 +957,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                     title: $scope.title,
                                     template: $scope.template
                                 });
+                                alertPopup.then(function(res) {
+                                    $window.location.reload(true);
+                                });
 
-                                $window.location.reload(true);
+
 
 
 
@@ -1004,9 +1019,15 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                             console.log("HERE");
 
-                            //FIXME: far comparire un popup dopo il reload della vista!
 
-                            $window.location.reload(true);
+                            var alertPopup = $ionicPopup.alert({
+                                title: 'Annuncio cancellato!',
+                                template: 'L\'annuncio selezionato è stato cancellato!'
+                            });
+                            alertPopup.then(function (res) {
+                                $window.location.reload(true);
+                            });
+
 
                         })
                         .error(function (data, status) {
@@ -1228,7 +1249,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                     modal.info_announcement = obj;
 
 
-                                    //TODO: FIX DATE (change format)
+
                                     modal.info_announcement.data_scadenza = $filter('date')(modal.info_announcement.data_scadenza,'dd-MM-yyyy');
                                     console.log(modal.info_announcement.data_scadenza);
                                     // modal.info_data.titolo = obj.titolo;
@@ -2150,7 +2171,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     .controller('MentorCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
 
-        //TODO: You must install the cordova plugin whitelist:
+
         //cordova plugin add cordova-plugin-whitelist
         //or if you want to save the reference to your config.xml file:
 
@@ -2397,7 +2418,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     //$state.go('app.profile');
 
 
-                    // //TODO: call API get_user_info
+                    //
                     // $http({
                     //     method :'POST',
                     //     url:'https://arctic-window-132923.appspot.com/get_user_info',
@@ -3163,6 +3184,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         $scope.piano=[];
         $scope.checkPs={};
 
+        $scope.doRef=function () {
+
         var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
         $scope.show($ionicLoading);
         $http({
@@ -3207,7 +3230,12 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             })
             .finally(function ($ionicLoading) {
                 $scope.hide($ionicLoading);
+                $scope.$broadcast('scroll.refreshComplete');
             });
+
+        };
+
+        $scope.doRef();
 
         /*$http.get('attivita.json').success(function(response) {
          $scope.piano = response;
@@ -3391,6 +3419,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         title: $scope.title,
                         template: $scope.template
                     });
+                })
+                .finally(function () {
+                    $scope.doRef();
                 });
 
         };
@@ -3796,10 +3827,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     // add the following plug in: ionic plugin add cordova-plugin-googlemaps
     .controller('MapCtrl', function($scope,$state,$http,$ionicPopup,$ionicLoading) {
 
-        //TODO: insert background image into ionicLoading
+
         $scope.show = function () {
             $ionicLoading.show({
-                template: '<p>Loading...</p><ion-spinner icon="spiral"></ion-spinner>'
+                template: '<div class="loader"> </div><!--p>Loading...</p><ion-spinner icon="spiral"></ion-spinner-->'
                 // templateUrl: '../views/test.html'
             });
             // content: 'Loading',
@@ -3862,7 +3893,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 var options = {timeout: 10000, enableHighAccuracy: true};
 
 
-                //TODO: insert ionicLoagin with image
+
 
                 // $ionicLoading.show({
                 //     template: 'Loading....',
@@ -3927,7 +3958,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             }
                             //TODO: do inner opening browser with href
                             if (info.link_sito != '-'){
-                                marker.content += '<p><b>Sito web: </b><a href=' + info.link_sito + '>' + info.link_sito + '</a> </p>';
+                                marker.content += '<p><b>Sito web: </b><a target="_blank" href=' + info.link_sito + ' >' + info.link_sito + '</a> </p>';
                             }
 
                             marker.content += '</div>';
