@@ -430,10 +430,19 @@ angular.module('your_app_name', [
           views: {
               'menuContent': {
                   templateUrl: "views/app/shs/search_announcement.html",
-                  controller: ''
+                  controller: 'SearchCtrl'
               }
           }
       })
+        .state('app.view_announcement', {
+            url: "/view_announcement",
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/shs/view_announcement.html",
+                    controller: 'ViewAnnCtrl'
+                }
+            }
+        })
 
 
       .state('app.update_announcement', {

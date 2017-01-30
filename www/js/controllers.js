@@ -3440,6 +3440,63 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $state.go('app.note', {'attivitaId': +attivitaId});
         };
     })
+    
+    .controller('SearchCtrl',function ($scope,$state,$http,$ionicLoading,UserService,$ionicModal,$ionicHistory,$ionicPopup,$stateParams) {
+
+        $scope.view=function (str) {
+            console.log(str);
+            $state.go('app.view_announcement');
+        };
+
+    })
+
+    .controller('ViewAnnCtrl',function ($scope,$state,$http,$ionicLoading,UserService,$ionicModal,$ionicHistory,$ionicPopup,$stateParams) {
+
+        $scope.ann=
+                [
+                    {
+                        "categoria":"Civile e Architettura",
+                        "data_pubblicazione":"2017-01-16",
+                        "descrizione":"blablabla",
+                        "stato":"archiviato",
+                        "titolo":"PROVA1",
+                        "id":1
+                    },
+                    {
+                        "categoria":"Sanitaria e Medica",
+                        "data_pubblicazione":"2017-01-16",
+                        "descrizione":"desc1",
+                        "stato":"archiviato",
+                        "titolo":"PROVA2",
+                        "id":3
+                    },
+                    {
+                        "categoria":"Scienze e Tecnologie",
+                        "data_pubblicazione":"2017-01-18",
+                        "descrizione":"Esame orale + Progetto",
+                        "stato":"archiviato",
+                        "titolo":"PROVA3",
+                        "id":40
+                    },
+                    {
+                        "categoria":"Scienze e Tecnologie",
+                        "data_pubblicazione":"2017-01-20",
+                        "descrizione":"regwfa",
+                        "stato":"archiviato",
+                        "titolo":"PROVA6",
+                        "id":46
+                    },
+                    {
+                        "categoria":"Civile e Architettura",
+                        "data_pubblicazione":"2017-01-26",
+                        "descrizione":"Ggdasfwrgefds",
+                        "stato":"archiviato",
+                        "titolo":"PROVA12",
+                        "id":53
+                    }
+                ];
+
+    })
 
 
 

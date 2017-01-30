@@ -1,0 +1,52 @@
+<ion-view class="profile-view">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <span>{{}}</span>
+    </ion-nav-title>
+    <ion-content>
+<!--ion-content>
+    <!--ion-list scroll="false s-editing="isEditingItems
+              animation="fade-out"
+              delete-icon="icon ion-minus-circled">
+        <div class="card">
+            <div class="item item-text-wrap" ng-repeat="app in ann" >
+
+                <h2><b>{{app.titolo}}</b></h2>
+                <h3><b>{{app.categoria}}</b></h3>
+                <h4><b>descrizione:</b> {{app.descrizione}}</h4>
+                <h4><b>email utente:</b> {{app.mail_pubblicante}}</h4>
+                <h4><b>data pubblicazione:</b> {{app.data_pubblicazione}}</h4>
+
+            </div>
+        </div>
+    </ion-list>
+
+    <div class="list">
+        <div class="bar bar-header item-input-inset">
+            <ion-search placeholder="Search a user" filter="search"></ion-search>
+        </div>
+        <div ng-repeat="app in ann | filter:search.value" class="item">
+            {{app.titolo}}
+        </div>
+    </div>
+</ion-content-->
+
+        <ion-content>
+
+                <input type="text" placeholder=" Search" ng-model="search.titolo"/>
+
+            <ion-list>
+                <ion-item  type="item-text-wrap"
+                           ng-repeat="app in ann | filter:search ">
+                    <h2><b>{{app.titolo}}</b></h2>
+                    <h3><b>{{app.categoria}}</b></h3>
+                    <h4><b>descrizione:</b> {{app.descrizione}}</h4>
+                    <h4><b>email utente:</b> {{app.mail_pubblicante}}</h4>
+                    <h4><b>data pubblicazione:</b> {{app.data_pubblicazione}}</h4>
+                </ion-item>
+            </ion-list>
+
+        </ion-content>
+</ion-view>
