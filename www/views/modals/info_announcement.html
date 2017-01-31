@@ -1,4 +1,4 @@
-<ion-modal-view ng-controller="MyAnnouncementsCtrl">
+<ion-modal-view>
     <ion-header-bar class="bar bar-header bar-positive">
         <h1 class="title">Info Annuncio</h1>
         <button class="button button-clear button-primary" ng-click="close()">Esci</button>
@@ -14,12 +14,14 @@
                 <div style="padding: 0px 0px 5px 0px;">
                     <b>Titolo: </b><h2 style="display: inline !important">{{modal.info_announcement.titolo}}</h2><br>
                 </div>
-
                 <div style="padding: 0px 0px 5px 0px;">
                     <b>Categoria: </b><h2 style="display: inline !important">{{modal.info_announcement.categoria}}</h2><br>
                 </div>
                 <div style="padding: 0px 0px 5px 0px;">
                     <b>Data Scadenza: </b><h2 style="display: inline !important">{{modal.info_announcement.data_scadenza}}</h2><br>
+                </div>
+                <div style="padding: 0px 0px 5px 0px;" ng-if="my_ann_bool===true">
+                    <b>Mail pubblicante: </b><h2 style="display: inline !important">{{modal.info_announcement.mail_pubblicante}}</h2><br>
                 </div>
                 <div style="padding: 0px 0px 5px 0px;">
                     <b>Descrizione: </b>

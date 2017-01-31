@@ -102,6 +102,8 @@ angular.module('your_app_name', [
 
     $ionicConfigProvider.tabs.position('bottom');
 
+    $ionicConfigProvider.backButton.text('Indietro');
+
     $stateProvider
 
   //INTRO
@@ -435,7 +437,7 @@ angular.module('your_app_name', [
           }
       })
         .state('app.view_announcement', {
-            url: "/view_announcement",
+            url: "/view_announcement/:category",
             views: {
                 'menuContent': {
                     templateUrl: "views/app/shs/view_announcement.html",

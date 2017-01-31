@@ -16,24 +16,51 @@
 
         <ion-content>
 
-            <a class="item">
-                <div style="padding: 0px 0px 5px 0px;">
-                    <b>Titolo: </b><h2 style="display: inline !important">ELIM</h2><br>
-                </div>
-
-                <div style="padding: 0px 0px 5px 0px;">
-                    <b>Categoria: </b><h3 style="display: inline !important">Scienze e Tecnologie</h3><br>
-                </div>
-                <div style="padding: 0px 0px 5px 0px;">
-                    <b>Data Scadenza: </b><h3 style="display: inline !important">29/02/2017</h3><br>
-                </div>
-                <div style="padding: 0px 0px 5px 0px;">
-                    <b>Descrizione: </b>
-                </div>
-                    <label class="item item-input" style="border-style: dashed;">
-                        <textarea style="resize: none;" readonly >Sviluppo progetto Elaborazione delle Immagini</textarea>
+            <div id="search-bar" style="transform: translate3d(0px, 0px, 0px);">
+                <div class="item item-input-inset">
+                    <label class="item-input-wrapper" id="search-input">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="text" placeholder="Cerca..." class="ng-pristine ng-valid ng-empty ng-touched">
                     </label>
-            </a>
+                </div>
+            </div>
+
+            <ion-refresher></ion-refresher>
+            <ion-list scroll="false s-editing="isEditingItems
+                      animation="fade-out">
+                <div class="card">
+                    <div class="item item-text-wrap">
+                        <!--<ion-avatar item-left>-->
+                        <!--<img src="img/avatar-finn.png">-->
+                        <!--</ion-avatar>                        &lt;!&ndash;<ion-avatar item-left>-->
+                        <!--<img src="img/avatar-finn.png">-->
+                        <!--</ion-avatar>-->
+                        <!--<input ng-model="test.id" type="hidden" id="hiddenValue" value="ciao" />-->
+                        <h2>Test1</h2>
+                        <h3>Test1.1</h3>
+                        <!--<p># candidature: {{info.num_cand}}</p>-->
+                    </div>
+                </div>
+            </ion-list>
+
+            <!--<a class="item">-->
+                <!--<div style="padding: 0px 0px 5px 0px;">-->
+                    <!--<b>Titolo: </b><h2 style="display: inline !important">ELIM</h2><br>-->
+                <!--</div>-->
+
+                <!--<div style="padding: 0px 0px 5px 0px;">-->
+                    <!--<b>Categoria: </b><h3 style="display: inline !important">Scienze e Tecnologie</h3><br>-->
+                <!--</div>-->
+                <!--<div style="padding: 0px 0px 5px 0px;">-->
+                    <!--<b>Data Scadenza: </b><h3 style="display: inline !important">29/02/2017</h3><br>-->
+                <!--</div>-->
+                <!--<div style="padding: 0px 0px 5px 0px;">-->
+                    <!--<b>Descrizione: </b>-->
+                <!--</div>-->
+                    <!--<label class="item item-input" style="border-style: dashed;">-->
+                        <!--<textarea style="resize: none;" readonly >Sviluppo progetto Elaborazione delle Immagini</textarea>-->
+                    <!--</label>-->
+            <!--</a>-->
         </ion-content>
 
 

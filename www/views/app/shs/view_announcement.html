@@ -2,51 +2,40 @@
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
+
     <ion-nav-title>
-        <span>{{}}</span>
+        <span>{{ann_cat}}</span>
     </ion-nav-title>
     <ion-content>
-<!--ion-content>
-    <!--ion-list scroll="false s-editing="isEditingItems
-              animation="fade-out"
-              delete-icon="icon ion-minus-circled">
-        <div class="card">
-            <div class="item item-text-wrap" ng-repeat="app in ann" >
 
-                <h2><b>{{app.titolo}}</b></h2>
-                <h3><b>{{app.categoria}}</b></h3>
-                <h4><b>descrizione:</b> {{app.descrizione}}</h4>
-                <h4><b>email utente:</b> {{app.mail_pubblicante}}</h4>
-                <h4><b>data pubblicazione:</b> {{app.data_pubblicazione}}</h4>
-
+        <div id="search-bar" style="transform: translate3d(0px, 0px, 0px);">
+            <div class="item item-input-inset">
+                <label class="item-input-wrapper" id="search-input">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="text" placeholder="Cerca..." ng-model="search.titolo" class="ng-pristine ng-valid ng-empty ng-touched">
+                </label>
             </div>
         </div>
-    </ion-list>
 
-    <div class="list">
-        <div class="bar bar-header item-input-inset">
-            <ion-search placeholder="Search a user" filter="search"></ion-search>
-        </div>
-        <div ng-repeat="app in ann | filter:search.value" class="item">
-            {{app.titolo}}
-        </div>
-    </div>
-</ion-content-->
 
-        <ion-content>
-
-                <input type="text" placeholder=" Search" ng-model="search.titolo"/>
-
-            <ion-list>
-                <ion-item  type="item-text-wrap"
-                           ng-repeat="app in ann | filter:search ">
+        <ion-refresher
+                on-refresh="doRefresh(0)">
+            > </ion-refresher>
+        <ion-list scroll="false s-editing="isEditingItems
+                  animation="fade-out">
+            <div class="card">
+                <div class="item item-text-wrap" ng-repeat="app in ann | filter:search" ng-click="showMenu(app)">
                     <h2><b>{{app.titolo}}</b></h2>
-                    <h3><b>{{app.categoria}}</b></h3>
-                    <h4><b>descrizione:</b> {{app.descrizione}}</h4>
-                    <h4><b>email utente:</b> {{app.mail_pubblicante}}</h4>
-                    <h4><b>data pubblicazione:</b> {{app.data_pubblicazione}}</h4>
-                </ion-item>
-            </ion-list>
+                    <h3><b>Mail pubblicante:</b> {{app.mail_pubblicante}}</h3>
+                    <!--<h4><b>Data pubblicazione: </b> {{app.data_pubblicazione}}</h4>-->
+                    <!--<h4><b>Data pubblicazione: </b>{{app.data_scadenza}}</h4>-->
+                    <!--TODO: set red color-->
+                    <h4 style="color: red"><b style="color: red">Giorni rimanenti: </b>{{app.giorni_rim}}</h4>
+                    <!--TODO: set blue color-->
+                    <h4 style="color: blue"><b style="color: blue">N&deg; candidati: </b>{{app.num_cand}}</h4>
+                </div>
+            </div>
+        </ion-list>
 
-        </ion-content>
+    </ion-content>
 </ion-view>
