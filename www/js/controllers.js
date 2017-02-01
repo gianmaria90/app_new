@@ -167,6 +167,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             icon: "ion-university",
                             level: 0,
                             state: 'app.hobby'
+                        },
+                        {
+                            id: 10,
+                            name: "Test",
+                            icon: "Test",
+                            level: 0,
+                            state: 'app.mentor'
                         }
                     ];
             }
@@ -412,6 +419,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             icon: "ion-university",
                             level: 0,
                             state: 'app.hobby'
+                        },
+                        {
+                            id: 10,
+                            name: "Test",
+                            icon: "Test",
+                            level: 0,
+                            state: 'app.mentor'
                         }
                     ];
             }
@@ -478,7 +492,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
 
-    .controller('AnnouncementsCtrl', function($timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$ionicLoading,$localStorage,$ionicTabsDelegate) {
+    .controller('AnnouncementsCtrl', function($timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$ionicLoading,$localStorage,$ionicTabsDelegate,$rootScope) {
 
         // $ionicHistory.clearHistory();
         // $ionicHistory.clearCache();
@@ -489,9 +503,22 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $ionicTabsDelegate .select(0);
         },400);
 
+        $rootScope.$on("CallParentGetInfoMyAnnouncements", function(){
+            $scope.getInfoMyAnnouncements(1);
+        });
+
+        $rootScope.$on("CallParentGetInfoMyAppliedAnnouncements", function(){
+            $scope.getInfoMyAnnouncements(1);
+        });
+
+        $rootScope.$on("CallParentgetGetInfoArchivedAnnouncements", function(){
+            $scope.getInfoArchivedAnnouncements(1);
+        });
+
+
         $scope.getInfoMyAnnouncements = function(par) {
 
-            $ionicTabsDelegate .select(0);
+            $ionicTabsDelegate.select(0);
 
             $scope.info_my_ann = {};
 
@@ -552,11 +579,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.getInfoMyAppliedAnnouncements = function(par) {
 
-            $ionicTabsDelegate .select(1);
+            $ionicTabsDelegate.select(1);
 
             $scope.info_my_app_ann = {};
 
-            if(par==1) {
+            if(par===1) {
                 $scope.show = function () {
                     $ionicLoading.show({
                         template: '<p>Caricamento...</p><ion-spinner icon="spiral"></ion-spinner>'
@@ -570,7 +597,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
             var params = JSON.stringify({'mail_student': $scope.user.mail});
             console.log(params);
-            if(par==1)
+            if(par===1)
                 $scope.show($ionicLoading);
             $http({
                 method: 'POST',
@@ -600,15 +627,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     });
                 })
                 .finally(function ($ionicLoading) {
-                    if(par==1)
+                    if(par===1)
                         $scope.hide($ionicLoading);
                 });
 
-            // console.log('RootCtrl');
-            // $scope.onControllerChanged = function (oldController, oldIndex, newController, newIndex) {
-            //     console.log('Controller changed', oldController, oldIndex, newController, newIndex);
-            //     console.log(arguments);
-            // };
         };
 
         $scope.getInfoArchivedAnnouncements = function(par) {
@@ -672,25 +694,23 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.doRefresh = function(par) {
 
-            $ionicLoading.show({
-                template: 'Caricamento note...'
-            });
+            // $ionicLoading.show({
+            //     template: 'Caricamento note...'
+            // });
 
             if(par===0)
-                $scope.getInfoMyAnnouncements(0);
+                $scope.getInfoMyAnnouncements(1);
             else if(par===1)
                 $scope.getInfoMyAppliedAnnouncements(0);
-            else {
 
-            }
-            $ionicLoading.hide();
+            // $ionicLoading.hide();
             $scope.$broadcast('scroll.refreshComplete');
         };
 
     })
 
 
-    .controller('MyAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$ionicTabsDelegate,$ionicActionSheet,$ionicModal) {
+    .controller('MyAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$ionicTabsDelegate,$ionicActionSheet,$ionicModal,$rootScope) {
 
         // $ionicHistory.clearHistory();
         // $ionicHistory.clearCache();
@@ -699,6 +719,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         $scope.to_update = $localStorage.info_ann;
 
         $scope.my_ann_bool = false;
+
 
         // Triggered on a the item click
         $scope.showMenu = function(obj) {
@@ -860,7 +881,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                     template: $scope.template
                                 });
                                 alertPopup.then(function(res) {
-                                    $window.location.reload(true);
+                                    // $window.location.reload(true);
+                                    $rootScope.$emit("CallParentGetInfoMyAnnouncements", {});
                                 });
 
 
@@ -927,7 +949,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                 template: 'L\'annuncio selezionato è stato cancellato!'
                             });
                             alertPopup.then(function (res) {
-                                $window.location.reload(true);
+                                // $window.location.reload(true);
+
+                                // $scope.doRefresh();
+                                $rootScope.$emit("CallParentGetInfoMyAnnouncements", {});
+
                             });
 
 
@@ -1091,8 +1117,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.to_update = $localStorage.info_my_app_ann;
 
-
         $scope.my_ann_bool = true;
+
 
         // Triggered on a the item click
         $scope.showMenu = function(obj) {
@@ -1227,7 +1253,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         .success(function (data, status) {
 
                             console.log("HERE");
-                            $window.location.reload(true);
+                            // $window.location.reload(true);
+                            $rootScope.$emit("CallParentGetInfoMyAppliedAnnouncements", {});
 
                         })
                         .error(function (data, status) {
@@ -1250,7 +1277,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             });
 
         };
-
 
 
     })
@@ -2269,7 +2295,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             name: "Test",
                             icon: "Test",
                             level: 0,
-                            state: 'app.shs.post_announcement'
+                            state: 'app.mentor'
                         }
 
                     ];
@@ -2603,7 +2629,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             name: "Test",
                             icon: "Test",
                             level: 0,
-                            state: 'app.shs.post_announcement'
+                            state: 'app.mentor'
                         },
                         // {
                         //   id: 4,
@@ -2884,7 +2910,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             name: "Test",
                             icon: "Test",
                             level: 0,
-                            state: 'app.shs.post_announcement'
+                            state: 'app.mentor'
                         }
                     ];
             }
@@ -3393,8 +3419,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         console.log($stateParams);
 
-        var params = JSON.stringify({'category': $stateParams.category});
-
         $scope.ann_cat = $stateParams.category;
 
         $scope.my_ann_bool = true;
@@ -3402,6 +3426,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         $scope.user = UserService.getUser();
 
         $scope.ann = {};
+
+
+        var params = JSON.stringify(
+            {
+                'category':     $stateParams.category,
+                'mail_student': $scope.user.mail
+            });
 
         $scope.doRefresh=function(par) {
 
@@ -3626,8 +3657,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                                         });
 
                                                         alertPopup.then(function(res) {
-                                                            //TODO: riattivare il bottone di back dopo il reload
-                                                            $window.location.reload(true);
+                                                            // $window.location.reload(true);
+                                                            $scope.doRefresh(1);
                                                         });
 
 
