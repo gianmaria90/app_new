@@ -14,7 +14,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         //console.log( $scope.user_profile.sex);
 
         //console.log(  $localStorage.user_profile);
-
         console.log( $localStorage.loggedIn +" logged");
 
         $scope.$on('menuDataChange', function (event) {
