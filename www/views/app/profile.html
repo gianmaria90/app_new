@@ -6,7 +6,7 @@
     <span>Profilo</span>
   </ion-nav-title>
   <ion-content>
-    <div class="top-content row">
+    <!--div class=" profileM">
       <div class="profile-container">
         <div class="user-image-container">
           <pre-img ratio="_1_1" helper-class="rounded-image">
@@ -17,13 +17,14 @@
         <div class="user-name">Benvenuto {{profile.nome_studente}}</div>
       </div>
       <div class="user-background-image-outer">
-        <div ng-if="profile.sesso_studente=='M'" multi-bg="['img/male.jpg']"></div>
+        <div  multi-bg="['img/male.jpg']"></div>
         <div ng-if="profile.sesso_studente=='F'" multi-bg="['img/female.jpg']"></div>
       </div>
-    </div>
+
+    </div-->
 
 
-    <div ng-if="profile.borsa=='true'" style="padding: 0px 10px 10px 10px;" class="button-bar">
+    <!--div ng-if="profile.borsa=='true'" style="padding: 0px 10px 10px 10px;" class="button-bar">
       <a class="button ion-android-person" ng-click="updateProfileData()">Profilo</a>
       <a class="button ion-android-list" ng-click="PianoStudi()">Piano studi</a>
     </div>
@@ -35,7 +36,31 @@
 
     <div ng-if="profile.borsa=='false'" class="button-bar">
         <button style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-person" ng-click="updateProfileData()">Profilo</button>
+    </div-->
+    <div class="profileM">
+      <!--<div class="col col-center">-->
+      <!--&lt;!&ndash;<img ng-src="img/home.png">&ndash;&gt;-->
+      <!--</div>-->
     </div>
+
+    <div class="row responsive-sm" style="padding: 0px; background: white; position: absolute; bottom: 0; right: 0;  left: 0;">
+      <div  style="padding: 0px 10px 10px 10px;" class="button-bar">
+        <a class="button ion-android-person" ng-click="updateProfileData()">Profilo</a>
+        <a class="button ion-android-list" ng-click="PianoStudi()">Piano studi</a>
+      </div>
+
+      <div  style="padding: 10px 10px 0px 10px;" class="button-bar">
+        <a style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-people" ng-click="Mentor()">Info Mentor</a>
+        <a style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-calendar" ng-click="Attivita()">Note</a>
+      </div>
+
+      <div  class="button-bar">
+          <button style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-person" ng-click="updateProfileData()">Profilo</button>
+      </div>
+
+    </div>
+
+    
 
   </ion-content>
 </ion-view>
