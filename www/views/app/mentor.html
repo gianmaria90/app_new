@@ -5,15 +5,14 @@
     <ion-nav-title>
         <span>Info Mentore</span>
     </ion-nav-title>
-    <ion-content>
-
+    <ion-content scroll="false">
 
         <a class="item item-avatar" href="#">
             <img ng-if="mentor_data.sesso=='M'" ng-src="img/male.jpg" >
             <img ng-if="mentor_data.sesso=='F'" ng-src="img/female.jpg" >
             <h2> <b>{{mentor_data.nome}} {{mentor_data.cognome}} </b></h2>
             <!--TODO: Let the Tutor insert a personal sentence-->
-            <p> Back off, man. I'm a scientist.</p>
+            <p> Mentore dell'iniziativa Prometeo</p>
         </a>
 
         <a ng-href="mailto:{{mentor_data.mail}}" class="item item-icon-left" href="#">
@@ -23,7 +22,12 @@
 
         <a ng-href="tel:{{mentor_data.telefono}}" class="item item-icon-left">
             <i class="icon ion-android-call"></i>
-            {{mentor_data.nome}} {{mentor_data.cognome}}
+            {{mentor_data.telefono}}
+        </a>
+
+        <a ng-href="sms:{{mentor_data.telefono}}" class="item item-icon-left">
+            <i class="icon ion-android-textsms"></i>
+            {{mentor_data.telefono}}
         </a>
 
 
