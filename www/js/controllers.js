@@ -3542,7 +3542,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                     title: 'Errore connessione!',
                                     template: 'Si prega di controllare la connessione ad internet!'
                                 });
-                            })
+                            });
 
                     }
                     else if (index===1){
@@ -3975,7 +3975,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.show = function () {
             $ionicLoading.show({
-                template: '<div class="loader"> </div>'
+                templateUrl: 'views/app/load.html',
+                showBackdrop: false,
+
             });
             // content: 'Loading',
             //     animation: 'fade-in',
