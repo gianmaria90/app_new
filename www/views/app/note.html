@@ -13,7 +13,6 @@
     <ion-nav-title>
         <span>Note</span>
     </ion-nav-title>
-
     <ion-content>
 
         <div id="search-bar" style="transform: translate3d(0px, 0px, 0px);" ng-if="!empty_note">
@@ -34,16 +33,15 @@
             <h3>Non ci sono note per la seguente attività.</h3>
         </ion-item>
 
-        <div class="card" ng-if="!empty_note">
-            <div class="item item-text-wrap"  ng-repeat="n in note|filter:search">
+        <div class="list card" ng-repeat="n in note | filter:search.nota_titolo" ng-if="!empty_note">
+            <div class="item item-text-wrap">
                 <b>
                     <h2>{{n.nota_titolo}}</h2>    <!--titolo delle note-->
                 </b>
-                <p>{{n.nota_note}}</p>
             </div>
-            <!--div class="item item-body item-text-wrap">
-                <p>{{n.nota_note}}</p>    <!--testo delle note>
-            </div-->
+            <div class="item item-body item-text-wrap">
+                <p>{{n.nota_note}}</p>    <!--testo delle note-->
+            </div>
         </div>
     </ion-content>
 </ion-view>

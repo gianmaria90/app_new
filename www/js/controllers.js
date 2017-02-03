@@ -3715,6 +3715,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
         //$scope.note = [];
+        $scope.search = {};
 
         var paramsToPost  = $stateParams.attivitaId;
         console.log($stateParams);
@@ -3854,7 +3855,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 });
         };
     })
-
 
     //STUDENT HELP STUDENT SECTION
     .controller('InsertAnnouncementCtrl', function($filter,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading) {
