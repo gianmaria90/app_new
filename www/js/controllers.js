@@ -3739,16 +3739,25 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             })
                 .success(function (data, status) {
                     //var obj=angular.fromJson(data);
+                    $scope.empty_note = false;
                     $scope.note=data;
                     $ionicLoading.hide();
+
+                    if (data.length===0)
+                    {
+                        $scope.empty_note=true;
+                    }
                     // console.log($scope.note);
                 })
                 .error(function (data, status) {
                     $ionicLoading.hide();
+
                     var alertPopup = $ionicPopup.alert({
-                        title: 'Note!',
-                        template: 'Non ci sono note per la seguente attività!'
+                        title: 'Errore!',
+                        template: 'Non è possibile caericare le note !'
                     });
+
+
                 })
                 .finally(function() {
                     // Stop the ion-refresher from spinning
@@ -3845,8 +3854,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 });
         };
     })
-
-
 
 
     //STUDENT HELP STUDENT SECTION

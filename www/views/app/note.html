@@ -4,9 +4,9 @@
     </ion-nav-buttons>
 
     <ion-nav-buttons side="right">
-        <button ng-click="openModalNote()" class="button" style=" background-color: #da6739; border-color: #f8f8f8;">
+        <button ng-click="openModalNote()" class="button" style=" background-color:#da6739;">
             <i class="glyphicon glyphicon-plus">
-            </i> Aggiungi
+            </i> Add
         </button>
     </ion-nav-buttons>
 
@@ -14,30 +14,36 @@
         <span>Note</span>
     </ion-nav-title>
 
-<div class="bar bar-subheader item-input-inset">
-        <label class="item-input-wrapper">
-            <i class="icon ion-ios7-search placeholder-icon"></i>
-            <input id="searchKey" type="search" placeholder="Search" ng-model="searchKey" autocorrect="off" >
-            <button class="button button-clear" ng-click="clearSearch()">X</button>
-        </label>
-        <button class="button button-clear" ng-click="search()">Search</button>
-    </div>
+    <ion-content>
 
-    <ion-content class="has-header has-subheader">
+        <div id="search-bar" style="transform: translate3d(0px, 0px, 0px);" ng-if="!empty_note">
+            <div class="item item-input-inset">
+                <label class="item-input-wrapper" id="search-input">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="text" placeholder="Cerca..." ng-model="search.nota_titolo" class="ng-pristine ng-valid ng-empty ng-touched">
+                </label>
+            </div>
+        </div>
 
         <ion-refresher
                 pulling-text="Pull to refresh..."
                 on-refresh="doRefresh()">
         </ion-refresher>
-        <div class="list card" ng-repeat="n in note">
-            <div class="item item-text-wrap">
+
+        <ion-item ng-if="empty_note" class="item-text-wrap">
+            <h3>Non ci sono note per la seguente attività.</h3>
+        </ion-item>
+
+        <div class="card" ng-if="!empty_note">
+            <div class="item item-text-wrap"  ng-repeat="n in note|filter:search">
                 <b>
-                   <h2>{{n.nota_titolo}}</h2>    <!--titolo delle note-->
+                    <h2>{{n.nota_titolo}}</h2>    <!--titolo delle note-->
                 </b>
+                <p>{{n.nota_note}}</p>
             </div>
-            <div class="item item-body item-text-wrap">
-               <p>{{n.nota_note}}</p>    <!--testo delle note-->
-            </div>
+            <!--div class="item item-body item-text-wrap">
+                <p>{{n.nota_note}}</p>    <!--testo delle note>
+            </div-->
         </div>
     </ion-content>
 </ion-view>
