@@ -39,7 +39,11 @@
     </div-->
     <div style="height: 60%;">
 
-      <img src="img/profilo.jpg" style="width: 100%;height: 100%;object-fit: cover;" >
+      <!--<img src="img/male_profile.jpg" style="width: 100%;height: 100%;object-fit: cover;">-->
+
+      <img class="user-image" ng-if="profile.sesso_studente=='M'" ng-src="img/male_profile.jpg" style="width: 100%;height: 100%;object-fit: cover;">
+      <img class="user-image" ng-if="profile.sesso_studente=='F'" ng-src="img/female_profile.jpg" style="width: 100%;height: 100%;object-fit: cover;">
+
       <!--<div class="col col-center">-->
       <!--&lt;!&ndash;<img ng-src="img/home.png">&ndash;&gt;-->
       <!--</div>-->

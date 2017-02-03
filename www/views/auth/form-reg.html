@@ -93,28 +93,34 @@
                                                 <input type="tel" placeholder="Telefono" name="phone" ng-model="reg.phone">
                                             </label>
 
-                                        <ion-checkbox style=" font-size: small" ng-model="showPasswordIsChecked">Mostra password</ion-checkbox>
+                                            <br>
+                                            <div>
+                                                <input type="checkbox" class="checkbox-round" style=" font-size: small" ng-model="showPasswordIsChecked"/>Mostra password
+                                            </div>
+                                            <br>
 
-                                    </div>
-                                </ion-scroll>
-                            </my-tab>
+                                            <input type="checkbox" class="checkbox-round" id="termsConditions" name="termsConditions"/> I agree to the <a href="terms">terms and conditions</a>
+                                            <label style="float: none;" for="termsConditions" class="error" generated="true"></label>
 
-                        </my-tabs>
+                                        </div>
+                                    </ion-scroll>
+                                    <!--<div class="form_group">-->
+                                    <!--<ion-checkbox style="display: inline-flex;" ng-model="reg.accept_terms" name="terms" class="terms-checkbox" ng-required="!reg.accept_terms">-->
 
-                        <div class="item item-body bottom-content">
-                            <button style="background-color: rgba(255, 255, 255, 0.4); border: 2px solid #F47F18; color: #444;" type="submit" class="button button-positive button-block" ng-click="doRegister()"  ng-disabled="!registration_form.$valid">
-                                Registrati
-                            </button>
-                        </div>
+                                    <!--</ion-checkbox>-->
+                                    <!--<span style="font-size: small" class="terms-checkbox-label">Ho letto e accetto i <a ui-sref="app.termini">Termini e Condizioni</a></span>-->
+                                    <!--<p style="font-size: small; color: red"  ng-show="!registration_form.accept_terms.$pristine && registration_form.accept_terms.$invalid" class="help-block">È necessario accettare i Termini e Condizioni.</p>-->
+                                    <!--</div>-->
+                                </my-tab>
 
-                        <div class="form_group">
-                            <ion-checkbox style="display: inline-flex;" ng-model="reg.accept_terms" name="terms" class="terms-checkbox" ng-required="!reg.accept_terms">
+                            </my-tabs>
 
-                            </ion-checkbox>
-                            <span style="font-size: small" class="terms-checkbox-label">Ho letto e accetto i <a ui-sref="app.termini">Termini e Condizioni</a></span>
-                            <p style="font-size: small; color: red"  ng-show="!registration_form.accept_terms.$pristine && registration_form.accept_terms.$invalid" class="help-block">È necessario accettare i Termini e Condizioni.</p>
-                        </div>
-                    </form>
+                            <div class="item item-body bottom-content">
+                                <button style="background-color: rgba(255, 255, 255, 0.4); border: 2px solid #F47F18; color: #444;" type="submit" class="button button-positive button-block" ng-click="doRegister()"  ng-disabled="!registration_form.$valid">
+                                    Registrati
+                                </button>
+                            </div>
+                        </form>
 
 
                     </div>

@@ -99,7 +99,7 @@ angular.module('your_app_name', [
 
     $ionicConfigProvider.tabs.position('bottom');
 
-    $ionicConfigProvider.backButton.text('Indietro');
+    $ionicConfigProvider.backButton.text('');
 
     $ionicConfigProvider.views.swipeBackEnabled(false);
 

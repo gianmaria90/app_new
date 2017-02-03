@@ -1864,9 +1864,23 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         $scope.profile={};
         $scope.user = UserService.getUser();
 
+
+        $scope.show = function() {
+            $ionicLoading.show({
+                template: '<ion-spinner icon="spiral"></ion-spinner>'
+            });
+        };
+
+        $scope.hide = function(){
+            $ionicLoading.hide();
+        };
+
+
         // console.log($localStorage.loggedIn);
         var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password} );
         console.log(params);
+
+        $scope.show($ionicLoading);
         $http({
             method :'POST',
             url:'https://arctic-window-132923.appspot.com/get_user_info',
@@ -1875,7 +1889,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 'Content-Type': 'application/json'
             }
         })
-
             .success(function (data, status) {
                 var obj=angular.fromJson(data);
 
@@ -1928,7 +1941,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             .error(function (data, status) {
                 console.log("Error." + data + " " + status);
 
-            });
+            }).finally(function ($ionicLoading) {
+                $scope.hide($ionicLoading);
+        });
 
         $scope.updateProfileData = function(){
             $state.go('app.update_profile');
