@@ -6,68 +6,21 @@
     <span>Profilo</span>
   </ion-nav-title>
   <ion-content scroll="false">
-    <!--div class=" profileM">
-      <div class="profile-container">
-        <div class="user-image-container">
-          <pre-img ratio="_1_1" helper-class="rounded-image">
-            <img class="user-image"  ng-if="profile.sesso_studente=='M'" ng-src="img/male.jpg" spinner-on-load>
-            <img class="user-image" ng-if="profile.sesso_studente=='F'" ng-src="img/female.jpg" spinner-on-load>
-          </pre-img>
-        </div>
-        <div class="user-name">Benvenuto {{profile.nome_studente}}</div>
-      </div>
-      <div class="user-background-image-outer">
-        <div  multi-bg="['img/male.jpg']"></div>
-        <div ng-if="profile.sesso_studente=='F'" multi-bg="['img/female.jpg']"></div>
-      </div>
 
-    </div-->
-
-
-    <!--div ng-if="profile.borsa=='true'" style="padding: 0px 10px 10px 10px;" class="button-bar">
-      <a class="button ion-android-person" ng-click="updateProfileData()">Profilo</a>
-      <a class="button ion-android-list" ng-click="PianoStudi()">Piano studi</a>
-    </div>
-
-    <div ng-if="profile.borsa=='true'" style="padding: 10px 10px 0px 10px;" class="button-bar">
-      <a style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-people" ng-click="Mentor()">Info Mentor</a>
-      <a style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-calendar" ng-click="Attivita()">Note</a>
-    </div>
-
-    <div ng-if="profile.borsa=='false'" class="button-bar">
-        <button style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-person" ng-click="updateProfileData()">Profilo</button>
-    </div-->
     <div style="height: 60%;">
 
-      <!--<img src="img/male_profile.jpg" style="width: 100%;height: 100%;object-fit: cover;">-->
+
 
       <img class="user-image" ng-if="profile.sesso_studente=='M'" ng-src="img/male_profile.jpg" style="width: 100%;height: 100%;object-fit: cover;">
       <img class="user-image" ng-if="profile.sesso_studente=='F'" ng-src="img/female_profile.jpg" style="width: 100%;height: 100%;object-fit: cover;">
 
-      <!--<div class="col col-center">-->
-      <!--&lt;!&ndash;<img ng-src="img/home.png">&ndash;&gt;-->
-      <!--</div>-->
 
     </div>
 
 
     
     <div class="responsive-sm" style="padding: 0%; background: white; position: absolute; bottom: 0; right: 0;  left: 0;height: 40%;">
-      <!--div  style="padding: 0px 10px 10px 10px; height: 10%" class="button-bar">
-        <button class="button icon ion-gear-a" style="font-size: 40px;"></button>
-        <button class="button icon ion-gear-a" style="font-size: 40px;"></button>
-        <!--a style="background-color: rgba(255, 255, 255, 0.4);  border: solid 1px; border-color: #da6739;" class="button ion-android-person" ng-click="updateProfileData()"></a>
-        <a style="background-color: rgba(255, 255, 255, 0.4);  border: solid 1px; border-color: #da6739;" class="button ion-android-list" ng-click="PianoStudi()">Piano studi</a>
-      </div>
 
-      <div  style="padding: 10px 10px 20px 10px;" class="button-bar">
-        <a style="background-color: rgba(255, 255, 255, 0.4); border: solid 1px; border-color: #da6739;" class="button ion-android-people" ng-click="Mentor()">Info Mentor</a>
-        <a style="background-color: rgba(255, 255, 255, 0.4);  border: solid 1px; border-color: #da6739;" class="button ion-android-calendar" ng-click="Attivita()">Note</a>
-      </div>
-
-      <!--div  class="button-bar">
-        <button style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-person" ng-click="updateProfileData()">Profilo</button>
-      </div-->
 
       <div class="row " ng-if="profile.borsa=='true'">
         <div class="col " align="middle">
