@@ -466,6 +466,16 @@ angular.module('your_app_name', [
             }
         })
 
+        .state('app.termini', {
+            url: "/termini",
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/termini.html",
+                    controller: ''
+                }
+            }
+        })
+
       .state('app.map', {
           url: '/map',
           views: {

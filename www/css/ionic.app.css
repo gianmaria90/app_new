@@ -118,7 +118,9 @@ For example, you might change some of the default colors:
     content: "\f36d"; }
 
 .ion-android-calendar:before {
-    content: "\f2d1"; }
+    content: "\f2d1";
+    font-size: 6vh !important;
+}
 
 .ion-android-call:before {
     content: "\f2d2"; }
@@ -256,7 +258,9 @@ For example, you might change some of the default colors:
     content: "\f390"; }
 
 .ion-android-list:before {
-    content: "\f391"; }
+    content: "\f391";
+    font-size: 6vh !important;
+}
 
 .ion-android-locate:before {
     content: "\f2e9"; }
@@ -304,10 +308,14 @@ For example, you might change some of the default colors:
     content: "\f39d"; }
 
 .ion-android-people:before {
-    content: "\f39e"; }
+    content: "\f39e";
+    font-size: 6vh !important;
+}
 
 .ion-android-person:before {
-    content: "\f3a0"; }
+    content: "\f3a0";
+    font-size: 6vh !important;
+}
 
 .ion-android-person-add:before {
     content: "\f39f"; }
@@ -745,7 +753,8 @@ For example, you might change some of the default colors:
     content: "\f31b"; }
 
 .ion-gear-a:before {
-    content: "\f13d"; }
+    content: "\f13d";
+    font-size: 10vh !important; }
 
 .ion-gear-b:before {
     content: "\f13e"; }
@@ -8496,13 +8505,13 @@ ion-side-menu .heading-item .message {
 
 
 .profileM {
-    background-image: url('../img/2017.02.01_Pagina profilo.png')!important;
+    background-image: url('../img/profilo.jpg')!important;
     left: 0%;
     top: 0%;
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center;
+
 
 }
 

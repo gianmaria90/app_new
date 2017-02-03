@@ -55,7 +55,7 @@
                                             <span style="color: #9F9F9F; font-size: 15px" class="item item-input">Università
                                          <select style="width: 100%; margin-left: 5px; font-size: 15px" id="UniversitySelector"
                                                  ng-model="reg.universita" ng-options="uni.id as uni.nome for uni in university">
-                                             <!--TODO: inserire "Seleziona Università" come opzione di default-->
+
                                              <option ng-repeat="uni in university" value="{{uni.id}}">{{uni.nome}}</option>
                                         </select>
                                     </span>
@@ -93,20 +93,28 @@
                                                 <input type="tel" placeholder="Telefono" name="phone" ng-model="reg.phone">
                                             </label>
 
-                                            <ion-checkbox ng-model="showPasswordIsChecked">Mostra password</ion-checkbox>
+                                        <ion-checkbox style=" font-size: small" ng-model="showPasswordIsChecked">Mostra password</ion-checkbox>
 
-                                        </div>
-                                    </ion-scroll>
-                                </my-tab>
+                                    </div>
+                                </ion-scroll>
+                            </my-tab>
 
-                            </my-tabs>
+                        </my-tabs>
 
-                            <div class="item item-body bottom-content">
-                                <button style="background-color: rgba(255, 255, 255, 0.4); border: 2px solid #F47F18; color: #444;" type="submit" class="button button-positive button-block" ng-click="doRegister()"  ng-disabled="!registration_form.$valid">
-                                    Registrati
-                                </button>
-                            </div>
-                        </form>
+                        <div class="item item-body bottom-content">
+                            <button style="background-color: rgba(255, 255, 255, 0.4); border: 2px solid #F47F18; color: #444;" type="submit" class="button button-positive button-block" ng-click="doRegister()"  ng-disabled="!registration_form.$valid">
+                                Registrati
+                            </button>
+                        </div>
+
+                        <div class="form_group">
+                            <ion-checkbox style="display: inline-flex;" ng-model="reg.accept_terms" name="terms" class="terms-checkbox" ng-required="!reg.accept_terms">
+
+                            </ion-checkbox>
+                            <span style="font-size: small" class="terms-checkbox-label">Ho letto e accetto i <a ui-sref="app.termini">Termini e Condizioni</a></span>
+                            <p style="font-size: small; color: red"  ng-show="!registration_form.accept_terms.$pristine && registration_form.accept_terms.$invalid" class="help-block">È necessario accettare i Termini e Condizioni.</p>
+                        </div>
+                    </form>
 
 
                     </div>

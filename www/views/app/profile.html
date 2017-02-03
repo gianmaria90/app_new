@@ -5,7 +5,7 @@
   <ion-nav-title>
     <span>Profilo</span>
   </ion-nav-title>
-  <ion-content>
+  <ion-content scroll="false">
     <!--div class=" profileM">
       <div class="profile-container">
         <div class="user-image-container">
@@ -37,30 +37,70 @@
     <div ng-if="profile.borsa=='false'" class="button-bar">
         <button style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-person" ng-click="updateProfileData()">Profilo</button>
     </div-->
-    <div class="profileM">
+    <div class="profileM" style="height: 60%;">
       <!--<div class="col col-center">-->
       <!--&lt;!&ndash;<img ng-src="img/home.png">&ndash;&gt;-->
       <!--</div>-->
     </div>
 
-    <div class="row responsive-sm" style="padding: 0px; background: white; position: absolute; bottom: 0; right: 0;  left: 0;">
-      <div  style="padding: 0px 10px 10px 10px;" class="button-bar">
-        <a class="button ion-android-person" ng-click="updateProfileData()">Profilo</a>
-        <a class="button ion-android-list" ng-click="PianoStudi()">Piano studi</a>
+
+
+    
+    <div class="responsive-sm" style="padding: 0%; background: white; position: absolute; bottom: 0; right: 0;  left: 0;height: 40%;">
+      <!--div  style="padding: 0px 10px 10px 10px; height: 10%" class="button-bar">
+        <button class="button icon ion-gear-a" style="font-size: 40px;"></button>
+        <button class="button icon ion-gear-a" style="font-size: 40px;"></button>
+        <!--a style="background-color: rgba(255, 255, 255, 0.4);  border: solid 1px; border-color: #da6739;" class="button ion-android-person" ng-click="updateProfileData()"></a>
+        <a style="background-color: rgba(255, 255, 255, 0.4);  border: solid 1px; border-color: #da6739;" class="button ion-android-list" ng-click="PianoStudi()">Piano studi</a>
       </div>
 
-      <div  style="padding: 10px 10px 0px 10px;" class="button-bar">
-        <a style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-people" ng-click="Mentor()">Info Mentor</a>
-        <a style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-calendar" ng-click="Attivita()">Note</a>
+      <div  style="padding: 10px 10px 20px 10px;" class="button-bar">
+        <a style="background-color: rgba(255, 255, 255, 0.4); border: solid 1px; border-color: #da6739;" class="button ion-android-people" ng-click="Mentor()">Info Mentor</a>
+        <a style="background-color: rgba(255, 255, 255, 0.4);  border: solid 1px; border-color: #da6739;" class="button ion-android-calendar" ng-click="Attivita()">Note</a>
       </div>
 
-      <div  class="button-bar">
-          <button style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-person" ng-click="updateProfileData()">Profilo</button>
+      <!--div  class="button-bar">
+        <button style="background-color: rgba(255, 255, 255, 0.4); border: none;" class="button ion-android-person" ng-click="updateProfileData()">Profilo</button>
+      </div-->
+
+      <div class="row ">
+        <div class="col " align="middle">
+          <button class="button icon ion-android-person" ng-click="updateProfileData()" style="border: none"></button>
+        </div>
+        <div class="col " align="middle">
+          <button class="button icon ion-android-list" ng-click="PianoStudi()" style="border: none"></button>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col" align="middle" style="margin-top: -10px">
+          Profilo
+        </div>
+        <div class="col" align="middle" style="margin-top: -10px">
+          Piano studi
+        </div>
+      </div>
+
+      <div class="row" >
+        <div class="col" align="middle">
+          <button class="button icon ion-android-people" ng-click="Mentor()" style="border: none"></button>
+        </div>
+        <div class="col " align="middle">
+          <button class="button icon ion-android-calendar" ng-click="Attivita()" style="border: none"></button>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col" align="middle" style="margin-top: -10px">
+          Mentore
+        </div>
+        <div class="col" align="middle" style="margin-top: -10px">
+          Note
+        </div>
       </div>
 
     </div>
-
-    
 
   </ion-content>
 </ion-view>

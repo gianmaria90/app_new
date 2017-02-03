@@ -4139,9 +4139,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             if (info.phone != '-'){
                                 marker.content +=  '<p><b>Telefono: </b>' + info.phone + '</p>';
                             }
-                            //TODO: do inner opening browser with href
+
                             if (info.link_sito != '-'){
-                                marker.content += '<p><b>Sito web: </b><a target="_blank" href=' + info.link_sito + ' >' + info.link_sito + '</a> </p>';
+                                //marker.content += '<p><b>Sito web: </b><a target="_system"  href="' + info.link_sito + '" >' + info.link_sito + '</a> </p>';
+                                marker.content += '<p><b>Sito web: </b><a target="_self"  href="#" onclick="window.open(\'' + info.link_sito +'\', \'_system\', \'location=yes\'); return false;" >' + info.link_sito + '</a> </p>';
                             }
 
                             marker.content += '</div>';
