@@ -1,44 +1,48 @@
-<ion-view class="login-view auth-view" cache-view="false" view-title="title">
+<ion-view class="login-view auth-view" cache-view="false">
     <ion-nav-title>
         <span>Questionario di valutazione</span>
     </ion-nav-title>
     <ion-content scroll="false">
-        <div class="row">
-            <div class="col col-center">
-                <div class="card login-container" content-tabs tabsdata='tabsdata'>
-                    <ion-item>
-                    <form name="cod_form" class="" novalidate ng-cloak>
-                        <my-tabs>
-                            <my-tab title="Codice">
-                                <div class="list">
 
-                                    <label class="item item-input">
+        <div class="top-content row questionario_prometeo_background">
 
-                                        <input type="text"
+            <div class="row">
+                <div class="col col-center">
+                    <div style="margin-bottom: 180px;" class="card login-container" content-tabs tabsdata='tabsdata'>
+                        <ion-item>
+                            <form name="cod_form" class="" novalidate ng-cloak>
+                                <my-tabs>
+                                    <my-tab title="Codice">
+                                        <div class="list">
 
-                                               placeholder="codice"
-                                               ng-model="cod.codice"
-                                               required ng-pattern="/[\w\d]{3,15}/i"
-                                               ng-focus="onPasswordFocus()"
-                                               ng-blur="onPasswordBlur()"
-                                               minlength="10"
-                                               maxlength="10">
+                                            <label class="item item-input">
 
-                                    </label>
+                                                <input type="text"
 
-                                    <div class="item item-body bottom-content">
-                                        <button style="background-color: rgba(255, 255, 255, 0.4); border: 2px solid #F47F18; color: #444;" type="submit" class="button button-positive button-block" ng-click="goQuest(cod)" ng-disabled="!cod_form.$valid">
-                                            Entra
-                                        </button>
-                                    </div>
-                                </div>
-                            </my-tab>
-                        </my-tabs>
+                                                       placeholder="codice"
+                                                       ng-model="cod.codice"
+                                                       required ng-pattern="/[\w\d]{3,15}/i"
+                                                       ng-focus="onPasswordFocus()"
+                                                       ng-blur="onPasswordBlur()"
+                                                       minlength="10"
+                                                       maxlength="10">
 
-                    </form>
-                    </ion-item>
+                                            </label>
+
+                                            <div class="item item-body bottom-content">
+                                                <button style="background-color: rgba(255, 255, 255, 0.4); border: 2px solid #F47F18; color: #444;" type="submit" class="button button-positive button-block" ng-click="goQuest(cod)" ng-disabled="!cod_form.$valid">
+                                                    Entra
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </my-tab>
+                                </my-tabs>
+
+                            </form>
+                        </ion-item>
+                    </div>
+
                 </div>
-
             </div>
         </div>
     </ion-content>

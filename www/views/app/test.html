@@ -1,68 +1,45 @@
-<ion-view ng-controller="TestCtrl">
-        <ion-nav-buttons side="left">
-                <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-        </ion-nav-buttons>
-        <ion-nav-buttons side="right">
-                <button type="button"  ng-click="openModal()" class="btn">
-                        <i class="glyphicon glyphicon-plus">
-                        </i> Add
-                </button>
-        </ion-nav-buttons>
+<ion-view class="post_announcement-view" cache-view="false">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <span>Inserisci annuncio</span>
+    </ion-nav-title>
+    <ion-content scroll="false">
 
 
-        <ion-nav-title>
-                <span>TEST</span>
-        </ion-nav-title>
+        <form name="post_project_form" class="" novalidate ng-cloak>
 
-        <ion-content>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label"><b>Titolo*</b></span>
+                <input type="text" ng-model="proj.title" required>
+            </label>
 
-            <div id="search-bar" style="transform: translate3d(0px, 0px, 0px);">
-                <div class="item item-input-inset">
-                    <label class="item-input-wrapper" id="search-input">
-                        <i class="icon ion-search placeholder-icon"></i>
-                        <input type="text" placeholder="Cerca..." class="ng-pristine ng-valid ng-empty ng-touched">
-                    </label>
-                </div>
+            <div ng-class="list" required>
+                <!--Click here to disable all the form fields:<input type="checkbox" ng-model="all"><br>-->
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        <b>Categoria*</b>
+                    </div>
+                    <select ng-model="proj.category">
+                        <option ng-selected="true">---Seleziona Categoria---</option>
+                        <option value="Sanitaria e Medica">Sanitaria e Medica</option>
+                        <option value="Scienze e Tecnologie">Scienze e Tecnologie</option>
+                        <option value="Umanistica e Giuridica">Umanistica e Giuridica</option>
+                        <option value="Umanistica e Giuridica">Umanistica e Giuridica</option>
+                        <option value="Economica">Economica</option>
+                        <option value="Civile e Architettura">Civile e Architettura</option>
+                    </select>
+                </label>
             </div>
 
-            <ion-refresher></ion-refresher>
-            <ion-list scroll="false s-editing="isEditingItems
-                      animation="fade-out">
-                <div class="card">
-                    <div class="item item-text-wrap">
-                        <!--<ion-avatar item-left>-->
-                        <!--<img src="img/avatar-finn.png">-->
-                        <!--</ion-avatar>                        &lt;!&ndash;<ion-avatar item-left>-->
-                        <!--<img src="img/avatar-finn.png">-->
-                        <!--</ion-avatar>-->
-                        <!--<input ng-model="test.id" type="hidden" id="hiddenValue" value="ciao" />-->
-                        <h2>Test1</h2>
-                        <h3>Test1.1</h3>
-                        <!--<p># candidature: {{info.num_cand}}</p>-->
-                    </div>
-                </div>
-            </ion-list>
+            <div class="item item-body bottom-content">
+                <button type="submit" class="button button-block button-assertive">
+                    Inserisci Annuncio
+                </button>
+            </div>
 
-            <!--<a class="item">-->
-                <!--<div style="padding: 0px 0px 5px 0px;">-->
-                    <!--<b>Titolo: </b><h2 style="display: inline !important">ELIM</h2><br>-->
-                <!--</div>-->
+        </form>
 
-                <!--<div style="padding: 0px 0px 5px 0px;">-->
-                    <!--<b>Categoria: </b><h3 style="display: inline !important">Scienze e Tecnologie</h3><br>-->
-                <!--</div>-->
-                <!--<div style="padding: 0px 0px 5px 0px;">-->
-                    <!--<b>Data Scadenza: </b><h3 style="display: inline !important">29/02/2017</h3><br>-->
-                <!--</div>-->
-                <!--<div style="padding: 0px 0px 5px 0px;">-->
-                    <!--<b>Descrizione: </b>-->
-                <!--</div>-->
-                    <!--<label class="item item-input" style="border-style: dashed;">-->
-                        <!--<textarea style="resize: none;" readonly >Sviluppo progetto Elaborazione delle Immagini</textarea>-->
-                    <!--</label>-->
-            <!--</a>-->
-        </ion-content>
-
-
+    </ion-content>
 </ion-view>
-

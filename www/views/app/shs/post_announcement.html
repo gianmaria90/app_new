@@ -32,12 +32,6 @@
                 </label>
             </div>
 
-            <!--<label class="item item-input">-->
-            <!--&lt;!&ndash;<span class="input-label" style="color: #9F9F9F; font-size: 15px">Data di nascita</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;TODO: handle in the form-reg's controller the type='date' instead of type='text'&ndash;&gt;-->
-            <!--<input type="text" placeholder="Data di nascita" name="user_data" ng-model="proj.exp_date"  ng-click="VerifyDate()" max="{{minAge | date:'yyyy-MM-dd'}}" onfocus="(this.type='date')">-->
-            <!--</label>-->
-
             <label class="item item-input item-stacked-label">
                 <b>Data pubblicazione</b>
                 <input type="text" ng-model="current_date"  disabled>
@@ -55,7 +49,7 @@
             </label>
 
             <div class="item item-body bottom-content">
-                <button type="submit" class="button button-block button-assertive" ng-click="doInsertAnnouncement()" ng-disabled="!post_project_form.$valid">
+                <button type="submit" class="button button-block button-assertive" ng-click="doInsertAnnouncement()" ng-disabled="(!post_project_form.$valid) || (proj.category==='---Seleziona Categoria---')">
                     Inserisci Annuncio
                 </button>
             </div>

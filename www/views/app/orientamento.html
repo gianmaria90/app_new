@@ -2,9 +2,13 @@
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button style="border-color: #f8f8f8; background-color: transparent" menu-toggle="right" class="button icon-left ion-home" ng-click="goToHome()"></button>
+    </ion-nav-buttons>
     <ion-nav-title>
         <span>Quiz orientamento</span>
     </ion-nav-title>
+
     <ion-content>
         <div style="border-style: none;" class="item item-text-wrap">
             <canvas width="80" id="doughnut" class="chart chart-doughnut" chart-data="getDati()" chart-labels="getLabels()" chart-options="getOptions()"> </canvas>
@@ -40,7 +44,7 @@
         </div>
 
         <button class="button button-block button-assertive"  ng-click="goToHome()">
-            HOME
+            Home
         </button>
 
     </ion-content>

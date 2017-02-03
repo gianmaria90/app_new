@@ -1,8 +1,13 @@
-<ion-view cache-view="false" view-title="title">
+<ion-view cache-view="false" view-title="title" ng-controller="QuizCtrl">
     <ion-nav-title>
         <span>Questionario di valutazione</span>
     </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button style="border-color: #f8f8f8; background-color: transparent" menu-toggle="right" class="button icon-left ion-home" ng-click="goToHome()"></button>
+    </ion-nav-buttons>
+
     <ion-content overflow-scroll="true">
+
         <iframe width="100%" height="100%" name="frame" ng-src="https://docs.google.com/forms/d/e/1FAIpQLSdyZYjhtO6ooN1JqiCShmdOPukm0Z0GOS-M2PnscU5kKibsgA/viewform"></iframe>
 
         <!--script type="text/javascript">var submitted=false;</script>
@@ -11,7 +16,7 @@
         <form-- action="https://docs.google.com/forms/d/e/1FAIpQLSc7tf8bNfBXSqW0JyyxmBh_4zMqLoiJdW3MGV2_O4GtpxOweA/viewform?c=0&w=1" method="post" target="hidden_iframe" onsubmit="submitted=true;">
         </form-->
         <button class="button button-block button-assertive"  ng-click="goToHome()">
-            HOME
+            Home
         </button>
     </ion-content>
 </ion-view>

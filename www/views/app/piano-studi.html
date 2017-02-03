@@ -3,10 +3,14 @@
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-        <button type="button"  ng-click="openModal()" class="btn">
-            <i class="glyphicon glyphicon-plus">
-            </i> Add
-        </button>
+        <!--<button type="button"  ng-click="openModal()" class="btn">-->
+        <!--<i class="glyphicon glyphicon-plus">-->
+        <!--</i> Add-->
+        <!--</button>-->
+
+        <button style="border-color: #f8f8f8;" menu-toggle="right" class="button button-small button-assertive" ng-click="openModal()">Aggiungi</button>
+
+
     </ion-nav-buttons>
 
 
@@ -14,87 +18,87 @@
         <span>Piano studi</span>
     </ion-nav-title>
 
-    <ion-content>
+    <ion-content scroll="false">
 
 
 
         <!--ion-scroll style="height:85%;"-->
 
-            <ion-tabs class="tabs-icon-bottom tabs-positive">
+        <ion-tabs class="tabs-icon-bottom tabs-positive">
 
-                <ion-tab title="Da confermare"
-                         icon-on="ion-ios-list"
-                         icon-off="ion-ios-list-outline"
-                         >
+            <ion-tab title="Da confermare"
+                     icon-on="ion-ios-list"
+                     icon-off="ion-ios-list-outline"
+            >
 
-                    <ion-content has-tabs="true" overflow-scroll="true" >
-                        <ion-refresher
-                                on-refresh="doRef()">
-                            ></ion-refresher>
-                        <label class="item item-input item-stacked-label item-text-wrap">
-                            <h2 ><b>Check per inviare conferma conclusione attività</b></h2>
-                        </label>
+                <ion-content has-tabs="true" overflow-scroll="true" >
+                    <ion-refresher
+                            on-refresh="doRef()">
+                        ></ion-refresher>
+                    <label class="item item-input item-stacked-label item-text-wrap">
+                        <h2 ><b>Check per inviare conferma conclusione attività</b></h2>
+                    </label>
 
-                        <ion-scroll style="height: 75%">
-                            <ion-list radio-group >
-                                <ion-item>
-                                    <ion-label><b>Da confermare</b></ion-label>
-                                    <ion-radio ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='da_completare'" ng-model="radioAttivita.text" ng-value="row.id" value="row.id">
-                                       <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
-                                    </ion-radio>
-
-
-                                </ion-item>
-                            </ion-list>
-                        </ion-scroll>
-
-                        <button class="button button-block button-assertive" style="bottom: 0px;position: fixed" ng-disabled="isThisDisabled2Attivita()" ng-click="Confirm()" ><b>SUBMIT</b></button>
-
-
-
-                    </ion-content>
-                </ion-tab>
-
-
-                <ion-tab title="In attesa"
-                         icon-on="ion-ios-list"
-                         icon-off="ion-ios-list-outline"
-                         >
-
-                    <ion-content has-tabs="true" >
-                        <ion-refresher
-                                on-refresh="doRef()">
-                            > </ion-refresher>
+                    <ion-scroll style="height: 75%">
                         <ion-list radio-group >
                             <ion-item>
-                                <ion-label><b>In attesa</b></ion-label>
-                                <ion-item  ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='pendente'">
+                                <ion-label><b>Da confermare</b></ion-label>
+                                <ion-radio ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='da_completare'" ng-model="radioAttivita.text" ng-value="row.id" value="row.id">
                                     <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
-                                </ion-item>
+                                </ion-radio>
+
+
                             </ion-item>
                         </ion-list>
-                    </ion-content>
-                </ion-tab>
+                    </ion-scroll>
 
-                <ion-tab title="Completate"
-                         icon-on="ion-ios-list"
-                         icon-off="ion-ios-list-outline"
-                        >
+                    <button class="button button-block button-assertive" style="bottom: 0px;position: fixed" ng-disabled="isThisDisabled2Attivita()" ng-click="Confirm()" ><b>SUBMIT</b></button>
 
-                    <ion-content has-tabs="true" >
-                        <ion-refresher
-                                on-refresh="doRef()">
-                            > </ion-refresher>
-                        <ion-list radio-group >
-                            <ion-item>
-                                <ion-label><b>Confermate</b></ion-label>
-                                <ion-item  ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='completato'">
-                                    <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
-                                </ion-item>
+
+
+                </ion-content>
+            </ion-tab>
+
+
+            <ion-tab title="In attesa"
+                     icon-on="ion-ios-list"
+                     icon-off="ion-ios-list-outline"
+            >
+
+                <ion-content has-tabs="true" >
+                    <ion-refresher
+                            on-refresh="doRef()">
+                        > </ion-refresher>
+                    <ion-list radio-group >
+                        <ion-item>
+                            <ion-label><b>In attesa</b></ion-label>
+                            <ion-item  ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='pendente'">
+                                <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
                             </ion-item>
-                        </ion-list>
-                    </ion-content>
-                </ion-tab>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-tab>
+
+            <ion-tab title="Completate"
+                     icon-on="ion-ios-list"
+                     icon-off="ion-ios-list-outline"
+            >
+
+                <ion-content has-tabs="true" >
+                    <ion-refresher
+                            on-refresh="doRef()">
+                        > </ion-refresher>
+                    <ion-list radio-group >
+                        <ion-item>
+                            <ion-label><b>Confermate</b></ion-label>
+                            <ion-item  ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='completato'">
+                                <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
+                            </ion-item>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-tab>
 
 
             <!--ion-list radio-group >
@@ -118,11 +122,11 @@
                 </ion-item>
             </ion-list-->
 
-        <!--/ion-scroll-->
-        <!--</div>-->
-        <!--button class="button button-block button-assertive" ng-click="Confirm()" ng-disabled="!isThisDisabledAttivita()">
-            SUBMIT
-        </button-->
+            <!--/ion-scroll-->
+            <!--</div>-->
+            <!--button class="button button-block button-assertive" ng-click="Confirm()" ng-disabled="!isThisDisabledAttivita()">
+                SUBMIT
+            </button-->
     </ion-content>
 
 

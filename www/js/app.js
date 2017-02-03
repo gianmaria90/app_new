@@ -280,7 +280,6 @@ angular.module('your_app_name', [
               'menuContent': {
                   templateUrl: "views/app/questionario.html",
                   controller: 'QuizCtrl'
-
               }
           }
       })
@@ -418,7 +417,7 @@ angular.module('your_app_name', [
 
       .state('app.my_announcements', {
           url: "/my_announcements",
-          cache: false,
+          // cache: false,
           views: {
               'menuContent': {
                   templateUrl: "views/app/shs/my_announcements.html",

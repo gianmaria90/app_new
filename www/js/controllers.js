@@ -172,7 +172,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             name: "Test",
                             icon: "Test",
                             level: 0,
-                            state: 'app.mentor'
+                            state: 'app.questionario'
                         }
                     ];
             }
@@ -424,7 +424,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             name: "Test",
                             icon: "Test",
                             level: 0,
-                            state: 'app.mentor'
+                            state: 'app.questionario'
                         }
                     ];
             }
@@ -687,9 +687,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             // };
         };
 
-
         $scope.getInfoMyAnnouncements(1);
-
 
         $scope.doRefresh = function(par) {
 
@@ -1031,7 +1029,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     if (obj.result === '500')
                     {
                         console.log("Something went wrong!");
-                        $scope.title="Something went wrong!";
+                        $scope.title="Qualcosa è andato storto";
                         $scope.template="Contattare il nostro team tecnico";
                         //resettare i parametri focus email
                     }
@@ -1749,12 +1747,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $state.go('app.feeds-categories');
         };
 
+
     })
 
 
 
     //REGISTRATION
-    .controller('RegistrationCtrl', function($scope, $ionicConfig,$http,$state,$ionicHistory,$ionicPopup) {
+    .controller('RegistrationCtrl', function($scope, $ionicConfig,$http,$state,$ionicHistory,$ionicPopup,$filter) {
 
         $scope.university = null;
 
@@ -1773,7 +1772,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 'cognome': $scope.reg.cognome,
                 'mail': $scope.reg.email,
                 'password': $scope.reg.password,
-                'dn': $scope.reg.date,
+                'dn': $filter('date')(new Date($scope.reg.date), 'yyyy-MM-dd'),
                 'sex': $scope.reg.sex,
                 'universita_id':$scope.reg.universita,
                 'phone': $scope.reg.phone,
@@ -1791,11 +1790,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             })
                 .success(function (data, status) {
 
-                    var obj=angular.fromJson(data);
-                    console.log(obj.result);
 
-                    if(obj.result === '200')
-                    {
+                    // console.log(obj.result);
+                    console.log("successo");
+
                         console.log("Registrazione ok.");
                         $scope.title="Account Creato";
                         $scope.template="Verifica la tua email per confermare la registrazione!";
@@ -1805,7 +1803,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         });
                         // the user is redirected to login page after sign up
                         $state.go('auth.login', {}, {location: "replace", reload: true});
-                    }
 
                     var alertPopup = $ionicPopup.alert({
                         title: $scope.title,
@@ -1813,9 +1810,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     });
                 })
                 .error(function (data, status) {
+                    console.log(data);
                     console.log("Error." + data + " " + status);
 
-                    if (obj.result === '404')
+                    if (data.result === '404')
                     {
                         console.log("Email already exist.");
                         $scope.title="Email già esistente";
@@ -1840,12 +1838,18 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         $scope.reg = {};
 
 
-
         $scope.VerifyDate = function()
         {
             var today = new Date();
             var minAge = 18;
-            $scope.minAge = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
+            $scope.reg.date = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
+            // console.log(typeof $scope.minAge);
+            // console.log($scope.minAge);
+
+            // $scope.minAge = $filter('date')(new Date($scope.minAge), 'yyyy-MM-dd');
+            $scope.reg.date = new Date($filter('date')($scope.reg.date,'yyyy-MM-dd'));
+            // console.log(typeof $scope.minAge);
+            // console.log($scope.minAge);
         };
 
     })
@@ -2458,7 +2462,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     if(obj.result==='402')
                     {
                         $scope.title="Login Fallita";
-                        $scope.template="Password or Username wrong!";
+                        $scope.template="Password o Utente errati!";
                     }
                     else
                     {
@@ -3863,6 +3867,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.proj = {};
 
+        $scope.proj.category = '---Seleziona Categoria---';
+
         $scope.user = UserService.getUser();
 
         $scope.show = function () {
@@ -4007,6 +4013,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $ionicLoading.show({
                 templateUrl: 'views/app/load.html',
                 showBackdrop: false,
+                duration:   5000
 
             });
             // content: 'Loading',
