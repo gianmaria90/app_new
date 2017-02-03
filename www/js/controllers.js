@@ -172,7 +172,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             name: "Test",
                             icon: "Test",
                             level: 0,
-                            state: 'app.questionario'
+                            state: 'app.test'
                         }
                     ];
             }
@@ -424,7 +424,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             name: "Test",
                             icon: "Test",
                             level: 0,
-                            state: 'app.questionario'
+                            state: 'app.test'
                         }
                     ];
             }

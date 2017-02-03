@@ -1,3 +1,28 @@
+<style>
+    .item.active, .item.activated, .item-complex.active .item-content, .item-complex.activated .item-content, .item .item-content.active, .item .item-content.activated {
+        border-color: transparent;
+        background-color: transparent;
+        border: solid 1px;
+        color: transparent;
+
+    }
+
+    .item.active.item-light, .item.activated.item-light, .item-complex.active .item-content.item-light, .item-complex.activated .item-content.item-light, .item .item-content.active.item-light, .item .item-content.activated.item-light {
+        border-color: transparent;
+        background-color: transparent;
+        border: solid 1px;
+        color: transparent;
+    }
+
+    .item.active.item-stable, .item.activated.item-stable, .item-complex.active .item-content.item-stable, .item-complex.activated .item-content.item-stable, .item .item-content.active.item-stable, .item .item-content.activated.item-stable {
+        border-color: transparent;
+        background-color: transparent;
+        border: solid 1px;
+        color: transparent;
+    }
+</style>
+
+
 <ion-view class="post_announcement-view" cache-view="false">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
@@ -32,6 +57,22 @@
                     </select>
                 </label>
             </div>
+
+            <a class="item">
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Titolo: </b><h2 style="display: inline !important">PROVA</h2><br>
+                </div>
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Titolo: </b><h2 style="display: inline !important">PROVA</h2><br>
+                </div>
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Titolo: </b><h2 style="display: inline !important">PROVA</h2><br>
+                </div>
+                <div style="padding: 0px 0px 5px 0px;">
+                    <b>Titolo: </b><h2 style="display: inline !important">PROVA</h2><br>
+                </div>
+            </a>
+
 
             <div class="item item-body bottom-content">
                 <button type="submit" class="button button-block button-assertive">
