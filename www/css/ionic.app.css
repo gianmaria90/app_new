@@ -8471,7 +8471,7 @@ ion-side-menu .heading-item .message {
 }
 
 .login_background {
-    background: url('../img/auth/pagina login_sl.jpg') no-repeat center center fixed !important;
+    background: url('../img/auth/pagina login_cl.jpg') no-repeat center center fixed !important;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -8583,11 +8583,6 @@ ion-side-menu .heading-item .message {
     background: none;
     border: none;
 }
-/*#content {*/
-/*top: 44px;*/
-/*padding-top: 45px;*/
-/*padding-bottom: 20px;*/
-/*}*/
 
 
 
