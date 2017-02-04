@@ -94,25 +94,20 @@
                                             </label>
 
                                             <br>
-                                            <div>
-                                                <input type="checkbox" class="checkbox-round" style=" font-size: small" ng-model="showPasswordIsChecked"/>Mostra password
+                                            <div style="font-size: small;">
+                                                <input type="checkbox" class="checkbox-round" style="margin-right: 10px;" ng-model="showPasswordIsChecked"/>Mostra password
                                             </div>
                                             <br>
-
-                                            <input type="checkbox" class="checkbox-round" id="termsConditions" name="termsConditions"/> I agree to the <a href="terms">terms and conditions</a>
-                                            <label style="float: none;" for="termsConditions" class="error" generated="true"></label>
-
+                                            <!--<div class="form_group">-->
+                                            <div style="font-size: small;">
+                                                <input type="checkbox" class="checkbox-round" style=" margin-right: 5px;" id="termsConditions" name="termsConditions" ng-model="reg.accept_terms" name="terms" class="terms-checkbox" ng-required="!reg.accept_terms"/> Ho letto e accetto i <a style="color: blue;" ui-sref="app.outer_termini">Termini e Condizioni</a>
+                                                <label style="float: none;" for="termsConditions" class="error" generated="true"></label>
+                                                <p style="font-size: small; color: red"  ng-show="!registration_form.accept_terms.$pristine && registration_form.accept_terms.$invalid" class="help-block">È necessario accettare i Termini e Condizioni.</p>
+                                                <!--</div>-->
+                                            </div>
                                         </div>
                                     </ion-scroll>
-                                    <!--<div class="form_group">-->
-                                    <!--<ion-checkbox style="display: inline-flex;" ng-model="reg.accept_terms" name="terms" class="terms-checkbox" ng-required="!reg.accept_terms">-->
-
-                                    <!--</ion-checkbox>-->
-                                    <!--<span style="font-size: small" class="terms-checkbox-label">Ho letto e accetto i <a ui-sref="app.termini">Termini e Condizioni</a></span>-->
-                                    <!--<p style="font-size: small; color: red"  ng-show="!registration_form.accept_terms.$pristine && registration_form.accept_terms.$invalid" class="help-block">È necessario accettare i Termini e Condizioni.</p>-->
-                                    <!--</div>-->
                                 </my-tab>
-
                             </my-tabs>
 
                             <div class="item item-body bottom-content">

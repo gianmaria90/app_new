@@ -466,17 +466,38 @@ angular.module('your_app_name', [
             }
         })
 
-        .state('app.termini', {
-            url: "/termini",
+        .state('app.outer_termini', {
+            url: "/outer_termini",
             views: {
                 'menuContent': {
-                    templateUrl: "views/app/termini.html",
+                    templateUrl: "views/app/outer_termini.html",
                     controller: ''
                 }
             }
         })
 
-      .state('app.map', {
+        .state('app.inner_termini', {
+            url: "/inner_termini",
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/inner_termini.html",
+                    controller: ''
+                }
+            }
+        })
+
+
+        .state('app.credits', {
+            url: "/credits",
+            views: {
+                'menuContent': {
+                    templateUrl: "views/app/credits.html",
+                    controller: 'CreditsCtrl'
+                }
+            }
+        })
+
+        .state('app.map', {
           url: '/map',
           views: {
               'menuContent': {

@@ -117,6 +117,20 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                 icon: "ion-ios-search-strong",
                                 state: 'app.search_announcement'
                             }]
+                        },
+                        {
+                            id: 11,
+                            name: "Privacy",
+                            icon: "ion-ios-locked",
+                            level: 0,
+                            state: 'app.inner_termini'
+                        },
+                        {
+                            id: 12,
+                            name: "Crediti",
+                            icon: "ion-ionic",
+                            level: 0,
+                            state: 'app.credits'
                         }
                         // {
                         //     id: 11,
@@ -169,10 +183,17 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         },
                         {
                             id: 10,
-                            name: "Test",
-                            icon: "Test",
+                            name: "Privacy",
+                            icon: "ion-ios-locked",
                             level: 0,
-                            state: 'app.test'
+                            state: 'app.inner_termini'
+                        },
+                        {
+                            id: 11,
+                            name: "Crediti",
+                            icon: "ion-ionic",
+                            level: 0,
+                            state: 'app.credits'
                         }
                     ];
             }
@@ -341,6 +362,20 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                 icon: "ion-ios-search-strong",
                                 state: 'app.search_announcement'
                             }]
+                        },
+                        {
+                            id: 11,
+                            name: "Privacy",
+                            icon: "ion-ios-locked",
+                            level: 0,
+                            state: 'app.inner_termini'
+                        },
+                        {
+                            id: 12,
+                            name: "Crediti",
+                            icon: "ion-ionic",
+                            level: 0,
+                            state: 'app.credits'
                         }
                         // {
                         //     id: 11,
@@ -421,10 +456,17 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         },
                         {
                             id: 10,
-                            name: "Test",
-                            icon: "Test",
+                            name: "Privacy",
+                            icon: "ion-ios-locked",
                             level: 0,
-                            state: 'app.test'
+                            state: 'app.inner_termini'
+                        },
+                        {
+                            id: 11,
+                            name: "Crediti",
+                            icon: "ion-ionic",
+                            level: 0,
+                            state: 'app.credits'
                         }
                     ];
             }
@@ -2310,12 +2352,18 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         },
                         {
                             id: 10,
-                            name: "Test",
-                            icon: "Test",
+                            name: "Privacy",
+                            icon: "ion-ios-locked",
                             level: 0,
-                            state: 'app.mentor'
+                            state: 'app.inner_termini'
+                        },
+                        {
+                            id: 11,
+                            name: "Crediti",
+                            icon: "ion-ionic",
+                            level: 0,
+                            state: 'app.credits'
                         }
-
                     ];
             }
 
@@ -2642,13 +2690,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             level: 0,
                             state: 'app.map'
                         },
-                        {
-                            id: 9,
-                            name: "Test",
-                            icon: "Test",
-                            level: 0,
-                            state: 'app.mentor'
-                        },
                         // {
                         //   id: 4,
                         //   name: "Layout",
@@ -2678,18 +2719,32 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         //   state: 'app.settings'
                         // },
                         {
-                            id: 8,
+                            id: 4,
                             name: "Questionario Prometeo",
                             icon: "ion-android-clipboard",
                             level: 0,
                             state: 'app.codice'
                         },
                         {
-                            id: 9,
+                            id: 5,
                             name: "Quiz affinità",
                             icon: "ion-university",
                             level: 0,
                             state: 'app.hobby'
+                        },
+                        {
+                            id: 6,
+                            name: "Privacy",
+                            icon: "ion-ios-locked",
+                            level: 0,
+                            state: 'app.inner_termini'
+                        },
+                        {
+                            id: 7,
+                            name: "Crediti",
+                            icon: "ion-ionic",
+                            level: 0,
+                            state: 'app.credits'
                         }
                         /*,
                          {
@@ -2881,6 +2936,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                             onclick: "doLogOut()"
 
+                        },
+                        {
+                            id: 12,
+                            name: "Crediti",
+                            icon: "ion-ionic",
+                            level: 0,
+                            state: 'app.credits'
                         }
                     ];
             }
@@ -2925,10 +2987,17 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         },
                         {
                             id: 10,
-                            name: "Test",
-                            icon: "Test",
+                            name: "Privacy",
+                            icon: "ion-ios-locked",
                             level: 0,
-                            state: 'app.mentor'
+                            state: 'app.inner_termini'
+                        },
+                        {
+                            id: 11,
+                            name: "Crediti",
+                            icon: "ion-ionic",
+                            level: 0,
+                            state: 'app.credits'
                         }
                     ];
             }
@@ -3969,6 +4038,27 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     })
 
 
+    .controller('CreditsCtrl', function($filter,$scope,$cordovaInAppBrowser, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading) {
+
+        var options = {
+            location: 'yes',
+            clearcache: 'yes',
+            toolbar: 'yes'
+        };
+
+        $scope.openBrowser = function(link) {
+            $cordovaInAppBrowser.open(link, '_blank', options)
+
+                .then(function(event) {
+                    // success
+                })
+
+                .catch(function(event) {
+                    // error
+                });
+        }
+
+    })
 
 
     .controller('RateApp', function($scope) {
