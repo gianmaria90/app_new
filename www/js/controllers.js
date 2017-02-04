@@ -1,19 +1,8 @@
 angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
-    .controller('AuthCtrl', function($scope, $ionicConfig) {
-
-    })
-
     .controller('SideMenuCtrl', function($rootScope,$scope,UserService,ProfileService,$localStorage,$window,$state,$ionicHistory,$ionicLoading,$timeout) {
 
-        //$scope.user_profile = ProfileService.getProfile();
         $localStorage.user_profile = ProfileService.getProfile();
-        // console.log($localStorage.user_profile);
-        // console.log( $scope.user_profile.nome);
-        //console.log( $scope.user_profile.sex);
-
-        //console.log(  $localStorage.user_profile);
-        console.log( $localStorage.loggedIn +" logged");
 
         $scope.$on('menuDataChange', function (event) {
             //refresh menu items data
@@ -50,34 +39,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             state: 'app.map'
                             //to remove, jus for testing
                         },
-                        // {
-                        //   id: 4,
-                        //   name: "Layout",
-                        //   icon: "ion-wand",
-                        //   level: 0,
-                        //   state: 'app.layouts'
-                        // },
-                        // {
-                        //   id: 5,
-                        //   name: "Forms",
-                        //   icon: "ion-document",
-                        //   level: 0,
-                        //   state: 'app.miscellaneous'
-                        // },
-                        // {
-                        //   id: 6,
-                        //   name: "Miscellaneous",
-                        //   icon: "ion-asterisk",
-                        //   level: 0,
-                        //   state: 'app.forms'
-                        // },
-                        // {
-                        //   id: 7,
-                        //   name: "Settings",
-                        //   icon: "ion-gear-a",
-                        //   level: 0,
-                        //   state: 'app.settings'
-                        // },
                         {
                             id: 8,
                             name: "Questionario Prometeo",
@@ -131,14 +92,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             level: 0,
                             state: 'app.credits'
                         }
-                        // {
-                        //     id: 11,
-                        //     name: "Logout",
-                        //     icon: "ion-android-exit",
-                        //     level: 0,
-                        //     onclick: "doLogOut()"
-                        //
-                        // }
                     ];
             }
             else {
@@ -204,23 +157,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         });
 
         $scope.doLogOut=function(){
-            console.log("logout effettuato");
-            /*$localStorage.$reset();
-             $localStorage.loggedIn=false;
-             $ionicHistory.nextViewOptions({
-             disableAnimate: true,
-             disableBack: true
-             });
-             UserService.resetUser();
-             $scope.Menu();
-             console.log($rootScope.tree);
-             //$state.go('walkthrough');
-             console.log(  $localStorage.user_profile);*/
 
             $ionicLoading.show({
                 template: 'Disconnessione....'
             });
-            //$localstorage.set('loggin_state', '');
 
             $timeout(function () {
                 $ionicLoading.hide();
@@ -232,17 +172,12 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 });
                 $localStorage.$reset();
                 $localStorage.loggedIn=false;
-                console.log(  $localStorage.loggedIn);
                 $ionicHistory.nextViewOptions({
                     disableAnimate: true,
                     disableBack: true
                 });
                 UserService.resetUser();
                 $scope.Menu();
-                console.log($rootScope.tree);
-                //$state.go('walkthrough');
-                console.log(  $localStorage.user_profile);
-                // $state.go('walkthrough');
                 $scope.$emit('menuDataChange');
             }, 100);
 
@@ -253,7 +188,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         {
             $localStorage.user_profile.sesso='N';
             $localStorage.user_profile.nome='Ospite';
-            console.log('Sono undefined');
         }
 
         $scope.user_profile = $localStorage.user_profile;
@@ -287,7 +221,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             state: 'app.profile'
                         },
                         {
-                            //to remove, jus for testing
                             id: 4,
                             name: "Aziende",
                             icon: "ion-briefcase",
@@ -295,34 +228,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             state: 'app.map'
                             //to remove, jus for testing
                         },
-                        // {
-                        //   id: 4,
-                        //   name: "Layout",
-                        //   icon: "ion-wand",
-                        //   level: 0,
-                        //   state: 'app.layouts'
-                        // },
-                        // {
-                        //   id: 5,
-                        //   name: "Forms",
-                        //   icon: "ion-document",
-                        //   level: 0,
-                        //   state: 'app.miscellaneous'
-                        // },
-                        // {
-                        //   id: 6,
-                        //   name: "Miscellaneous",
-                        //   icon: "ion-asterisk",
-                        //   level: 0,
-                        //   state: 'app.forms'
-                        // },
-                        // {
-                        //   id: 7,
-                        //   name: "Settings",
-                        //   icon: "ion-gear-a",
-                        //   level: 0,
-                        //   state: 'app.settings'
-                        // },
                         {
                             id: 8,
                             name: "Questionario Prometeo",
@@ -376,15 +281,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             level: 0,
                             state: 'app.credits'
                         }
-                        // {
-                        //     id: 11,
-                        //     name: "Logout",
-                        //     icon: "ion-android-exit",
-                        //     level: 0,
-                        //
-                        //     onclick: "doLogOut()"
-                        //
-                        // }
                     ];
             }
             else {
@@ -404,41 +300,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             level: 0,
                             state: 'app.feeds-categories'
                         },
-                        // {
-                        //     id: 3,
-                        //     name: "Aziende",
-                        //     icon: "ion-briefcase",
-                        //     level: 0,
-                        //     state: 'app.map'
-                        // },
-                        // {
-                        //   id: 4,
-                        //   name: "Layout",
-                        //   icon: "ion-wand",
-                        //   level: 0,
-                        //   state: 'app.layouts'
-                        // },
-                        // {
-                        //   id: 5,
-                        //   name: "Forms",
-                        //   icon: "ion-document",
-                        //   level: 0,
-                        //   state: 'app.miscellaneous'
-                        // },
-                        // {
-                        //   id: 6,
-                        //   name: "Miscellaneous",
-                        //   icon: "ion-asterisk",
-                        //   level: 0,
-                        //   state: 'app.forms'
-                        // },
-                        // {
-                        //   id: 7,
-                        //   name: "Settings",
-                        //   icon: "ion-gear-a",
-                        //   level: 0,
-                        //   state: 'app.settings'
-                        // },
                         {
                             id: 8,
                             name: "Questionario Prometeo",
@@ -476,8 +337,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     .controller('AnnouncementsCtrl', function($timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$ionicLoading,$localStorage,$ionicTabsDelegate,$rootScope) {
 
-        // $ionicHistory.clearHistory();
-        // $ionicHistory.clearCache();
 
         $scope.user = UserService.getUser();
 
@@ -517,7 +376,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             }
 
             var params = JSON.stringify({'mail_student': $scope.user.mail});
-            console.log(params);
             if(par==1)
                 $scope.show($ionicLoading);
             $http({
@@ -534,14 +392,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     $scope.info_my_ann = data;
 
                     if(typeof $scope.info_my_ann[0]==='undefined' || $scope.info_my_ann[0]===null)
-                    {
-                        console.log('vuoto');
                         $scope.my_empty=true;
-                    }
-                    console.log($scope.info_my_ann);
                 })
                 .error(function (data, status) {
-                    console.log("1_Error storing device token." + data + " " + status);
                     var alertPopup = $ionicPopup.alert({
                         title: 'Errore connessione!',
                         template: 'Si prega di controllare la connessione ad internet!'
@@ -551,12 +404,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     if(par==1)
                         $scope.hide($ionicLoading);
                 });
-
-            // console.log('RootCtrl');
-            // $scope.onControllerChanged = function (oldController, oldIndex, newController, newIndex) {
-            //     console.log('Controller changed', oldController, oldIndex, newController, newIndex);
-            //     console.log(arguments);
-            // };
         };
 
         $scope.getInfoMyAppliedAnnouncements = function(par) {
@@ -578,7 +425,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             }
 
             var params = JSON.stringify({'mail_student': $scope.user.mail});
-            console.log(params);
+
             if(par===1)
                 $scope.show($ionicLoading);
             $http({
@@ -595,14 +442,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     $scope.info_my_app_ann = data;
 
                     if(typeof $scope.info_my_app_ann[0]==='undefined' || $scope.info_my_app_ann[0]===null)
-                    {
-                        console.log('vuoto');
                         $scope.app_empty=true;
-                    }
-                    console.log($scope.info_my_app_ann);
+
                 })
                 .error(function (data, status) {
-                    console.log("2_Error storing device token." + data + " " + status);
                     var alertPopup = $ionicPopup.alert({
                         title: 'Errore connessione!',
                         template: 'Si prega di controllare la connessione ad internet!'
@@ -634,7 +477,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             }
 
             var params = JSON.stringify({'mail_student': $scope.user.mail});
-            console.log(params);
             if(par==1)
                 $scope.show($ionicLoading);
             $http({
@@ -649,10 +491,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             })
                 .success(function (data, status) {
                     $scope.info_my_app_ann = data;
-                    console.log($scope.info_my_app_ann);
                 })
                 .error(function (data, status) {
-                    console.log("2_Error storing device token." + data + " " + status);
                     var alertPopup = $ionicPopup.alert({
                         title: 'Errore connessione!',
                         template: 'Si prega di controllare la connessione ad internet!'
@@ -662,12 +502,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     if(par==1)
                         $scope.hide($ionicLoading);
                 });
-
-            // console.log('RootCtrl');
-            // $scope.onControllerChanged = function (oldController, oldIndex, newController, newIndex) {
-            //     console.log('Controller changed', oldController, oldIndex, newController, newIndex);
-            //     console.log(arguments);
-            // };
         };
 
         $scope.getInfoMyAnnouncements(1);
@@ -691,14 +525,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     .controller('MyAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicLoading,$ionicTabsDelegate,$ionicActionSheet,$ionicModal,$rootScope) {
 
-        // $ionicHistory.clearHistory();
-        // $ionicHistory.clearCache();
         $scope.user = UserService.getUser();
 
         $scope.to_update = $localStorage.info_ann;
 
         $scope.my_ann_bool = false;
-
 
         // Triggered on a the item click
         $scope.showMenu = function(obj) {
@@ -708,18 +539,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
             $localStorage.info_ann = obj;
 
-            // console.log($scope.to_update);
-
             var menu_buttons = [];
 
             menu_buttons.push({text: 'Info'});
             menu_buttons.push({text: 'Modifica'});
 
-            if(obj.num_cand > 0) {
-                // menu_buttons.push({text: 'Info'});
+            if(obj.num_cand > 0)
                 menu_buttons.push({text: '<b>Stop</b>'});
-            }
-
 
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
@@ -732,16 +558,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     // add cancel code..
                 },
                 buttonClicked: function(index) {
-                    //Called when one of the non-destructive buttons is clicked,
-                    //with the index of the button that was clicked and the button object.
-                    //Return true to close the action sheet, or false to keep it opened.
-
-                    console.log(index);
 
                     //code for 'Modifica' function
                     if(index===0) {
-                        console.log('INFO');
-                        console.log(obj.id);
 
                         var params = JSON.stringify({'id': obj.id});
 
@@ -755,10 +574,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         })
                             .success(function (data, status) {
 
-                                console.log("HERE");
-                                // $scope.info_data = data;
-                                // console.log($scope.info_data);
-
                                 $scope.modal = $ionicModal.fromTemplateUrl('../www/views/modals/info_announcement.html', {
                                     scope: $scope,
                                     animation: 'slide-in-up'
@@ -766,20 +581,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                     modal.info_candidates = data;
                                     modal.info_announcement = obj;
 
-
-
                                     // modal.info_announcement.data_scadenza = $filter('limitTo')(modal.info_announcement.data_scadenza.toString(),10,0);
                                     modal.info_announcement.data_scadenza = $filter('date')(modal.info_announcement.data_scadenza,'dd-MM-yyyy');
-                                    console.log(modal.info_announcement.data_scadenza);
-                                    // modal.info_data.titolo = obj.titolo;
-                                    // modal.info_data.categoria = obj.titolo;
-                                    // modal.info_data.categoria = obj.titolo;
-                                    // modal.info_data.data_pubblicazione = obj.data_pubblicazione;
-                                    // modal.info_data.descrizione = obj.descrizione;
-                                    // modal.info_data. = obj.num_cand;
+
                                     $scope.modal = modal;
 
-                                    console.log($scope.modal.info_data);
                                     $scope.modal.show();
                                 });
 
@@ -787,16 +593,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                     $scope.modal.hide();
                                 };
 
-                                // $scope.openModal=function () {
-                                //     $scope.modal.show();
-                                // };
-
-
-                                // $window.location.reload(true);
 
                             })
                             .error(function (data, status) {
-                                console.log("2_Error storing device token." + data + " " + status);
                                 var alertPopup = $ionicPopup.alert({
                                     title: 'Errore connessione!',
                                     template: 'Si prega di controllare la connessione ad internet!'
@@ -805,18 +604,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             .finally(function ($ionicLoading) {
                                 $scope.hide($ionicLoading);
                             });
-
-
                     }
-                    else if (index===1){
-
-                        console.log($localStorage.info_ann);
-                        console.log("MODIFICA");
+                    else if (index===1)
                         $state.go('app.update_announcement');
-                    }
-                    else if(index===2) //code for 'STOP' function
-                    {
-                        console.log('STOP');
+
+                    else if(index===2) {
 
                         $scope.show = function () {
                             $ionicLoading.show({
@@ -843,9 +635,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         })
                             .success(function (data, status) {
 
-                                console.log("HERE");
-
-                                console.log("Annuncio Stoppato");
                                 $scope.title="Annuncio Stoppato";
                                 $scope.template="Controlla la mail per visualizzare i candidati alla risoluzione dell'annuncio da te selezionato.";
 
@@ -860,17 +649,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                     template: $scope.template
                                 });
                                 alertPopup.then(function(res) {
-                                    // $window.location.reload(true);
                                     $rootScope.$emit("CallParentGetInfoMyAnnouncements", {});
                                 });
-
-
-
-
-
                             })
                             .error(function (data, status) {
-                                console.log("Error storing device token." + data + " " + status);
                                 var alertPopup = $ionicPopup.alert({
                                     title: 'Errore connessione!',
                                     template: 'Si prega di controllare la connessione ad internet!'
@@ -879,26 +661,17 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             .finally(function ($ionicLoading) {
                                 $scope.hide($ionicLoading);
                             });
-                        // $ionicTabsDelegate .select(2);
-                        // $state.go('app.my_announcements');
+
                     }
-                    else {}
 
 
                     return true;
                 },
                 destructiveButtonClicked: function(){
 
-                    //Called when the destructive button is clicked.
-                    //Return true to close the action sheet, or false to keep it opened.
-                    // $state.go('walkthrough');
-
-                    console.log(obj.id);
-
                     $scope.show = function () {
                         $ionicLoading.show({
-                            template: '<p>Eliminazione annuncio...</p><ion-spinner icon="spiral"></ion-spinner>',
-                            duration: 5000
+                            template: '<p>Eliminazione annuncio...</p><ion-spinner icon="spiral"></ion-spinner>'
                         });
                     };
 
@@ -920,17 +693,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     })
                         .success(function (data, status) {
 
-                            console.log("HERE");
-
-
                             var alertPopup = $ionicPopup.alert({
                                 title: 'Annuncio cancellato!',
                                 template: 'L\'annuncio selezionato è stato cancellato!'
                             });
                             alertPopup.then(function (res) {
-                                // $window.location.reload(true);
-
-                                // $scope.doRefresh();
                                 $rootScope.$emit("CallParentGetInfoMyAnnouncements", {});
 
                             });
@@ -938,7 +705,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                         })
                         .error(function (data, status) {
-                            console.log("2_Error storing device token." + data + " " + status);
                             var alertPopup = $ionicPopup.alert({
                                 title: 'Errore connessione!',
                                 template: 'Si prega di controllare la connessione ad internet!'
@@ -947,9 +713,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         .finally(function ($ionicLoading) {
                             $scope.hide($ionicLoading);
                         });
-
-                    // $state.go("app.my_announcements");
-                    // $state.go($state.current, {}, {reload: true});
 
                     return true;
 
@@ -971,8 +734,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             });
 
 
-            console.log(updated_data);
-
             $http({
                 method :'POST',
                 url:'https://arctic-window-132923.appspot.com/update_announcement',
@@ -984,18 +745,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 .success(function (data, status) {
 
                     var obj = angular.fromJson(data);
-                    console.log(obj.result);
 
-                    // if(obj.result === '200') {
-                    console.log("Dati aggiornati con successo");
                     $scope.title="Annuncio aggiornato";
                     $scope.template="L'annuncio selezionato è stato aggiornato con successo!";
                     $ionicHistory.nextViewOptions({
                         disableAnimate: true,
                         disableBack: true
                     });
-                    // the user is redirected to login page after sign up
-                    // }
 
                     var alertPopup = $ionicPopup.alert({
                         title: $scope.title,
@@ -1006,14 +762,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                 })
                 .error(function (data, status) {
-                    console.log("Error." + data + " " + status);
 
-                    if (obj.result === '500')
-                    {
-                        console.log("Something went wrong!");
+                    if (obj.result === '500') {
                         $scope.title="Qualcosa è andato storto";
                         $scope.template="Contattare il nostro team tecnico";
-                        //resettare i parametri focus email
                     }
 
                     var alertPopup = $ionicPopup.alert({
@@ -1029,8 +781,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     .controller('HistoryCtrl',function ($scope,$http,UserService,$ionicLoading,$ionicPopup,$ionicTabsDelegate) {
 
-
         $scope.storico=function () {
+
             $ionicTabsDelegate.select(2);
             $scope.user = UserService.getUser();
             var params = JSON.stringify({
@@ -1063,12 +815,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     $scope.applied=obj[0].applied_announcements;
                     $scope.my=obj[1].my_announcements;
 
-                    console.log($scope.applied);
-                    console.log($scope.my);
 
                 })
                 .error(function (data, status) {
-                    console.log("2_Error storing device token." + data + " " + status);
                     var alertPopup = $ionicPopup.alert({
                         title: 'Errore connessione!',
                         template: 'Si prega di controllare la connessione ad internet!'
@@ -1084,16 +833,12 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     .controller('MyAppliedAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicTabsDelegate,$ionicActionSheet,$ionicLoading,$ionicModal) {
 
-        // $ionicHistory.clearHistory();
-        // $ionicHistory.clearCache();
         $scope.user = UserService.getUser();
 
         $scope.to_update = $localStorage.info_my_app_ann;
 
         $scope.my_ann_bool = true;
 
-
-        // Triggered on a the item click
         $scope.showMenu = function(obj) {
 
             obj.data_scadenza = $filter('limitTo')(obj.data_scadenza,10,0);
@@ -1101,11 +846,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
             $localStorage.info_my_ann = obj;
 
-            // console.log($scope.to_update);
-
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
-                //Here you can add some more buttons
                 buttons: [
                     { text: 'Info' }
                 ],
@@ -1116,20 +858,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     // add cancel code..
                 },
                 buttonClicked: function(index) {
-                    //Called when one of the non-destructive buttons is clicked,
-                    //with the index of the button that was clicked and the button object.
-                    //Return true to close the action sheet, or false to keep it opened.
 
-                    console.log(index);
-
-                    if(index===0) //code for 'Stop' function
-                    {
-                        console.log('INFO');
+                    if(index===0) { //code for 'Stop' function
 
                         var params = JSON.stringify({'id': obj.id, 'mail_student': $scope.user.mail});
-
-                        console.log(params);
-
 
                         $http({
                             method: 'POST',
@@ -1141,9 +873,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         })
                             .success(function (data, status) {
 
-                                console.log("HERE");
-                                // $scope.info_data = data;
-
                                 $scope.modal = $ionicModal.fromTemplateUrl('../www/views/modals/info_announcement.html', {
                                     scope: $scope,
                                     animation: 'slide-in-up'
@@ -1151,18 +880,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                     modal.info_candidates = data;
                                     modal.info_announcement = obj;
 
-
-
                                     modal.info_announcement.data_scadenza = $filter('date')(modal.info_announcement.data_scadenza,'dd-MM-yyyy');
-                                    console.log(modal.info_announcement.data_scadenza);
-                                    // modal.info_data.titolo = obj.titolo;
-                                    // modal.info_data.categoria = obj.titolo;
-                                    // modal.info_data.categoria = obj.titolo;
-                                    // modal.info_data.data_pubblicazione = obj.data_pubblicazione;
-                                    // modal.info_data.descrizione = obj.descrizione;
-                                    // modal.info_data. = obj.num_cand;
                                     $scope.modal = modal;
-
 
                                     $scope.modal.show();
                                 });
@@ -1171,10 +890,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                                     $scope.modal.hide();
                                 };
 
-
                             })
                             .error(function (data, status) {
-                                console.log("2_Error storing device token." + data + " " + status);
                                 var alertPopup = $ionicPopup.alert({
                                     title: 'Errore connessione!',
                                     template: 'Si prega di controllare la connessione ad internet!'
@@ -1183,21 +900,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             .finally(function ($ionicLoading) {
                                 $scope.hide($ionicLoading);
                             });
-
-                        // $state.go('app.profile');
                     }
-                    else
-                    {}
 
                     return true;
                 },
                 destructiveButtonClicked: function(){
-
-                    //Called when the destructive button is clicked.
-                    //Return true to close the action sheet, or false to keep it opened.
-                    // $state.go('walkthrough');
-
-                    console.log(obj.id);
 
                     $scope.show = function () {
                         $ionicLoading.show({
@@ -1225,13 +932,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     })
                         .success(function (data, status) {
 
-                            console.log("HERE");
-                            // $window.location.reload(true);
                             $rootScope.$emit("CallParentGetInfoMyAppliedAnnouncements", {});
 
                         })
                         .error(function (data, status) {
-                            console.log("2_Error storing device token." + data + " " + status);
                             var alertPopup = $ionicPopup.alert({
                                 title: 'Errore connessione!',
                                 template: 'Si prega di controllare la connessione ad internet!'
@@ -1240,9 +944,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         .finally(function ($ionicLoading) {
                             $scope.hide($ionicLoading);
                         });
-
-                    // $state.go("app.my_announcements");
-                    // $state.go($state.current, {}, {reload: true});
 
                     return true;
 
@@ -1254,20 +955,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     })
 
-    .controller('TaskCtrl', function($scope) {
-        $scope.close = function() {
-            $scope.modal.hide();
-        };
-    }) //IDK
-
-    .controller('AppCtrl', function($scope, $ionicConfig) {
-
-    })
-
     .controller('QuestCtrl', function($scope,$state,$ionicPopup,$http) {
 
         $scope.goQuest=function(cod){
-            console.log(cod.codice);
             $http({
                 method :'GET',
                 url:'https://arctic-window-132923.appspot.com/latest_code',
@@ -1277,19 +967,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             })
                 .success(function (data, status) {
 
-                    console.log("Token stored, device is successfully subscribed to receive push notifications.");
                     var obj=angular.fromJson(data);
-                    console.log(obj);
 
-                    console.log(status);
                     $scope.cod=obj.result.codice;
-                    console.log(obj.result.codice);
 
                     if(cod.codice===$scope.cod)
                         $state.go('app.questionario');
                     else
                     {
-                        console.log("codice errato"); //mettere alert
                         var alertPopup = $ionicPopup.alert({
                             title: 'Codice errato!',
                             template: 'Si prega di verificare il codice d\'accesso!'
@@ -1298,10 +983,9 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
                 })
                 .error(function (data, status) {
-                    console.log("Error storing device token." + data + " " + status);
                     var alertPopup = $ionicPopup.alert({
                         title: 'Errore connessione!',
-                        template: 'Si prega di contrllare la connessione ad internet!'
+                        template: 'Si prega di controllare la connessione ad internet!'
                     });
                 });
 
@@ -1309,21 +993,15 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.check=function(object){
 
-            if($scope.codice === '' || $scope.isUnd(object)=="UNDEFINED") {
-                console.log("true");
+            if($scope.codice === '' || $scope.isUnd(object)=="UNDEFINED")
                 return true;
-            }
-            else {
-                console.log("false");
+            else
                 return false;
-            }
         };
 
         $scope.isUnd = function (thing) {
-            if (typeof thing == "undefined") {
-                console.log("true");
+            if (typeof thing == "undefined")
                 return "UNDEFINED";
-            }
             else
                 return "OK";
         };
@@ -1332,7 +1010,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     .controller('QuizCtrl', function($scope, $ionicConfig,$http,$localStorage,$state,$ionicPopup,$ionicHistory) {
 
-        //hobbie
         $scope.hobbies = [];
 
         $http.get('hobby.json').success(function(response) {
@@ -1376,7 +1053,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             if ($scope.checkHobbies.Altro) //se altro
                 $localStorage.quest1.push(object.txtHobbie);
 
-            console.log($localStorage.quest1);
             $state.go('app.answer');
         };
 
@@ -1385,8 +1061,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
             $localStorage.quest2=object.Q2;
             $localStorage.quest3=object.Q3;
-            console.log($localStorage.quest2);
-            console.log($localStorage.quest3);
             $state.go('app.lavoro');
         };
 
@@ -1434,7 +1108,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             else
                 $localStorage.quest4 = $scope.radioLavoro.text;
 
-            console.log($localStorage.quest4);
             $state.go('app.competenze');
         };
 
@@ -1483,7 +1156,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             else
                 $localStorage.quest5 = $scope.radioCompetenze.text;
 
-            console.log($localStorage.quest5);
             $state.go('app.materie');
         };
 
@@ -1534,7 +1206,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             if ($scope.checkMaterie.Altro) //se altro
                 $localStorage.quest6.push(object.txtMaterie);
 
-            console.log($localStorage.quest6);
             $state.go('app.libreria');
         };
 
@@ -1581,14 +1252,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         };
 
         $scope.isUnd = function (thing) {
-            if (typeof thing == "undefined") {
-
+            if (typeof thing == "undefined")
                 return "UNDEFINED";
-            }
             else
                 return "OK";
         };
-
 
 
         $scope.submit = function (object) {
@@ -1598,9 +1266,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 params= {"q1": $localStorage.quest1,"q2": $localStorage.quest2,"q3": $localStorage.quest3,"q4": $localStorage.quest4,"q5": $localStorage.quest5,"q6": $localStorage.quest6,"q7": object.txtTematica};
             else
                 params= {"q1": $localStorage.quest1,"q2": $localStorage.quest2,"q3": $localStorage.quest3,"q4": $localStorage.quest4,"q5": $localStorage.quest5,"q6": $localStorage.quest6,"q7": $scope.radioTematica.text};
-
-            console.log($scope.radioTematica.text);
-            console.log(params);
 
             $http({
                 method :'POST',
@@ -1612,34 +1277,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             })
                 .success(function (data, status) {
 
-                    console.log("Token stored, device is successfully subscribed to receive push notifications.");
                     var obj=angular.fromJson(data);
-                    console.log(obj);
-                    console.log(status);
                     $localStorage.labelsLS=obj.classes.cls[0];
                     $localStorage.datiLS=obj.classes.probs[0];
-                    console.log($localStorage.labelsLS);
-                    console.log($localStorage.datiLS);
-                    /*if(obj.result=== '200')
-                     {
-                     console.log("Registrazione ok.");
-                     $scope.title="Registrazione";
-                     $scope.template="Registrazione effettuata con successo";
-                     $state.go('app.feeds-categories');
-                     }
-                     else if (obj.result=== '401')
-                     {
-                     console.log("Email already exist.");
-                     $scope.title="Errore";
-                     $scope.template="Email già esistente";
-                     //resettare i parametri focus email
-                     }
-                     else
-                     {
-                     console.log("Registrazione fallita.");
-                     $scope.title="Errore";
-                     $scope.template="Registrazione fallita";
-                     }*/
+
                     $ionicHistory.nextViewOptions({
                         disableAnimate: true,
                         disableBack: true
@@ -1648,7 +1289,10 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     $state.go('app.orientamento');
                 })
                 .error(function (data, status) {
-                    console.log("Error storing device token." + data + " " + status);
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Errore connessione!',
+                        template: 'Si prega di controllare la connessione ad internet!'
+                    });
                 });
 
 
@@ -1675,10 +1319,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 }
 
             ];
-            console.log($localStorage.labelsLS);
-            console.log($localStorage.labelsLS);
             $state.go('app.orientamento');
-
         };
 
         $scope.getDati = function () {
