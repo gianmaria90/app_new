@@ -8,7 +8,7 @@
     </ion-nav-title>
     <ion-content>
 
-        <div id="search-bar" style="transform: translate3d(0px, 0px, 0px);">
+        <div ng-if="!my_empty" id="search-bar" style="transform: translate3d(0px, 0px, 0px);">
             <div class="item item-input-inset">
                 <label class="item-input-wrapper" id="search-input">
                     <i class="icon ion-search placeholder-icon"></i>
@@ -22,7 +22,7 @@
                 on-refresh="doRefresh(0)">
             > </ion-refresher>
         <ion-list scroll="false s-editing="isEditingItems
-                  animation="fade-out">
+                  animation="fade-out" ng-if="!my_empty">
             <div class="card">
                 <div class="item item-text-wrap" ng-repeat="app in ann | filter:search" ng-click="showMenu(app)">
                     <h2><b>{{app.titolo}}</b></h2>
@@ -36,6 +36,10 @@
                 </div>
             </div>
         </ion-list>
+
+        <ion-item ng-if="my_empty" class="item-text-wrap">
+            <h3>Non ci sono annunci per la categoria selezionata.</h3>
+        </ion-item>
 
     </ion-content>
 </ion-view>

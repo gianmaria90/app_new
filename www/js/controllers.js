@@ -3550,6 +3550,12 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     console.log(data);
                     $scope.ann = data;
 
+                    if(typeof $scope.ann[0]==='undefined' || $scope.ann[0]===null)
+                    {
+                        console.log('vuoto');
+                        $scope.my_empty=true;
+                    }
+
 
                 })
                 .error(function (data, status) {
