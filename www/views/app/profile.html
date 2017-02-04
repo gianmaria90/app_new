@@ -25,43 +25,38 @@
       <div class="row " ng-if="profile.borsa=='true'">
         <div class="col " align="middle">
           <button class="button icon ion-android-person" ng-click="updateProfileData()" style="border: none"></button>
+          <br>
+          Profilo
         </div>
         <div class="col " align="middle">
           <button class="button icon ion-android-list" ng-click="PianoStudi()" style="border: none"></button>
+          <br>
+          Piano studi
         </div>
 
       </div>
-      <div class="row" ng-if="profile.borsa=='true'">
-        <div class="col" align="middle" style="margin-top: -10px">
-          Profilo
-        </div>
-        <div class="col" align="middle" style="margin-top: -10px">
-          Piano studi
-        </div>
-      </div>
+
 
       <div class="row" ng-if="profile.borsa=='true'">
         <div class="col" align="middle" >
           <button class="button icon ion-android-people" ng-click="Mentor()" style="border: none"></button>
+          <br>
+          Mentore
         </div>
         <div class="col " align="middle">
           <button class="button icon ion-android-calendar" ng-click="Attivita()" style="border: none"></button>
-        </div>
-
-      </div>
-
-      <div class="row" ng-if="profile.borsa=='true'">
-        <div class="col" align="middle" style="margin-top: -10px">
-          Mentore
-        </div>
-        <div class="col" align="middle" style="margin-top: -10px">
+          <br>
           Note
         </div>
+
       </div>
+
 
       <div ng-if="profile.borsa=='false'" class="row">
         <div class="col" align="middle">
-          <button class="button ion-android-person" ng-click="updateProfileData()" style="border: none">Profilo</button>
+          <button class="button ion-android-person" ng-click="updateProfileData()" style="border: none"></button>
+          <br>
+          Profilo
         </div>
       </div>
 

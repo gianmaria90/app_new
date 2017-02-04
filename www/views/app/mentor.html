@@ -5,15 +5,15 @@
     <ion-nav-title>
         <span>Info Mentore</span>
     </ion-nav-title>
-    <ion-content scroll="false">
+    <ion-content>
 
-        <div style="height: 65%;" >
+        <div >
 
             <img  ng-if="mentor_data.sesso=='M'" src="img/male_mentor.jpg" style="width: 100%;height: 100%;object-fit: cover;" >
-            <img  ng-if="mentor_data.sesso=='F'" src="img/female_mentor.jpg" style="width: 100%;height: 100%;object-fit: cover;" >
+            <img   src="img/female_mentor.jpg" style="max-width: 100%" >
 
         </div>
-        <div class="row responsive-sm" style="padding: 0px; background: white; position: absolute; bottom: 0; right: 0;  left: 0;height: 35%;">
+        <div class="row responsive-sm" style="padding: 0px; background: white; bottom: 0; right: 0;  left: 0;">
             <a class="item item-avatar" href="#">
                 <img ng-if="mentor_data.sesso=='M'" ng-src="img/male.jpg" >
                 <img ng-if="mentor_data.sesso=='F'" ng-src="img/female.jpg" >
