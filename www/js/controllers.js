@@ -1,5 +1,8 @@
 angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
+    .controller('AuthCtrl', function($scope, $ionicConfig) {
+
+    })
 
     .controller('SideMenuCtrl', function($rootScope,$scope,UserService,ProfileService,$localStorage,$window,$state,$ionicHistory,$ionicLoading,$timeout) {
 
@@ -3218,5 +3221,4 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             $scope.feeds_categories = response;
         });
     })
-
 ;
