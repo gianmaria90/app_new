@@ -27,11 +27,9 @@
                 <div class="item item-text-wrap" ng-repeat="app in ann | filter:search" ng-click="showMenu(app)">
                     <h2><b>{{app.titolo}}</b></h2>
                     <h3><b>Mail pubblicante:</b> {{app.mail_pubblicante}}</h3>
-                    <!--<h4><b>Data pubblicazione: </b> {{app.data_pubblicazione}}</h4>-->
-                    <!--<h4><b>Data pubblicazione: </b>{{app.data_scadenza}}</h4>-->
-                    <!--TODO: set red color-->
+
                     <h4 style="color: red"><b style="color: red">Giorni rimanenti: </b>{{app.giorni_rim}}</h4>
-                    <!--TODO: set blue color-->
+
                     <h4 style="color: blue"><b style="color: blue">N&deg; candidati: </b>{{app.num_cand}}</h4>
                 </div>
             </div>

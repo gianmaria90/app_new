@@ -106,12 +106,7 @@ angular.module('your_app_name', [
     $stateProvider
 
   //INTRO
-  .state('auth', {
-    url: "/auth",
-    templateUrl: "views/auth/auth.html",
-    abstract: true,
-    controller: 'AuthCtrl'
-  })
+
 
   .state('walkthrough', {
     url: '/walkthrough',
@@ -151,54 +146,6 @@ angular.module('your_app_name', [
     controller: 'SideMenuCtrl'
   })
 
-  //MISCELLANEOUS
-  .state('app.miscellaneous', {
-    url: "/miscellaneous",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/miscellaneous/miscellaneous.html"
-      }
-    }
-  })
-
-  .state('app.image-picker', {
-    url: "/miscellaneous/image-picker",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/miscellaneous/image-picker.html",
-        controller: 'ImagePickerCtrl'
-      }
-    }
-  })
-
-  //LAYOUTS
-  .state('app.layouts', {
-    url: "/layouts",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/layouts/layouts.html"
-      }
-    }
-  })
-
-  .state('app.tinder-cards', {
-    url: "/layouts/tinder-cards",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/layouts/tinder-cards.html",
-        controller: 'TinderCardsCtrl'
-      }
-    }
-  })
-
-  .state('app.slider', {
-    url: "/layouts/slider",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/layouts/slider.html"
-      }
-    }
-  })
 
   //FEEDS
   .state('app.feeds-categories', {
@@ -211,67 +158,7 @@ angular.module('your_app_name', [
     }
   })
 
-  .state('app.category-feeds', {
-    url: "/category-feeds/:categoryId",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/feeds/category-feeds.html",
-        controller: 'CategoryFeedsCtrl'
-      }
-    }
-  })
 
-  .state('app.feed-entries', {
-    url: "/feed-entries/:categoryId/:sourceId",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/feeds/feed-entries.html",
-        controller: 'FeedEntriesCtrl'
-      }
-    }
-  })
-
-  //WORDPRESS
-  .state('app.wordpress', {
-    url: "/wordpress",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/wordpress/wordpress.html",
-        controller: 'WordpressCtrl'
-      }
-    }
-  })
-
-  .state('app.post', {
-    url: "/wordpress/:postId",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/wordpress/wordpress_post.html",
-        controller: 'WordpressPostCtrl'
-      }
-   /* },
-    resolve: {
-      post_data: function(PostService, $ionicLoading, $stateParams) {
-        $ionicLoading.show({
-      		template: 'Loading post ...'
-      	});
-
-        var postId = $stateParams.postId;
-        return PostService.getPost(postId);
-      }*/
-    }
-  })
-
-  //OTHERS
-  .state('app.settings', {
-    url: "/settings",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/settings.html",
-        controller: 'SettingsCtrl'
-      }
-    }
-  })
 
       .state('app.questionario', {
           url: "/questionario",
@@ -344,16 +231,6 @@ angular.module('your_app_name', [
       })
 
 
-      .state('app.student', {
-          url: "/student",
-          views: {
-              'menuContent': {
-                  templateUrl: "views/app/student.html",
-                  controller: ''
-              }
-          }
-      })      
-
       .state('app.libreria', {
           url: "/libreria",
           views: {
@@ -374,14 +251,7 @@ angular.module('your_app_name', [
           }
       })
 
-  .state('app.forms', {
-    url: "/forms",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/forms.html"
-      }
-    }
-  })
+
 
   .state('app.profile', {
     url: "/profile",
@@ -394,15 +264,7 @@ angular.module('your_app_name', [
     }
   })
 
-  .state('app.bookmarks', {
-    url: "/bookmarks",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/bookmarks.html",
-        controller: 'BookMarksCtrl'
-      }
-    }
-  })
+
 
    .state('app.post_announcement', {
        url: "/post_announcement",
@@ -455,16 +317,6 @@ angular.module('your_app_name', [
           }
       })
 
-
-        .state('app.test', {
-            url: "/test",
-            views: {
-                'menuContent': {
-                    templateUrl: "views/app/test.html",
-                    controller: 'TestCtrl'
-                }
-            }
-        })
 
         .state('app.outer_termini', {
             url: "/outer_termini",
@@ -549,16 +401,7 @@ angular.module('your_app_name', [
                   controller: "NoteCtrl"
               }
           },
-     /*     resolve:{
-              note_data: function (NoteService, $ionicLoading, $stateParams) {
-                  $ionicLoading.show({
-                      template: 'Loading note ...'
-                  });
-                  var noteId = $stateParams.noteId;
-                  return NoteService.getNote(noteId);
 
-              }
-          }*/
       })
 
 
@@ -582,28 +425,6 @@ angular.module('your_app_name', [
               }
           }
       })
-
-
-        .state('app.my_announcements.page1', {
-            url: "/page1",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates.about-page1.html"
-                }
-            },
-            parent:"app.my_announcements"
-        })
-
-        .state('app.my_announcements.page2', {
-            url: "/page2",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates.about-page2.html"
-                }
-            },
-            parent:"app.my_announcements"
-        })
-
 
 
 ;
