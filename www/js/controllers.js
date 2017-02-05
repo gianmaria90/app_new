@@ -353,7 +353,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         });
 
         $rootScope.$on("CallParentGetInfoMyAppliedAnnouncements", function(){
-            $scope.getInfoMyAnnouncements(1);
+            $scope.getInfoMyAppliedAnnouncements(1);
         });
 
         $rootScope.$on("CallParentgetGetInfoArchivedAnnouncements", function(){
@@ -393,6 +393,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
             })
                 .success(function (data, status) {
+
                     $scope.info_my_ann = data;
 
                     if(typeof $scope.info_my_ann[0]==='undefined' || $scope.info_my_ann[0]===null)
@@ -835,7 +836,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     })
 
-    .controller('MyAppliedAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicTabsDelegate,$ionicActionSheet,$ionicLoading,$ionicModal) {
+    .controller('MyAppliedAnnouncementsCtrl', function($filter,$window,$timeout,$scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicTabsDelegate,$ionicActionSheet,$ionicLoading,$ionicModal,$rootScope) {
 
         $scope.user = UserService.getUser();
 
@@ -936,7 +937,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     })
                         .success(function (data, status) {
 
-                            $rootScope.$emit("CallParentGetInfoMyAppliedAnnouncements", {});
+                            var alertPopup = $ionicPopup.alert({
+                                title: 'Candidatura cancellata!',
+                                template: 'La candidatura è stata cancellata!'
+                            });
+                            alertPopup.then(function (res) {
+                                $rootScope.$emit("CallParentGetInfoMyAppliedAnnouncements", {});
+                            });
 
                         })
                         .error(function (data, status) {
@@ -3017,6 +3024,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         };
 
 
+
         $scope.doInsertAnnouncement = function () {
 
             var params = JSON.stringify(
@@ -3049,21 +3057,21 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                         disableBack: true
                     });
                     $state.go('app.my_announcements');
-
-
                 })
                 .error(function (data, status) {
 
-                    $scope.title = "Errore connessione";
-                    $scope.template = "Contattare il nostro team tecnico";
+                    if (data.result=='406'){
+                        $scope.title = "Errore Inserimento Data scadenza";
+                        $scope.template = "La data di scadenza non può essere minore di quella di scadenza";
+                    }
+                    else {
+                        $scope.title = "Errore connessione";
+                        $scope.template = "Contattare il nostro team tecnico";
 
-                    var alertPopup = $ionicPopup.alert({
-                        title: $scope.title,
-                        template: $scope.template
-                    });
+                    }
 
                 }).finally(function ($ionicLoading) {
-                $scope.hide($ionicLoading);
+                    $scope.hide($ionicLoading);
 
                 var alertPopup = $ionicPopup.alert({
                     title: $scope.title,
