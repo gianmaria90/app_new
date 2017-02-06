@@ -26,7 +26,7 @@
 
         <ion-tabs class="tabs-icon-bottom tabs-positive">
 
-            <ion-tab title="Da confermare"
+            <ion-tab title="Da completare"
                      icon-on="ion-ios-list"
                      icon-off="ion-ios-list-outline"
             >
@@ -42,7 +42,7 @@
                     <ion-scroll style="height: 75%">
                         <ion-list radio-group >
                             <ion-item>
-                                <ion-label><b>Da confermare</b></ion-label>
+                                <ion-label><b>Da completarecd ..</b></ion-label>
                                 <ion-radio ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='da_completare'" ng-model="radioAttivita.text" ng-value="row.id" value="row.id">
                                     <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
                                 </ion-radio>
@@ -60,7 +60,7 @@
             </ion-tab>
 
 
-            <ion-tab title="In attesa"
+            <ion-tab title="Pendenti"
                      icon-on="ion-ios-list"
                      icon-off="ion-ios-list-outline"
             >
@@ -71,7 +71,7 @@
                         > </ion-refresher>
                     <ion-list radio-group >
                         <ion-item>
-                            <ion-label><b>In attesa</b></ion-label>
+                            <ion-label><b>Pendenti</b></ion-label>
                             <ion-item  ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='pendente'">
                                 <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
                             </ion-item>
@@ -91,7 +91,7 @@
                         > </ion-refresher>
                     <ion-list radio-group >
                         <ion-item>
-                            <ion-label><b>Confermate</b></ion-label>
+                            <ion-label><b>Completate</b></ion-label>
                             <ion-item  ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='completato'">
                                 <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
                             </ion-item>

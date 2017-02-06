@@ -3215,7 +3215,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 });
             })
             .finally(function ($ionicLoading) {
-                $scope.hide($ionicLoading);
+                //$scope.hide($ionicLoading);
             });
 
 
