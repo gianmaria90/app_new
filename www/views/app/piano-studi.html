@@ -43,7 +43,7 @@
                         <ion-list radio-group >
                             <ion-item>
                                 <ion-label><b>Da completare</b></ion-label>
-                                <ion-radio ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='da_completare'" ng-model="radioAttivita.text" ng-value="row.id" value="row.id">
+                                <ion-radio ng-repeat="row in piano" class="item-text-wrap" ng-if="row.stato=='da_completare'" ng-model="radioAttivita.nome" ng-value="row.id" value="row.id">
                                     <b>{{row.nome}}</b> <br>tipo: {{row.tipo}}  cfu: {{row.cfu}}
                                 </ion-radio>
 

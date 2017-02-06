@@ -2395,7 +2395,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
         $scope.Confirm=function () {
 
-            var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password,'id_att':$scope.radioAttivita.text.toString()} );
+            var params = JSON.stringify( {'mail': $scope.user.mail,'password':$scope.user.password,'id_att':$scope.radioAttivita.nome.toString()} );
 
             $scope.show($ionicLoading);
             $http({
@@ -2461,13 +2461,13 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         };
 
 
-        $scope.radioAttivita={text:'1'};
+        $scope.radioAttivita={nome:'1'};
 
 
         $scope.isThisDisabled2Attivita=function() {
 
 
-            if($scope.radioAttivita.text==1)
+            if($scope.radioAttivita.nome==1)
                 return true;
             else
                 return false;
