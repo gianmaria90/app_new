@@ -1526,6 +1526,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     $localStorage.user_profile.tipologia_borsa = $scope.profile.tipologia_borsa;
                     $localStorage.user_profile.data_inizio_borsa = $scope.profile.data_inizio_borsa;
                     $localStorage.user_profile.nome_mentore = $scope.profile.nome_mentore;
+                    $localStorage.user_profile.bio_mentore = $scope.profile.bio_mentore;
                     $localStorage.user_profile.cognome_mentore = $scope.profile.cognome_mentore;
                     $localStorage.user_profile.sesso_mentore = $scope.profile.sesso_mentore;
                     $localStorage.user_profile.mail_mentore = $scope.profile.mail_mentore;
@@ -1686,8 +1687,30 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         };
     })
 
-    .controller('MentorCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage) {
+    .controller('MentorCtrl', function($scope, $state, $http,$ionicPopup,$ionicHistory,UserService,$localStorage,$ionicModal) {
 
+
+
+        $scope.showPopup = function() {
+            $scope.data = {};
+
+            // An elaborate, custom popup
+            var myPopup = $ionicPopup.show({
+                template: '<div class="list"> <div class="item item-divider"> <b>{{mentor_data.cognome}} {{mentor_data.nome}}</b><div><a class="item item-text-wrap"> <div style="padding: 0px 0px 5px 0px;"> <h2 >{{mentor_data.info}}</h2><br> </div></a></div>',
+                title: 'Info mentore',
+                scope: $scope,
+                buttons: [
+
+                    {
+                        text: '<b>Chiudi</b>',
+                        type: 'button-positive',
+                        onTap: function (e) {
+                            myPopup.close();
+                        }
+                    }
+                ]
+            });
+        };
 
         $scope.mentor_data =
 
@@ -1696,7 +1719,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 "cognome":           $localStorage.user_profile.cognome_mentore,
                 "sesso":             $localStorage.user_profile.sesso_mentore,
                 "mail":              $localStorage.user_profile.mail_mentore,
-                "telefono":          $localStorage.user_profile.telefono_mentore
+                "telefono":          $localStorage.user_profile.telefono_mentore,
+                "info":              $localStorage.user_profile.bio_mentore
             };
 
 
