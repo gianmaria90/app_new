@@ -60,6 +60,9 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         }
     },
     "dependent_plugins": {}
