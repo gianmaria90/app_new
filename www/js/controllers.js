@@ -1393,6 +1393,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 'dn': $filter('date')(new Date($scope.reg.date), 'yyyy-MM-dd'),
                 'sex': $scope.reg.sex,
                 'universita_id':$scope.reg.universita,
+                'corso_laurea':$scope.reg.corso,
                 'phone': $scope.reg.phone,
                 'indirizzo' : $scope.reg.indirizzo+';'+$scope.reg.cap.toString()+';'+$scope.reg.citta+';'+$scope.reg.prov
             });
@@ -2499,7 +2500,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
         };
 
 
-        $scope.modal= $ionicModal.fromTemplate('<ion-modal-view > <ion-header-bar class="bar bar-header bar-positive"> <h1 class="title">Nuova attività</h1> <button class="button button-clear button-primary" ng-click="close()">Annulla</button> </ion-header-bar> <ion-content class="padding"> <form name="form_attivita" class="" novalidate ng-cloak> <div class="list"> <label class="item item-input"> <span class="input-label">Nome</span> <input ng-model="attivita.nome" type="text" required></label> <label class="item item-input"><span class="input-label">CFU</span> <input ng-model="attivita.cfu" type="number" required></label> <label class="item item-input"> <span class="input-label">Tipo <select style="width: 100%; margin-left: 5px; font-size: 15px" ng-model="attivita.tipo" required> <option value="Univ">Universita</option> <option  value="Extra">Extra</option> </select> </span> </label> <button class="button button-full button-positive" ng-click="addAttivita(attivita)" ng-disabled="!form_attivita.$valid">Aggiungi</button> </div> </form> </ion-content> </ion-modal-view>',
+        $scope.modal= $ionicModal.fromTemplate('<ion-modal-view > <ion-header-bar class="bar bar-header bar-positive"> <h1 class="title">Nuova attività</h1> <button class="button button-clear button-primary" ng-click="close()">Annulla</button> </ion-header-bar> <ion-content class="padding"> <form name="form_attivita" class="" novalidate ng-cloak> <div class="list"> <label class="item item-input"> <span class="input-label">Nome</span> <input ng-model="attivita.nome" type="text" required></label> <label class="item item-input"><span class="input-label">CFU</span> <input ng-model="attivita.cfu" type="number" required></label> <label class="item item-input"> <span class="input-label">Tipo <select style="width: 100%; margin-left: 5px; font-size: 15px" ng-model="attivita.tipo" required> <option value="Univ">Università</option> <option  value="Extra">Extra</option> </select> </span> </label> <button class="button button-full button-positive" ng-click="addAttivita(attivita)" ng-disabled="!form_attivita.$valid">Aggiungi</button> </div> </form> </ion-content> </ion-modal-view>',
             {scope:$scope});
 
 

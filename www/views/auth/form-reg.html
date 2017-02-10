@@ -53,12 +53,18 @@
                                             </label>
 
                                             <span style="color: #9F9F9F; font-size: 15px" class="item item-input">Università
-                                         <select style="width: 100%; margin-left: 5px; font-size: 15px" id="UniversitySelector"
-                                                 ng-model="reg.universita" ng-options="uni.id as uni.nome for uni in university">
+                                                 <select style="width: 100%; margin-left: 5px; font-size: 15px" id="UniversitySelector"
+                                                         ng-model="reg.universita" ng-options="uni.id as uni.nome for uni in university">
 
-                                             <option ng-repeat="uni in university" value="{{uni.id}}">{{uni.nome}}</option>
-                                        </select>
-                                    </span>
+                                                     <option ng-repeat="uni in university" value="{{uni.id}}">{{uni.nome}}</option>
+                                                </select>
+
+
+                                            </span>
+
+                                            <label class="item item-input">
+                                                <input type="text" placeholder="Corso di laurea" name="user_corso" ng-model="reg.corso">
+                                            </label>
 
                                             <label class="item item-input">
 
