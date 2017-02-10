@@ -856,7 +856,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 buttons: [
                     { text: 'Info' }
                 ],
-                destructiveText: 'Cancella Candidatura',
+                destructiveText: 'Cancella candidatura',
                 titleText: 'Sei sicuro di voler cancellare la candidatura?',
                 cancelText: 'Annulla',
                 cancel: function() {
