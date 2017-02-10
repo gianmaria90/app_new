@@ -1,22 +1,4 @@
-<!--<script id="templates.about-page1.html" type="text/ng-template">-->
 
-    <!--<ion-view title="About Page 1">-->
-        <!--<ion-content class="padding has-tabs-top">-->
-            <!--About Page 1-->
-        <!--</ion-content>-->
-    <!--</ion-view>-->
-
-<!--</script>-->
-
-<!--<script id="templates.about-page2.html" type="text/ng-template">-->
-
-    <!--<ion-view title="About Page 2">-->
-        <!--<ion-content class="padding has-tabs-top">-->
-            <!--About Page 2-->
-        <!--</ion-content>-->
-    <!--</ion-view>-->
-
-<!--</script>-->
 
 <ion-view class="my_announcements-view" cache-view="false">
     <ion-nav-buttons side="left">
@@ -27,8 +9,6 @@
     </ion-nav-title>
     <ion-content>
 
-
-        <!--<body ng-controller="AnnouncementsCtrl">-->
 
         <ion-tabs class="tabs-icon-bottom tabs-positive">
 
@@ -52,12 +32,7 @@
                               delete-icon="icon ion-minus-circled" ng-if="!my_empty">
                         <div class="card">
                             <div class="item item-text-wrap" ng-repeat="info in info_my_ann" ng-click="showMenu(info)">
-                                <!--<ion-avatar item-left>-->
-                                <!--<img src="img/avatar-finn.png">-->
-                                <!--</ion-avatar>                        &lt;!&ndash;<ion-avatar item-left>-->
-                                <!--<img src="img/avatar-finn.png">-->
-                                <!--</ion-avatar>-->
-                                <!--<input ng-model="test.id" type="hidden" id="hiddenValue" value="ciao" />-->
+
                                 <h2>{{info.titolo}}</h2>
                                 <h3>{{info.categoria}}</h3>
                                 <p># candidature: {{info.num_cand}}</p>
@@ -76,9 +51,7 @@
                     ng-controller="MyAppliedAnnouncementsCtrl",
                     ng-click="getInfoMyAppliedAnnouncements(1)"
             >
-                <!--<header class="bar bar-header bar-positive">-->
-                <!--<h1 class="title">Annunci candidato</h1>-->
-                <!--</header>-->
+
 
                 <ion-content has-tabs="true" >
                     <ion-refresher
@@ -95,14 +68,7 @@
                               delete-icon="icon ion-minus-circled" ng-if="!app_empty">
                         <div class="card">
                             <div class="item item-text-wrap" ng-repeat="info in info_my_app_ann" ng-click="showMenu(info)">
-                                <!--ng-click="showMenu(info)-->
 
-                                <!--<ion-avatar item-left>-->
-                                <!--<img src="img/avatar-finn.png">-->
-                                <!--</ion-avatar>                        &lt;!&ndash;<ion-avatar item-left>-->
-                                <!--<img src="img/avatar-finn.png">-->
-                                <!--</ion-avatar>-->
-                                <!--<input ng-model="test.id" type="hidden" id="hiddenValue2" value="ciao" />-->
                                 <h2>{{info.titolo}}</h2>
                                 <h3>{{info.categoria}}</h3>
                                 <p># candidature: {{info.num_cand}}</p>
@@ -124,21 +90,7 @@
 
             <ion-content has-tabs="true" >
 
-                <!--<ion-refresher-->
-                <!--on-refresh="doRefresh(1)">-->
-                <!--&gt; </ion-refresher>-->
 
-
-                    <!--div class="tabs-striped tabs-top tabs-background-stable">
-                        <div style="top: 0px;" class="tabs">
-                            <a class="tab-item" ui-sref="app.my_announcements.page1">
-                                <b>Miei Annunci</b>
-                            </a>
-                            <a class="tab-item" ui-sref="app.my_announcements.page2">
-                                <b>Annunci Applicati</b>
-                            </a>
-                        </div>
-                    </div-->
                 <ion-tabs class="tabs-striped tabs-background-stable"  >
 
                     <ion-tab title="Annunci applicati">
@@ -190,24 +142,11 @@
                 </ion-tabs>
 
 
-
-
-                <!--<ion-list scroll="false s-editing="isEditingItems-->
-                <!--animation="fade-out"-->
-                <!--delete-icon="icon ion-minus-circled">-->
-                <!---->
-                <!--<ion-item ng-repeat="info in info_my_app_ann">-->
-                <!--<h2>{{info.titolo}}</h2>-->
-                <!--<h3>{{info.categoria}}</h3>-->
-                <!--<p># candidature: {{info.num_cand}}</p>-->
-                <!--</ion-item>-->
-                <!---->
-                <!--</ion-list>-->
             </ion-content>
             </ion-tab>
 
         </ion-tabs>
-        <!--</body>-->
+
     </ion-content>
 </ion-view>
 
