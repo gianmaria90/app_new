@@ -1371,7 +1371,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     })
 
-    .controller('RegistrationCtrl', function($scope, $ionicConfig,$http,$state,$ionicHistory,$ionicPopup,$filter) {
+    .controller('RegistrationCtrl', function($scope, $ionicConfig,$http,$state,$ionicHistory,$ionicPopup,$filter,$ionicModal) {
 
         $scope.university = null;
 
@@ -1447,7 +1447,24 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
         };
+
         $scope.reg = {};
+
+        $scope.termini=function () {
+            $scope.modal = $ionicModal.fromTemplateUrl('../www/views/modals/privacy.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function(modal) {
+
+                $scope.modal = modal;
+
+                $scope.modal.show();
+            });
+
+            $scope.close=function () {
+                $scope.modal.hide();
+            };
+        };
 
 
         $scope.VerifyDate = function()
