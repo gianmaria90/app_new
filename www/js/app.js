@@ -231,15 +231,15 @@ angular.module('your_app_name', [
                 }
             })
 
-            .state('app.student', {
-                url: "/student",
-                views: {
-                    'menuContent': {
-                        templateUrl: "views/app/student.html",
-                        controller: ''
-                    }
-                }
-            })
+            // .state('app.student', {
+            //     url: "/student",
+            //     views: {
+            //         'menuContent': {
+            //             templateUrl: "views/app/student.html",
+            //             controller: ''
+            //         }
+            //     }
+            // })
 
             .state('app.libreria', {
                 url: "/libreria",
@@ -336,15 +336,15 @@ angular.module('your_app_name', [
             })
 
 
-            .state('app.outer_termini', {
-                url: "/outer_termini",
-                views: {
-                    'menuContent': {
-                        templateUrl: "views/app/outer_termini.html",
-                        controller: ''
-                    }
-                }
-            })
+            // .state('app.outer_termini', {
+            //     url: "/outer_termini",
+            //     views: {
+            //         'menuContent': {
+            //             templateUrl: "views/app/outer_termini.html",
+            //             controller: ''
+            //         }
+            //     }
+            // })
 
             .state('app.inner_termini', {
                 url: "/inner_termini",
