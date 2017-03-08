@@ -2604,12 +2604,17 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
     })
 
-    .controller('AttivitaCtrl', function ($scope,$state,$stateParams, $ionicModal,$http,$ionicPopup,UserService) {
+    .controller('AttivitaCtrl', function ($scope,$state,$stateParams, $ionicModal,$ionicLoading,$http,$ionicPopup,UserService) {
 
         $scope.doRefresh = function() {
 
             $scope.user = UserService.getUser();
             $scope.attivita = [];
+
+            $ionicLoading.show({
+                template: '<p>Caricamento attività...</p><ion-spinner icon="spiral"></ion-spinner>'
+
+            });
 
             var params = JSON.stringify({'mail': $scope.user.mail, 'password': $scope.user.password});
             $http({
@@ -2621,13 +2626,14 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 }
             })
                 .success(function (data, status) {
-
+                    $ionicLoading.hide();
                     $scope.attivita = angular.fromJson(data);
                     $scope.$broadcast('scroll.refreshComplete');
 
 
                 })
                 .error(function (data, status) {
+                    $ionicLoading.hide();
                     var alertPopup = $ionicPopup.alert({
                         title: 'Errore!',
                         template: 'Non è possibile caericare la lista delle attività !'
