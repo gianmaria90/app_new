@@ -73,6 +73,10 @@ angular.module('your_app_name', [
                     console.log("setting transition to android and disabling swipe back");
                 }, 0);
             }
+            if (toState.external) {
+                event.preventDefault();
+                window.open(toState.url, '_system');
+            }
         });
         $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams){
             if(toState.name.indexOf('app.feeds-categories') > -1)
@@ -262,13 +266,10 @@ angular.module('your_app_name', [
             })
 
             .state('app.prometeo', {
-                url: '/prometeo',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'views/app/prometeo.html',
-                        controller: ''
-                    }
-                },
+
+                url:'http://www.fondazionediana.it/prometeo',
+                external: true,
+
                 parent:""
             })
 
