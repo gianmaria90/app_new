@@ -969,6 +969,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     .controller('QuestCtrl', function($scope,$state,$ionicPopup,$http) {
 
         $scope.goQuest=function(cod){
+
             $http({
                 method :'GET',
                 url:'https://arctic-window-132923.appspot.com/latest_code',
@@ -1374,6 +1375,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
     .controller('RegistrationCtrl', function($scope, $ionicConfig,$http,$state,$ionicHistory,$ionicPopup,$filter,$ionicModal) {
 
         $scope.university = null;
+        $scope.reg = {};
 
         //  The user has selected a Customer from our Drop Down List.  Let's load this Customer's records.
         $http.get('https://arctic-window-132923.appspot.com/list_universities')
@@ -1384,19 +1386,39 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 $scope.errorMessage = "Couldn't load the list of University, error # " + status;
             });
 
+
         $scope.doRegister = function(){
 
-            var params = JSON.stringify( {'nome': $scope.reg.nome,
-                'cognome': $scope.reg.cognome,
-                'mail': $scope.reg.email,
-                'password': $scope.reg.password,
-                'dn': $filter('date')(new Date($scope.reg.date), 'yyyy-MM-dd'),
-                'sex': $scope.reg.sex,
-                'universita_id':$scope.reg.universita,
-                'corso_laurea':$scope.reg.corso,
-                'phone': $scope.reg.phone,
-                'indirizzo' : $scope.reg.indirizzo+';'+$scope.reg.cap.toString()+';'+$scope.reg.citta+';'+$scope.reg.prov
+            console.log($scope.reg);
+
+            var nome = !$scope.reg.nome ? '' : $scope.reg.nome;
+            var cognome = !$scope.reg.cognome ? '' : $scope.reg.cognome;
+            var mail = !$scope.reg.email ? '' : $scope.reg.email;
+            var password = !$scope.reg.password ? '' : $scope.reg.password;
+            var dn = !$scope.reg.date ? '' : $filter('date')(new Date($scope.reg.date), 'yyyy-MM-dd');
+            var sex = !$scope.reg.sex ? '' : $scope.reg.sex;
+            var universita_id = !$scope.reg.universita ? '' : $scope.reg.universita;
+            var corso_laurea = !$scope.reg.corso_laurea ? '' : $scope.reg.corso_laurea;
+            var phone = !$scope.reg.phone ? '' : $scope.reg.phone;
+            var indirizzo = !$scope.reg.indirizzo ? '' : $scope.reg.indirizzo;
+            var cap = !$scope.reg.cap ? '' : $scope.reg.cap;
+            var citta = !$scope.reg.citta ? '' : $scope.reg.citta;
+            var prov = !$scope.reg.prov ? '' : $scope.reg.prov;
+
+
+            var params = JSON.stringify( {
+                'nome': nome,
+                'cognome': cognome,
+                'mail': mail,
+                'password': password,
+                'dn': dn,
+                'sex': sex,
+                'universita_id': universita_id,
+                'corso_laurea': corso_laurea,
+                'phone': phone,
+                'indirizzo' : indirizzo+';'+cap+';'+citta+';'+prov
             });
+            console.log(params);
 
 
             $http({
@@ -1447,8 +1469,6 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
         };
-
-        $scope.reg = {};
 
         $scope.termini=function () {
             $scope.modal = $ionicModal.fromTemplateUrl('../www/views/modals/privacy.html', {
@@ -1555,8 +1575,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
             })
             .error(function (data, status) {
 
-                    $scope.title="Errore";
-                    $scope.template="Si è verificato un errore";
+                $scope.title="Errore";
+                $scope.template="Si è verificato un errore";
 
 
                 var alertPopup = $ionicPopup.alert({
@@ -1566,7 +1586,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
 
 
             }).finally(function ($ionicLoading) {
-                $scope.hide($ionicLoading);
+            $scope.hide($ionicLoading);
         });
 
         $scope.updateProfileData = function(){
@@ -1663,6 +1683,8 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                 "corso_laurea":             $scope.prof.corso_laurea,
                 "indirizzo":                $scope.ind[0]+';'+$scope.ind[1]+';'+$scope.ind[2]+';'+$scope.ind[3]
             });
+
+            console.log(updated_data);
 
             $http({
                 method :'POST',
@@ -2725,11 +2747,11 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     });
 
                 }).finally(function ($ionicLoading) {
-                    // Stop the ion-refresher from spinning
-                    if(par===1)
-                        $scope.hide($ionicLoading);
+                // Stop the ion-refresher from spinning
+                if(par===1)
+                    $scope.hide($ionicLoading);
 
-                    $scope.$broadcast('scroll.refreshComplete');
+                $scope.$broadcast('scroll.refreshComplete');
 
             });
         };
@@ -2818,84 +2840,84 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                             $ionicLoading.hide();
                         };
 
-                            $scope.data = {};
+                        $scope.data = {};
 
 
-                            var myPopup = $ionicPopup.show({
+                        var myPopup = $ionicPopup.show({
 
-                                template: '<input type="number" ng-model="data.stima" autofocus>',
-                                title: 'Stima Annuncio',
-                                subTitle: 'Inserisci il numero di giorni per la risoluzione dell\' annuncio',
-                                scope: $scope,
-                                buttons: [
-                                    { text: 'Cancella' },
-                                    {
-                                        text: '<b>Candidati</b>',
-                                        type: 'button-positive',
-                                        onTap: function(e) {
-                                            if (!$scope.data.stima) {
+                            template: '<input type="number" ng-model="data.stima" autofocus>',
+                            title: 'Stima Annuncio',
+                            subTitle: 'Inserisci il numero di giorni per la risoluzione dell\' annuncio',
+                            scope: $scope,
+                            buttons: [
+                                { text: 'Cancella' },
+                                {
+                                    text: '<b>Candidati</b>',
+                                    type: 'button-positive',
+                                    onTap: function(e) {
+                                        if (!$scope.data.stima) {
 
-                                                e.preventDefault();
-                                            } else {
+                                            e.preventDefault();
+                                        } else {
 
-                                                var params = JSON.stringify(
-                                                    {
-                                                        'ann_id': obj.id,
-                                                        'student_mail': $scope.user.mail,
-                                                        "stima": $scope.data.stima
-                                                    });
-
-                                                $scope.show($ionicLoading);
-
-                                                $http({
-                                                    method: 'POST',
-                                                    url: 'https://arctic-window-132923.appspot.com/apply_for_announcement',
-                                                    data: params,
-                                                    headers: {
-                                                        'Content-Type': 'application/json'
-                                                    }
-                                                })
-                                                    .success(function (data, status) {
-
-                                                        $scope.title = "Candidatura effettuata";
-                                                        $scope.template = "La Candidatura è stata effettuata";
-
-                                                        var alertPopup = $ionicPopup.alert({
-                                                            title: $scope.title,
-                                                            template: $scope.template
-                                                        });
-
-                                                        alertPopup.then(function(res) {
-                                                            // $window.location.reload(true);
-                                                            $scope.doRefresh(1);
-                                                        });
-
-
-                                                    })
-                                                    .error(function (data, status) {
-
-                                                        $scope.title = "Errore nell'inserimento dell'annuncio.";
-                                                        $scope.template = "Candidatura già esistente per l\'annuncio selezionato";
-
-                                                        var alertPopup = $ionicPopup.alert({
-                                                            title: $scope.title,
-                                                            template: $scope.template
-                                                        });
-
-                                                    }).finally(function ($ionicLoading) {
-                                                        $scope.hide($ionicLoading);
-
+                                            var params = JSON.stringify(
+                                                {
+                                                    'ann_id': obj.id,
+                                                    'student_mail': $scope.user.mail,
+                                                    "stima": $scope.data.stima
                                                 });
 
-                                            }
+                                            $scope.show($ionicLoading);
+
+                                            $http({
+                                                method: 'POST',
+                                                url: 'https://arctic-window-132923.appspot.com/apply_for_announcement',
+                                                data: params,
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                }
+                                            })
+                                                .success(function (data, status) {
+
+                                                    $scope.title = "Candidatura effettuata";
+                                                    $scope.template = "La Candidatura è stata effettuata";
+
+                                                    var alertPopup = $ionicPopup.alert({
+                                                        title: $scope.title,
+                                                        template: $scope.template
+                                                    });
+
+                                                    alertPopup.then(function(res) {
+                                                        // $window.location.reload(true);
+                                                        $scope.doRefresh(1);
+                                                    });
+
+
+                                                })
+                                                .error(function (data, status) {
+
+                                                    $scope.title = "Errore nell'inserimento dell'annuncio.";
+                                                    $scope.template = "Candidatura già esistente per l\'annuncio selezionato";
+
+                                                    var alertPopup = $ionicPopup.alert({
+                                                        title: $scope.title,
+                                                        template: $scope.template
+                                                    });
+
+                                                }).finally(function ($ionicLoading) {
+                                                $scope.hide($ionicLoading);
+
+                                            });
+
                                         }
                                     }
-                                ]
-                            });
+                                }
+                            ]
+                        });
 
-                            myPopup.then(function(res) {
+                        myPopup.then(function(res) {
 
-                            });
+                        });
 
                     }
 
@@ -3119,7 +3141,7 @@ angular.module('your_app_name.controllers', ["ngStorage",'chart.js'])
                     }
 
                 }).finally(function ($ionicLoading) {
-                    $scope.hide($ionicLoading);
+                $scope.hide($ionicLoading);
 
                 var alertPopup = $ionicPopup.alert({
                     title: $scope.title,
